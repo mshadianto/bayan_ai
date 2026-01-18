@@ -4,6 +4,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com https://cdn.tailwindcss.com https://cdn.jsdelivr.net;
+    style-src 'self' 'unsafe-inline' https://unpkg.com;
+    img-src 'self' data: https:;
+    connect-src 'self' https://api.groq.com https://api.aladhan.com https://api.open-meteo.com https://api.exchangerate-api.com https://*.tile.openstreetmap.org;
+    font-src 'self' https:;
+  ">
   <title>BPKH Limited - RAG Agentic AI Platform</title>
   <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
@@ -2121,12 +2129,14 @@ Jawab dengan ramah, singkat, dan helpful. Gunakan emoji yang relevan.`;
       }
     };
 
+    // DISCLAIMER: Data di bawah ini adalah DATA FIKTIF untuk keperluan demo.
+    // Nama dan email tidak merepresentasikan individu nyata.
     const DEMO_USERS = [
-      { id: 1, name: 'Ahmad Fauzi', email: 'ahmad.fauzi@bpkh.go.id', role: 'admin', avatar: '👨‍💼', department: 'IT', status: 'active' },
-      { id: 2, name: 'Siti Nurhaliza', email: 'siti.nurhaliza@bpkh.go.id', role: 'manager', avatar: '👩‍💼', department: 'Operations', status: 'active' },
-      { id: 3, name: 'Budi Santoso', email: 'budi.santoso@bpkh.go.id', role: 'staff', avatar: '👨‍🔧', department: 'Customer Service', status: 'active' },
-      { id: 4, name: 'Dewi Lestari', email: 'dewi.lestari@bpkh.go.id', role: 'staff', avatar: '👩‍🔧', department: 'Customer Service', status: 'active' },
-      { id: 5, name: 'Rizki Pratama', email: 'rizki.pratama@bpkh.go.id', role: 'viewer', avatar: '👤', department: 'Guest', status: 'active' },
+      { id: 1, name: 'Demo Admin', email: 'admin@example.com', role: 'admin', avatar: '👨‍💼', department: 'IT', status: 'active' },
+      { id: 2, name: 'Demo Manager', email: 'manager@example.com', role: 'manager', avatar: '👩‍💼', department: 'Operations', status: 'active' },
+      { id: 3, name: 'Demo Staff 1', email: 'staff1@example.com', role: 'staff', avatar: '👨‍🔧', department: 'Customer Service', status: 'active' },
+      { id: 4, name: 'Demo Staff 2', email: 'staff2@example.com', role: 'staff', avatar: '👩‍🔧', department: 'Customer Service', status: 'active' },
+      { id: 5, name: 'Demo Viewer', email: 'viewer@example.com', role: 'viewer', avatar: '👤', department: 'Guest', status: 'active' },
     ];
 
     // Login Modal Component
