@@ -2097,6 +2097,409 @@ Jawab dengan ramah, singkat, dan helpful. Gunakan emoji yang relevan.`;
       );
     };
 
+    // ============ SOTK VIEWER (Struktur Organisasi & Tata Kerja) ============
+    const SOTK_DATA = {
+      regulation: {
+        number: '002/2025',
+        title: 'Struktur Organisasi dan Tata Kerja BPKH Limited',
+        date: '2 Februari 2025',
+        signatories: ['Sidiq Haryono (Mudir 1)', 'Iman Ni\'matullah (Mudir 2)']
+      },
+      boardOfMudir: [
+        { role: 'CEO', name: 'Mudir 1', title: 'Chief Executive Officer', divisions: ['Business & Investment', 'Marketing Communication', 'Internal Audit'] },
+        { role: 'COO', name: 'Mudir 2', title: 'Chief Operating Officer', divisions: ['Human Capital & GA', 'Legal & Compliance', 'IT'] },
+        { role: 'CFO', name: 'Mudir 3', title: 'Chief Finance Officer', divisions: ['Finance & Treasury', 'Accounting', 'Risk Management'] }
+      ],
+      divisions: [
+        {
+          id: 'business',
+          name: 'Business & Investment',
+          icon: '💼',
+          color: 'from-blue-600 to-indigo-600',
+          mudir: 'CEO',
+          description: 'Pengembangan portofolio bisnis dan investasi strategis perusahaan',
+          positions: [
+            { level: 'Head', title: 'Head of Business & Investment Division', duties: ['Menyusun strategi pengembangan bisnis dan investasi', 'Mengkoordinasikan program kerja strategis divisi', 'Mengarahkan pengelolaan kemitraan bisnis'] },
+            { level: 'Supervisor', title: 'Supervisor of Business & Investment', duties: ['Mengelola rencana kerja operasional harian', 'Memberikan arahan teknis kepada Officer', 'Menjamin sinkronisasi kerja bisnis dan investasi'] },
+            { level: 'Officer', title: 'Business Officer & Investment Officer', duties: ['Menyusun analisis kelayakan bisnis', 'Mengkaji potensi investasi', 'Menyusun laporan monitoring portofolio'] },
+            { level: 'Staff', title: 'Business Staff & Investment Staff', duties: ['Membantu pengumpulan data pasar', 'Menyiapkan dokumen presentasi', 'Mengelola dokumentasi kontrak'] }
+          ]
+        },
+        {
+          id: 'marcom',
+          name: 'Marketing Communication',
+          icon: '📢',
+          color: 'from-pink-600 to-rose-600',
+          mudir: 'CEO',
+          description: 'Pengelolaan branding, promosi, dan komunikasi strategis perusahaan',
+          positions: [
+            { level: 'Head', title: 'Head of Marketing Communication', duties: ['Merumuskan strategi komunikasi pemasaran', 'Mengarahkan kegiatan promosi dan branding', 'Menjaga konsistensi pesan perusahaan'] },
+            { level: 'Supervisor', title: 'Supervisor of Marketing Communication', duties: ['Mengelola program komunikasi operasional', 'Memberikan arahan teknis pengembangan konten', 'Menjaga kualitas pesan komunikasi'] },
+            { level: 'Officer', title: 'Marketing Communication Officer', duties: ['Menyusun rencana kampanye pemasaran', 'Mengelola media sosial dan website', 'Memonitor persepsi publik'] },
+            { level: 'Staff', title: 'Marketing Communication Staff', duties: ['Membantu pengumpulan data promosi', 'Mengelola arsip digital media', 'Mendukung pelaksanaan event'] }
+          ]
+        },
+        {
+          id: 'audit',
+          name: 'Internal Audit',
+          icon: '🔍',
+          color: 'from-red-600 to-orange-600',
+          mudir: 'CEO',
+          description: 'Memastikan tata kelola perusahaan melalui audit internal',
+          positions: [
+            { level: 'Head', title: 'Head of Internal Audit', duties: ['Menyusun strategi dan rencana audit tahunan', 'Memimpin pelaksanaan audit internal', 'Menyampaikan hasil audit kepada Board of Mudir'] },
+            { level: 'Supervisor', title: 'Supervisor of Internal Audit', duties: ['Mengawasi pelaksanaan kegiatan audit', 'Melakukan review temuan audit', 'Memberikan bimbingan teknis kepada auditor'] },
+            { level: 'Officer', title: 'Internal Audit Officer', duties: ['Melaksanakan pemeriksaan pengendalian internal', 'Mengumpulkan dan menganalisis data kepatuhan', 'Menyusun temuan dan rekomendasi'] },
+            { level: 'Staff', title: 'Internal Audit Staff', duties: ['Mendukung pengumpulan data audit', 'Membantu menyusun laporan temuan', 'Mengelola penyimpanan data audit'] }
+          ]
+        },
+        {
+          id: 'hcga',
+          name: 'Human Capital & General Affairs',
+          icon: '👥',
+          color: 'from-green-600 to-emerald-600',
+          mudir: 'COO',
+          description: 'Pengelolaan SDM, rekrutmen, pengembangan kompetensi, dan layanan umum',
+          positions: [
+            { level: 'Head', title: 'Head of HC & GA Division', duties: ['Menyusun strategi pengelolaan SDM', 'Mengawasi rekrutmen dan pengembangan kompetensi', 'Mengelola layanan umum dan logistik'] },
+            { level: 'Supervisor', title: 'Supervisor of HC & GA', duties: ['Mengawasi program SDM dan layanan umum', 'Mengoordinasikan administrasi kepegawaian', 'Melakukan monitoring SOP'] },
+            { level: 'Officer', title: 'HC Officer & GA Officer', duties: ['Menjalankan proses rekrutmen dan evaluasi', 'Mengelola database personalia', 'Mengelola fasilitas dan aset kantor'] },
+            { level: 'Staff', title: 'HC Staff & GA Staff', duties: ['Membantu administrasi kepegawaian', 'Menyiapkan dokumen rekrutmen', 'Mendukung layanan umum harian'] }
+          ]
+        },
+        {
+          id: 'legal',
+          name: 'Legal & Compliance',
+          icon: '⚖️',
+          color: 'from-purple-600 to-violet-600',
+          mudir: 'COO',
+          description: 'Memastikan kepatuhan terhadap peraturan dan dukungan hukum',
+          positions: [
+            { level: 'Head', title: 'Head of Legal & Compliance', duties: ['Menyusun strategi kebijakan hukum', 'Mengawasi fungsi hukum dan kepatuhan', 'Menyediakan dukungan hukum negosiasi'] },
+            { level: 'Supervisor', title: 'Supervisor of Legal & Compliance', duties: ['Mengkoordinasikan kegiatan legal dan compliance', 'Memberikan supervisi penyusunan dokumen hukum', 'Mengidentifikasi potensi risiko hukum'] },
+            { level: 'Officer', title: 'Legal Officer & Compliance Officer', duties: ['Menyusun dan mereviu kontrak', 'Melakukan monitoring implementasi kebijakan', 'Menyusun laporan kepatuhan'] },
+            { level: 'Staff', title: 'Legal Staff & Compliance Staff', duties: ['Membantu administrasi dokumen hukum', 'Melakukan pengarsipan dokumen', 'Mendukung audit kepatuhan'] }
+          ]
+        },
+        {
+          id: 'it',
+          name: 'Information Technology',
+          icon: '💻',
+          color: 'from-cyan-600 to-teal-600',
+          mudir: 'COO',
+          description: 'Infrastruktur teknologi, keamanan data, dan transformasi digital',
+          positions: [
+            { level: 'Head', title: 'Head of IT Division', duties: ['Menyusun strategi pengembangan TI', 'Mengelola infrastruktur dan keamanan data', 'Mendorong inisiatif transformasi digital'] },
+            { level: 'Supervisor', title: 'Supervisor of IT', duties: ['Mengelola pelaksanaan program kerja TI', 'Mengidentifikasi kebutuhan teknologi', 'Melaporkan kendala operasional TI'] },
+            { level: 'Officer', title: 'IT Officer', duties: ['Melaksanakan kegiatan operasional TI', 'Memberikan dukungan teknis', 'Mendokumentasikan proses kerja'] },
+            { level: 'Staff', title: 'IT Staff', duties: ['Mendukung instalasi software/hardware', 'Membantu dokumentasi penggunaan TI', 'Menyediakan bantuan teknis awal'] }
+          ]
+        },
+        {
+          id: 'finance',
+          name: 'Finance & Treasury',
+          icon: '💰',
+          color: 'from-amber-600 to-yellow-600',
+          mudir: 'CFO',
+          description: 'Pengelolaan keuangan, anggaran, arus kas, dan likuiditas',
+          positions: [
+            { level: 'Head', title: 'Head of Finance & Treasury', duties: ['Menyusun strategi pengelolaan keuangan', 'Mengawasi pelaksanaan anggaran', 'Mengelola risiko likuiditas'] },
+            { level: 'Supervisor', title: 'Supervisor of Finance & Treasury', duties: ['Mengawasi operasional finance dan treasury', 'Melakukan verifikasi dokumen pengeluaran', 'Mengelola proyeksi kas'] },
+            { level: 'Officer', title: 'Finance Officer & Treasury Officer', duties: ['Menyusun dan memantau anggaran', 'Melaksanakan pengelolaan kas harian', 'Menyusun laporan arus kas'] },
+            { level: 'Staff', title: 'Finance Staff & Treasury Staff', duties: ['Mendukung input data anggaran', 'Membantu administrasi transaksi kas', 'Mengarsipkan dokumen keuangan'] }
+          ]
+        },
+        {
+          id: 'accounting',
+          name: 'Accounting',
+          icon: '📊',
+          color: 'from-indigo-600 to-blue-600',
+          mudir: 'CFO',
+          description: 'Pencatatan akuntansi, pelaporan keuangan, dan tutup buku',
+          positions: [
+            { level: 'Head', title: 'Head of Accounting Division', duties: ['Mengawasi proses pencatatan akuntansi', 'Menyusun sistem dan prosedur akuntansi', 'Memastikan penyusunan laporan keuangan'] },
+            { level: 'Supervisor', title: 'Supervisor of Accounting', duties: ['Mengawasi kegiatan akuntansi harian', 'Melakukan verifikasi jurnal dan buku besar', 'Memberikan supervisi rekonsiliasi'] },
+            { level: 'Officer', title: 'Accounting Officer', duties: ['Menyusun dan mencatat jurnal transaksi', 'Melakukan rekonsiliasi akun', 'Menyusun laporan posisi keuangan'] },
+            { level: 'Staff', title: 'Accounting Staff', duties: ['Membantu input data transaksi', 'Menyiapkan dokumen pendukung', 'Melakukan pengarsipan dokumen'] }
+          ]
+        },
+        {
+          id: 'risk',
+          name: 'Risk Management',
+          icon: '🛡️',
+          color: 'from-rose-600 to-red-600',
+          mudir: 'CFO',
+          description: 'Identifikasi, penilaian, dan pengendalian risiko perusahaan',
+          positions: [
+            { level: 'Head', title: 'Head of Risk Management', duties: ['Merumuskan kebijakan manajemen risiko', 'Mengkoordinasikan penyusunan profil risiko', 'Memimpin asesmen risiko'] },
+            { level: 'Supervisor', title: 'Supervisor of Risk Management', duties: ['Memantau implementasi kebijakan risiko', 'Melakukan review penilaian risiko', 'Mengkoordinasikan identifikasi risiko'] },
+            { level: 'Officer', title: 'Risk Management Officer', duties: ['Melakukan identifikasi dan analisis risiko', 'Menyusun laporan risiko', 'Melakukan monitoring kontrol risiko'] },
+            { level: 'Staff', title: 'Risk Management Staff', duties: ['Membantu pengumpulan data risiko', 'Menyusun database risiko', 'Membantu pelaksanaan survei risiko'] }
+          ]
+        },
+        {
+          id: 'corsec',
+          name: 'Corporate Secretariat',
+          icon: '📋',
+          color: 'from-slate-600 to-gray-600',
+          mudir: 'Board',
+          description: 'Fungsi tata kelola, komunikasi strategis, dan kesekretariatan',
+          positions: [
+            { level: 'Head', title: 'Corporate Secretary', duties: ['Memimpin fungsi kesekretariatan perusahaan', 'Menyusun strategi komunikasi korporat', 'Mengelola koordinasi rapat Board of Mudir'] },
+            { level: 'Supervisor', title: 'Corporate Secretariat Supervisor', duties: ['Mengelola aktivitas harian sekretariat', 'Melakukan pengecekan dokumen penting', 'Menyusun jadwal rapat'] },
+            { level: 'Officer', title: 'Corporate Secretariat Officer', duties: ['Melaksanakan pengarsipan dokumen legal', 'Menyusun notulen dan laporan rapat', 'Mendukung proses komunikasi'] },
+            { level: 'Staff', title: 'Corporate Secretariat Staff', duties: ['Membantu tugas administratif', 'Menyiapkan bahan rapat', 'Melakukan pencatatan dan pengarsipan'] }
+          ]
+        },
+        {
+          id: 'bu',
+          name: 'Business Units',
+          icon: '🏢',
+          color: 'from-teal-600 to-cyan-600',
+          mudir: 'CEO',
+          description: 'Unit usaha: Akomodasi, Transportasi, Tiket Kereta, Katering',
+          positions: [
+            { level: 'Head', title: 'Head of Business Unit', duties: ['Merancang strategi operasional unit bisnis', 'Memastikan kelancaran kegiatan bisnis harian', 'Melakukan koordinasi lintas divisi', 'Menyusun laporan performa operasional'] }
+          ]
+        }
+      ],
+      businessUnits: [
+        { name: 'Hajj & Umrah Services', icon: '🕋', desc: 'Layanan jamaah haji & umrah' },
+        { name: 'Hospitality', icon: '🏨', desc: 'Akomodasi hotel Mekkah & Madinah' },
+        { name: 'Catering & Restaurants', icon: '🍽️', desc: 'Katering dan restoran halal' }
+      ]
+    };
+
+    const SOTKViewer = ({ isOpen, onClose }) => {
+      const [selectedDivision, setSelectedDivision] = useState(null);
+      const [searchTerm, setSearchTerm] = useState('');
+      const [viewMode, setViewMode] = useState('orgchart'); // orgchart, list, search
+
+      if (!isOpen) return null;
+
+      const filteredDivisions = SOTK_DATA.divisions.filter(div =>
+        div.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        div.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        div.positions.some(pos =>
+          pos.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          pos.duties.some(d => d.toLowerCase().includes(searchTerm.toLowerCase()))
+        )
+      );
+
+      return (
+        <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
+          <div className="bg-slate-900 rounded-2xl max-w-6xl w-full max-h-[90vh] overflow-hidden border border-slate-700 flex flex-col">
+            {/* Header */}
+            <div className="bg-gradient-to-r from-teal-600 to-emerald-600 p-6 flex justify-between items-start">
+              <div>
+                <div className="flex items-center gap-3 mb-2">
+                  <span className="text-4xl">🏛️</span>
+                  <div>
+                    <h2 className="text-2xl font-bold text-white">Struktur Organisasi & Tata Kerja</h2>
+                    <p className="text-teal-100 text-sm">Peraturan Syarikah No. {SOTK_DATA.regulation.number}</p>
+                  </div>
+                </div>
+                <p className="text-teal-100 text-sm">Ditetapkan: {SOTK_DATA.regulation.date}</p>
+              </div>
+              <button onClick={onClose} className="text-white/80 hover:text-white text-2xl">✕</button>
+            </div>
+
+            {/* View Toggle & Search */}
+            <div className="p-4 border-b border-slate-700 flex flex-wrap gap-4 items-center justify-between">
+              <div className="flex gap-2">
+                <button
+                  onClick={() => setViewMode('orgchart')}
+                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${viewMode === 'orgchart' ? 'bg-teal-600 text-white' : 'bg-slate-800 text-slate-300 hover:bg-slate-700'}`}
+                >
+                  📊 Org Chart
+                </button>
+                <button
+                  onClick={() => setViewMode('list')}
+                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${viewMode === 'list' ? 'bg-teal-600 text-white' : 'bg-slate-800 text-slate-300 hover:bg-slate-700'}`}
+                >
+                  📋 Daftar Divisi
+                </button>
+              </div>
+              <div className="relative">
+                <input
+                  type="text"
+                  placeholder="Cari jabatan atau tugas..."
+                  value={searchTerm}
+                  onChange={(e) => { setSearchTerm(e.target.value); if (e.target.value) setViewMode('list'); }}
+                  className="bg-slate-800 border border-slate-600 rounded-lg px-4 py-2 text-white placeholder-slate-400 w-64 focus:outline-none focus:border-teal-500"
+                />
+                {searchTerm && (
+                  <button onClick={() => setSearchTerm('')} className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white">✕</button>
+                )}
+              </div>
+            </div>
+
+            {/* Content */}
+            <div className="flex-1 overflow-auto p-6">
+              {viewMode === 'orgchart' && !selectedDivision && (
+                <div className="space-y-8">
+                  {/* Board of Mudir */}
+                  <div className="text-center">
+                    <div className="inline-block bg-gradient-to-r from-amber-600 to-orange-600 rounded-xl p-4 border-2 border-amber-400/50 mb-4">
+                      <div className="text-2xl mb-1">👑</div>
+                      <div className="text-white font-bold">General Meeting (RUPS)</div>
+                      <div className="text-amber-200 text-xs">Forum pengambilan keputusan tertinggi</div>
+                    </div>
+                    <div className="flex justify-center gap-2 mb-2">
+                      <div className="w-0.5 h-8 bg-slate-600"></div>
+                    </div>
+                    <div className="inline-flex items-center gap-4 bg-slate-800/50 rounded-xl p-3 border border-slate-600 mb-4">
+                      <div className="text-xl">👁️</div>
+                      <div>
+                        <div className="text-white font-medium text-sm">Shahibul Syarikah</div>
+                        <div className="text-slate-400 text-xs">Wakil Pemegang Saham</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Board of Mudir Cards */}
+                  <div className="flex justify-center gap-2 mb-2">
+                    <div className="w-0.5 h-8 bg-slate-600"></div>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto">
+                    {SOTK_DATA.boardOfMudir.map((mudir, idx) => (
+                      <div key={idx} className={`bg-gradient-to-br ${idx === 0 ? 'from-red-900/50 to-red-800/30 border-red-700/50' : idx === 1 ? 'from-blue-900/50 to-blue-800/30 border-blue-700/50' : 'from-green-900/50 to-green-800/30 border-green-700/50'} rounded-xl p-4 border text-center`}>
+                        <div className="text-3xl mb-2">{idx === 0 ? '👔' : idx === 1 ? '⚙️' : '💵'}</div>
+                        <div className="text-white font-bold">{mudir.role}</div>
+                        <div className={`text-xs ${idx === 0 ? 'text-red-300' : idx === 1 ? 'text-blue-300' : 'text-green-300'}`}>{mudir.title}</div>
+                        <div className="mt-3 space-y-1">
+                          {mudir.divisions.map((div, i) => (
+                            <div key={i} className="text-slate-300 text-xs bg-slate-800/50 rounded px-2 py-1">{div}</div>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Divisions Grid */}
+                  <div className="mt-8">
+                    <h3 className="text-lg font-bold text-white mb-4 text-center">Klik Divisi untuk Melihat Detail</h3>
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                      {SOTK_DATA.divisions.map((div) => (
+                        <button
+                          key={div.id}
+                          onClick={() => setSelectedDivision(div)}
+                          className={`bg-gradient-to-br ${div.color} rounded-xl p-4 text-left hover:scale-105 transition-transform border border-white/10`}
+                        >
+                          <div className="text-2xl mb-2">{div.icon}</div>
+                          <div className="text-white font-bold text-sm">{div.name}</div>
+                          <div className="text-white/70 text-xs mt-1">{div.mudir}</div>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Business Units */}
+                  <div className="mt-6 bg-slate-800/30 rounded-xl p-4 border border-slate-700">
+                    <h4 className="text-white font-semibold mb-3 flex items-center gap-2">
+                      <span>🏢</span> Business Units
+                    </h4>
+                    <div className="grid grid-cols-3 gap-3">
+                      {SOTK_DATA.businessUnits.map((bu, idx) => (
+                        <div key={idx} className="bg-slate-700/50 rounded-lg p-3 text-center">
+                          <div className="text-xl">{bu.icon}</div>
+                          <div className="text-white text-xs font-medium">{bu.name}</div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {viewMode === 'list' && !selectedDivision && (
+                <div className="space-y-4">
+                  {filteredDivisions.length === 0 ? (
+                    <div className="text-center text-slate-400 py-8">
+                      Tidak ditemukan hasil untuk "{searchTerm}"
+                    </div>
+                  ) : (
+                    filteredDivisions.map((div) => (
+                      <button
+                        key={div.id}
+                        onClick={() => setSelectedDivision(div)}
+                        className="w-full bg-slate-800/50 rounded-xl p-4 text-left hover:bg-slate-800 transition-colors border border-slate-700 flex items-center gap-4"
+                      >
+                        <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${div.color} flex items-center justify-center text-2xl`}>
+                          {div.icon}
+                        </div>
+                        <div className="flex-1">
+                          <div className="text-white font-bold">{div.name}</div>
+                          <div className="text-slate-400 text-sm">{div.description}</div>
+                          <div className="text-slate-500 text-xs mt-1">Di bawah: {div.mudir} | {div.positions.length} level jabatan</div>
+                        </div>
+                        <span className="text-slate-400">→</span>
+                      </button>
+                    ))
+                  )}
+                </div>
+              )}
+
+              {selectedDivision && (
+                <div className="space-y-6">
+                  <button
+                    onClick={() => setSelectedDivision(null)}
+                    className="text-teal-400 hover:text-teal-300 flex items-center gap-2"
+                  >
+                    ← Kembali
+                  </button>
+
+                  <div className={`bg-gradient-to-br ${selectedDivision.color} rounded-xl p-6 border border-white/10`}>
+                    <div className="flex items-center gap-4">
+                      <div className="text-5xl">{selectedDivision.icon}</div>
+                      <div>
+                        <h3 className="text-2xl font-bold text-white">{selectedDivision.name}</h3>
+                        <p className="text-white/80">{selectedDivision.description}</p>
+                        <p className="text-white/60 text-sm mt-1">Di bawah: {selectedDivision.mudir}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="space-y-4">
+                    {selectedDivision.positions.map((pos, idx) => (
+                      <div key={idx} className="bg-slate-800/50 rounded-xl p-5 border border-slate-700">
+                        <div className="flex items-center gap-3 mb-3">
+                          <div className={`w-8 h-8 rounded-lg ${idx === 0 ? 'bg-amber-500/20 text-amber-400' : idx === 1 ? 'bg-blue-500/20 text-blue-400' : idx === 2 ? 'bg-green-500/20 text-green-400' : 'bg-slate-500/20 text-slate-400'} flex items-center justify-center text-sm font-bold`}>
+                            {idx + 1}
+                          </div>
+                          <div>
+                            <div className="text-white font-bold">{pos.title}</div>
+                            <div className={`text-xs ${idx === 0 ? 'text-amber-400' : idx === 1 ? 'text-blue-400' : idx === 2 ? 'text-green-400' : 'text-slate-400'}`}>
+                              Level: {pos.level}
+                            </div>
+                          </div>
+                        </div>
+                        <div className="space-y-2">
+                          <div className="text-slate-300 text-sm font-medium">Tugas dan Tanggung Jawab:</div>
+                          <ul className="space-y-1">
+                            {pos.duties.map((duty, i) => (
+                              <li key={i} className="text-slate-400 text-sm flex items-start gap-2">
+                                <span className="text-teal-400 mt-1">•</span>
+                                <span>{duty}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Footer */}
+            <div className="p-4 border-t border-slate-700 bg-slate-800/50 text-center text-slate-400 text-xs">
+              Sumber: Peraturan Syarikah BPKH Limited No. {SOTK_DATA.regulation.number} tentang {SOTK_DATA.regulation.title}
+            </div>
+          </div>
+        </div>
+      );
+    };
+
     // ============ USER ACCESS LEVELS ============
     const ACCESS_LEVELS = {
       admin: {
@@ -2110,7 +2513,7 @@ Jawab dengan ramah, singkat, dan helpful. Gunakan emoji yang relevan.`;
         label: 'Manager',
         color: 'from-amber-600 to-orange-600',
         badge: 'bg-amber-500/20 text-amber-400 border-amber-500/30',
-        features: ['chatbot', 'whatsapp', 'charts', 'map', 'qr', 'prayer', 'weather', 'calculator', 'hijri', 'inventory', 'tickets', 'scheduler', 'vendor', 'invoice'],
+        features: ['chatbot', 'whatsapp', 'charts', 'map', 'qr', 'prayer', 'weather', 'calculator', 'hijri', 'inventory', 'tickets', 'scheduler', 'vendor', 'invoice', 'sotk'],
         description: 'Akses operasional & monitoring'
       },
       staff: {
@@ -2405,6 +2808,7 @@ Jawab dengan ramah, singkat, dan helpful. Gunakan emoji yang relevan.`;
       const [showCalculator, setShowCalculator] = useState(false);
       const [showHijri, setShowHijri] = useState(false);
       const [showInvoice, setShowInvoice] = useState(false);
+      const [showSOTK, setShowSOTK] = useState(false);
       const [showLogin, setShowLogin] = useState(false);
       const [showUserManagement, setShowUserManagement] = useState(false);
       const [currentUser, setCurrentUser] = useState(null);
@@ -2741,6 +3145,24 @@ Jawab dengan ramah, singkat, dan helpful. Gunakan emoji yang relevan.`;
                   <div className="text-white font-bold">Invoice Management</div>
                   <div className={hasAccess('invoice') ? 'text-indigo-100 text-xs' : 'text-slate-400 text-xs'}>
                     {hasAccess('invoice') ? 'Faktur & pembayaran' : '🔒 Manager+ only'}
+                  </div>
+                </div>
+              </div>
+            </button>
+            <button
+              onClick={() => hasAccess('sotk') ? setShowSOTK(true) : setShowLogin(true)}
+              className={`rounded-xl p-5 text-left transition-all border ${
+                hasAccess('sotk')
+                  ? 'bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-500 hover:to-emerald-500 hover:scale-[1.02] border-teal-500/30'
+                  : 'bg-slate-800/50 border-slate-700 opacity-60'
+              }`}
+            >
+              <div className="flex items-center gap-4">
+                <span className="text-3xl">🏛️</span>
+                <div>
+                  <div className="text-white font-bold">SOTK Viewer</div>
+                  <div className={hasAccess('sotk') ? 'text-teal-100 text-xs' : 'text-slate-400 text-xs'}>
+                    {hasAccess('sotk') ? 'Struktur organisasi' : '🔒 Manager+ only'}
                   </div>
                 </div>
               </div>
@@ -3506,6 +3928,7 @@ Jawab dengan ramah, singkat, dan helpful. Gunakan emoji yang relevan.`;
           <StaffScheduler isOpen={showScheduler} onClose={() => setShowScheduler(false)} />
           <VendorPerformance isOpen={showVendor} onClose={() => setShowVendor(false)} />
           <InvoiceManagement isOpen={showInvoice} onClose={() => setShowInvoice(false)} />
+          <SOTKViewer isOpen={showSOTK} onClose={() => setShowSOTK(false)} />
           <LoginModal isOpen={showLogin} onClose={() => setShowLogin(false)} onLogin={setCurrentUser} />
           <UserManagement isOpen={showUserManagement} onClose={() => setShowUserManagement(false)} currentUser={currentUser} />
         </div>
