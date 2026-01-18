@@ -78,6 +78,41 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
+
+    /* Language Toggle Switch */
+    .lang-switch {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px;
+      background: rgba(51, 65, 85, 0.5);
+      border-radius: 9999px;
+      border: 1px solid rgba(71, 85, 105, 0.5);
+    }
+
+    .lang-btn {
+      padding: 6px 12px;
+      border-radius: 9999px;
+      font-size: 12px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .lang-btn.active {
+      background: linear-gradient(135deg, #14b8a6, #10b981);
+      color: white;
+      box-shadow: 0 2px 10px rgba(20, 184, 166, 0.3);
+    }
+
+    .lang-btn:not(.active) {
+      color: #94a3b8;
+    }
+
+    .lang-btn:not(.active):hover {
+      color: white;
+    }
   </style>
 </head>
 <body class="gradient-bg text-white overflow-x-hidden">
@@ -96,10 +131,16 @@
           </div>
         </div>
         <div class="flex items-center gap-4">
-          <a href="#features" class="hidden md:inline text-sm text-slate-300 hover:text-white transition-colors">Fitur</a>
-          <a href="#benefits" class="hidden md:inline text-sm text-slate-300 hover:text-white transition-colors">Keunggulan</a>
-          <a href="#access" class="hidden md:inline text-sm text-slate-300 hover:text-white transition-colors">Akses Level</a>
-          <a href="index.html" class="px-4 py-2 bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-500 hover:to-emerald-500 rounded-lg text-sm font-medium transition-all hover:scale-105">
+          <!-- Language Toggle -->
+          <div class="lang-switch">
+            <button class="lang-btn active" data-lang="id" onclick="setLanguage('id')">ID</button>
+            <button class="lang-btn" data-lang="en" onclick="setLanguage('en')">EN</button>
+          </div>
+
+          <a href="#features" class="hidden md:inline text-sm text-slate-300 hover:text-white transition-colors" data-id="Fitur" data-en="Features">Fitur</a>
+          <a href="#benefits" class="hidden md:inline text-sm text-slate-300 hover:text-white transition-colors" data-id="Keunggulan" data-en="Benefits">Keunggulan</a>
+          <a href="#access" class="hidden md:inline text-sm text-slate-300 hover:text-white transition-colors" data-id="Akses Level" data-en="Access Level">Akses Level</a>
+          <a href="index.html" class="px-4 py-2 bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-500 hover:to-emerald-500 rounded-lg text-sm font-medium transition-all hover:scale-105" data-id="🚀 Buka Aplikasi" data-en="🚀 Open App">
             🚀 Buka Aplikasi
           </a>
         </div>
@@ -123,19 +164,19 @@
           </div>
 
           <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6">
-            Transformasi Digital
-            <span class="gradient-text block">Layanan Haji & Umrah</span>
+            <span data-id="Transformasi Digital" data-en="Digital Transformation">Transformasi Digital</span>
+            <span class="gradient-text block" data-id="Layanan Haji & Umrah" data-en="Hajj & Umrah Services">Layanan Haji & Umrah</span>
           </h1>
 
-          <p class="text-lg text-slate-300 mb-8 max-w-xl">
+          <p class="text-lg text-slate-300 mb-8 max-w-xl" data-id="Platform AI terintegrasi dengan <strong class='text-white'>15+ fitur interaktif</strong> untuk efisiensi operasional layanan jamaah di Arab Saudi. Didukung teknologi RAG & LLM terkini." data-en="Integrated AI platform with <strong class='text-white'>15+ interactive features</strong> for operational efficiency of pilgrimage services in Saudi Arabia. Powered by cutting-edge RAG & LLM technology.">
             Platform AI terintegrasi dengan <strong class="text-white">15+ fitur interaktif</strong> untuk efisiensi operasional layanan jamaah di Arab Saudi. Didukung teknologi RAG & LLM terkini.
           </p>
 
           <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-            <a href="index.html" class="px-8 py-4 bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-500 hover:to-emerald-500 rounded-xl text-lg font-semibold transition-all hover:scale-105 pulse-glow flex items-center justify-center gap-2">
+            <a href="index.html" class="px-8 py-4 bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-500 hover:to-emerald-500 rounded-xl text-lg font-semibold transition-all hover:scale-105 pulse-glow flex items-center justify-center gap-2" data-id="🚀 Mulai Sekarang" data-en="🚀 Get Started">
               🚀 Mulai Sekarang
             </a>
-            <a href="#features" class="px-8 py-4 bg-slate-800 hover:bg-slate-700 border border-slate-600 rounded-xl text-lg font-semibold transition-all flex items-center justify-center gap-2">
+            <a href="#features" class="px-8 py-4 bg-slate-800 hover:bg-slate-700 border border-slate-600 rounded-xl text-lg font-semibold transition-all flex items-center justify-center gap-2" data-id="📖 Lihat Fitur" data-en="📖 View Features">
               📖 Lihat Fitur
             </a>
           </div>
@@ -143,12 +184,12 @@
           <div class="flex items-center gap-6 mt-10 justify-center lg:justify-start">
             <div class="text-center">
               <div class="text-2xl font-bold stats-number">15+</div>
-              <div class="text-xs text-slate-400">Fitur</div>
+              <div class="text-xs text-slate-400" data-id="Fitur" data-en="Features">Fitur</div>
             </div>
             <div class="w-px h-10 bg-slate-700"></div>
             <div class="text-center">
               <div class="text-2xl font-bold stats-number">4</div>
-              <div class="text-xs text-slate-400">Role Level</div>
+              <div class="text-xs text-slate-400" data-id="Role Level" data-en="Role Levels">Role Level</div>
             </div>
             <div class="w-px h-10 bg-slate-700"></div>
             <div class="text-center">
@@ -181,7 +222,7 @@
               </div>
               <div class="bg-gradient-to-br from-cyan-600/20 to-blue-600/20 rounded-xl p-4 border border-cyan-500/30 text-center">
                 <span class="text-2xl">🗺️</span>
-                <div class="text-xs text-slate-300 mt-1">Peta Hotel</div>
+                <div class="text-xs text-slate-300 mt-1" data-id="Peta Hotel" data-en="Hotel Map">Peta Hotel</div>
               </div>
               <div class="bg-gradient-to-br from-amber-600/20 to-orange-600/20 rounded-xl p-4 border border-amber-500/30 text-center">
                 <span class="text-2xl">🎫</span>
@@ -189,7 +230,7 @@
               </div>
               <div class="bg-gradient-to-br from-emerald-600/20 to-green-600/20 rounded-xl p-4 border border-emerald-500/30 text-center">
                 <span class="text-2xl">🌙</span>
-                <div class="text-xs text-slate-300 mt-1">Sholat</div>
+                <div class="text-xs text-slate-300 mt-1" data-id="Sholat" data-en="Prayer">Sholat</div>
               </div>
             </div>
             <div class="mt-4 p-3 bg-slate-900/50 rounded-xl border border-slate-700">
@@ -218,9 +259,11 @@
     <div class="absolute inset-0 bg-gradient-to-b from-transparent via-slate-800/50 to-transparent"></div>
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-16 scroll-reveal">
-        <span class="inline-block px-4 py-1 bg-teal-500/10 border border-teal-500/30 rounded-full text-teal-400 text-sm mb-4">15+ Fitur Interaktif</span>
-        <h2 class="text-3xl sm:text-4xl font-bold mb-4">Solusi Lengkap dalam <span class="gradient-text">Satu Platform</span></h2>
-        <p class="text-slate-400 max-w-2xl mx-auto">Semua fitur yang Anda butuhkan untuk mengelola operasional layanan haji & umrah secara efisien</p>
+        <span class="inline-block px-4 py-1 bg-teal-500/10 border border-teal-500/30 rounded-full text-teal-400 text-sm mb-4" data-id="15+ Fitur Interaktif" data-en="15+ Interactive Features">15+ Fitur Interaktif</span>
+        <h2 class="text-3xl sm:text-4xl font-bold mb-4">
+          <span data-id="Solusi Lengkap dalam" data-en="Complete Solution in">Solusi Lengkap dalam</span> <span class="gradient-text" data-id="Satu Platform" data-en="One Platform">Satu Platform</span>
+        </h2>
+        <p class="text-slate-400 max-w-2xl mx-auto" data-id="Semua fitur yang Anda butuhkan untuk mengelola operasional layanan haji & umrah secara efisien" data-en="All the features you need to efficiently manage hajj & umrah service operations">Semua fitur yang Anda butuhkan untuk mengelola operasional layanan haji & umrah secara efisien</p>
       </div>
 
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -228,63 +271,63 @@
         <div class="feature-card card-hover bg-slate-800/50 backdrop-blur-sm rounded-2xl p-6 border border-slate-700 scroll-reveal">
           <div class="feature-icon w-14 h-14 rounded-xl bg-gradient-to-br from-teal-500 to-emerald-600 flex items-center justify-center text-2xl mb-4">🤖</div>
           <h3 class="text-xl font-bold mb-2">AI Chatbot</h3>
-          <p class="text-slate-400 text-sm mb-3">Asisten AI bilingual (Arabic/Indonesian/English) powered by Groq Llama 3.3 70B</p>
+          <p class="text-slate-400 text-sm mb-3" data-id="Asisten AI bilingual (Arabic/Indonesian/English) powered by Groq Llama 3.3 70B" data-en="Bilingual AI assistant (Arabic/Indonesian/English) powered by Groq Llama 3.3 70B">Asisten AI bilingual (Arabic/Indonesian/English) powered by Groq Llama 3.3 70B</p>
           <span class="inline-block px-2 py-1 bg-teal-500/10 text-teal-400 text-xs rounded">Groq API</span>
         </div>
 
         <div class="feature-card card-hover bg-slate-800/50 backdrop-blur-sm rounded-2xl p-6 border border-slate-700 scroll-reveal">
           <div class="feature-icon w-14 h-14 rounded-xl bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center text-2xl mb-4">💬</div>
           <h3 class="text-xl font-bold mb-2">WhatsApp Bot</h3>
-          <p class="text-slate-400 text-sm mb-3">Simulasi percakapan bilingual untuk demo integrasi WhatsApp Business API</p>
+          <p class="text-slate-400 text-sm mb-3" data-id="Simulasi percakapan bilingual untuk demo integrasi WhatsApp Business API" data-en="Bilingual conversation simulation for WhatsApp Business API integration demo">Simulasi percakapan bilingual untuk demo integrasi WhatsApp Business API</p>
           <span class="inline-block px-2 py-1 bg-green-500/10 text-green-400 text-xs rounded">Demo Mode</span>
         </div>
 
         <div class="feature-card card-hover bg-slate-800/50 backdrop-blur-sm rounded-2xl p-6 border border-slate-700 scroll-reveal">
           <div class="feature-icon w-14 h-14 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-2xl mb-4">📊</div>
           <h3 class="text-xl font-bold mb-2">Live Charts</h3>
-          <p class="text-slate-400 text-sm mb-3">Grafik KPI & Budget dengan animasi real-time menggunakan Chart.js</p>
+          <p class="text-slate-400 text-sm mb-3" data-id="Grafik KPI & Budget dengan animasi real-time menggunakan Chart.js" data-en="KPI & Budget charts with real-time animation using Chart.js">Grafik KPI & Budget dengan animasi real-time menggunakan Chart.js</p>
           <span class="inline-block px-2 py-1 bg-indigo-500/10 text-indigo-400 text-xs rounded">Chart.js</span>
         </div>
 
         <div class="feature-card card-hover bg-slate-800/50 backdrop-blur-sm rounded-2xl p-6 border border-slate-700 scroll-reveal">
           <div class="feature-icon w-14 h-14 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-2xl mb-4">🗺️</div>
-          <h3 class="text-xl font-bold mb-2">Peta Hotel</h3>
-          <p class="text-slate-400 text-sm mb-3">Lokasi hotel dekat Masjidil Haram dengan marker interaktif</p>
+          <h3 class="text-xl font-bold mb-2" data-id="Peta Hotel" data-en="Hotel Map">Peta Hotel</h3>
+          <p class="text-slate-400 text-sm mb-3" data-id="Lokasi hotel dekat Masjidil Haram dengan marker interaktif" data-en="Hotel locations near Masjidil Haram with interactive markers">Lokasi hotel dekat Masjidil Haram dengan marker interaktif</p>
           <span class="inline-block px-2 py-1 bg-cyan-500/10 text-cyan-400 text-xs rounded">Leaflet.js</span>
         </div>
 
         <div class="feature-card card-hover bg-slate-800/50 backdrop-blur-sm rounded-2xl p-6 border border-slate-700 scroll-reveal">
           <div class="feature-icon w-14 h-14 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center text-2xl mb-4">🎫</div>
           <h3 class="text-xl font-bold mb-2">QR Booking</h3>
-          <p class="text-slate-400 text-sm mb-3">Generate QR code untuk konfirmasi booking dengan data jamaah</p>
+          <p class="text-slate-400 text-sm mb-3" data-id="Generate QR code untuk konfirmasi booking dengan data jamaah" data-en="Generate QR code for booking confirmation with pilgrim data">Generate QR code untuk konfirmasi booking dengan data jamaah</p>
           <span class="inline-block px-2 py-1 bg-amber-500/10 text-amber-400 text-xs rounded">QRCode.js</span>
         </div>
 
         <div class="feature-card card-hover bg-slate-800/50 backdrop-blur-sm rounded-2xl p-6 border border-slate-700 scroll-reveal">
           <div class="feature-icon w-14 h-14 rounded-xl bg-gradient-to-br from-emerald-500 to-green-600 flex items-center justify-center text-2xl mb-4">🌙</div>
-          <h3 class="text-xl font-bold mb-2">Jadwal Sholat</h3>
-          <p class="text-slate-400 text-sm mb-3">Waktu sholat Mekkah real-time dari Aladhan API</p>
+          <h3 class="text-xl font-bold mb-2" data-id="Jadwal Sholat" data-en="Prayer Times">Jadwal Sholat</h3>
+          <p class="text-slate-400 text-sm mb-3" data-id="Waktu sholat Mekkah real-time dari Aladhan API" data-en="Real-time Mecca prayer times from Aladhan API">Waktu sholat Mekkah real-time dari Aladhan API</p>
           <span class="inline-block px-2 py-1 bg-emerald-500/10 text-emerald-400 text-xs rounded">Aladhan API</span>
         </div>
 
         <div class="feature-card card-hover bg-slate-800/50 backdrop-blur-sm rounded-2xl p-6 border border-slate-700 scroll-reveal">
           <div class="feature-icon w-14 h-14 rounded-xl bg-gradient-to-br from-blue-500 to-sky-600 flex items-center justify-center text-2xl mb-4">☁️</div>
-          <h3 class="text-xl font-bold mb-2">Cuaca Live</h3>
-          <p class="text-slate-400 text-sm mb-3">Kondisi cuaca Mekkah & Madinah dari Open-Meteo API</p>
+          <h3 class="text-xl font-bold mb-2" data-id="Cuaca Live" data-en="Live Weather">Cuaca Live</h3>
+          <p class="text-slate-400 text-sm mb-3" data-id="Kondisi cuaca Mekkah & Madinah dari Open-Meteo API" data-en="Mecca & Medina weather conditions from Open-Meteo API">Kondisi cuaca Mekkah & Madinah dari Open-Meteo API</p>
           <span class="inline-block px-2 py-1 bg-blue-500/10 text-blue-400 text-xs rounded">Open-Meteo</span>
         </div>
 
         <div class="feature-card card-hover bg-slate-800/50 backdrop-blur-sm rounded-2xl p-6 border border-slate-700 scroll-reveal">
           <div class="feature-icon w-14 h-14 rounded-xl bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center text-2xl mb-4">💱</div>
-          <h3 class="text-xl font-bold mb-2">Kalkulator Kurs</h3>
-          <p class="text-slate-400 text-sm mb-3">Konversi SAR ↔ IDR dengan rate live dari ExchangeRate API</p>
+          <h3 class="text-xl font-bold mb-2" data-id="Kalkulator Kurs" data-en="Currency Calculator">Kalkulator Kurs</h3>
+          <p class="text-slate-400 text-sm mb-3" data-id="Konversi SAR ↔ IDR dengan rate live dari ExchangeRate API" data-en="SAR ↔ IDR conversion with live rate from ExchangeRate API">Konversi SAR ↔ IDR dengan rate live dari ExchangeRate API</p>
           <span class="inline-block px-2 py-1 bg-purple-500/10 text-purple-400 text-xs rounded">ExchangeRate</span>
         </div>
 
         <div class="feature-card card-hover bg-slate-800/50 backdrop-blur-sm rounded-2xl p-6 border border-slate-700 scroll-reveal">
           <div class="feature-icon w-14 h-14 rounded-xl bg-gradient-to-br from-yellow-500 to-amber-600 flex items-center justify-center text-2xl mb-4">🗓️</div>
-          <h3 class="text-xl font-bold mb-2">Kalender Hijriyah</h3>
-          <p class="text-slate-400 text-sm mb-3">Tanggal Hijriyah dengan info bulan & tanggal penting Islam</p>
+          <h3 class="text-xl font-bold mb-2" data-id="Kalender Hijriyah" data-en="Hijri Calendar">Kalender Hijriyah</h3>
+          <p class="text-slate-400 text-sm mb-3" data-id="Tanggal Hijriyah dengan info bulan & tanggal penting Islam" data-en="Hijri date with Islamic months & important dates info">Tanggal Hijriyah dengan info bulan & tanggal penting Islam</p>
           <span class="inline-block px-2 py-1 bg-yellow-500/10 text-yellow-400 text-xs rounded">Aladhan API</span>
         </div>
       </div>
@@ -293,14 +336,14 @@
       <div class="mt-12">
         <h3 class="text-xl font-bold text-center mb-8 scroll-reveal">
           <span class="inline-flex items-center gap-2 px-4 py-2 bg-slate-800/50 rounded-full border border-slate-700">
-            ⚙️ Fitur Operasional
+            ⚙️ <span data-id="Fitur Operasional" data-en="Operational Features">Fitur Operasional</span>
           </span>
         </h3>
         <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-4">
           <div class="card-hover bg-slate-800/30 rounded-xl p-4 border border-slate-700/50 text-center scroll-reveal">
             <span class="text-2xl">📊</span>
             <div class="text-sm font-medium mt-2">Inventory</div>
-            <div class="text-xs text-slate-500">Real-time stok</div>
+            <div class="text-xs text-slate-500" data-id="Real-time stok" data-en="Real-time stock">Real-time stok</div>
           </div>
           <div class="card-hover bg-slate-800/30 rounded-xl p-4 border border-slate-700/50 text-center scroll-reveal">
             <span class="text-2xl">📝</span>
@@ -310,7 +353,7 @@
           <div class="card-hover bg-slate-800/30 rounded-xl p-4 border border-slate-700/50 text-center scroll-reveal">
             <span class="text-2xl">📅</span>
             <div class="text-sm font-medium mt-2">Scheduler</div>
-            <div class="text-xs text-slate-500">Jadwal shift</div>
+            <div class="text-xs text-slate-500" data-id="Jadwal shift" data-en="Shift schedule">Jadwal shift</div>
           </div>
           <div class="card-hover bg-slate-800/30 rounded-xl p-4 border border-slate-700/50 text-center scroll-reveal">
             <span class="text-2xl">📦</span>
@@ -331,8 +374,10 @@
   <section id="benefits" class="py-20 relative">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-16 scroll-reveal">
-        <span class="inline-block px-4 py-1 bg-emerald-500/10 border border-emerald-500/30 rounded-full text-emerald-400 text-sm mb-4">Keunggulan Platform</span>
-        <h2 class="text-3xl sm:text-4xl font-bold mb-4">Mengapa Memilih <span class="gradient-text">BPKH Limited?</span></h2>
+        <span class="inline-block px-4 py-1 bg-emerald-500/10 border border-emerald-500/30 rounded-full text-emerald-400 text-sm mb-4" data-id="Keunggulan Platform" data-en="Platform Benefits">Keunggulan Platform</span>
+        <h2 class="text-3xl sm:text-4xl font-bold mb-4">
+          <span data-id="Mengapa Memilih" data-en="Why Choose">Mengapa Memilih</span> <span class="gradient-text">BPKH Limited?</span>
+        </h2>
       </div>
 
       <div class="grid md:grid-cols-3 gap-8">
@@ -340,8 +385,8 @@
           <div class="w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br from-indigo-500/20 to-purple-500/20 border border-indigo-500/30 flex items-center justify-center mb-6">
             <span class="text-4xl font-bold stats-number">85%</span>
           </div>
-          <h3 class="text-xl font-bold mb-2">Efisiensi Layanan</h3>
-          <p class="text-slate-400">Otomasi respons bilingual 24/7 dengan AI chatbot untuk pelayanan jamaah</p>
+          <h3 class="text-xl font-bold mb-2" data-id="Efisiensi Layanan" data-en="Service Efficiency">Efisiensi Layanan</h3>
+          <p class="text-slate-400" data-id="Otomasi respons bilingual 24/7 dengan AI chatbot untuk pelayanan jamaah" data-en="24/7 bilingual response automation with AI chatbot for pilgrim services">Otomasi respons bilingual 24/7 dengan AI chatbot untuk pelayanan jamaah</p>
         </div>
 
         <div class="text-center scroll-reveal">
@@ -349,7 +394,7 @@
             <span class="text-4xl">🔄</span>
           </div>
           <h3 class="text-xl font-bold mb-2">Real-time Data</h3>
-          <p class="text-slate-400">Kurs SAR-IDR, cuaca, jadwal sholat, dan inventory selalu terupdate</p>
+          <p class="text-slate-400" data-id="Kurs SAR-IDR, cuaca, jadwal sholat, dan inventory selalu terupdate" data-en="SAR-IDR rate, weather, prayer times, and inventory always up-to-date">Kurs SAR-IDR, cuaca, jadwal sholat, dan inventory selalu terupdate</p>
         </div>
 
         <div class="text-center scroll-reveal">
@@ -357,7 +402,7 @@
             <span class="text-4xl">📄</span>
           </div>
           <h3 class="text-xl font-bold mb-2">Zero Paper</h3>
-          <p class="text-slate-400">Full digitalisasi dokumen Arab-Indonesia dengan QR code booking</p>
+          <p class="text-slate-400" data-id="Full digitalisasi dokumen Arab-Indonesia dengan QR code booking" data-en="Full Arabic-Indonesian document digitalization with QR code booking">Full digitalisasi dokumen Arab-Indonesia dengan QR code booking</p>
         </div>
       </div>
 
@@ -394,8 +439,10 @@
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-16 scroll-reveal">
         <span class="inline-block px-4 py-1 bg-red-500/10 border border-red-500/30 rounded-full text-red-400 text-sm mb-4">Role-Based Access Control</span>
-        <h2 class="text-3xl sm:text-4xl font-bold mb-4">User Access <span class="gradient-text">Level System</span></h2>
-        <p class="text-slate-400 max-w-2xl mx-auto">Sistem RBAC terintegrasi untuk kontrol akses fitur berdasarkan role pengguna</p>
+        <h2 class="text-3xl sm:text-4xl font-bold mb-4">
+          User Access <span class="gradient-text">Level System</span>
+        </h2>
+        <p class="text-slate-400 max-w-2xl mx-auto" data-id="Sistem RBAC terintegrasi untuk kontrol akses fitur berdasarkan role pengguna" data-en="Integrated RBAC system for feature access control based on user roles">Sistem RBAC terintegrasi untuk kontrol akses fitur berdasarkan role pengguna</p>
       </div>
 
       <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -408,7 +455,7 @@
             </div>
           </div>
           <ul class="space-y-2 text-sm text-slate-300">
-            <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Semua fitur</li>
+            <li class="flex items-center gap-2"><span class="text-green-400">✓</span> <span data-id="Semua fitur" data-en="All features">Semua fitur</span></li>
             <li class="flex items-center gap-2"><span class="text-green-400">✓</span> User Management</li>
             <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Access Matrix</li>
           </ul>
@@ -419,11 +466,11 @@
             <span class="text-3xl">👩‍💼</span>
             <div>
               <div class="font-bold text-amber-400">Manager</div>
-              <div class="text-xs text-slate-400">14 Fitur</div>
+              <div class="text-xs text-slate-400" data-id="14 Fitur" data-en="14 Features">14 Fitur</div>
             </div>
           </div>
           <ul class="space-y-2 text-sm text-slate-300">
-            <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Operasional</li>
+            <li class="flex items-center gap-2"><span class="text-green-400">✓</span> <span data-id="Operasional" data-en="Operations">Operasional</span></li>
             <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Monitoring</li>
             <li class="flex items-center gap-2"><span class="text-red-400">✗</span> User Management</li>
           </ul>
@@ -434,7 +481,7 @@
             <span class="text-3xl">👨‍🔧</span>
             <div>
               <div class="font-bold text-blue-400">Staff</div>
-              <div class="text-xs text-slate-400">9 Fitur</div>
+              <div class="text-xs text-slate-400" data-id="9 Fitur" data-en="9 Features">9 Fitur</div>
             </div>
           </div>
           <ul class="space-y-2 text-sm text-slate-300">
@@ -449,13 +496,13 @@
             <span class="text-3xl">👤</span>
             <div>
               <div class="font-bold text-slate-400">Viewer</div>
-              <div class="text-xs text-slate-500">5 Fitur</div>
+              <div class="text-xs text-slate-500" data-id="5 Fitur" data-en="5 Features">5 Fitur</div>
             </div>
           </div>
           <ul class="space-y-2 text-sm text-slate-400">
-            <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Info Publik</li>
+            <li class="flex items-center gap-2"><span class="text-green-400">✓</span> <span data-id="Info Publik" data-en="Public Info">Info Publik</span></li>
             <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Read-only</li>
-            <li class="flex items-center gap-2"><span class="text-red-400">✗</span> Operasional</li>
+            <li class="flex items-center gap-2"><span class="text-red-400">✗</span> <span data-id="Operasional" data-en="Operations">Operasional</span></li>
           </ul>
         </div>
       </div>
@@ -471,11 +518,13 @@
     </div>
 
     <div class="relative max-w-4xl mx-auto px-4 text-center scroll-reveal">
-      <h2 class="text-3xl sm:text-4xl font-bold mb-6">Siap Memulai <span class="gradient-text">Transformasi Digital?</span></h2>
-      <p class="text-lg text-slate-300 mb-8">Akses platform BPKH Limited sekarang dan rasakan kemudahan pengelolaan layanan haji & umrah dengan teknologi AI terkini.</p>
+      <h2 class="text-3xl sm:text-4xl font-bold mb-6">
+        <span data-id="Siap Memulai" data-en="Ready to Start">Siap Memulai</span> <span class="gradient-text" data-id="Transformasi Digital?" data-en="Digital Transformation?">Transformasi Digital?</span>
+      </h2>
+      <p class="text-lg text-slate-300 mb-8" data-id="Akses platform BPKH Limited sekarang dan rasakan kemudahan pengelolaan layanan haji & umrah dengan teknologi AI terkini." data-en="Access the BPKH Limited platform now and experience the ease of managing hajj & umrah services with cutting-edge AI technology.">Akses platform BPKH Limited sekarang dan rasakan kemudahan pengelolaan layanan haji & umrah dengan teknologi AI terkini.</p>
 
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="index.html" class="px-8 py-4 bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-500 hover:to-emerald-500 rounded-xl text-lg font-semibold transition-all hover:scale-105 pulse-glow flex items-center justify-center gap-2">
+        <a href="index.html" class="px-8 py-4 bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-500 hover:to-emerald-500 rounded-xl text-lg font-semibold transition-all hover:scale-105 pulse-glow flex items-center justify-center gap-2" data-id="🚀 Buka Aplikasi" data-en="🚀 Open App">
           🚀 Buka Aplikasi
         </a>
         <a href="https://github.com/mshadianto/bayan_ai" target="_blank" class="px-8 py-4 bg-slate-800 hover:bg-slate-700 border border-slate-600 rounded-xl text-lg font-semibold transition-all flex items-center justify-center gap-2">
@@ -511,25 +560,57 @@
 
         <div class="text-center text-sm text-slate-400">
           <p>© 2025 BPKH Limited. All Rights Reserved.</p>
-          <p class="text-xs mt-1">Proprietary Software - Internal Use Only</p>
+          <p class="text-xs mt-1" data-id="Proprietary Software - Internal Use Only" data-en="Proprietary Software - Internal Use Only">Proprietary Software - Internal Use Only</p>
         </div>
 
         <div class="text-center md:text-right text-sm text-slate-400">
-          <p>Developed with 💚 by</p>
+          <p data-id="Developed with 💚 by" data-en="Developed with 💚 by">Developed with 💚 by</p>
           <p class="text-slate-300">MS Hadianto | Claude Opus 4.5</p>
         </div>
       </div>
 
       <div class="mt-8 pt-8 border-t border-slate-800 text-center">
         <p class="text-lg font-arabic text-slate-300">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم</p>
-        <p class="text-xs text-slate-500 mt-2">Transformasi Digital Layanan Jamaah Haji & Umrah</p>
+        <p class="text-xs text-slate-500 mt-2" data-id="Transformasi Digital Layanan Jamaah Haji & Umrah" data-en="Digital Transformation for Hajj & Umrah Pilgrim Services">Transformasi Digital Layanan Jamaah Haji & Umrah</p>
       </div>
     </div>
   </footer>
 
-  <!-- Scroll Reveal Script -->
+  <!-- Scripts -->
   <script>
+    // Language handling
+    let currentLang = localStorage.getItem('bpkh-lang') || 'id';
+
+    function setLanguage(lang) {
+      currentLang = lang;
+      localStorage.setItem('bpkh-lang', lang);
+
+      // Update toggle buttons
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.lang === lang);
+      });
+
+      // Update all text elements with data attributes
+      document.querySelectorAll('[data-id][data-en]').forEach(el => {
+        const text = el.getAttribute(`data-${lang}`);
+        if (text) {
+          if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+            el.placeholder = text;
+          } else {
+            el.innerHTML = text;
+          }
+        }
+      });
+
+      // Update HTML lang attribute
+      document.documentElement.lang = lang;
+    }
+
+    // Initialize language on page load
     document.addEventListener('DOMContentLoaded', function() {
+      setLanguage(currentLang);
+
+      // Scroll reveal
       const observerOptions = {
         root: null,
         rootMargin: '0px',
