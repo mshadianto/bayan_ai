@@ -5,7 +5,7 @@
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind-CSS-38B2AC?style=for-the-badge&logo=tailwind-css)
 ![License](https://img.shields.io/badge/License-Proprietary-red?style=for-the-badge)
 
-> Platform AI terintegrasi untuk layanan haji & umrah di Arab Saudi dengan 14 fitur interaktif dalam single HTML file.
+> Platform AI terintegrasi untuk layanan haji & umrah di Arab Saudi dengan 15 fitur interaktif + Role-Based Access Control dalam single HTML file.
 
 ## Live Demo
 
@@ -34,6 +34,7 @@
 | 12 | **Staff Scheduler** | Jadwal shift staf visual | - |
 | 13 | **Vendor Performance** | Rating & compliance dashboard | - |
 | 14 | **Invoice Management** | Faktur, pembayaran, status tracking | - |
+| 15 | **User Access Level** | RBAC: Admin/Manager/Staff/Viewer | - |
 
 ---
 
@@ -46,7 +47,7 @@ Maps:         Leaflet.js + OpenStreetMap
 Charts:       Chart.js
 QR Code:      QRCode.js
 APIs:         Aladhan, Open-Meteo, ExchangeRate
-Deployment:   Single HTML File (~3100 lines)
+Deployment:   Single HTML File (~3500 lines)
 ```
 
 ---
@@ -113,9 +114,10 @@ bayan_ai/
 ## Screenshots
 
 ### Dashboard Overview
-- 14 tombol fitur interaktif
+- 15 tombol fitur interaktif
 - Live forex rate SAR-IDR
 - Architecture diagram
+- Role-based access control
 
 ### AI Chatbot
 - Bilingual support (Arabic/Indonesian/English)
@@ -138,6 +140,13 @@ bayan_ai/
 - **Staff Scheduler**: Visual shift schedule (Pagi/Siang/Malam/OFF)
 - **Vendor Performance**: Rating, compliance score, contract tracking
 - **Invoice Management**: Status tracking (Draft/Sent/Paid/Overdue), summary stats
+
+### User Access Level (RBAC)
+- **4 Role Levels**: Admin, Manager, Staff, Viewer
+- **Login Simulation**: Demo users dengan berbagai role
+- **User Management**: Admin-only dashboard untuk kelola users
+- **Access Matrix**: Visual tabel akses per fitur per role
+- **Feature Gating**: Tombol disabled untuk fitur tanpa akses
 
 ---
 

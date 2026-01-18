@@ -2089,6 +2089,294 @@ Jawab dengan ramah, singkat, dan helpful. Gunakan emoji yang relevan.`;
       );
     };
 
+    // ============ USER ACCESS LEVELS ============
+    const ACCESS_LEVELS = {
+      admin: {
+        label: 'Administrator',
+        color: 'from-red-600 to-rose-600',
+        badge: 'bg-red-500/20 text-red-400 border-red-500/30',
+        features: ['all'],
+        description: 'Full access ke semua fitur'
+      },
+      manager: {
+        label: 'Manager',
+        color: 'from-amber-600 to-orange-600',
+        badge: 'bg-amber-500/20 text-amber-400 border-amber-500/30',
+        features: ['chatbot', 'whatsapp', 'charts', 'map', 'qr', 'prayer', 'weather', 'calculator', 'hijri', 'inventory', 'tickets', 'scheduler', 'vendor', 'invoice'],
+        description: 'Akses operasional & monitoring'
+      },
+      staff: {
+        label: 'Staff',
+        color: 'from-blue-600 to-indigo-600',
+        badge: 'bg-blue-500/20 text-blue-400 border-blue-500/30',
+        features: ['chatbot', 'whatsapp', 'map', 'qr', 'prayer', 'weather', 'calculator', 'hijri', 'tickets'],
+        description: 'Akses fitur layanan pelanggan'
+      },
+      viewer: {
+        label: 'Viewer',
+        color: 'from-slate-600 to-gray-600',
+        badge: 'bg-slate-500/20 text-slate-400 border-slate-500/30',
+        features: ['prayer', 'weather', 'calculator', 'hijri', 'map'],
+        description: 'Akses view-only informasi publik'
+      }
+    };
+
+    const DEMO_USERS = [
+      { id: 1, name: 'Ahmad Fauzi', email: 'ahmad.fauzi@bpkh.go.id', role: 'admin', avatar: '👨‍💼', department: 'IT', status: 'active' },
+      { id: 2, name: 'Siti Nurhaliza', email: 'siti.nurhaliza@bpkh.go.id', role: 'manager', avatar: '👩‍💼', department: 'Operations', status: 'active' },
+      { id: 3, name: 'Budi Santoso', email: 'budi.santoso@bpkh.go.id', role: 'staff', avatar: '👨‍🔧', department: 'Customer Service', status: 'active' },
+      { id: 4, name: 'Dewi Lestari', email: 'dewi.lestari@bpkh.go.id', role: 'staff', avatar: '👩‍🔧', department: 'Customer Service', status: 'active' },
+      { id: 5, name: 'Rizki Pratama', email: 'rizki.pratama@bpkh.go.id', role: 'viewer', avatar: '👤', department: 'Guest', status: 'active' },
+    ];
+
+    // Login Modal Component
+    const LoginModal = ({ isOpen, onClose, onLogin }) => {
+      const [selectedUser, setSelectedUser] = useState(null);
+
+      if (!isOpen) return null;
+
+      const handleLogin = () => {
+        if (selectedUser) {
+          onLogin(selectedUser);
+          onClose();
+        }
+      };
+
+      return (
+        <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
+          <div className="bg-slate-900 rounded-2xl max-w-md w-full overflow-hidden border border-slate-700">
+            <div className="bg-gradient-to-r from-teal-600 to-emerald-600 p-6 text-center">
+              <span className="text-5xl mb-3 block">🔐</span>
+              <h2 className="text-2xl font-bold text-white">Login ke BPKH Limited</h2>
+              <p className="text-teal-100 text-sm mt-1">Pilih akun untuk demo akses level</p>
+            </div>
+
+            <div className="p-6">
+              <div className="space-y-3 mb-6">
+                {DEMO_USERS.map(user => (
+                  <button
+                    key={user.id}
+                    onClick={() => setSelectedUser(user)}
+                    className={`w-full p-4 rounded-xl border transition-all text-left flex items-center gap-4 ${
+                      selectedUser?.id === user.id
+                        ? 'bg-teal-600/20 border-teal-500'
+                        : 'bg-slate-800/50 border-slate-700 hover:border-slate-600'
+                    }`}
+                  >
+                    <span className="text-3xl">{user.avatar}</span>
+                    <div className="flex-1">
+                      <div className="text-white font-semibold">{user.name}</div>
+                      <div className="text-slate-400 text-sm">{user.email}</div>
+                    </div>
+                    <span className={`px-2 py-1 rounded text-xs border ${ACCESS_LEVELS[user.role].badge}`}>
+                      {ACCESS_LEVELS[user.role].label}
+                    </span>
+                  </button>
+                ))}
+              </div>
+
+              {selectedUser && (
+                <div className="bg-slate-800/50 rounded-xl p-4 mb-4 border border-slate-700">
+                  <div className="text-slate-400 text-sm mb-2">Akses Level: <span className={`font-medium ${ACCESS_LEVELS[selectedUser.role].badge.split(' ')[1]}`}>{ACCESS_LEVELS[selectedUser.role].label}</span></div>
+                  <div className="text-slate-500 text-xs">{ACCESS_LEVELS[selectedUser.role].description}</div>
+                </div>
+              )}
+
+              <div className="flex gap-3">
+                <button
+                  onClick={onClose}
+                  className="flex-1 py-3 bg-slate-700 hover:bg-slate-600 text-white rounded-xl font-medium transition-all"
+                >
+                  Batal
+                </button>
+                <button
+                  onClick={handleLogin}
+                  disabled={!selectedUser}
+                  className={`flex-1 py-3 rounded-xl font-medium transition-all ${
+                    selectedUser
+                      ? 'bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-500 hover:to-emerald-500 text-white'
+                      : 'bg-slate-800 text-slate-500 cursor-not-allowed'
+                  }`}
+                >
+                  🚀 Masuk
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    };
+
+    // User Management Component (Admin Only)
+    const UserManagement = ({ isOpen, onClose, currentUser }) => {
+      const [users, setUsers] = useState(DEMO_USERS);
+      const [filter, setFilter] = useState('all');
+
+      if (!isOpen) return null;
+
+      const filteredUsers = filter === 'all' ? users : users.filter(u => u.role === filter);
+
+      const getRoleStats = () => ({
+        total: users.length,
+        admin: users.filter(u => u.role === 'admin').length,
+        manager: users.filter(u => u.role === 'manager').length,
+        staff: users.filter(u => u.role === 'staff').length,
+        viewer: users.filter(u => u.role === 'viewer').length,
+      });
+
+      const stats = getRoleStats();
+
+      return (
+        <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
+          <div className="bg-slate-900 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden border border-slate-700">
+            <div className="bg-gradient-to-r from-red-600 to-rose-600 p-4 flex justify-between items-center">
+              <div className="flex items-center gap-3">
+                <span className="text-3xl">👥</span>
+                <div>
+                  <h2 className="text-xl font-bold text-white">User Management</h2>
+                  <p className="text-red-200 text-sm">Kelola akses pengguna sistem</p>
+                </div>
+              </div>
+              <button onClick={onClose} className="text-white/80 hover:text-white text-2xl">✕</button>
+            </div>
+
+            <div className="p-6 overflow-y-auto max-h-[calc(90vh-80px)]">
+              {/* Stats */}
+              <div className="grid grid-cols-5 gap-3 mb-6">
+                <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700 text-center">
+                  <div className="text-2xl font-bold text-white">{stats.total}</div>
+                  <div className="text-slate-400 text-xs">Total Users</div>
+                </div>
+                <div className="bg-red-900/30 rounded-xl p-4 border border-red-700/50 text-center">
+                  <div className="text-2xl font-bold text-red-400">{stats.admin}</div>
+                  <div className="text-red-400/70 text-xs">Admin</div>
+                </div>
+                <div className="bg-amber-900/30 rounded-xl p-4 border border-amber-700/50 text-center">
+                  <div className="text-2xl font-bold text-amber-400">{stats.manager}</div>
+                  <div className="text-amber-400/70 text-xs">Manager</div>
+                </div>
+                <div className="bg-blue-900/30 rounded-xl p-4 border border-blue-700/50 text-center">
+                  <div className="text-2xl font-bold text-blue-400">{stats.staff}</div>
+                  <div className="text-blue-400/70 text-xs">Staff</div>
+                </div>
+                <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-600 text-center">
+                  <div className="text-2xl font-bold text-slate-400">{stats.viewer}</div>
+                  <div className="text-slate-500 text-xs">Viewer</div>
+                </div>
+              </div>
+
+              {/* Filter & Actions */}
+              <div className="flex flex-wrap gap-2 mb-4">
+                <div className="flex gap-2 flex-1">
+                  {['all', 'admin', 'manager', 'staff', 'viewer'].map(role => (
+                    <button
+                      key={role}
+                      onClick={() => setFilter(role)}
+                      className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
+                        filter === role
+                          ? 'bg-red-600 text-white'
+                          : 'bg-slate-800 text-slate-400 hover:bg-slate-700'
+                      }`}
+                    >
+                      {role === 'all' ? 'Semua' : ACCESS_LEVELS[role]?.label || role}
+                    </button>
+                  ))}
+                </div>
+                <button className="px-4 py-1.5 bg-red-600 hover:bg-red-500 text-white rounded-lg text-sm font-medium flex items-center gap-2">
+                  ➕ Tambah User
+                </button>
+              </div>
+
+              {/* User List */}
+              <div className="space-y-3">
+                {filteredUsers.map((user, idx) => (
+                  <div key={idx} className="bg-slate-800/50 rounded-xl p-4 border border-slate-700 hover:border-red-500/50 transition-all">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-4">
+                        <span className="text-4xl">{user.avatar}</span>
+                        <div>
+                          <div className="flex items-center gap-2">
+                            <span className="text-white font-bold">{user.name}</span>
+                            {user.id === currentUser?.id && (
+                              <span className="px-2 py-0.5 bg-teal-500/20 text-teal-400 border border-teal-500/30 rounded text-xs">You</span>
+                            )}
+                          </div>
+                          <div className="text-slate-400 text-sm">{user.email}</div>
+                          <div className="text-slate-500 text-xs">{user.department}</div>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-4">
+                        <div className="text-right">
+                          <span className={`px-3 py-1 rounded-lg text-sm border ${ACCESS_LEVELS[user.role].badge}`}>
+                            {ACCESS_LEVELS[user.role].label}
+                          </span>
+                          <div className="text-slate-500 text-xs mt-1">
+                            {ACCESS_LEVELS[user.role].features.length === 1 && ACCESS_LEVELS[user.role].features[0] === 'all'
+                              ? 'Full Access'
+                              : `${ACCESS_LEVELS[user.role].features.length} fitur`}
+                          </div>
+                        </div>
+                        <div className="flex gap-2">
+                          <button className="p-2 bg-slate-700 hover:bg-slate-600 rounded-lg text-slate-300" title="Edit">✏️</button>
+                          {user.id !== currentUser?.id && (
+                            <button className="p-2 bg-slate-700 hover:bg-red-600 rounded-lg text-slate-300" title="Delete">🗑️</button>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Access Matrix */}
+              <div className="mt-6 pt-4 border-t border-slate-700">
+                <h3 className="text-white font-semibold mb-3 flex items-center gap-2">
+                  <span>📋</span> Access Matrix
+                </h3>
+                <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700 overflow-x-auto">
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="text-slate-400">
+                        <th className="text-left py-2 px-3">Fitur</th>
+                        <th className="text-center py-2 px-3">Admin</th>
+                        <th className="text-center py-2 px-3">Manager</th>
+                        <th className="text-center py-2 px-3">Staff</th>
+                        <th className="text-center py-2 px-3">Viewer</th>
+                      </tr>
+                    </thead>
+                    <tbody className="text-slate-300">
+                      {[
+                        { name: 'AI Chatbot', key: 'chatbot' },
+                        { name: 'WhatsApp Bot', key: 'whatsapp' },
+                        { name: 'Live Charts', key: 'charts' },
+                        { name: 'Peta Hotel', key: 'map' },
+                        { name: 'QR Booking', key: 'qr' },
+                        { name: 'Inventory', key: 'inventory' },
+                        { name: 'Tickets', key: 'tickets' },
+                        { name: 'Staff Scheduler', key: 'scheduler' },
+                        { name: 'Vendor', key: 'vendor' },
+                        { name: 'Invoice', key: 'invoice' },
+                        { name: 'User Management', key: 'users' },
+                      ].map((feature, idx) => (
+                        <tr key={idx} className="border-t border-slate-700/50">
+                          <td className="py-2 px-3">{feature.name}</td>
+                          <td className="text-center py-2 px-3">✅</td>
+                          <td className="text-center py-2 px-3">{ACCESS_LEVELS.manager.features.includes(feature.key) || feature.key !== 'users' ? '✅' : '❌'}</td>
+                          <td className="text-center py-2 px-3">{ACCESS_LEVELS.staff.features.includes(feature.key) ? '✅' : '❌'}</td>
+                          <td className="text-center py-2 px-3">{ACCESS_LEVELS.viewer.features.includes(feature.key) ? '✅' : '❌'}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    };
+
     // ============ MAIN APP ============
     const BPKHLimitedSolution = () => {
       const [activeModule, setActiveModule] = useState('overview');
@@ -2107,7 +2395,17 @@ Jawab dengan ramah, singkat, dan helpful. Gunakan emoji yang relevan.`;
       const [showCalculator, setShowCalculator] = useState(false);
       const [showHijri, setShowHijri] = useState(false);
       const [showInvoice, setShowInvoice] = useState(false);
+      const [showLogin, setShowLogin] = useState(false);
+      const [showUserManagement, setShowUserManagement] = useState(false);
+      const [currentUser, setCurrentUser] = useState(null);
       const [forexRate, setForexRate] = useState({ rate: 4200, loading: true, lastUpdate: null });
+
+      // Check if user has access to a feature
+      const hasAccess = (featureKey) => {
+        if (!currentUser) return false;
+        const userAccess = ACCESS_LEVELS[currentUser.role];
+        return userAccess.features.includes('all') || userAccess.features.includes(featureKey);
+      };
 
       useEffect(() => {
         setIsLoaded(true);
@@ -2190,41 +2488,88 @@ Jawab dengan ramah, singkat, dan helpful. Gunakan emoji yang relevan.`;
             </div>
           </div>
 
+          {/* Access Control Notice */}
+          {!currentUser && (
+            <div className="bg-amber-900/30 border border-amber-600/50 rounded-xl p-4 mb-4 flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <span className="text-2xl">🔐</span>
+                <div>
+                  <div className="text-amber-400 font-semibold">Login untuk akses penuh</div>
+                  <div className="text-amber-400/70 text-sm">Beberapa fitur memerlukan login sesuai level akses</div>
+                </div>
+              </div>
+              <button
+                onClick={() => setShowLogin(true)}
+                className="px-4 py-2 bg-amber-600 hover:bg-amber-500 text-white rounded-lg text-sm font-medium transition-all"
+              >
+                Login Sekarang
+              </button>
+            </div>
+          )}
+
+          {currentUser && (
+            <div className="bg-teal-900/30 border border-teal-600/50 rounded-xl p-4 mb-4 flex items-center gap-3">
+              <span className="text-2xl">{currentUser.avatar}</span>
+              <div className="flex-1">
+                <div className="text-teal-400 font-semibold">Selamat datang, {currentUser.name}!</div>
+                <div className="text-teal-400/70 text-sm">Level akses: <span className={ACCESS_LEVELS[currentUser.role].badge.split(' ')[1]}>{ACCESS_LEVELS[currentUser.role].label}</span> - {ACCESS_LEVELS[currentUser.role].description}</div>
+              </div>
+            </div>
+          )}
+
           {/* Interactive Demo Buttons */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             <button
-              onClick={() => setShowChatbot(true)}
-              className="bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-500 hover:to-emerald-500 rounded-xl p-5 text-left transition-all hover:scale-[1.02] border border-teal-500/30"
+              onClick={() => hasAccess('chatbot') ? setShowChatbot(true) : setShowLogin(true)}
+              className={`rounded-xl p-5 text-left transition-all border ${
+                hasAccess('chatbot')
+                  ? 'bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-500 hover:to-emerald-500 hover:scale-[1.02] border-teal-500/30'
+                  : 'bg-slate-800/50 border-slate-700 opacity-60'
+              }`}
             >
               <div className="flex items-center gap-4">
                 <span className="text-3xl">🤖</span>
                 <div>
                   <div className="text-white font-bold">AI Chatbot</div>
-                  <div className="text-teal-100 text-xs">Groq Llama 3.3 70B</div>
+                  <div className={hasAccess('chatbot') ? 'text-teal-100 text-xs' : 'text-slate-400 text-xs'}>
+                    {hasAccess('chatbot') ? 'Groq Llama 3.3 70B' : '🔒 Login required'}
+                  </div>
                 </div>
               </div>
             </button>
             <button
-              onClick={() => setShowWhatsApp(true)}
-              className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 rounded-xl p-5 text-left transition-all hover:scale-[1.02] border border-green-500/30"
+              onClick={() => hasAccess('whatsapp') ? setShowWhatsApp(true) : setShowLogin(true)}
+              className={`rounded-xl p-5 text-left transition-all border ${
+                hasAccess('whatsapp')
+                  ? 'bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 hover:scale-[1.02] border-green-500/30'
+                  : 'bg-slate-800/50 border-slate-700 opacity-60'
+              }`}
             >
               <div className="flex items-center gap-4">
                 <span className="text-3xl">💬</span>
                 <div>
                   <div className="text-white font-bold">WhatsApp Bot</div>
-                  <div className="text-green-100 text-xs">Bilingual AR-ID Demo</div>
+                  <div className={hasAccess('whatsapp') ? 'text-green-100 text-xs' : 'text-slate-400 text-xs'}>
+                    {hasAccess('whatsapp') ? 'Bilingual AR-ID Demo' : '🔒 Login required'}
+                  </div>
                 </div>
               </div>
             </button>
             <button
-              onClick={() => setShowCharts(true)}
-              className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 rounded-xl p-5 text-left transition-all hover:scale-[1.02] border border-indigo-500/30"
+              onClick={() => hasAccess('charts') ? setShowCharts(true) : setShowLogin(true)}
+              className={`rounded-xl p-5 text-left transition-all border ${
+                hasAccess('charts')
+                  ? 'bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 hover:scale-[1.02] border-indigo-500/30'
+                  : 'bg-slate-800/50 border-slate-700 opacity-60'
+              }`}
             >
               <div className="flex items-center gap-4">
                 <span className="text-3xl">📊</span>
                 <div>
                   <div className="text-white font-bold">Live Charts</div>
-                  <div className="text-indigo-100 text-xs">KPI & Budget Analytics</div>
+                  <div className={hasAccess('charts') ? 'text-indigo-100 text-xs' : 'text-slate-400 text-xs'}>
+                    {hasAccess('charts') ? 'KPI & Budget Analytics' : '🔒 Manager+ only'}
+                  </div>
                 </div>
               </div>
             </button>
@@ -2301,62 +2646,92 @@ Jawab dengan ramah, singkat, dan helpful. Gunakan emoji yang relevan.`;
               </div>
             </button>
             <button
-              onClick={() => setShowInventory(true)}
-              className="bg-gradient-to-r from-cyan-600 to-teal-600 hover:from-cyan-500 hover:to-teal-500 rounded-xl p-5 text-left transition-all hover:scale-[1.02] border border-cyan-500/30"
+              onClick={() => hasAccess('inventory') ? setShowInventory(true) : setShowLogin(true)}
+              className={`rounded-xl p-5 text-left transition-all border ${
+                hasAccess('inventory')
+                  ? 'bg-gradient-to-r from-cyan-600 to-teal-600 hover:from-cyan-500 hover:to-teal-500 hover:scale-[1.02] border-cyan-500/30'
+                  : 'bg-slate-800/50 border-slate-700 opacity-60'
+              }`}
             >
               <div className="flex items-center gap-4">
                 <span className="text-3xl">📊</span>
                 <div>
                   <div className="text-white font-bold">Inventory Dashboard</div>
-                  <div className="text-cyan-100 text-xs">Real-time stok & alert</div>
+                  <div className={hasAccess('inventory') ? 'text-cyan-100 text-xs' : 'text-slate-400 text-xs'}>
+                    {hasAccess('inventory') ? 'Real-time stok & alert' : '🔒 Manager+ only'}
+                  </div>
                 </div>
               </div>
             </button>
             <button
-              onClick={() => setShowTickets(true)}
-              className="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-500 hover:to-red-500 rounded-xl p-5 text-left transition-all hover:scale-[1.02] border border-orange-500/30"
+              onClick={() => hasAccess('tickets') ? setShowTickets(true) : setShowLogin(true)}
+              className={`rounded-xl p-5 text-left transition-all border ${
+                hasAccess('tickets')
+                  ? 'bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-500 hover:to-red-500 hover:scale-[1.02] border-orange-500/30'
+                  : 'bg-slate-800/50 border-slate-700 opacity-60'
+              }`}
             >
               <div className="flex items-center gap-4">
                 <span className="text-3xl">📝</span>
                 <div>
                   <div className="text-white font-bold">Ticket Management</div>
-                  <div className="text-orange-100 text-xs">SLA tracking & support</div>
+                  <div className={hasAccess('tickets') ? 'text-orange-100 text-xs' : 'text-slate-400 text-xs'}>
+                    {hasAccess('tickets') ? 'SLA tracking & support' : '🔒 Staff+ only'}
+                  </div>
                 </div>
               </div>
             </button>
             <button
-              onClick={() => setShowScheduler(true)}
-              className="bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-500 hover:to-purple-500 rounded-xl p-5 text-left transition-all hover:scale-[1.02] border border-violet-500/30"
+              onClick={() => hasAccess('scheduler') ? setShowScheduler(true) : setShowLogin(true)}
+              className={`rounded-xl p-5 text-left transition-all border ${
+                hasAccess('scheduler')
+                  ? 'bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-500 hover:to-purple-500 hover:scale-[1.02] border-violet-500/30'
+                  : 'bg-slate-800/50 border-slate-700 opacity-60'
+              }`}
             >
               <div className="flex items-center gap-4">
                 <span className="text-3xl">📅</span>
                 <div>
                   <div className="text-white font-bold">Staff Scheduler</div>
-                  <div className="text-violet-100 text-xs">Jadwal shift staf</div>
+                  <div className={hasAccess('scheduler') ? 'text-violet-100 text-xs' : 'text-slate-400 text-xs'}>
+                    {hasAccess('scheduler') ? 'Jadwal shift staf' : '🔒 Manager+ only'}
+                  </div>
                 </div>
               </div>
             </button>
             <button
-              onClick={() => setShowVendor(true)}
-              className="bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-500 hover:to-pink-500 rounded-xl p-5 text-left transition-all hover:scale-[1.02] border border-rose-500/30"
+              onClick={() => hasAccess('vendor') ? setShowVendor(true) : setShowLogin(true)}
+              className={`rounded-xl p-5 text-left transition-all border ${
+                hasAccess('vendor')
+                  ? 'bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-500 hover:to-pink-500 hover:scale-[1.02] border-rose-500/30'
+                  : 'bg-slate-800/50 border-slate-700 opacity-60'
+              }`}
             >
               <div className="flex items-center gap-4">
                 <span className="text-3xl">📦</span>
                 <div>
                   <div className="text-white font-bold">Vendor Performance</div>
-                  <div className="text-rose-100 text-xs">Rating & compliance</div>
+                  <div className={hasAccess('vendor') ? 'text-rose-100 text-xs' : 'text-slate-400 text-xs'}>
+                    {hasAccess('vendor') ? 'Rating & compliance' : '🔒 Manager+ only'}
+                  </div>
                 </div>
               </div>
             </button>
             <button
-              onClick={() => setShowInvoice(true)}
-              className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 rounded-xl p-5 text-left transition-all hover:scale-[1.02] border border-indigo-500/30"
+              onClick={() => hasAccess('invoice') ? setShowInvoice(true) : setShowLogin(true)}
+              className={`rounded-xl p-5 text-left transition-all border ${
+                hasAccess('invoice')
+                  ? 'bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 hover:scale-[1.02] border-indigo-500/30'
+                  : 'bg-slate-800/50 border-slate-700 opacity-60'
+              }`}
             >
               <div className="flex items-center gap-4">
                 <span className="text-3xl">🧾</span>
                 <div>
                   <div className="text-white font-bold">Invoice Management</div>
-                  <div className="text-indigo-100 text-xs">Faktur & pembayaran</div>
+                  <div className={hasAccess('invoice') ? 'text-indigo-100 text-xs' : 'text-slate-400 text-xs'}>
+                    {hasAccess('invoice') ? 'Faktur & pembayaran' : '🔒 Manager+ only'}
+                  </div>
                 </div>
               </div>
             </button>
@@ -3002,12 +3377,56 @@ Jawab dengan ramah, singkat, dan helpful. Gunakan emoji yang relevan.`;
                     <p className="text-sm text-slate-400">RAG Agentic AI Platform</p>
                   </div>
                 </div>
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-3">
                   <div className="hidden md:flex items-center gap-2 bg-slate-800/50 rounded-lg px-3 py-2">
                     <span className="w-2 h-2 bg-green-400 rounded-full pulse-dot"></span>
                     <span className="text-xs text-slate-400">SAR/IDR:</span>
                     <span className="text-xs text-teal-400 font-medium">{forexRate.rate.toLocaleString()}</span>
                   </div>
+
+                  {/* User Profile / Login */}
+                  {currentUser ? (
+                    <div className="flex items-center gap-2">
+                      <div className="hidden md:flex flex-col items-end">
+                        <span className="text-sm text-white font-medium">{currentUser.name}</span>
+                        <span className={`text-xs px-2 py-0.5 rounded ${ACCESS_LEVELS[currentUser.role].badge}`}>
+                          {ACCESS_LEVELS[currentUser.role].label}
+                        </span>
+                      </div>
+                      <div className="relative group">
+                        <button className="w-10 h-10 rounded-full bg-gradient-to-br from-teal-500 to-emerald-600 flex items-center justify-center text-xl shadow-lg hover:scale-105 transition-transform">
+                          {currentUser.avatar}
+                        </button>
+                        <div className="absolute right-0 top-12 w-48 bg-slate-800 rounded-xl border border-slate-700 shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                          <div className="p-3 border-b border-slate-700">
+                            <div className="text-white font-medium text-sm">{currentUser.name}</div>
+                            <div className="text-slate-400 text-xs">{currentUser.email}</div>
+                          </div>
+                          {currentUser.role === 'admin' && (
+                            <button
+                              onClick={() => setShowUserManagement(true)}
+                              className="w-full px-3 py-2 text-left text-sm text-slate-300 hover:bg-slate-700 flex items-center gap-2"
+                            >
+                              👥 User Management
+                            </button>
+                          )}
+                          <button
+                            onClick={() => setCurrentUser(null)}
+                            className="w-full px-3 py-2 text-left text-sm text-red-400 hover:bg-slate-700 flex items-center gap-2 rounded-b-xl"
+                          >
+                            🚪 Logout
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
+                    <button
+                      onClick={() => setShowLogin(true)}
+                      className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-500 hover:to-emerald-500 rounded-lg text-sm font-medium text-white transition-all"
+                    >
+                      🔐 Login
+                    </button>
+                  )}
                 </div>
               </div>
             </div>
@@ -3077,6 +3496,8 @@ Jawab dengan ramah, singkat, dan helpful. Gunakan emoji yang relevan.`;
           <StaffScheduler isOpen={showScheduler} onClose={() => setShowScheduler(false)} />
           <VendorPerformance isOpen={showVendor} onClose={() => setShowVendor(false)} />
           <InvoiceManagement isOpen={showInvoice} onClose={() => setShowInvoice(false)} />
+          <LoginModal isOpen={showLogin} onClose={() => setShowLogin(false)} onLogin={setCurrentUser} />
+          <UserManagement isOpen={showUserManagement} onClose={() => setShowUserManagement(false)} currentUser={currentUser} />
         </div>
       );
     };
