@@ -3,7 +3,7 @@
 ![BPKH Limited](https://img.shields.io/badge/BPKH-Limited-teal?style=for-the-badge)
 ![React](https://img.shields.io/badge/React-18-blue?style=for-the-badge&logo=react)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind-CSS-38B2AC?style=for-the-badge&logo=tailwind-css)
-![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
+![License](https://img.shields.io/badge/License-Proprietary-red?style=for-the-badge)
 
 > Platform AI terintegrasi untuk layanan haji & umrah di Arab Saudi dengan 9 fitur interaktif dalam single HTML file.
 
@@ -162,7 +162,18 @@ bayan_ai/
 
 ## License
 
-MIT License - Feel free to use and modify.
+**PROPRIETARY LICENSE**
+
+© 2025 BPKH Limited. All Rights Reserved.
+
+This software is the exclusive property of **BPKH Limited** (Badan Pengelola Keuangan Haji).
+
+**Restrictions:**
+- No copying, modification, or distribution without written permission
+- For internal BPKH Limited use only
+- Unauthorized use is strictly prohibited
+
+For licensing inquiries, contact BPKH Limited.
 
 ---
 
