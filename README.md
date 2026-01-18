@@ -5,7 +5,7 @@
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind-CSS-38B2AC?style=for-the-badge&logo=tailwind-css)
 ![License](https://img.shields.io/badge/License-Proprietary-red?style=for-the-badge)
 
-> Platform AI terintegrasi untuk layanan haji & umrah di Arab Saudi dengan 9 fitur interaktif dalam single HTML file.
+> Platform AI terintegrasi untuk layanan haji & umrah di Arab Saudi dengan 13 fitur interaktif dalam single HTML file.
 
 ## Live Demo
 
@@ -29,6 +29,10 @@
 | 7 | **Cuaca Live** | Cuaca Mekkah & Madinah | Open-Meteo API |
 | 8 | **Kalkulator Kurs** | Konversi SAR ↔ IDR | ExchangeRate API |
 | 9 | **Kalender Hijriyah** | Tanggal penting Islam | Aladhan API |
+| 10 | **Inventory Dashboard** | Real-time stok & low-stock alerts | - |
+| 11 | **Ticket Management** | SLA tracking & support system | - |
+| 12 | **Staff Scheduler** | Jadwal shift staf visual | - |
+| 13 | **Vendor Performance** | Rating & compliance dashboard | - |
 
 ---
 
@@ -41,7 +45,7 @@ Maps:         Leaflet.js + OpenStreetMap
 Charts:       Chart.js
 QR Code:      QRCode.js
 APIs:         Aladhan, Open-Meteo, ExchangeRate
-Deployment:   Single HTML File (~2300 lines)
+Deployment:   Single HTML File (~2900 lines)
 ```
 
 ---
@@ -108,7 +112,7 @@ bayan_ai/
 ## Screenshots
 
 ### Dashboard Overview
-- 9 tombol fitur interaktif
+- 13 tombol fitur interaktif
 - Live forex rate SAR-IDR
 - Architecture diagram
 
@@ -126,6 +130,12 @@ bayan_ai/
 - Current Hijri date
 - 12 bulan Hijriyah
 - Tanggal penting Islam
+
+### Operational Features (NEW)
+- **Inventory Dashboard**: Real-time stok hotel, bus, kereta dengan low-stock alerts
+- **Ticket Management**: SLA tracking, priority badges, assignee management
+- **Staff Scheduler**: Visual shift schedule (Pagi/Siang/Malam/OFF)
+- **Vendor Performance**: Rating, compliance score, contract tracking
 
 ---
 

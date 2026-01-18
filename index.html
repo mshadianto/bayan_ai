@@ -1373,6 +1373,542 @@ Jawab dengan ramah, singkat, dan helpful. Gunakan emoji yang relevan.`;
       );
     };
 
+    // ============ REAL-TIME INVENTORY DASHBOARD ============
+    const InventoryDashboard = ({ isOpen, onClose }) => {
+      const [inventory, setInventory] = useState({
+        hotels: [
+          { name: 'Dar Al-Tawhid', location: 'Mekkah', total: 150, booked: 142, available: 8, alert: true },
+          { name: 'Al-Safwa Hotel', location: 'Mekkah', total: 200, booked: 165, available: 35, alert: false },
+          { name: 'Pullman ZamZam', location: 'Mekkah', total: 180, booked: 178, available: 2, alert: true },
+          { name: 'Oberoi Madinah', location: 'Madinah', total: 120, booked: 89, available: 31, alert: false },
+        ],
+        buses: [
+          { route: 'Jeddah - Mekkah', total: 25, available: 8, nextDeparture: '14:30' },
+          { route: 'Mekkah - Madinah', total: 20, available: 3, nextDeparture: '16:00' },
+          { route: 'Hotel - Haram Shuttle', total: 40, available: 15, nextDeparture: '10 min' },
+        ],
+        trains: [
+          { route: 'Mekkah - Madinah', class: 'Economy', total: 400, available: 45, price: 150 },
+          { route: 'Mekkah - Madinah', class: 'Business', total: 120, available: 28, price: 250 },
+          { route: 'Mekkah - Madinah', class: 'First', total: 40, available: 12, price: 300 },
+        ]
+      });
+
+      const [lastUpdate, setLastUpdate] = useState(new Date());
+
+      useEffect(() => {
+        if (isOpen) {
+          const interval = setInterval(() => {
+            // Simulate real-time updates
+            setInventory(prev => ({
+              ...prev,
+              hotels: prev.hotels.map(h => ({
+                ...h,
+                booked: Math.min(h.total, h.booked + Math.floor(Math.random() * 3) - 1),
+                available: Math.max(0, h.total - h.booked)
+              }))
+            }));
+            setLastUpdate(new Date());
+          }, 5000);
+          return () => clearInterval(interval);
+        }
+      }, [isOpen]);
+
+      if (!isOpen) return null;
+
+      const getStockColor = (available, total) => {
+        const pct = (available / total) * 100;
+        if (pct <= 5) return 'text-red-400 bg-red-900/30';
+        if (pct <= 20) return 'text-amber-400 bg-amber-900/30';
+        return 'text-emerald-400 bg-emerald-900/30';
+      };
+
+      return (
+        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
+          <div className="w-full max-w-5xl bg-slate-800 rounded-2xl shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto">
+            <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-4 flex items-center justify-between sticky top-0 z-10">
+              <div className="flex items-center gap-3">
+                <span className="text-2xl">📊</span>
+                <div>
+                  <div className="text-white font-bold text-lg">Real-time Inventory</div>
+                  <div className="text-blue-200 text-sm">Live Stock Monitoring</div>
+                </div>
+              </div>
+              <div className="flex items-center gap-4">
+                <div className="text-blue-200 text-xs flex items-center gap-2">
+                  <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                  Update: {lastUpdate.toLocaleTimeString('id-ID')}
+                </div>
+                <button onClick={onClose} className="text-white/80 hover:text-white text-2xl">✕</button>
+              </div>
+            </div>
+
+            <div className="p-6 space-y-6">
+              {/* Hotels */}
+              <div>
+                <h3 className="text-white font-semibold mb-3 flex items-center gap-2">🏨 Kamar Hotel</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  {inventory.hotels.map((hotel, idx) => (
+                    <div key={idx} className={`rounded-xl p-4 border ${hotel.alert ? 'border-red-500 bg-red-900/20' : 'border-slate-700 bg-slate-900/50'}`}>
+                      <div className="flex justify-between items-start mb-2">
+                        <div>
+                          <div className="text-white font-medium">{hotel.name}</div>
+                          <div className="text-slate-400 text-sm">{hotel.location}</div>
+                        </div>
+                        {hotel.alert && <span className="text-red-400 text-xs px-2 py-1 bg-red-900/50 rounded">⚠️ LOW</span>}
+                      </div>
+                      <div className="flex items-center gap-4">
+                        <div className={`text-2xl font-bold ${getStockColor(hotel.available, hotel.total).split(' ')[0]}`}>
+                          {hotel.available}
+                        </div>
+                        <div className="flex-1">
+                          <div className="text-slate-400 text-xs mb-1">Available / {hotel.total} rooms</div>
+                          <div className="h-2 bg-slate-700 rounded-full overflow-hidden">
+                            <div className="h-full bg-blue-500 rounded-full transition-all" style={{width: `${(hotel.booked/hotel.total)*100}%`}}></div>
+                          </div>
+                        </div>
+                        <div className="text-slate-400 text-sm">{Math.round((hotel.booked/hotel.total)*100)}% booked</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Buses */}
+              <div>
+                <h3 className="text-white font-semibold mb-3 flex items-center gap-2">🚌 Armada Bus</h3>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                  {inventory.buses.map((bus, idx) => (
+                    <div key={idx} className="rounded-xl p-4 border border-slate-700 bg-slate-900/50">
+                      <div className="text-white font-medium mb-2">{bus.route}</div>
+                      <div className="flex justify-between items-center">
+                        <div>
+                          <div className={`text-2xl font-bold ${getStockColor(bus.available, bus.total).split(' ')[0]}`}>{bus.available}</div>
+                          <div className="text-slate-400 text-xs">dari {bus.total} unit</div>
+                        </div>
+                        <div className="text-right">
+                          <div className="text-slate-400 text-xs">Berangkat</div>
+                          <div className="text-amber-400 font-medium">{bus.nextDeparture}</div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Trains */}
+              <div>
+                <h3 className="text-white font-semibold mb-3 flex items-center gap-2">🚄 Tiket Haramain</h3>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                  {inventory.trains.map((train, idx) => (
+                    <div key={idx} className="rounded-xl p-4 border border-slate-700 bg-slate-900/50">
+                      <div className="flex justify-between items-center mb-2">
+                        <div className="text-white font-medium">{train.class}</div>
+                        <div className="text-emerald-400 font-bold">{train.price} SAR</div>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <div className={`text-2xl font-bold ${getStockColor(train.available, train.total).split(' ')[0]}`}>{train.available}</div>
+                        <div className="text-slate-400 text-sm">/ {train.total} seats</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    };
+
+    // ============ TICKET MANAGEMENT SYSTEM ============
+    const TicketManagement = ({ isOpen, onClose }) => {
+      const [tickets, setTickets] = useState([
+        { id: 'TKT-001', customer: 'Ahmad Hidayat', type: 'Complaint', subject: 'AC kamar tidak dingin', status: 'open', priority: 'high', created: '2 jam lalu', sla: '2 jam', assignee: 'Fatimah' },
+        { id: 'TKT-002', customer: 'Siti Aminah', type: 'Request', subject: 'Upgrade kamar ke suite', status: 'in_progress', priority: 'medium', created: '4 jam lalu', sla: '6 jam', assignee: 'Omar' },
+        { id: 'TKT-003', customer: 'Budi Santoso', type: 'Inquiry', subject: 'Jadwal shuttle ke Haram', status: 'resolved', priority: 'low', created: '1 hari lalu', sla: 'OK', assignee: 'Yusuf' },
+        { id: 'TKT-004', customer: 'Dewi Lestari', type: 'Complaint', subject: 'Makanan tidak sesuai pesanan', status: 'open', priority: 'high', created: '30 menit lalu', sla: '1.5 jam', assignee: '-' },
+        { id: 'TKT-005', customer: 'Hasan Ali', type: 'Request', subject: 'Extra bed untuk anak', status: 'in_progress', priority: 'medium', created: '5 jam lalu', sla: '3 jam', assignee: 'Fatimah' },
+      ]);
+      const [filter, setFilter] = useState('all');
+
+      const getStatusBadge = (status) => {
+        switch(status) {
+          case 'open': return 'bg-red-900/50 text-red-300 border-red-600';
+          case 'in_progress': return 'bg-amber-900/50 text-amber-300 border-amber-600';
+          case 'resolved': return 'bg-emerald-900/50 text-emerald-300 border-emerald-600';
+          default: return 'bg-slate-700 text-slate-300';
+        }
+      };
+
+      const getPriorityBadge = (priority) => {
+        switch(priority) {
+          case 'high': return '🔴';
+          case 'medium': return '🟡';
+          case 'low': return '🟢';
+          default: return '⚪';
+        }
+      };
+
+      const stats = {
+        open: tickets.filter(t => t.status === 'open').length,
+        inProgress: tickets.filter(t => t.status === 'in_progress').length,
+        resolved: tickets.filter(t => t.status === 'resolved').length,
+        breachingSLA: tickets.filter(t => t.status !== 'resolved' && t.priority === 'high').length
+      };
+
+      const filteredTickets = filter === 'all' ? tickets : tickets.filter(t => t.status === filter);
+
+      if (!isOpen) return null;
+
+      return (
+        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
+          <div className="w-full max-w-5xl bg-slate-800 rounded-2xl shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto">
+            <div className="bg-gradient-to-r from-orange-600 to-red-600 p-4 flex items-center justify-between sticky top-0 z-10">
+              <div className="flex items-center gap-3">
+                <span className="text-2xl">📝</span>
+                <div>
+                  <div className="text-white font-bold text-lg">Ticket Management</div>
+                  <div className="text-orange-200 text-sm">Request & Complaint Tracking</div>
+                </div>
+              </div>
+              <button onClick={onClose} className="text-white/80 hover:text-white text-2xl">✕</button>
+            </div>
+
+            <div className="p-6">
+              {/* Stats */}
+              <div className="grid grid-cols-4 gap-4 mb-6">
+                <div className="bg-red-900/30 rounded-xl p-4 border border-red-700/50 text-center">
+                  <div className="text-3xl font-bold text-red-400">{stats.open}</div>
+                  <div className="text-slate-400 text-sm">Open</div>
+                </div>
+                <div className="bg-amber-900/30 rounded-xl p-4 border border-amber-700/50 text-center">
+                  <div className="text-3xl font-bold text-amber-400">{stats.inProgress}</div>
+                  <div className="text-slate-400 text-sm">In Progress</div>
+                </div>
+                <div className="bg-emerald-900/30 rounded-xl p-4 border border-emerald-700/50 text-center">
+                  <div className="text-3xl font-bold text-emerald-400">{stats.resolved}</div>
+                  <div className="text-slate-400 text-sm">Resolved</div>
+                </div>
+                <div className="bg-purple-900/30 rounded-xl p-4 border border-purple-700/50 text-center">
+                  <div className="text-3xl font-bold text-purple-400">{stats.breachingSLA}</div>
+                  <div className="text-slate-400 text-sm">SLA Alert</div>
+                </div>
+              </div>
+
+              {/* Filter */}
+              <div className="flex gap-2 mb-4">
+                {['all', 'open', 'in_progress', 'resolved'].map((f) => (
+                  <button
+                    key={f}
+                    onClick={() => setFilter(f)}
+                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${filter === f ? 'bg-orange-600 text-white' : 'bg-slate-700 text-slate-300 hover:bg-slate-600'}`}
+                  >
+                    {f === 'all' ? 'Semua' : f === 'open' ? 'Open' : f === 'in_progress' ? 'In Progress' : 'Resolved'}
+                  </button>
+                ))}
+              </div>
+
+              {/* Tickets Table */}
+              <div className="bg-slate-900/50 rounded-xl border border-slate-700 overflow-hidden">
+                <table className="w-full">
+                  <thead className="bg-slate-800">
+                    <tr>
+                      <th className="text-left p-3 text-slate-400 text-sm">ID</th>
+                      <th className="text-left p-3 text-slate-400 text-sm">Customer</th>
+                      <th className="text-left p-3 text-slate-400 text-sm">Subject</th>
+                      <th className="text-left p-3 text-slate-400 text-sm">Status</th>
+                      <th className="text-left p-3 text-slate-400 text-sm">Priority</th>
+                      <th className="text-left p-3 text-slate-400 text-sm">SLA</th>
+                      <th className="text-left p-3 text-slate-400 text-sm">Assignee</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {filteredTickets.map((ticket) => (
+                      <tr key={ticket.id} className="border-t border-slate-700 hover:bg-slate-800/50">
+                        <td className="p-3 text-blue-400 font-mono text-sm">{ticket.id}</td>
+                        <td className="p-3 text-white">{ticket.customer}</td>
+                        <td className="p-3 text-slate-300 text-sm">{ticket.subject}</td>
+                        <td className="p-3">
+                          <span className={`px-2 py-1 rounded text-xs border ${getStatusBadge(ticket.status)}`}>
+                            {ticket.status === 'open' ? 'Open' : ticket.status === 'in_progress' ? 'In Progress' : 'Resolved'}
+                          </span>
+                        </td>
+                        <td className="p-3">{getPriorityBadge(ticket.priority)}</td>
+                        <td className="p-3 text-sm">
+                          <span className={ticket.sla === 'OK' ? 'text-emerald-400' : 'text-amber-400'}>{ticket.sla}</span>
+                        </td>
+                        <td className="p-3 text-slate-300">{ticket.assignee}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    };
+
+    // ============ STAFF SCHEDULER ============
+    const StaffScheduler = ({ isOpen, onClose }) => {
+      const [currentWeek, setCurrentWeek] = useState(0);
+      const days = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Ahad'];
+      const shifts = ['Pagi (06-14)', 'Siang (14-22)', 'Malam (22-06)'];
+
+      const [schedule, setSchedule] = useState({
+        'Fatimah': ['Pagi', 'Pagi', 'Siang', 'Siang', 'OFF', 'Malam', 'Malam'],
+        'Omar': ['Siang', 'Siang', 'Pagi', 'Pagi', 'Pagi', 'OFF', 'OFF'],
+        'Yusuf': ['Malam', 'Malam', 'OFF', 'OFF', 'Siang', 'Siang', 'Pagi'],
+        'Aisha': ['OFF', 'Pagi', 'Pagi', 'Malam', 'Malam', 'Pagi', 'Siang'],
+        'Hassan': ['Pagi', 'OFF', 'Malam', 'Siang', 'Siang', 'Siang', 'OFF'],
+      });
+
+      const getShiftColor = (shift) => {
+        switch(shift) {
+          case 'Pagi': return 'bg-amber-900/50 text-amber-300 border-amber-600';
+          case 'Siang': return 'bg-blue-900/50 text-blue-300 border-blue-600';
+          case 'Malam': return 'bg-purple-900/50 text-purple-300 border-purple-600';
+          case 'OFF': return 'bg-slate-800 text-slate-500 border-slate-600';
+          default: return '';
+        }
+      };
+
+      const stats = {
+        totalStaff: Object.keys(schedule).length,
+        onDutyToday: Object.values(schedule).filter(s => s[0] !== 'OFF').length,
+        totalShifts: Object.values(schedule).flat().filter(s => s !== 'OFF').length
+      };
+
+      if (!isOpen) return null;
+
+      return (
+        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
+          <div className="w-full max-w-6xl bg-slate-800 rounded-2xl shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto">
+            <div className="bg-gradient-to-r from-violet-600 to-purple-600 p-4 flex items-center justify-between sticky top-0 z-10">
+              <div className="flex items-center gap-3">
+                <span className="text-2xl">📅</span>
+                <div>
+                  <div className="text-white font-bold text-lg">Staff Scheduler</div>
+                  <div className="text-violet-200 text-sm">Jadwal Shift Karyawan</div>
+                </div>
+              </div>
+              <button onClick={onClose} className="text-white/80 hover:text-white text-2xl">✕</button>
+            </div>
+
+            <div className="p-6">
+              {/* Stats */}
+              <div className="grid grid-cols-3 gap-4 mb-6">
+                <div className="bg-slate-900/50 rounded-xl p-4 border border-slate-700 text-center">
+                  <div className="text-3xl font-bold text-violet-400">{stats.totalStaff}</div>
+                  <div className="text-slate-400 text-sm">Total Staff</div>
+                </div>
+                <div className="bg-slate-900/50 rounded-xl p-4 border border-slate-700 text-center">
+                  <div className="text-3xl font-bold text-emerald-400">{stats.onDutyToday}</div>
+                  <div className="text-slate-400 text-sm">On Duty Hari Ini</div>
+                </div>
+                <div className="bg-slate-900/50 rounded-xl p-4 border border-slate-700 text-center">
+                  <div className="text-3xl font-bold text-amber-400">{stats.totalShifts}</div>
+                  <div className="text-slate-400 text-sm">Total Shift/Minggu</div>
+                </div>
+              </div>
+
+              {/* Legend */}
+              <div className="flex gap-4 mb-4">
+                <div className="flex items-center gap-2">
+                  <span className="w-4 h-4 rounded bg-amber-600"></span>
+                  <span className="text-slate-400 text-sm">Pagi (06-14)</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="w-4 h-4 rounded bg-blue-600"></span>
+                  <span className="text-slate-400 text-sm">Siang (14-22)</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="w-4 h-4 rounded bg-purple-600"></span>
+                  <span className="text-slate-400 text-sm">Malam (22-06)</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="w-4 h-4 rounded bg-slate-600"></span>
+                  <span className="text-slate-400 text-sm">OFF</span>
+                </div>
+              </div>
+
+              {/* Schedule Table */}
+              <div className="bg-slate-900/50 rounded-xl border border-slate-700 overflow-hidden overflow-x-auto">
+                <table className="w-full">
+                  <thead className="bg-slate-800">
+                    <tr>
+                      <th className="text-left p-3 text-slate-400 text-sm min-w-[120px]">Staff</th>
+                      {days.map((day) => (
+                        <th key={day} className="text-center p-3 text-slate-400 text-sm min-w-[90px]">{day}</th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {Object.entries(schedule).map(([staff, shifts]) => (
+                      <tr key={staff} className="border-t border-slate-700">
+                        <td className="p-3">
+                          <div className="flex items-center gap-2">
+                            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-violet-500 to-purple-500 flex items-center justify-center text-white text-sm font-bold">
+                              {staff[0]}
+                            </div>
+                            <span className="text-white font-medium">{staff}</span>
+                          </div>
+                        </td>
+                        {shifts.map((shift, idx) => (
+                          <td key={idx} className="p-2 text-center">
+                            <span className={`px-3 py-1 rounded-lg text-xs font-medium border ${getShiftColor(shift)}`}>
+                              {shift}
+                            </span>
+                          </td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+
+              <div className="mt-4 text-slate-500 text-sm text-center">
+                💡 Klik shift untuk edit • Drag untuk pindahkan
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    };
+
+    // ============ VENDOR PERFORMANCE DASHBOARD ============
+    const VendorPerformance = ({ isOpen, onClose }) => {
+      const [vendors, setVendors] = useState([
+        { name: 'Dar Al-Tawhid Hotel', type: 'Hotel', rating: 4.8, contracts: 3, value: '2.5M SAR', status: 'active', compliance: 98, issues: 2 },
+        { name: 'Al-Safwa Hospitality', type: 'Hotel', rating: 4.5, contracts: 2, value: '1.8M SAR', status: 'active', compliance: 95, issues: 5 },
+        { name: 'Saudi Transport Co.', type: 'Bus', rating: 4.2, contracts: 1, value: '800K SAR', status: 'active', compliance: 88, issues: 8 },
+        { name: 'Haramain Catering', type: 'Catering', rating: 4.6, contracts: 2, value: '1.2M SAR', status: 'active', compliance: 92, issues: 3 },
+        { name: 'Express Logistics', type: 'Transport', rating: 3.9, contracts: 1, value: '500K SAR', status: 'warning', compliance: 78, issues: 12 },
+        { name: 'Zamzam Foods', type: 'Catering', rating: 4.7, contracts: 1, value: '600K SAR', status: 'active', compliance: 96, issues: 1 },
+      ]);
+
+      const [filter, setFilter] = useState('all');
+
+      const getStatusBadge = (status) => {
+        switch(status) {
+          case 'active': return 'bg-emerald-900/50 text-emerald-300 border-emerald-600';
+          case 'warning': return 'bg-amber-900/50 text-amber-300 border-amber-600';
+          case 'inactive': return 'bg-red-900/50 text-red-300 border-red-600';
+          default: return '';
+        }
+      };
+
+      const getComplianceColor = (score) => {
+        if (score >= 90) return 'text-emerald-400';
+        if (score >= 80) return 'text-amber-400';
+        return 'text-red-400';
+      };
+
+      const filteredVendors = filter === 'all' ? vendors : vendors.filter(v => v.type.toLowerCase() === filter);
+
+      const stats = {
+        total: vendors.length,
+        avgRating: (vendors.reduce((a, b) => a + b.rating, 0) / vendors.length).toFixed(1),
+        totalValue: '7.4M SAR',
+        avgCompliance: Math.round(vendors.reduce((a, b) => a + b.compliance, 0) / vendors.length)
+      };
+
+      if (!isOpen) return null;
+
+      return (
+        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
+          <div className="w-full max-w-5xl bg-slate-800 rounded-2xl shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto">
+            <div className="bg-gradient-to-r from-teal-600 to-cyan-600 p-4 flex items-center justify-between sticky top-0 z-10">
+              <div className="flex items-center gap-3">
+                <span className="text-2xl">📦</span>
+                <div>
+                  <div className="text-white font-bold text-lg">Vendor Performance</div>
+                  <div className="text-teal-200 text-sm">Mitra & Supplier Dashboard</div>
+                </div>
+              </div>
+              <button onClick={onClose} className="text-white/80 hover:text-white text-2xl">✕</button>
+            </div>
+
+            <div className="p-6">
+              {/* Stats */}
+              <div className="grid grid-cols-4 gap-4 mb-6">
+                <div className="bg-slate-900/50 rounded-xl p-4 border border-slate-700 text-center">
+                  <div className="text-3xl font-bold text-teal-400">{stats.total}</div>
+                  <div className="text-slate-400 text-sm">Total Vendor</div>
+                </div>
+                <div className="bg-slate-900/50 rounded-xl p-4 border border-slate-700 text-center">
+                  <div className="text-3xl font-bold text-amber-400">⭐ {stats.avgRating}</div>
+                  <div className="text-slate-400 text-sm">Avg Rating</div>
+                </div>
+                <div className="bg-slate-900/50 rounded-xl p-4 border border-slate-700 text-center">
+                  <div className="text-3xl font-bold text-emerald-400">{stats.totalValue}</div>
+                  <div className="text-slate-400 text-sm">Contract Value</div>
+                </div>
+                <div className="bg-slate-900/50 rounded-xl p-4 border border-slate-700 text-center">
+                  <div className={`text-3xl font-bold ${getComplianceColor(stats.avgCompliance)}`}>{stats.avgCompliance}%</div>
+                  <div className="text-slate-400 text-sm">Avg Compliance</div>
+                </div>
+              </div>
+
+              {/* Filter */}
+              <div className="flex gap-2 mb-4">
+                {['all', 'hotel', 'bus', 'catering', 'transport'].map((f) => (
+                  <button
+                    key={f}
+                    onClick={() => setFilter(f)}
+                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${filter === f ? 'bg-teal-600 text-white' : 'bg-slate-700 text-slate-300 hover:bg-slate-600'}`}
+                  >
+                    {f === 'all' ? 'Semua' : f.charAt(0).toUpperCase() + f.slice(1)}
+                  </button>
+                ))}
+              </div>
+
+              {/* Vendor Cards */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {filteredVendors.map((vendor, idx) => (
+                  <div key={idx} className="bg-slate-900/50 rounded-xl p-4 border border-slate-700">
+                    <div className="flex justify-between items-start mb-3">
+                      <div>
+                        <div className="text-white font-semibold">{vendor.name}</div>
+                        <div className="text-slate-400 text-sm">{vendor.type}</div>
+                      </div>
+                      <span className={`px-2 py-1 rounded text-xs border ${getStatusBadge(vendor.status)}`}>
+                        {vendor.status === 'active' ? '✓ Active' : '⚠️ Warning'}
+                      </span>
+                    </div>
+
+                    <div className="grid grid-cols-4 gap-2 text-center">
+                      <div>
+                        <div className="text-amber-400 font-bold">⭐ {vendor.rating}</div>
+                        <div className="text-slate-500 text-xs">Rating</div>
+                      </div>
+                      <div>
+                        <div className="text-white font-bold">{vendor.contracts}</div>
+                        <div className="text-slate-500 text-xs">Contracts</div>
+                      </div>
+                      <div>
+                        <div className={`font-bold ${getComplianceColor(vendor.compliance)}`}>{vendor.compliance}%</div>
+                        <div className="text-slate-500 text-xs">Compliance</div>
+                      </div>
+                      <div>
+                        <div className="text-red-400 font-bold">{vendor.issues}</div>
+                        <div className="text-slate-500 text-xs">Issues</div>
+                      </div>
+                    </div>
+
+                    <div className="mt-3 pt-3 border-t border-slate-700 flex justify-between items-center">
+                      <div className="text-slate-400 text-sm">Contract Value</div>
+                      <div className="text-emerald-400 font-bold">{vendor.value}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    };
+
     // ============ MAIN APP ============
     const BPKHLimitedSolution = () => {
       const [activeModule, setActiveModule] = useState('overview');
@@ -1382,6 +1918,10 @@ Jawab dengan ramah, singkat, dan helpful. Gunakan emoji yang relevan.`;
       const [showCharts, setShowCharts] = useState(false);
       const [showMap, setShowMap] = useState(false);
       const [showQR, setShowQR] = useState(false);
+      const [showInventory, setShowInventory] = useState(false);
+      const [showTickets, setShowTickets] = useState(false);
+      const [showScheduler, setShowScheduler] = useState(false);
+      const [showVendor, setShowVendor] = useState(false);
       const [showPrayer, setShowPrayer] = useState(false);
       const [showWeather, setShowWeather] = useState(false);
       const [showCalculator, setShowCalculator] = useState(false);
@@ -1576,6 +2116,54 @@ Jawab dengan ramah, singkat, dan helpful. Gunakan emoji yang relevan.`;
                 <div>
                   <div className="text-white font-bold">Kalender Hijriyah</div>
                   <div className="text-yellow-100 text-xs">Tanggal penting Islam</div>
+                </div>
+              </div>
+            </button>
+            <button
+              onClick={() => setShowInventory(true)}
+              className="bg-gradient-to-r from-cyan-600 to-teal-600 hover:from-cyan-500 hover:to-teal-500 rounded-xl p-5 text-left transition-all hover:scale-[1.02] border border-cyan-500/30"
+            >
+              <div className="flex items-center gap-4">
+                <span className="text-3xl">📊</span>
+                <div>
+                  <div className="text-white font-bold">Inventory Dashboard</div>
+                  <div className="text-cyan-100 text-xs">Real-time stok & alert</div>
+                </div>
+              </div>
+            </button>
+            <button
+              onClick={() => setShowTickets(true)}
+              className="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-500 hover:to-red-500 rounded-xl p-5 text-left transition-all hover:scale-[1.02] border border-orange-500/30"
+            >
+              <div className="flex items-center gap-4">
+                <span className="text-3xl">📝</span>
+                <div>
+                  <div className="text-white font-bold">Ticket Management</div>
+                  <div className="text-orange-100 text-xs">SLA tracking & support</div>
+                </div>
+              </div>
+            </button>
+            <button
+              onClick={() => setShowScheduler(true)}
+              className="bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-500 hover:to-purple-500 rounded-xl p-5 text-left transition-all hover:scale-[1.02] border border-violet-500/30"
+            >
+              <div className="flex items-center gap-4">
+                <span className="text-3xl">📅</span>
+                <div>
+                  <div className="text-white font-bold">Staff Scheduler</div>
+                  <div className="text-violet-100 text-xs">Jadwal shift staf</div>
+                </div>
+              </div>
+            </button>
+            <button
+              onClick={() => setShowVendor(true)}
+              className="bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-500 hover:to-pink-500 rounded-xl p-5 text-left transition-all hover:scale-[1.02] border border-rose-500/30"
+            >
+              <div className="flex items-center gap-4">
+                <span className="text-3xl">📦</span>
+                <div>
+                  <div className="text-white font-bold">Vendor Performance</div>
+                  <div className="text-rose-100 text-xs">Rating & compliance</div>
                 </div>
               </div>
             </button>
@@ -2291,6 +2879,10 @@ Jawab dengan ramah, singkat, dan helpful. Gunakan emoji yang relevan.`;
           <WeatherWidget isOpen={showWeather} onClose={() => setShowWeather(false)} />
           <CurrencyCalculator isOpen={showCalculator} onClose={() => setShowCalculator(false)} forexRate={forexRate} />
           <HijriCalendar isOpen={showHijri} onClose={() => setShowHijri(false)} />
+          <InventoryDashboard isOpen={showInventory} onClose={() => setShowInventory(false)} />
+          <TicketManagement isOpen={showTickets} onClose={() => setShowTickets(false)} />
+          <StaffScheduler isOpen={showScheduler} onClose={() => setShowScheduler(false)} />
+          <VendorPerformance isOpen={showVendor} onClose={() => setShowVendor(false)} />
         </div>
       );
     };
