@@ -1909,6 +1909,186 @@ Jawab dengan ramah, singkat, dan helpful. Gunakan emoji yang relevan.`;
       );
     };
 
+    // ============ INVOICE MANAGEMENT ============
+    const InvoiceManagement = ({ isOpen, onClose }) => {
+      const [filter, setFilter] = useState('all');
+      const [invoices, setInvoices] = useState([
+        { id: 'INV-2025-001', customer: 'PT Amanah Travel', type: 'Hotel', items: 'Dar Al-Tawhid - 50 kamar x 3 malam', amount: 75000, currency: 'SAR', date: '2025-01-15', due: '2025-01-30', status: 'paid' },
+        { id: 'INV-2025-002', customer: 'Berkah Umroh Tour', type: 'Transport', items: 'Bus Shuttle - 10 unit x 7 hari', amount: 28000, currency: 'SAR', date: '2025-01-18', due: '2025-02-02', status: 'sent' },
+        { id: 'INV-2025-003', customer: 'Safar Wisata Religi', type: 'Train', items: 'Haramain Train - 200 tiket', amount: 12000, currency: 'SAR', date: '2025-01-10', due: '2025-01-25', status: 'overdue' },
+        { id: 'INV-2025-004', customer: 'Haji Mabrur Group', type: 'Catering', items: 'Paket Makan - 150 pax x 14 hari', amount: 42000, currency: 'SAR', date: '2025-01-20', due: '2025-02-04', status: 'draft' },
+        { id: 'INV-2025-005', customer: 'Nabawi Tour & Travel', type: 'Hotel', items: 'Al-Safwa Hotel - 30 kamar x 5 malam', amount: 52500, currency: 'SAR', date: '2025-01-12', due: '2025-01-27', status: 'paid' },
+        { id: 'INV-2025-006', customer: 'Zamzam Holidays', type: 'Package', items: 'Full Package - Hotel + Transport + Catering', amount: 185000, currency: 'SAR', date: '2025-01-19', due: '2025-02-03', status: 'sent' },
+      ]);
+
+      const getStatusBadge = (status) => {
+        switch(status) {
+          case 'paid': return 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30';
+          case 'sent': return 'bg-blue-500/20 text-blue-400 border-blue-500/30';
+          case 'overdue': return 'bg-red-500/20 text-red-400 border-red-500/30';
+          case 'draft': return 'bg-slate-500/20 text-slate-400 border-slate-500/30';
+          default: return 'bg-slate-500/20 text-slate-400 border-slate-500/30';
+        }
+      };
+
+      const getStatusIcon = (status) => {
+        switch(status) {
+          case 'paid': return '✅';
+          case 'sent': return '📤';
+          case 'overdue': return '⚠️';
+          case 'draft': return '📝';
+          default: return '📄';
+        }
+      };
+
+      const getTypeIcon = (type) => {
+        switch(type) {
+          case 'Hotel': return '🏨';
+          case 'Transport': return '🚌';
+          case 'Train': return '🚄';
+          case 'Catering': return '🍽️';
+          case 'Package': return '📦';
+          default: return '📋';
+        }
+      };
+
+      const filteredInvoices = filter === 'all' ? invoices : invoices.filter(inv => inv.status === filter);
+
+      const stats = {
+        total: invoices.reduce((sum, inv) => sum + inv.amount, 0),
+        paid: invoices.filter(inv => inv.status === 'paid').reduce((sum, inv) => sum + inv.amount, 0),
+        pending: invoices.filter(inv => inv.status === 'sent').reduce((sum, inv) => sum + inv.amount, 0),
+        overdue: invoices.filter(inv => inv.status === 'overdue').reduce((sum, inv) => sum + inv.amount, 0),
+        draft: invoices.filter(inv => inv.status === 'draft').reduce((sum, inv) => sum + inv.amount, 0),
+      };
+
+      if (!isOpen) return null;
+
+      return (
+        <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
+          <div className="bg-slate-900 rounded-2xl max-w-5xl w-full max-h-[90vh] overflow-hidden border border-slate-700">
+            <div className="bg-gradient-to-r from-indigo-600 to-purple-600 p-4 flex justify-between items-center">
+              <div className="flex items-center gap-3">
+                <span className="text-3xl">🧾</span>
+                <div>
+                  <h2 className="text-xl font-bold text-white">Invoice Management</h2>
+                  <p className="text-indigo-200 text-sm">Kelola faktur & pembayaran</p>
+                </div>
+              </div>
+              <button onClick={onClose} className="text-white/80 hover:text-white text-2xl">✕</button>
+            </div>
+
+            <div className="p-6 overflow-y-auto max-h-[calc(90vh-80px)]">
+              {/* Stats Cards */}
+              <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mb-6">
+                <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+                  <div className="text-slate-400 text-xs mb-1">Total Invoice</div>
+                  <div className="text-white font-bold text-lg">{stats.total.toLocaleString()} SAR</div>
+                </div>
+                <div className="bg-emerald-900/30 rounded-xl p-4 border border-emerald-700/50">
+                  <div className="text-emerald-400 text-xs mb-1">✅ Paid</div>
+                  <div className="text-emerald-400 font-bold text-lg">{stats.paid.toLocaleString()} SAR</div>
+                </div>
+                <div className="bg-blue-900/30 rounded-xl p-4 border border-blue-700/50">
+                  <div className="text-blue-400 text-xs mb-1">📤 Pending</div>
+                  <div className="text-blue-400 font-bold text-lg">{stats.pending.toLocaleString()} SAR</div>
+                </div>
+                <div className="bg-red-900/30 rounded-xl p-4 border border-red-700/50">
+                  <div className="text-red-400 text-xs mb-1">⚠️ Overdue</div>
+                  <div className="text-red-400 font-bold text-lg">{stats.overdue.toLocaleString()} SAR</div>
+                </div>
+                <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-600">
+                  <div className="text-slate-400 text-xs mb-1">📝 Draft</div>
+                  <div className="text-slate-300 font-bold text-lg">{stats.draft.toLocaleString()} SAR</div>
+                </div>
+              </div>
+
+              {/* Filter & Actions */}
+              <div className="flex flex-wrap gap-2 mb-4">
+                <div className="flex gap-2 flex-1">
+                  {['all', 'paid', 'sent', 'overdue', 'draft'].map(status => (
+                    <button
+                      key={status}
+                      onClick={() => setFilter(status)}
+                      className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
+                        filter === status
+                          ? 'bg-indigo-600 text-white'
+                          : 'bg-slate-800 text-slate-400 hover:bg-slate-700'
+                      }`}
+                    >
+                      {status === 'all' ? 'Semua' : status.charAt(0).toUpperCase() + status.slice(1)}
+                      <span className="ml-1 text-xs opacity-70">
+                        ({status === 'all' ? invoices.length : invoices.filter(inv => inv.status === status).length})
+                      </span>
+                    </button>
+                  ))}
+                </div>
+                <button className="px-4 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg text-sm font-medium flex items-center gap-2">
+                  ➕ Buat Invoice
+                </button>
+              </div>
+
+              {/* Invoice List */}
+              <div className="space-y-3">
+                {filteredInvoices.map((invoice, idx) => (
+                  <div key={idx} className="bg-slate-800/50 rounded-xl p-4 border border-slate-700 hover:border-indigo-500/50 transition-all">
+                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                      <div className="flex items-start gap-4">
+                        <div className="text-3xl">{getTypeIcon(invoice.type)}</div>
+                        <div>
+                          <div className="flex items-center gap-2 mb-1">
+                            <span className="text-white font-bold">{invoice.id}</span>
+                            <span className={`px-2 py-0.5 rounded text-xs border ${getStatusBadge(invoice.status)}`}>
+                              {getStatusIcon(invoice.status)} {invoice.status.charAt(0).toUpperCase() + invoice.status.slice(1)}
+                            </span>
+                          </div>
+                          <div className="text-slate-300 font-medium">{invoice.customer}</div>
+                          <div className="text-slate-500 text-sm">{invoice.items}</div>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-6">
+                        <div className="text-right">
+                          <div className="text-2xl font-bold text-white">{invoice.amount.toLocaleString()}</div>
+                          <div className="text-slate-400 text-sm">{invoice.currency}</div>
+                        </div>
+                        <div className="text-right text-sm">
+                          <div className="text-slate-400">Tgl Invoice: <span className="text-slate-300">{invoice.date}</span></div>
+                          <div className={invoice.status === 'overdue' ? 'text-red-400' : 'text-slate-400'}>
+                            Jatuh Tempo: <span className={invoice.status === 'overdue' ? 'text-red-400 font-medium' : 'text-slate-300'}>{invoice.due}</span>
+                          </div>
+                        </div>
+                        <div className="flex gap-2">
+                          <button className="p-2 bg-slate-700 hover:bg-slate-600 rounded-lg text-slate-300" title="View">👁️</button>
+                          <button className="p-2 bg-slate-700 hover:bg-slate-600 rounded-lg text-slate-300" title="Download PDF">📥</button>
+                          {invoice.status === 'draft' && (
+                            <button className="p-2 bg-indigo-600 hover:bg-indigo-500 rounded-lg text-white" title="Send">📤</button>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Footer Summary */}
+              <div className="mt-6 pt-4 border-t border-slate-700 flex justify-between items-center">
+                <div className="text-slate-400 text-sm">
+                  Menampilkan {filteredInvoices.length} dari {invoices.length} invoice
+                </div>
+                <div className="text-right">
+                  <div className="text-slate-400 text-sm">Total Filtered</div>
+                  <div className="text-xl font-bold text-indigo-400">
+                    {filteredInvoices.reduce((sum, inv) => sum + inv.amount, 0).toLocaleString()} SAR
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    };
+
     // ============ MAIN APP ============
     const BPKHLimitedSolution = () => {
       const [activeModule, setActiveModule] = useState('overview');
@@ -1926,6 +2106,7 @@ Jawab dengan ramah, singkat, dan helpful. Gunakan emoji yang relevan.`;
       const [showWeather, setShowWeather] = useState(false);
       const [showCalculator, setShowCalculator] = useState(false);
       const [showHijri, setShowHijri] = useState(false);
+      const [showInvoice, setShowInvoice] = useState(false);
       const [forexRate, setForexRate] = useState({ rate: 4200, loading: true, lastUpdate: null });
 
       useEffect(() => {
@@ -2164,6 +2345,18 @@ Jawab dengan ramah, singkat, dan helpful. Gunakan emoji yang relevan.`;
                 <div>
                   <div className="text-white font-bold">Vendor Performance</div>
                   <div className="text-rose-100 text-xs">Rating & compliance</div>
+                </div>
+              </div>
+            </button>
+            <button
+              onClick={() => setShowInvoice(true)}
+              className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 rounded-xl p-5 text-left transition-all hover:scale-[1.02] border border-indigo-500/30"
+            >
+              <div className="flex items-center gap-4">
+                <span className="text-3xl">🧾</span>
+                <div>
+                  <div className="text-white font-bold">Invoice Management</div>
+                  <div className="text-indigo-100 text-xs">Faktur & pembayaran</div>
                 </div>
               </div>
             </button>
@@ -2883,6 +3076,7 @@ Jawab dengan ramah, singkat, dan helpful. Gunakan emoji yang relevan.`;
           <TicketManagement isOpen={showTickets} onClose={() => setShowTickets(false)} />
           <StaffScheduler isOpen={showScheduler} onClose={() => setShowScheduler(false)} />
           <VendorPerformance isOpen={showVendor} onClose={() => setShowVendor(false)} />
+          <InvoiceManagement isOpen={showInvoice} onClose={() => setShowInvoice(false)} />
         </div>
       );
     };

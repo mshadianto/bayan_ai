@@ -5,7 +5,7 @@
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind-CSS-38B2AC?style=for-the-badge&logo=tailwind-css)
 ![License](https://img.shields.io/badge/License-Proprietary-red?style=for-the-badge)
 
-> Platform AI terintegrasi untuk layanan haji & umrah di Arab Saudi dengan 13 fitur interaktif dalam single HTML file.
+> Platform AI terintegrasi untuk layanan haji & umrah di Arab Saudi dengan 14 fitur interaktif dalam single HTML file.
 
 ## Live Demo
 
@@ -33,6 +33,7 @@
 | 11 | **Ticket Management** | SLA tracking & support system | - |
 | 12 | **Staff Scheduler** | Jadwal shift staf visual | - |
 | 13 | **Vendor Performance** | Rating & compliance dashboard | - |
+| 14 | **Invoice Management** | Faktur, pembayaran, status tracking | - |
 
 ---
 
@@ -45,7 +46,7 @@ Maps:         Leaflet.js + OpenStreetMap
 Charts:       Chart.js
 QR Code:      QRCode.js
 APIs:         Aladhan, Open-Meteo, ExchangeRate
-Deployment:   Single HTML File (~2900 lines)
+Deployment:   Single HTML File (~3100 lines)
 ```
 
 ---
@@ -112,7 +113,7 @@ bayan_ai/
 ## Screenshots
 
 ### Dashboard Overview
-- 13 tombol fitur interaktif
+- 14 tombol fitur interaktif
 - Live forex rate SAR-IDR
 - Architecture diagram
 
@@ -136,6 +137,7 @@ bayan_ai/
 - **Ticket Management**: SLA tracking, priority badges, assignee management
 - **Staff Scheduler**: Visual shift schedule (Pagi/Siang/Malam/OFF)
 - **Vendor Performance**: Rating, compliance score, contract tracking
+- **Invoice Management**: Status tracking (Draft/Sent/Paid/Overdue), summary stats
 
 ---
 
