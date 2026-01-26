@@ -40,11 +40,11 @@ export const mockAttendance: Attendance[] = [
 
 // ==================== LEAVE ====================
 export const mockLeaveRequests: LeaveRequest[] = [
-  { id: '1', employee_id: 'BPKH004', employee_name: 'Mohammad Khan', leave_type: 'annual', start_date: '2024-02-03', end_date: '2024-02-05', days: 3, status: 'approved', reason: 'Family vacation', approved_by: 'Abdullah Al-Faisal' },
-  { id: '2', employee_id: 'BPKH006', employee_name: 'Khalid Bin Salman', leave_type: 'sick', start_date: '2024-02-03', end_date: '2024-02-03', days: 1, status: 'approved', reason: 'Medical appointment', approved_by: 'Fatima Hassan' },
+  { id: '1', employee_id: 'BPKH004', employee_name: 'Mohammad Khan', leave_type: 'annual', start_date: '2024-02-03', end_date: '2024-02-05', days: 3, status: 'approved', reason: 'Family vacation', approved_by: 'Abdullah Al-Faisal', approved_at: '2024-02-01T10:30:00Z' },
+  { id: '2', employee_id: 'BPKH006', employee_name: 'Khalid Bin Salman', leave_type: 'sick', start_date: '2024-02-03', end_date: '2024-02-03', days: 1, status: 'approved', reason: 'Medical appointment', approved_by: 'Fatima Hassan', approved_at: '2024-02-02T09:15:00Z' },
   { id: '3', employee_id: 'BPKH003', employee_name: 'Ahmed Al-Rashid', leave_type: 'annual', start_date: '2024-02-10', end_date: '2024-02-14', days: 5, status: 'pending', reason: 'Personal travel' },
   { id: '4', employee_id: 'BPKH005', employee_name: 'Sarah Al-Qahtani', leave_type: 'emergency', start_date: '2024-02-06', end_date: '2024-02-07', days: 2, status: 'pending', reason: 'Family emergency' },
-  { id: '5', employee_id: 'BPKH008', employee_name: 'Yusuf Ibrahim', leave_type: 'annual', start_date: '2024-01-20', end_date: '2024-01-25', days: 6, status: 'approved', reason: 'Hajj preparation', approved_by: 'Ahmed Al-Rashid' },
+  { id: '5', employee_id: 'BPKH008', employee_name: 'Yusuf Ibrahim', leave_type: 'annual', start_date: '2024-01-20', end_date: '2024-01-25', days: 6, status: 'approved', reason: 'Hajj preparation', approved_by: 'Ahmed Al-Rashid', approved_at: '2024-01-18T14:00:00Z' },
 ];
 
 // ==================== PAYROLL ====================
@@ -498,6 +498,7 @@ export const hcmsApi = {
       if (!leave) throw new Error('Leave request not found');
       leave.status = 'approved';
       leave.approved_by = input.approved_by;
+      leave.approved_at = new Date().toISOString();
       return leave;
     },
     reject: async (input: RejectLeaveInput): Promise<LeaveRequest> => {

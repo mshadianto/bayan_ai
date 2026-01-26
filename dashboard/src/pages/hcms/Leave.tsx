@@ -589,7 +589,9 @@ export function Leave() {
                         </span>
                         <div className="flex items-center gap-1 text-sm text-slate-300">
                           <Calendar size={14} />
-                          {format(new Date(leave.start_date), 'MMM d')} - {format(new Date(leave.end_date), 'MMM d, yyyy')}
+                          {leave.start_date && leave.end_date ? (
+                            <>{format(new Date(leave.start_date), 'MMM d')} - {format(new Date(leave.end_date), 'MMM d, yyyy')}</>
+                          ) : 'Date not specified'}
                         </div>
                         <span className="text-sm text-slate-400">({leave.days} day{leave.days !== 1 ? 's' : ''})</span>
                       </div>
