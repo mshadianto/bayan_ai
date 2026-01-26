@@ -3,3 +3,4 @@ export { Investments } from './Investments';
 export { Treasury } from './Treasury';
 export { Invoices } from './Invoices';
 export { WhatsApp } from './WhatsApp';
+export { FinancialRequests } from './FinancialRequests';

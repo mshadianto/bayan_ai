@@ -322,6 +322,95 @@ export interface ComplianceAlert {
   status: 'active' | 'resolved';
 }
 
+// ============================================
+// Financial Request Workflow Types
+// ============================================
+
+export type FinancialRequestStatus =
+  | 'draft'
+  | 'pending_head'
+  | 'pending_finance_staff'
+  | 'pending_finance_head'
+  | 'pending_mudir'
+  | 'approved'
+  | 'rejected'
+  | 'completed';
+
+export interface FinancialRequest {
+  id: string;
+  request_number: string;
+  type: 'payment' | 'transfer' | 'reimbursement' | 'advance';
+  title: string;
+  description: string;
+  amount: number;
+  currency: 'SAR' | 'IDR' | 'USD';
+
+  // Requester info
+  requester_id: string;
+  requester_name: string;
+  requester_unit: string;
+
+  // Ledger/categorization
+  gl_code?: string;
+  gl_name?: string;
+  cost_center?: string;
+  budget_code?: string;
+
+  // Vendor/beneficiary
+  beneficiary_name?: string;
+  beneficiary_bank?: string;
+  beneficiary_account?: string;
+
+  // Documents
+  documents: FinancialDocument[];
+
+  // Status & workflow
+  status: FinancialRequestStatus;
+  current_approver?: string;
+
+  // Approval trail
+  approvals: ApprovalStep[];
+
+  // Timestamps
+  created_at: string;
+  updated_at?: string;
+  completed_at?: string;
+
+  // Transaction proof
+  transaction_proof_url?: string;
+  transaction_date?: string;
+  transaction_reference?: string;
+}
+
+export interface FinancialDocument {
+  id: string;
+  name: string;
+  type: 'invoice' | 'receipt' | 'contract' | 'quotation' | 'other';
+  url: string;
+  uploaded_at: string;
+}
+
+export interface ApprovalStep {
+  id: string;
+  step: number;
+  role: 'head_division' | 'finance_staff' | 'finance_head' | 'mudir_1' | 'mudir_3';
+  approver_id?: string;
+  approver_name?: string;
+  status: 'pending' | 'approved' | 'rejected' | 'returned';
+  comments?: string;
+  action_at?: string;
+}
+
+export interface FinancialRequestSummary {
+  total_requests: number;
+  pending_approval: number;
+  approved_this_month: number;
+  total_amount_pending: number;
+  total_amount_approved: number;
+  by_status: { status: FinancialRequestStatus; count: number }[];
+  by_type: { type: string; count: number; amount: number }[];
+}
+
 export interface HCMSDashboard {
   total_employees: number;
   active_employees: number;

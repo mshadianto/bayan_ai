@@ -1,0 +1,7 @@
+Proses pengelolaan keuangan:
+1. Unit pengusul menginput data usulan pembayaran atau transfer keuangan dilengkapi dengan dokumen2 yang dibutuhkan
+2. Head Division unit pengusul mengapprove atau menolak usulan dari staf nya
+3. Staf finance memeriksa kesesuaian data2 dan dokumen2 yang dikirimkan, dan mengedit data yang diperlukan serta memilih kategorisasi/ledger account, jika ada yang tidak sesuai maka staf finance dapat mengembalikan usulan tersebut kembali kepada unit pengusul
+4. Dead Divisian finance mengecek hasil pengecekan staf finance dan menyetujui/menolak usulannya, jika approve lanjut ke proses berikutnya (ke mudir atau kembali ke unit pengusul)
+5. Mudir 1 dan Mudir 3 memeriksa secara paralel, jika setuju keduanya lanjut proses ke finance untuk transaksi dan jika tidak maka kembali ke unit pengusul untuk perbaikan
+6. jika Mudir approve finance proses transaksi dan upload dokumen bukti transaksi di sistem

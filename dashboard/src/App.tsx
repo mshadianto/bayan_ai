@@ -1,7 +1,7 @@
 import { lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Layout } from './components/Layout';
-import { Dashboard, Investments, Treasury, Invoices, WhatsApp } from './pages';
+import { Dashboard, Investments, Treasury, Invoices, WhatsApp, FinancialRequests } from './pages';
 import { PageSkeleton } from './components/common';
 
 // Lazy load HCMS pages for code splitting
@@ -24,6 +24,7 @@ function App() {
           <Route path="investments" element={<Investments />} />
           <Route path="treasury" element={<Treasury />} />
           <Route path="invoices" element={<Invoices />} />
+          <Route path="financial-requests" element={<FinancialRequests />} />
           <Route path="whatsapp" element={<WhatsApp />} />
           {/* HCMS Routes - Lazy loaded */}
           <Route

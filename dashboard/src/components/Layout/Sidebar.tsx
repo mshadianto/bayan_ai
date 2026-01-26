@@ -7,6 +7,7 @@ const financeItems = [
   { path: '/investments', label: 'Investments', emoji: '💰' },
   { path: '/treasury', label: 'Treasury', emoji: '🏦' },
   { path: '/invoices', label: 'Invoices', emoji: '📄' },
+  { path: '/financial-requests', label: 'Financial Requests', emoji: '📝' },
   { path: '/whatsapp', label: 'WhatsApp', emoji: '💬' },
 ];
 
