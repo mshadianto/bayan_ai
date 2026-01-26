@@ -52,45 +52,50 @@ export function Modal({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4"
+      className="fixed inset-0 z-50 overflow-y-auto"
       role="dialog"
       aria-modal="true"
       aria-labelledby="modal-title"
     >
       {/* Backdrop */}
       <div
-        className="absolute inset-0 bg-black/70 backdrop-blur-sm animate-fade-in"
+        className="fixed inset-0 bg-black/70 backdrop-blur-sm"
         onClick={onClose}
         aria-hidden="true"
       />
 
-      {/* Modal content */}
-      <div
-        className={`relative bg-slate-800 rounded-2xl border border-slate-700 w-full ${SIZE_CLASSES[size]} max-h-[90vh] flex flex-col shadow-2xl animate-modal-slide-up`}
-      >
-        {/* Header */}
-        <div className="flex items-center justify-between p-4 border-b border-slate-700">
-          <h2 id="modal-title" className="text-lg font-semibold text-white">
-            {title}
-          </h2>
-          <button
-            onClick={onClose}
-            className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-700 transition-colors"
-            aria-label="Close modal"
-          >
-            <X size={20} />
-          </button>
-        </div>
-
-        {/* Body */}
-        <div className="flex-1 overflow-y-auto p-4">{children}</div>
-
-        {/* Footer */}
-        {footer && (
-          <div className="p-4 border-t border-slate-700 flex justify-end gap-3">
-            {footer}
+      {/* Modal wrapper - centers content */}
+      <div className="min-h-full flex items-center justify-center p-4">
+        {/* Modal content */}
+        <div
+          className={`relative bg-slate-800 rounded-2xl border border-slate-700 w-full ${SIZE_CLASSES[size]} max-h-[85vh] flex flex-col shadow-2xl animate-modal-slide-up`}
+        >
+          {/* Header - sticky */}
+          <div className="flex-shrink-0 flex items-center justify-between p-4 border-b border-slate-700 bg-slate-800 rounded-t-2xl">
+            <h2 id="modal-title" className="text-lg font-semibold text-white pr-8 truncate">
+              {title}
+            </h2>
+            <button
+              onClick={onClose}
+              className="absolute right-4 top-4 p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-700 transition-colors"
+              aria-label="Close modal"
+            >
+              <X size={20} />
+            </button>
           </div>
-        )}
+
+          {/* Body - scrollable */}
+          <div className="flex-1 overflow-y-auto p-4 overscroll-contain">
+            {children}
+          </div>
+
+          {/* Footer - sticky */}
+          {footer && (
+            <div className="flex-shrink-0 p-4 border-t border-slate-700 flex justify-end gap-3 bg-slate-800 rounded-b-2xl">
+              {footer}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

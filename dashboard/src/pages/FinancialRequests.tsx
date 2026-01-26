@@ -862,7 +862,7 @@ export function FinancialRequests() {
           isOpen={!!selectedRequest}
           onClose={() => setSelectedRequest(null)}
           title={selectedRequest?.title || ''}
-          size="lg"
+          size="xl"
         >
           {selectedRequest && (
             <div className="space-y-6">
