@@ -1,0 +1,9 @@
+export { HCMSDashboard } from './HCMSDashboard';
+export { Employees } from './Employees';
+export { Attendance } from './Attendance';
+export { Leave } from './Leave';
+export { Payroll } from './Payroll';
+export { Recruitment } from './Recruitment';
+export { Performance } from './Performance';
+export { Training } from './Training';
+export { Compliance } from './Compliance';
