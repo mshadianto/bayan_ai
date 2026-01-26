@@ -1,2 +1,48 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+build/
+.vite/
+.wrangler/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# IDE & Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Claude Code
 .claude/
+
+# Netlify
+.netlify/
+
+# Vercel
+.vercel/
+
+# Cache
+*.cache
+.cache/
+
+# PDF files (large binaries)
 *.pdf
+
+# Temporary files
+*.tmp
+*.temp
+temp*/

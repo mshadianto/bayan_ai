@@ -1,0 +1,841 @@
+{
+  "name": "BPKH Limited - Financial Transfer Approval Workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "submit-payment-request",
+        "responseMode": "responseNode",
+        "options": {
+          "responseData": "allEntries"
+        }
+      },
+      "id": "webhook-submit-request",
+      "name": "1️⃣ Unit Pengusul: Submit Payment Request",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [240, 400],
+      "webhookId": "bpkh-payment-request",
+      "notes": "Staff dari unit manapun submit usulan pembayaran dengan upload dokumen pendukung"
+    },
+    {
+      "parameters": {
+        "functionCode": "// Extract payment request data\nconst requestData = {\n  request_id: `PR-${Date.now()}`,\n  submitter_name: $json.submitter_name,\n  submitter_phone: $json.submitter_phone,\n  unit: $json.unit, // Business & Investment / Legal / IT / HR / etc\n  head_division_phone: $json.head_division_phone,\n  \n  // Payment details\n  payment_type: $json.payment_type, // Transfer / Cash / Vendor Payment\n  amount: parseFloat($json.amount),\n  currency: $json.currency || 'SAR',\n  beneficiary_name: $json.beneficiary_name,\n  beneficiary_account: $json.beneficiary_account,\n  bank_name: $json.bank_name,\n  payment_purpose: $json.payment_purpose,\n  \n  // Documents\n  documents: $json.documents || [], // Array of {name, url, type}\n  \n  // Workflow status\n  status: 'PENDING_HEAD_APPROVAL',\n  current_approver: 'Head Division',\n  created_at: new Date().toISOString(),\n  workflow_stage: 1,\n  approval_history: []\n};\n\nreturn { json: requestData };"
+      },
+      "id": "parse-payment-request",
+      "name": "Parse & Validate Request Data",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [460, 400]
+    },
+    {
+      "parameters": {
+        "operation": "insert",
+        "tableId": "payment_requests",
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "matchingColumns": [],
+          "schema": []
+        },
+        "options": {
+          "returning": "*"
+        }
+      },
+      "id": "supabase-insert-request",
+      "name": "Supabase: Save Payment Request",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [680, 400],
+      "credentials": {
+        "supabaseApi": {
+          "id": "supabase-creds",
+          "name": "Supabase BPKH Limited"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "={{$env.WAHA_URL}}/api/sendText",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-Api-Key",
+              "value": "={{$env.WAHA_API_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "jsonBody": "={\n  \"session\": \"{{$env.WAHA_SESSION}}\",\n  \"chatId\": \"{{$json.head_division_phone}}\",\n  \"text\": \"📋 *PAYMENT REQUEST APPROVAL NEEDED*\\n\\n*Request ID:* {{$json.request_id}}\\n*From:* {{$json.submitter_name}} ({{$json.unit}})\\n*Amount:* {{$json.amount.toLocaleString()}} {{$json.currency}}\\n*Beneficiary:* {{$json.beneficiary_name}}\\n*Purpose:* {{$json.payment_purpose}}\\n\\n*Documents Attached:* {{$json.documents.length}} files\\n\\n⏰ *Awaiting Your Approval*\\n\\n*Actions:*\\n/approve_{{$json.request_id}}\\n/reject_{{$json.request_id}}\\n/info_{{$json.request_id}}\\n\\n🔗 View Details:\\nhttps://dashboard.bpkh-limited.com/payments/{{$json.request_id}}\"\n}",
+        "options": {}
+      },
+      "id": "wa-notify-head-division",
+      "name": "2️⃣ WhatsApp: Notify Head Division for Approval",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [900, 400],
+      "notes": "Kepala divisi dari unit pengusul menerima notifikasi untuk approve/reject"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"status\": \"success\",\n  \"message\": \"Payment request submitted successfully\",\n  \"data\": {\n    \"request_id\": \"{{$json.request_id}}\",\n    \"status\": \"PENDING_HEAD_APPROVAL\",\n    \"current_approver\": \"Head Division - {{$json.unit}}\",\n    \"dashboard_url\": \"https://dashboard.bpkh-limited.com/payments/{{$json.request_id}}\"\n  }\n}",
+        "options": {}
+      },
+      "id": "webhook-response-submit",
+      "name": "Response to Submitter",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [900, 600]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "head-division-decision",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-head-decision",
+      "name": "Webhook: Head Division Decision",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [240, 800],
+      "webhookId": "bpkh-head-decision",
+      "notes": "Triggered dari WhatsApp command /approve_xxx atau /reject_xxx"
+    },
+    {
+      "parameters": {
+        "functionCode": "const decision = $json.decision; // 'approve' or 'reject'\nconst requestId = $json.request_id;\nconst approverPhone = $json.approver_phone;\nconst notes = $json.notes || '';\n\n// Update approval history\nconst approvalEntry = {\n  stage: 'HEAD_DIVISION_APPROVAL',\n  approver: approverPhone,\n  decision: decision.toUpperCase(),\n  notes: notes,\n  timestamp: new Date().toISOString()\n};\n\nlet newStatus = '';\nlet nextStage = 0;\n\nif (decision === 'approve') {\n  newStatus = 'PENDING_FINANCE_REVIEW';\n  nextStage = 3;\n} else {\n  newStatus = 'REJECTED_BY_HEAD';\n  nextStage = 0;\n}\n\nreturn {\n  json: {\n    request_id: requestId,\n    decision: decision,\n    approval_entry: approvalEntry,\n    new_status: newStatus,\n    workflow_stage: nextStage,\n    approver_phone: approverPhone\n  }\n};"
+      },
+      "id": "process-head-decision",
+      "name": "Process Head Division Decision",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [460, 800]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "=UPDATE payment_requests \nSET \n  status = '{{$json.new_status}}',\n  workflow_stage = {{$json.workflow_stage}},\n  approval_history = approval_history || '{{JSON.stringify($json.approval_entry)}}'::jsonb,\n  updated_at = NOW()\nWHERE request_id = '{{$json.request_id}}'\nRETURNING *;",
+        "options": {}
+      },
+      "id": "supabase-update-head-decision",
+      "name": "Supabase: Update Request Status",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [680, 800],
+      "credentials": {
+        "supabaseApi": {
+          "id": "supabase-creds",
+          "name": "Supabase BPKH Limited"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json.decision}}",
+              "value2": "approve"
+            }
+          ]
+        }
+      },
+      "id": "if-head-approved",
+      "name": "IF: Head Division Approved?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [900, 800]
+    },
+    {
+      "parameters": {
+        "url": "={{$env.WAHA_URL}}/api/sendText",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-Api-Key",
+              "value": "={{$env.WAHA_API_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "jsonBody": "={\n  \"session\": \"{{$env.WAHA_SESSION}}\",\n  \"chatId\": \"966500000010@c.us\",\n  \"text\": \"💼 *NEW PAYMENT REQUEST FOR FINANCE REVIEW*\\n\\n*Request ID:* {{$node['Supabase: Update Request Status'].json[0].request_id}}\\n*Unit:* {{$node['Supabase: Update Request Status'].json[0].unit}}\\n*Amount:* {{$node['Supabase: Update Request Status'].json[0].amount.toLocaleString()}} {{$node['Supabase: Update Request Status'].json[0].currency}}\\n*Beneficiary:* {{$node['Supabase: Update Request Status'].json[0].beneficiary_name}}\\n\\n✅ Approved by Head Division\\n\\n*Your Tasks:*\\n1. Verify documents\\n2. Check data accuracy\\n3. Assign GL Account/Ledger\\n4. Approve or return to unit\\n\\n*Actions:*\\n/finance_review_{{$node['Supabase: Update Request Status'].json[0].request_id}}\\n/return_to_unit_{{$node['Supabase: Update Request Status'].json[0].request_id}}\\n\\n🔗 https://dashboard.bpkh-limited.com/payments/{{$node['Supabase: Update Request Status'].json[0].request_id}}\"\n}",
+        "options": {}
+      },
+      "id": "wa-notify-finance-staff",
+      "name": "3️⃣ WhatsApp: Notify Finance Staff",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [1120, 700],
+      "notes": "Staf Finance menerima request untuk review dokumen dan assign GL code"
+    },
+    {
+      "parameters": {
+        "url": "={{$env.WAHA_URL}}/api/sendText",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-Api-Key",
+              "value": "={{$env.WAHA_API_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "jsonBody": "={\n  \"session\": \"{{$env.WAHA_SESSION}}\",\n  \"chatId\": \"{{$node['Supabase: Update Request Status'].json[0].submitter_phone}}\",\n  \"text\": \"❌ *PAYMENT REQUEST REJECTED*\\n\\n*Request ID:* {{$node['Supabase: Update Request Status'].json[0].request_id}}\\n*Amount:* {{$node['Supabase: Update Request Status'].json[0].amount.toLocaleString()}} {{$node['Supabase: Update Request Status'].json[0].currency}}\\n\\n*Rejected by:* Head Division\\n*Reason:* {{$json.notes || 'No reason provided'}}\\n\\n*Next Steps:*\\n- Review rejection reason\\n- Make necessary corrections\\n- Resubmit request\\n\\n🔗 https://dashboard.bpkh-limited.com/payments/{{$node['Supabase: Update Request Status'].json[0].request_id}}\"\n}",
+        "options": {}
+      },
+      "id": "wa-notify-rejected-submitter",
+      "name": "WhatsApp: Notify Rejection to Submitter",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [1120, 900],
+      "notes": "Jika ditolak kepala divisi, notifikasi kembali ke pengusul"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "finance-staff-review",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-finance-review",
+      "name": "Webhook: Finance Staff Review",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [240, 1200],
+      "webhookId": "bpkh-finance-review",
+      "notes": "Finance staff submit review results dengan GL code assignment"
+    },
+    {
+      "parameters": {
+        "functionCode": "const action = $json.action; // 'approve' or 'return_to_unit'\nconst requestId = $json.request_id;\nconst reviewerPhone = $json.reviewer_phone;\nconst glAccount = $json.gl_account || '';\nconst ledgerCategory = $json.ledger_category || '';\nconst editedData = $json.edited_data || {};\nconst notes = $json.notes || '';\n\nconst reviewEntry = {\n  stage: 'FINANCE_STAFF_REVIEW',\n  reviewer: reviewerPhone,\n  action: action.toUpperCase(),\n  gl_account: glAccount,\n  ledger_category: ledgerCategory,\n  edited_data: editedData,\n  notes: notes,\n  timestamp: new Date().toISOString()\n};\n\nlet newStatus = '';\nlet nextStage = 0;\n\nif (action === 'approve') {\n  newStatus = 'PENDING_FINANCE_HEAD_APPROVAL';\n  nextStage = 4;\n} else {\n  newStatus = 'RETURNED_BY_FINANCE';\n  nextStage = 1; // Back to unit\n}\n\nreturn {\n  json: {\n    request_id: requestId,\n    action: action,\n    review_entry: reviewEntry,\n    new_status: newStatus,\n    workflow_stage: nextStage,\n    gl_account: glAccount,\n    ledger_category: ledgerCategory,\n    edited_data: editedData\n  }\n};"
+      },
+      "id": "process-finance-review",
+      "name": "Process Finance Staff Review",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [460, 1200]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "=UPDATE payment_requests \nSET \n  status = '{{$json.new_status}}',\n  workflow_stage = {{$json.workflow_stage}},\n  gl_account = '{{$json.gl_account}}',\n  ledger_category = '{{$json.ledger_category}}',\n  approval_history = approval_history || '{{JSON.stringify($json.review_entry)}}'::jsonb,\n  updated_at = NOW()\nWHERE request_id = '{{$json.request_id}}'\nRETURNING *;",
+        "options": {}
+      },
+      "id": "supabase-update-finance-review",
+      "name": "Supabase: Update Finance Review",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [680, 1200],
+      "credentials": {
+        "supabaseApi": {
+          "id": "supabase-creds",
+          "name": "Supabase BPKH Limited"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json.action}}",
+              "value2": "approve"
+            }
+          ]
+        }
+      },
+      "id": "if-finance-approved",
+      "name": "IF: Finance Staff Approved?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [900, 1200]
+    },
+    {
+      "parameters": {
+        "url": "={{$env.WAHA_URL}}/api/sendText",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-Api-Key",
+              "value": "={{$env.WAHA_API_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "jsonBody": "={\n  \"session\": \"{{$env.WAHA_SESSION}}\",\n  \"chatId\": \"966500000011@c.us\",\n  \"text\": \"💼 *PAYMENT REQUEST FOR HEAD FINANCE APPROVAL*\\n\\n*Request ID:* {{$node['Supabase: Update Finance Review'].json[0].request_id}}\\n*Unit:* {{$node['Supabase: Update Finance Review'].json[0].unit}}\\n*Amount:* {{$node['Supabase: Update Finance Review'].json[0].amount.toLocaleString()}} {{$node['Supabase: Update Finance Review'].json[0].currency}}\\n*Beneficiary:* {{$node['Supabase: Update Finance Review'].json[0].beneficiary_name}}\\n\\n✅ Reviewed by Finance Staff\\n*GL Account:* {{$node['Supabase: Update Finance Review'].json[0].gl_account}}\\n*Category:* {{$node['Supabase: Update Finance Review'].json[0].ledger_category}}\\n\\n*Your Decision:*\\n/approve_finance_head_{{$node['Supabase: Update Finance Review'].json[0].request_id}}\\n/reject_finance_head_{{$node['Supabase: Update Finance Review'].json[0].request_id}}\\n\\n🔗 https://dashboard.bpkh-limited.com/payments/{{$node['Supabase: Update Finance Review'].json[0].request_id}}\"\n}",
+        "options": {}
+      },
+      "id": "wa-notify-finance-head",
+      "name": "4️⃣ WhatsApp: Notify Head Finance Division",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [1120, 1100],
+      "notes": "Kepala Divisi Finance approve hasil review staf finance"
+    },
+    {
+      "parameters": {
+        "url": "={{$env.WAHA_URL}}/api/sendText",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-Api-Key",
+              "value": "={{$env.WAHA_API_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "jsonBody": "={\n  \"session\": \"{{$env.WAHA_SESSION}}\",\n  \"chatId\": \"{{$node['Supabase: Update Finance Review'].json[0].submitter_phone}}\",\n  \"text\": \"⚠️ *PAYMENT REQUEST RETURNED FOR REVISION*\\n\\n*Request ID:* {{$node['Supabase: Update Finance Review'].json[0].request_id}}\\n*Amount:* {{$node['Supabase: Update Finance Review'].json[0].amount.toLocaleString()}} {{$node['Supabase: Update Finance Review'].json[0].currency}}\\n\\n*Returned by:* Finance Division\\n*Reason:* {{$json.notes || 'Documents/data incomplete or incorrect'}}\\n\\n*Required Actions:*\\n- Review finance feedback\\n- Upload missing documents\\n- Correct data errors\\n- Resubmit request\\n\\n🔗 https://dashboard.bpkh-limited.com/payments/{{$node['Supabase: Update Finance Review'].json[0].request_id}}\"\n}",
+        "options": {}
+      },
+      "id": "wa-notify-returned-to-unit",
+      "name": "WhatsApp: Notify Return to Unit",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [1120, 1300],
+      "notes": "Jika finance return, notifikasi ke unit pengusul untuk perbaikan"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "finance-head-decision",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-finance-head-decision",
+      "name": "Webhook: Finance Head Decision",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [240, 1600],
+      "webhookId": "bpkh-finance-head-decision"
+    },
+    {
+      "parameters": {
+        "functionCode": "const decision = $json.decision; // 'approve' or 'reject'\nconst requestId = $json.request_id;\nconst approverPhone = $json.approver_phone;\nconst notes = $json.notes || '';\n\nconst approvalEntry = {\n  stage: 'FINANCE_HEAD_APPROVAL',\n  approver: approverPhone,\n  decision: decision.toUpperCase(),\n  notes: notes,\n  timestamp: new Date().toISOString()\n};\n\nlet newStatus = '';\nlet nextStage = 0;\n\nif (decision === 'approve') {\n  newStatus = 'PENDING_MUDIRS_APPROVAL';\n  nextStage = 5;\n} else {\n  newStatus = 'REJECTED_BY_FINANCE_HEAD';\n  nextStage = 1; // Return to unit\n}\n\nreturn {\n  json: {\n    request_id: requestId,\n    decision: decision,\n    approval_entry: approvalEntry,\n    new_status: newStatus,\n    workflow_stage: nextStage\n  }\n};"
+      },
+      "id": "process-finance-head-decision",
+      "name": "Process Finance Head Decision",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [460, 1600]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "=UPDATE payment_requests \nSET \n  status = '{{$json.new_status}}',\n  workflow_stage = {{$json.workflow_stage}},\n  approval_history = approval_history || '{{JSON.stringify($json.approval_entry)}}'::jsonb,\n  updated_at = NOW()\nWHERE request_id = '{{$json.request_id}}'\nRETURNING *;",
+        "options": {}
+      },
+      "id": "supabase-update-finance-head",
+      "name": "Supabase: Update Finance Head Decision",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [680, 1600],
+      "credentials": {
+        "supabaseApi": {
+          "id": "supabase-creds",
+          "name": "Supabase BPKH Limited"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json.decision}}",
+              "value2": "approve"
+            }
+          ]
+        }
+      },
+      "id": "if-finance-head-approved",
+      "name": "IF: Finance Head Approved?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [900, 1600]
+    },
+    {
+      "parameters": {
+        "batchSize": 1,
+        "options": {}
+      },
+      "id": "split-to-mudirs",
+      "name": "Split to Mudir 1 & Mudir 3",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [1120, 1500]
+    },
+    {
+      "parameters": {
+        "url": "={{$env.WAHA_URL}}/api/sendText",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-Api-Key",
+              "value": "={{$env.WAHA_API_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "jsonBody": "={\n  \"session\": \"{{$env.WAHA_SESSION}}\",\n  \"chatId\": \"966500000002@c.us\",\n  \"text\": \"🏢 *PAYMENT REQUEST - MUDIR 1 (CEO) APPROVAL*\\n\\n*Request ID:* {{$node['Supabase: Update Finance Head Decision'].json[0].request_id}}\\n*Unit:* {{$node['Supabase: Update Finance Head Decision'].json[0].unit}}\\n*Amount:* {{$node['Supabase: Update Finance Head Decision'].json[0].amount.toLocaleString()}} {{$node['Supabase: Update Finance Head Decision'].json[0].currency}}\\n*Beneficiary:* {{$node['Supabase: Update Finance Head Decision'].json[0].beneficiary_name}}\\n*Purpose:* {{$node['Supabase: Update Finance Head Decision'].json[0].payment_purpose}}\\n\\n✅ Approved by:\\n- Head Division\\n- Finance Staff\\n- Head Finance Division\\n\\n*GL Account:* {{$node['Supabase: Update Finance Head Decision'].json[0].gl_account}}\\n\\n⚠️ *Parallel Approval Required*\\n(Both Mudir 1 & Mudir 3 must approve)\\n\\n*Your Decision:*\\n/approve_mudir1_{{$node['Supabase: Update Finance Head Decision'].json[0].request_id}}\\n/reject_mudir1_{{$node['Supabase: Update Finance Head Decision'].json[0].request_id}}\\n\\n🔗 https://dashboard.bpkh-limited.com/payments/{{$node['Supabase: Update Finance Head Decision'].json[0].request_id}}\"\n}",
+        "options": {}
+      },
+      "id": "wa-notify-mudir1",
+      "name": "5️⃣ WhatsApp: Notify Mudir 1 (CEO)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [1340, 1400],
+      "notes": "Mudir 1 (CEO) - Business & Investment Division"
+    },
+    {
+      "parameters": {
+        "url": "={{$env.WAHA_URL}}/api/sendText",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-Api-Key",
+              "value": "={{$env.WAHA_API_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "jsonBody": "={\n  \"session\": \"{{$env.WAHA_SESSION}}\",\n  \"chatId\": \"966500000003@c.us\",\n  \"text\": \"💰 *PAYMENT REQUEST - MUDIR 3 (CFO) APPROVAL*\\n\\n*Request ID:* {{$node['Supabase: Update Finance Head Decision'].json[0].request_id}}\\n*Unit:* {{$node['Supabase: Update Finance Head Decision'].json[0].unit}}\\n*Amount:* {{$node['Supabase: Update Finance Head Decision'].json[0].amount.toLocaleString()}} {{$node['Supabase: Update Finance Head Decision'].json[0].currency}}\\n*Beneficiary:* {{$node['Supabase: Update Finance Head Decision'].json[0].beneficiary_name}}\\n*Bank:* {{$node['Supabase: Update Finance Head Decision'].json[0].bank_name}}\\n*Account:* {{$node['Supabase: Update Finance Head Decision'].json[0].beneficiary_account}}\\n\\n✅ Finance Division Approved:\\n*GL Account:* {{$node['Supabase: Update Finance Head Decision'].json[0].gl_account}}\\n*Category:* {{$node['Supabase: Update Finance Head Decision'].json[0].ledger_category}}\\n\\n⚠️ *Parallel Approval Required*\\n(Both Mudir 1 & Mudir 3 must approve)\\n\\n*Your Decision:*\\n/approve_mudir3_{{$node['Supabase: Update Finance Head Decision'].json[0].request_id}}\\n/reject_mudir3_{{$node['Supabase: Update Finance Head Decision'].json[0].request_id}}\\n\\n🔗 https://dashboard.bpkh-limited.com/payments/{{$node['Supabase: Update Finance Head Decision'].json[0].request_id}}\"\n}",
+        "options": {}
+      },
+      "id": "wa-notify-mudir3",
+      "name": "5️⃣ WhatsApp: Notify Mudir 3 (CFO)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [1340, 1600],
+      "notes": "Mudir 3 (CFO) - Finance & Treasury Division"
+    },
+    {
+      "parameters": {
+        "url": "={{$env.WAHA_URL}}/api/sendText",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-Api-Key",
+              "value": "={{$env.WAHA_API_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "jsonBody": "={\n  \"session\": \"{{$env.WAHA_SESSION}}\",\n  \"chatId\": \"{{$node['Supabase: Update Finance Head Decision'].json[0].submitter_phone}}\",\n  \"text\": \"❌ *PAYMENT REQUEST REJECTED*\\n\\n*Request ID:* {{$node['Supabase: Update Finance Head Decision'].json[0].request_id}}\\n*Amount:* {{$node['Supabase: Update Finance Head Decision'].json[0].amount.toLocaleString()}} {{$node['Supabase: Update Finance Head Decision'].json[0].currency}}\\n\\n*Rejected by:* Head Finance Division\\n*Reason:* {{$json.notes || 'Does not meet approval criteria'}}\\n\\n*Next Steps:*\\n- Review rejection feedback\\n- Make necessary revisions\\n- Resubmit request\\n\\n🔗 https://dashboard.bpkh-limited.com/payments/{{$node['Supabase: Update Finance Head Decision'].json[0].request_id}}\"\n}",
+        "options": {}
+      },
+      "id": "wa-notify-finance-head-reject",
+      "name": "WhatsApp: Notify Finance Head Rejection",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [1120, 1700]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "mudir-decision",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-mudir-decision",
+      "name": "Webhook: Mudir Decision",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [240, 2000],
+      "webhookId": "bpkh-mudir-decision",
+      "notes": "Webhook menerima approval dari Mudir 1 atau Mudir 3"
+    },
+    {
+      "parameters": {
+        "functionCode": "const decision = $json.decision; // 'approve' or 'reject'\nconst requestId = $json.request_id;\nconst mudir = $json.mudir; // 'mudir1' or 'mudir3'\nconst approverPhone = $json.approver_phone;\nconst notes = $json.notes || '';\n\nconst approvalEntry = {\n  stage: mudir === 'mudir1' ? 'MUDIR_1_APPROVAL' : 'MUDIR_3_APPROVAL',\n  approver: approverPhone,\n  decision: decision.toUpperCase(),\n  notes: notes,\n  timestamp: new Date().toISOString()\n};\n\nreturn {\n  json: {\n    request_id: requestId,\n    mudir: mudir,\n    decision: decision,\n    approval_entry: approvalEntry,\n    approver_phone: approverPhone\n  }\n};"
+      },
+      "id": "process-mudir-decision",
+      "name": "Process Mudir Decision",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [460, 2000]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "=UPDATE payment_requests \nSET \n  approval_history = approval_history || '{{JSON.stringify($json.approval_entry)}}'::jsonb,\n  {{$json.mudir === 'mudir1' ? 'mudir1_approved' : 'mudir3_approved'}} = {{$json.decision === 'approve' ? 'true' : 'false'}},\n  {{$json.mudir === 'mudir1' ? 'mudir1_approved_at' : 'mudir3_approved_at'}} = {{$json.decision === 'approve' ? 'NOW()' : 'NULL'}},\n  updated_at = NOW()\nWHERE request_id = '{{$json.request_id}}'\nRETURNING *;",
+        "options": {}
+      },
+      "id": "supabase-update-mudir-decision",
+      "name": "Supabase: Update Mudir Decision",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [680, 2000],
+      "credentials": {
+        "supabaseApi": {
+          "id": "supabase-creds",
+          "name": "Supabase BPKH Limited"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "functionCode": "// Check if both Mudirs have approved\nconst mudir1Approved = $json.mudir1_approved === true;\nconst mudir3Approved = $json.mudir3_approved === true;\n\nlet status = '';\nlet workflowStage = 0;\nlet bothApproved = false;\n\nif (mudir1Approved && mudir3Approved) {\n  status = 'APPROVED_BY_MUDIRS';\n  workflowStage = 6;\n  bothApproved = true;\n} else if ($json.mudir1_approved === false || $json.mudir3_approved === false) {\n  // If any Mudir rejected\n  status = 'REJECTED_BY_MUDIR';\n  workflowStage = 1; // Return to unit\n  bothApproved = false;\n} else {\n  // Still pending one Mudir\n  status = 'PENDING_MUDIRS_APPROVAL';\n  workflowStage = 5;\n  bothApproved = false;\n}\n\nreturn {\n  json: {\n    ...($json),\n    new_status: status,\n    workflow_stage: workflowStage,\n    both_mudirs_approved: bothApproved\n  }\n};"
+      },
+      "id": "check-both-mudirs-approval",
+      "name": "Check Both Mudirs Approval Status",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [900, 2000]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "=UPDATE payment_requests \nSET \n  status = '{{$json.new_status}}',\n  workflow_stage = {{$json.workflow_stage}},\n  updated_at = NOW()\nWHERE request_id = '{{$json.request_id}}'\nRETURNING *;",
+        "options": {}
+      },
+      "id": "supabase-update-final-mudirs-status",
+      "name": "Supabase: Update Final Mudirs Status",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [1120, 2000],
+      "credentials": {
+        "supabaseApi": {
+          "id": "supabase-creds",
+          "name": "Supabase BPKH Limited"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{$json.both_mudirs_approved}}",
+              "value2": true
+            }
+          ]
+        }
+      },
+      "id": "if-both-mudirs-approved",
+      "name": "IF: Both Mudirs Approved?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [1340, 2000]
+    },
+    {
+      "parameters": {
+        "url": "={{$env.WAHA_URL}}/api/sendText",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-Api-Key",
+              "value": "={{$env.WAHA_API_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "jsonBody": "={\n  \"session\": \"{{$env.WAHA_SESSION}}\",\n  \"chatId\": \"966500000010@c.us\",\n  \"text\": \"✅ *PAYMENT APPROVED - PROCEED TO TRANSACTION*\\n\\n*Request ID:* {{$node['Supabase: Update Final Mudirs Status'].json[0].request_id}}\\n*Amount:* {{$node['Supabase: Update Final Mudirs Status'].json[0].amount.toLocaleString()}} {{$node['Supabase: Update Final Mudirs Status'].json[0].currency}}\\n*Beneficiary:* {{$node['Supabase: Update Final Mudirs Status'].json[0].beneficiary_name}}\\n*Bank:* {{$node['Supabase: Update Final Mudirs Status'].json[0].bank_name}}\\n*Account:* {{$node['Supabase: Update Final Mudirs Status'].json[0].beneficiary_account}}\\n\\n✅ *Approved by:*\\n- Head Division\\n- Finance Staff\\n- Head Finance\\n- Mudir 1 (CEO)\\n- Mudir 3 (CFO)\\n\\n*GL Account:* {{$node['Supabase: Update Final Mudirs Status'].json[0].gl_account}}\\n\\n*Your Tasks:*\\n1. Process bank transfer\\n2. Upload transaction proof\\n3. Update system\\n\\n*Actions:*\\n/process_transaction_{{$node['Supabase: Update Final Mudirs Status'].json[0].request_id}}\\n\\n🔗 https://dashboard.bpkh-limited.com/payments/{{$node['Supabase: Update Final Mudirs Status'].json[0].request_id}}\"\n}",
+        "options": {}
+      },
+      "id": "wa-notify-finance-process",
+      "name": "6️⃣ WhatsApp: Notify Finance to Process",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [1560, 1900],
+      "notes": "Finance staff proses transaksi setelah kedua Mudir approve"
+    },
+    {
+      "parameters": {
+        "url": "={{$env.WAHA_URL}}/api/sendText",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-Api-Key",
+              "value": "={{$env.WAHA_API_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "jsonBody": "={\n  \"session\": \"{{$env.WAHA_SESSION}}\",\n  \"chatId\": \"{{$node['Supabase: Update Final Mudirs Status'].json[0].submitter_phone}}\",\n  \"text\": \"❌ *PAYMENT REQUEST REJECTED BY MUDIR*\\n\\n*Request ID:* {{$node['Supabase: Update Final Mudirs Status'].json[0].request_id}}\\n*Amount:* {{$node['Supabase: Update Final Mudirs Status'].json[0].amount.toLocaleString()}} {{$node['Supabase: Update Final Mudirs Status'].json[0].currency}}\\n\\n*Status:* One or both Mudirs rejected the request\\n\\n*Next Steps:*\\n- Review rejection feedback\\n- Consult with your Head Division\\n- Make necessary corrections\\n- Resubmit if applicable\\n\\n🔗 https://dashboard.bpkh-limited.com/payments/{{$node['Supabase: Update Final Mudirs Status'].json[0].request_id}}\"\n}",
+        "options": {}
+      },
+      "id": "wa-notify-mudir-rejection",
+      "name": "WhatsApp: Notify Mudir Rejection",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [1560, 2100]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "transaction-completed",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-transaction-completed",
+      "name": "Webhook: Transaction Completed",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [240, 2400],
+      "webhookId": "bpkh-transaction-completed",
+      "notes": "Finance upload bukti transfer setelah transaksi selesai"
+    },
+    {
+      "parameters": {
+        "functionCode": "const requestId = $json.request_id;\nconst transactionProof = $json.transaction_proof; // URL dokumen bukti transfer\nconst transactionDate = $json.transaction_date;\nconst transactionReference = $json.transaction_reference;\nconst processedBy = $json.processed_by;\nconst notes = $json.notes || '';\n\nconst completionEntry = {\n  stage: 'TRANSACTION_COMPLETED',\n  processed_by: processedBy,\n  transaction_date: transactionDate,\n  transaction_reference: transactionReference,\n  transaction_proof: transactionProof,\n  notes: notes,\n  timestamp: new Date().toISOString()\n};\n\nreturn {\n  json: {\n    request_id: requestId,\n    completion_entry: completionEntry,\n    transaction_proof: transactionProof,\n    transaction_date: transactionDate,\n    transaction_reference: transactionReference,\n    new_status: 'COMPLETED',\n    workflow_stage: 7\n  }\n};"
+      },
+      "id": "process-transaction-completion",
+      "name": "Process Transaction Completion",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [460, 2400]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "=UPDATE payment_requests \nSET \n  status = '{{$json.new_status}}',\n  workflow_stage = {{$json.workflow_stage}},\n  transaction_date = '{{$json.transaction_date}}',\n  transaction_reference = '{{$json.transaction_reference}}',\n  transaction_proof = '{{$json.transaction_proof}}',\n  approval_history = approval_history || '{{JSON.stringify($json.completion_entry)}}'::jsonb,\n  completed_at = NOW(),\n  updated_at = NOW()\nWHERE request_id = '{{$json.request_id}}'\nRETURNING *;",
+        "options": {}
+      },
+      "id": "supabase-complete-transaction",
+      "name": "Supabase: Mark Transaction Complete",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [680, 2400],
+      "credentials": {
+        "supabaseApi": {
+          "id": "supabase-creds",
+          "name": "Supabase BPKH Limited"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "={{$env.WAHA_URL}}/api/sendText",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-Api-Key",
+              "value": "={{$env.WAHA_API_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "jsonBody": "={\n  \"session\": \"{{$env.WAHA_SESSION}}\",\n  \"chatId\": \"{{$json.submitter_phone}}\",\n  \"text\": \"✅ *PAYMENT COMPLETED SUCCESSFULLY*\\n\\n*Request ID:* {{$json.request_id}}\\n*Amount:* {{$json.amount.toLocaleString()}} {{$json.currency}}\\n*Beneficiary:* {{$json.beneficiary_name}}\\n\\n*Transaction Details:*\\n- Date: {{$json.transaction_date}}\\n- Reference: {{$json.transaction_reference}}\\n- Bank: {{$json.bank_name}}\\n\\n📄 *Transaction Proof:*\\n{{$json.transaction_proof}}\\n\\n*Processing Time:* {{Math.round((new Date($json.completed_at) - new Date($json.created_at)) / 1000 / 3600)}} hours\\n\\n✅ *Approval Chain:*\\n1. Head Division\\n2. Finance Staff Review\\n3. Head Finance Division\\n4. Mudir 1 (CEO)\\n5. Mudir 3 (CFO)\\n6. Finance Transaction\\n\\n🔗 https://dashboard.bpkh-limited.com/payments/{{$json.request_id}}\"\n}",
+        "options": {}
+      },
+      "id": "wa-notify-completion-submitter",
+      "name": "WhatsApp: Notify Completion to Submitter",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [900, 2400]
+    },
+    {
+      "parameters": {
+        "url": "={{$env.WAHA_URL}}/api/sendText",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-Api-Key",
+              "value": "={{$env.WAHA_API_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "jsonBody": "={\n  \"session\": \"{{$env.WAHA_SESSION}}\",\n  \"chatId\": \"966500000001-1234567890@g.us\",\n  \"text\": \"📊 *PAYMENT TRANSACTION COMPLETED*\\n\\n*Request ID:* {{$node['Supabase: Mark Transaction Complete'].json[0].request_id}}\\n*Unit:* {{$node['Supabase: Mark Transaction Complete'].json[0].unit}}\\n*Amount:* {{$node['Supabase: Mark Transaction Complete'].json[0].amount.toLocaleString()}} {{$node['Supabase: Mark Transaction Complete'].json[0].currency}}\\n*Beneficiary:* {{$node['Supabase: Mark Transaction Complete'].json[0].beneficiary_name}}\\n\\n*Transaction:*\\n- Date: {{$node['Supabase: Mark Transaction Complete'].json[0].transaction_date}}\\n- Ref: {{$node['Supabase: Mark Transaction Complete'].json[0].transaction_reference}}\\n\\n*GL Account:* {{$node['Supabase: Mark Transaction Complete'].json[0].gl_account}}\\n\\n✅ Full workflow completed\\n\\n🔗 https://dashboard.bpkh-limited.com/payments/{{$node['Supabase: Mark Transaction Complete'].json[0].request_id}}\"\n}",
+        "options": {}
+      },
+      "id": "wa-notify-board-completion",
+      "name": "WhatsApp: Notify Board of Mudirs",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [1120, 2400]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook: Upload Investment Document": {
+      "main": [[{"node": "Parse & Validate Request Data", "type": "main", "index": 0}]]
+    },
+    "Parse & Validate Request Data": {
+      "main": [[{"node": "Supabase: Save Payment Request", "type": "main", "index": 0}]]
+    },
+    "Supabase: Save Payment Request": {
+      "main": [[{"node": "WhatsApp: Notify Head Division for Approval", "type": "main", "index": 0}, {"node": "Response to Submitter", "type": "main", "index": 0}]]
+    },
+    "Webhook: Head Division Decision": {
+      "main": [[{"node": "Process Head Division Decision", "type": "main", "index": 0}]]
+    },
+    "Process Head Division Decision": {
+      "main": [[{"node": "Supabase: Update Request Status", "type": "main", "index": 0}]]
+    },
+    "Supabase: Update Request Status": {
+      "main": [[{"node": "IF: Head Division Approved?", "type": "main", "index": 0}]]
+    },
+    "IF: Head Division Approved?": {
+      "main": [[{"node": "WhatsApp: Notify Finance Staff", "type": "main", "index": 0}], [{"node": "WhatsApp: Notify Rejection to Submitter", "type": "main", "index": 0}]]
+    },
+    "Webhook: Finance Staff Review": {
+      "main": [[{"node": "Process Finance Staff Review", "type": "main", "index": 0}]]
+    },
+    "Process Finance Staff Review": {
+      "main": [[{"node": "Supabase: Update Finance Review", "type": "main", "index": 0}]]
+    },
+    "Supabase: Update Finance Review": {
+      "main": [[{"node": "IF: Finance Staff Approved?", "type": "main", "index": 0}]]
+    },
+    "IF: Finance Staff Approved?": {
+      "main": [[{"node": "WhatsApp: Notify Head Finance Division", "type": "main", "index": 0}], [{"node": "WhatsApp: Notify Return to Unit", "type": "main", "index": 0}]]
+    },
+    "Webhook: Finance Head Decision": {
+      "main": [[{"node": "Process Finance Head Decision", "type": "main", "index": 0}]]
+    },
+    "Process Finance Head Decision": {
+      "main": [[{"node": "Supabase: Update Finance Head Decision", "type": "main", "index": 0}]]
+    },
+    "Supabase: Update Finance Head Decision": {
+      "main": [[{"node": "IF: Finance Head Approved?", "type": "main", "index": 0}]]
+    },
+    "IF: Finance Head Approved?": {
+      "main": [[{"node": "Split to Mudir 1 & Mudir 3", "type": "main", "index": 0}], [{"node": "WhatsApp: Notify Finance Head Rejection", "type": "main", "index": 0}]]
+    },
+    "Split to Mudir 1 & Mudir 3": {
+      "main": [[{"node": "WhatsApp: Notify Mudir 1 (CEO)", "type": "main", "index": 0}, {"node": "WhatsApp: Notify Mudir 3 (CFO)", "type": "main", "index": 0}]]
+    },
+    "Webhook: Mudir Decision": {
+      "main": [[{"node": "Process Mudir Decision", "type": "main", "index": 0}]]
+    },
+    "Process Mudir Decision": {
+      "main": [[{"node": "Supabase: Update Mudir Decision", "type": "main", "index": 0}]]
+    },
+    "Supabase: Update Mudir Decision": {
+      "main": [[{"node": "Check Both Mudirs Approval Status", "type": "main", "index": 0}]]
+    },
+    "Check Both Mudirs Approval Status": {
+      "main": [[{"node": "Supabase: Update Final Mudirs Status", "type": "main", "index": 0}]]
+    },
+    "Supabase: Update Final Mudirs Status": {
+      "main": [[{"node": "IF: Both Mudirs Approved?", "type": "main", "index": 0}]]
+    },
+    "IF: Both Mudirs Approved?": {
+      "main": [[{"node": "WhatsApp: Notify Finance to Process", "type": "main", "index": 0}], [{"node": "WhatsApp: Notify Mudir Rejection", "type": "main", "index": 0}]]
+    },
+    "Webhook: Transaction Completed": {
+      "main": [[{"node": "Process Transaction Completion", "type": "main", "index": 0}]]
+    },
+    "Process Transaction Completion": {
+      "main": [[{"node": "Supabase: Mark Transaction Complete", "type": "main", "index": 0}]]
+    },
+    "Supabase: Mark Transaction Complete": {
+      "main": [[{"node": "WhatsApp: Notify Completion to Submitter", "type": "main", "index": 0}, {"node": "WhatsApp: Notify Board of Mudirs", "type": "main", "index": 0}]]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "saveExecutionProgress": true,
+    "saveManualExecutions": true,
+    "timezone": "Asia/Riyadh"
+  },
+  "versionId": "bpkh-payment-approval-v1.0",
+  "id": "financial-transfer-approval-workflow",
+  "meta": {
+    "instanceId": "bpkh-limited-prod"
+  },
+  "tags": [
+    {"name": "BPKH Limited", "id": "tag-bpkh"},
+    {"name": "Payment Approval", "id": "tag-payment"},
+    {"name": "Multi-Level Approval", "id": "tag-approval"}
+  ]
+}

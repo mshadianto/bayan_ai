@@ -1,0 +1,731 @@
+{
+  "name": "BPKH Limited - Investment Due Diligence Pipeline (WhatsApp)",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "investment-upload",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-investment-doc",
+      "name": "Webhook: Upload Investment Document",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [240, 300],
+      "webhookId": "bpkh-invest-001"
+    },
+    {
+      "parameters": {
+        "functionCode": "// Extract file from webhook (WAHA format)\nconst fileData = items[0].binary.data;\nconst fileName = items[0].json.fileName || 'investment_doc.pdf';\nconst uploadedBy = items[0].json.from || 'Unknown';\nconst dealName = items[0].json.dealName || items[0].json.caption || 'New Investment Opportunity';\nconst whatsappNumber = items[0].json.from;\n\nreturn {\n  json: {\n    fileName: fileName,\n    uploadedBy: uploadedBy,\n    whatsappNumber: whatsappNumber,\n    dealName: dealName,\n    uploadTimestamp: new Date().toISOString(),\n    fileSize: fileData.length,\n    processingStatus: 'started'\n  },\n  binary: {\n    data: fileData\n  }\n};"
+      },
+      "id": "extract-metadata",
+      "name": "Extract Upload Metadata",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "operation": "upload",
+        "bucketName": "bpkh-investment-docs",
+        "fileName": "={{$json.dealName}}_={{$json.uploadTimestamp}}.pdf",
+        "binaryData": true,
+        "options": {}
+      },
+      "id": "cloudflare-r2-upload",
+      "name": "Cloudflare R2: Store Original PDF",
+      "type": "n8n-nodes-base.awsS3",
+      "typeVersion": 1,
+      "position": [680, 300],
+      "credentials": {
+        "aws": {
+          "id": "cloudflare-r2-credentials",
+          "name": "Cloudflare R2 (S3 Compatible)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://api.unstructured.io/general/v0/general",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "unstructuredApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "unstructured-api-key",
+              "value": "={{$credentials.apiKey}}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "files",
+              "value": "={{$binary.data}}"
+            },
+            {
+              "name": "strategy",
+              "value": "hi_res"
+            },
+            {
+              "name": "extract_tables",
+              "value": "true"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "unstructured-extract",
+      "name": "Unstructured.io: Extract Text & Tables",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [900, 300],
+      "credentials": {
+        "unstructuredApi": {
+          "id": "unstructured-api-cred",
+          "name": "Unstructured API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "functionCode": "// Parse Unstructured.io response\nconst response = items[0].json;\nconst extractedText = response.elements\n  .filter(el => el.type === 'NarrativeText' || el.type === 'Title')\n  .map(el => el.text)\n  .join('\\n\\n');\n\nconst tables = response.elements\n  .filter(el => el.type === 'Table')\n  .map(el => el.metadata.text_as_html || el.text);\n\nconst financialData = {\n  revenue: extractFinancialMetric(extractedText, ['revenue', 'إيرادات']),\n  profit: extractFinancialMetric(extractedText, ['profit', 'ربح']),\n  assets: extractFinancialMetric(extractedText, ['assets', 'أصول']),\n  liabilities: extractFinancialMetric(extractedText, ['liabilities', 'التزامات'])\n};\n\nfunction extractFinancialMetric(text, keywords) {\n  const pattern = new RegExp(`(${keywords.join('|')}).*?(\\d[\\d,\\.]+)`, 'gi');\n  const match = text.match(pattern);\n  return match ? match[0] : 'Not found';\n}\n\nreturn {\n  json: {\n    dealName: $node['Extract Upload Metadata'].json.dealName,\n    whatsappNumber: $node['Extract Upload Metadata'].json.whatsappNumber,\n    extractedText: extractedText,\n    tables: tables,\n    financialData: financialData,\n    textLength: extractedText.length,\n    processingStatus: 'extracted'\n  }\n};"
+      },
+      "id": "parse-extraction",
+      "name": "Parse Extracted Content",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [1120, 300]
+    },
+    {
+      "parameters": {
+        "operation": "insert",
+        "tableId": "investment_documents",
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "deal_name": "={{$json.dealName}}",
+            "extracted_text": "={{$json.extractedText}}",
+            "financial_data": "={{JSON.stringify($json.financialData)}}",
+            "uploaded_by": "={{$json.whatsappNumber}}",
+            "processing_status": "embedded",
+            "created_at": "={{new Date().toISOString()}}"
+          }
+        },
+        "options": {
+          "returning": "*"
+        }
+      },
+      "id": "supabase-insert-raw",
+      "name": "Supabase: Insert Raw Data",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [1340, 300],
+      "credentials": {
+        "supabaseApi": {
+          "id": "supabase-creds",
+          "name": "Supabase BPKH Limited"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://api.groq.com/openai/v1/embeddings",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "groqApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer ={{$credentials.apiKey}}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "jsonBody": "={\n  \"model\": \"mixtral-8x7b-32768\",\n  \"input\": \"{{$json.extractedText.substring(0, 8000)}}\"\n}",
+        "options": {}
+      },
+      "id": "groq-embeddings",
+      "name": "Groq: Create Embeddings",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [1340, 500],
+      "credentials": {
+        "groqApi": {
+          "id": "groq-api-cred",
+          "name": "Groq API Key"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "=UPDATE investment_documents \nSET embedding = '{{JSON.stringify($json.data[0].embedding)}}',\n    processing_status = 'ready_for_analysis'\nWHERE deal_name = '{{$node[\"Supabase: Insert Raw Data\"].json.deal_name}}'\nRETURNING *;",
+        "options": {}
+      },
+      "id": "supabase-update-embedding",
+      "name": "Supabase: Store Vector Embedding",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [1560, 500],
+      "credentials": {
+        "supabaseApi": {
+          "id": "supabase-creds",
+          "name": "Supabase BPKH Limited"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "agent1-financial",
+              "name": "Agent 1: Financial Analysis",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "agent2-risk",
+              "name": "Agent 2: Risk Assessment",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "agent3-shariah",
+              "name": "Agent 3: Shariah Compliance",
+              "value": "",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "split-to-agents",
+      "name": "Split to Multi-Agent Analysis",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3,
+      "position": [1780, 300]
+    },
+    {
+      "parameters": {
+        "url": "https://api.groq.com/openai/v1/chat/completions",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "groqApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer ={{$credentials.apiKey}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "jsonBody": "={\n  \"model\": \"llama-3.3-70b-versatile\",\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"You are a senior financial analyst for BPKH Limited, a Saudi Arabian Islamic finance company. Analyze investment opportunities according to Islamic finance principles and Saudi regulatory requirements. Provide analysis in both Arabic and Indonesian (Bahasa Indonesia).\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"Analyze this investment opportunity for financial viability:\\n\\nDeal: {{$node['Parse Extracted Content'].json.dealName}}\\n\\nFinancial Data:\\n{{JSON.stringify($node['Parse Extracted Content'].json.financialData, null, 2)}}\\n\\nExtracted Information:\\n{{$node['Parse Extracted Content'].json.extractedText.substring(0, 4000)}}\\n\\nProvide:\\n1. Revenue analysis and growth potential\\n2. Profitability assessment\\n3. Asset quality evaluation\\n4. Key financial ratios (ROE, ROA, Debt/Equity)\\n5. Investment recommendation (Strong Buy/Buy/Hold/Sell/Strong Sell)\\n\\nFormat in bilingual (Arabic/Indonesian).\"\n    }\n  ],\n  \"temperature\": 0.3,\n  \"max_tokens\": 2000\n}",
+        "options": {}
+      },
+      "id": "agent1-financial-analysis",
+      "name": "Agent 1: Financial Analysis (Groq)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [2000, 180],
+      "credentials": {
+        "groqApi": {
+          "id": "groq-api-cred",
+          "name": "Groq API Key"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://api.groq.com/openai/v1/chat/completions",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "groqApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer ={{$credentials.apiKey}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "jsonBody": "={\n  \"model\": \"llama-3.3-70b-versatile\",\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"You are a risk management expert for BPKH Limited. Assess investment risks according to Saudi regulatory framework and Islamic finance risk management principles. Use BPKH Limited's risk appetite framework.\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"Conduct comprehensive risk assessment for:\\n\\nDeal: {{$node['Parse Extracted Content'].json.dealName}}\\n\\nDocument Content:\\n{{$node['Parse Extracted Content'].json.extractedText.substring(0, 4000)}}\\n\\nEvaluate:\\n1. Strategic Risk: Market position, competitive landscape\\n2. Financial Risk: Liquidity, credit, market risk\\n3. Operational Risk: Management quality, process efficiency\\n4. Compliance Risk: Saudi regulatory adherence\\n5. Shariah Risk: Potential non-compliance areas\\n6. Reputational Risk: ESG factors, public perception\\n\\nProvide risk rating (1-10, where 10 = highest risk) and mitigation strategies.\\n\\nFormat in bilingual (Arabic/Indonesian).\"\n    }\n  ],\n  \"temperature\": 0.2,\n  \"max_tokens\": 2000\n}",
+        "options": {}
+      },
+      "id": "agent2-risk-assessment",
+      "name": "Agent 2: Risk Assessment (Groq)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [2000, 380],
+      "credentials": {
+        "groqApi": {
+          "id": "groq-api-cred",
+          "name": "Groq API Key"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "=SELECT content FROM shariah_rulings \nWHERE embedding <-> '{{$node[\"Groq: Create Embeddings\"].json.data[0].embedding}}' < 0.3\nORDER BY embedding <-> '{{$node[\"Groq: Create Embeddings\"].json.data[0].embedding}}'\nLIMIT 5;",
+        "options": {}
+      },
+      "id": "supabase-rag-shariah",
+      "name": "Supabase: RAG Query Shariah Database",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [1780, 580],
+      "credentials": {
+        "supabaseApi": {
+          "id": "supabase-creds",
+          "name": "Supabase BPKH Limited"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://api.groq.com/openai/v1/chat/completions",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "groqApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer ={{$credentials.apiKey}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "jsonBody": "={\n  \"model\": \"llama-3.3-70b-versatile\",\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"You are a Shariah compliance expert specializing in Islamic finance. Reference DSN-MUI fatwas, AAOIFI standards, and Saudi Shariah regulations. Ensure all recommendations comply with Islamic principles.\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"Evaluate Shariah compliance for this investment:\\n\\nDeal: {{$node['Parse Extracted Content'].json.dealName}}\\n\\nInvestment Details:\\n{{$node['Parse Extracted Content'].json.extractedText.substring(0, 3000)}}\\n\\nRelevant Shariah Rulings from Database:\\n{{JSON.stringify($node['Supabase: RAG Query Shariah Database'].json, null, 2)}}\\n\\nAssess:\\n1. Business model alignment with Shariah principles\\n2. Revenue sources (halal/haram screening)\\n3. Debt structure (riba compliance)\\n4. Contractual terms (gharar, maysir evaluation)\\n5. Sector permissibility (tobacco, alcohol, gambling, weapons)\\n6. Purification requirements if any\\n\\nProvide: COMPLIANT / NON-COMPLIANT / REQUIRES RESTRUCTURING\\n\\nFormat in bilingual (Arabic/Indonesian).\"\n    }\n  ],\n  \"temperature\": 0.1,\n  \"max_tokens\": 2000\n}",
+        "options": {}
+      },
+      "id": "agent3-shariah-compliance",
+      "name": "Agent 3: Shariah Compliance (Groq)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [2000, 580],
+      "credentials": {
+        "groqApi": {
+          "id": "groq-api-cred",
+          "name": "Groq API Key"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combinationMode": "mergeByPosition",
+        "options": {}
+      },
+      "id": "merge-agent-outputs",
+      "name": "Merge All Agent Outputs",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2.1,
+      "position": [2220, 380]
+    },
+    {
+      "parameters": {
+        "url": "https://api.groq.com/openai/v1/chat/completions",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "groqApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer ={{$credentials.apiKey}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "jsonBody": "={\n  \"model\": \"llama-3.3-70b-versatile\",\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"You are the Chief Investment Officer orchestrating final investment recommendations for BPKH Limited Board of Mudirs. Synthesize multi-agent analysis into executive decision memo following McKinsey consulting format. Must be bilingual (Arabic/Indonesian).\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"Create Investment Decision Memo:\\n\\n**Deal:** {{$node['Parse Extracted Content'].json.dealName}}\\n\\n**Financial Analysis:**\\n{{$node['Agent 1: Financial Analysis (Groq)'].json.choices[0].message.content}}\\n\\n**Risk Assessment:**\\n{{$node['Agent 2: Risk Assessment (Groq)'].json.choices[0].message.content}}\\n\\n**Shariah Compliance:**\\n{{$node['Agent 3: Shariah Compliance (Groq)'].json.choices[0].message.content}}\\n\\n---\\n\\nGenerate comprehensive memo with:\\n\\n# INVESTMENT DECISION MEMO\\n\\n## 1. EXECUTIVE SUMMARY (2-3 sentences)\\n\\n## 2. INVESTMENT OVERVIEW\\n- Deal Name\\n- Sector\\n- Investment Size (SAR)\\n- Expected IRR\\n\\n## 3. STRATEGIC RATIONALE\\n- Alignment with BPKH Limited strategy\\n- Market opportunity\\n\\n## 4. KEY FINDINGS\\n### Financial Performance\\n### Risk Profile\\n### Shariah Compliance Status\\n\\n## 5. RECOMMENDATION\\n**Decision:** APPROVE / CONDITIONAL APPROVE / REJECT\\n**Conditions (if any):**\\n**Next Steps:**\\n\\n## 6. APPROVALS REQUIRED\\n- [ ] Mudir 1 (CEO) - Business & Investment Division\\n- [ ] Mudir 3 (CFO) - Finance & Risk Management\\n- [ ] Legal & Compliance Division\\n- [ ] Shariah Board (external)\\n\\n---\\nPrepared by: AI Investment Analysis System\\nDate: {{new Date().toISOString()}}\\n\\n**BILINGUAL FORMAT: Provide full memo in Arabic first, then Indonesian translation.**\"\n    }\n  ],\n  \"temperature\": 0.2,\n  \"max_tokens\": 3000\n}",
+        "options": {}
+      },
+      "id": "orchestrator-final-memo",
+      "name": "Orchestrator: Generate Investment Memo",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [2440, 380],
+      "credentials": {
+        "groqApi": {
+          "id": "groq-api-cred",
+          "name": "Groq API Key"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "insert",
+        "tableId": "investment_analysis",
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "deal_name": "={{$node['Parse Extracted Content'].json.dealName}}",
+            "financial_analysis": "={{$node['Agent 1: Financial Analysis (Groq)'].json.choices[0].message.content}}",
+            "risk_assessment": "={{$node['Agent 2: Risk Assessment (Groq)'].json.choices[0].message.content}}",
+            "shariah_compliance": "={{$node['Agent 3: Shariah Compliance (Groq)'].json.choices[0].message.content}}",
+            "final_memo": "={{$json.choices[0].message.content}}",
+            "recommendation": "={{$json.choices[0].message.content.includes('APPROVE') ? 'APPROVE' : ($json.choices[0].message.content.includes('CONDITIONAL') ? 'CONDITIONAL' : 'REJECT')}}",
+            "analyzed_at": "={{new Date().toISOString()}}",
+            "analyst": "AI Multi-Agent System"
+          }
+        },
+        "options": {}
+      },
+      "id": "supabase-save-analysis",
+      "name": "Supabase: Save Complete Analysis",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [2660, 380],
+      "credentials": {
+        "supabaseApi": {
+          "id": "supabase-creds",
+          "name": "Supabase BPKH Limited"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=https://waha-qikiufjwa2nh.cgk-max.sumopod.my.id/api/sendText",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-Api-Key",
+              "value": "=5rMMXHU07G5F0cqj5QBcVjFeLCIdSWLI"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "jsonBody": "={\n  \"session\": \"bayan-ai\",\n  \"chatId\": \"{{$node['Parse Extracted Content'].json.whatsappNumber}}\",\n  \"text\": \"📊 *INVESTMENT ANALYSIS COMPLETE*\\n\\n*Deal:* {{$node['Parse Extracted Content'].json.dealName}}\\n*Status:* ✅ Analysis Ready\\n*Processing Time:* {{Math.round((new Date() - new Date($node['Extract Upload Metadata'].json.uploadTimestamp)) / 1000)}} seconds\\n\\n*Recommendation:* {{$node['Supabase: Save Complete Analysis'].json.recommendation}}\\n\\n📄 Full memo available in dashboard.\\n\\n*Next Steps:*\\n- Review by Board of Mudirs\\n- Legal & Compliance sign-off\\n- Shariah Board approval (if required)\\n\\n🔗 View Full Analysis:\\nhttps://dashboard.bpkh-limited.com/investments/{{$node['Supabase: Save Complete Analysis'].json.id}}\"\n}",
+        "options": {}
+      },
+      "id": "whatsapp-notify-uploader",
+      "name": "WhatsApp (WAHA): Notify Uploader",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [2660, 180]
+    },
+    {
+      "parameters": {
+        "url": "=https://waha-qikiufjwa2nh.cgk-max.sumopod.my.id/api/sendText",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-Api-Key",
+              "value": "=5rMMXHU07G5F0cqj5QBcVjFeLCIdSWLI"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "jsonBody": "={\n  \"session\": \"bayan-ai\",\n  \"chatId\": \"966500000001-1234567890@g.us\",\n  \"text\": \"🚀 *NEW INVESTMENT OPPORTUNITY ANALYZED*\\n\\n*Deal:* {{$node['Parse Extracted Content'].json.dealName}}\\n*Uploaded by:* {{$node['Extract Upload Metadata'].json.whatsappNumber}}\\n\\n*AI Recommendation:* {{$node['Supabase: Save Complete Analysis'].json.recommendation}}\\n\\n*Key Highlights:*\\n{{$node['Orchestrator: Generate Investment Memo'].json.choices[0].message.content.substring(0, 400)}}...\\n\\n📊 *Required Approvals:*\\n- [ ] Mudir 1 (CEO)\\n- [ ] Mudir 3 (CFO)\\n- [ ] Legal Division\\n\\n🔗 Full Investment Memo:\\nhttps://dashboard.bpkh-limited.com/investments/{{$node['Supabase: Save Complete Analysis'].json.id}}\\n\\n_Reply with /approve or /reject_\"\n}",
+        "options": {}
+      },
+      "id": "whatsapp-board-alert",
+      "name": "WhatsApp (WAHA): Alert Board of Mudirs Group",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [2880, 380]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"status\": \"success\",\n  \"message\": \"Investment analysis completed\",\n  \"data\": {\n    \"deal_name\": \"{{$node['Parse Extracted Content'].json.dealName}}\",\n    \"recommendation\": \"{{$node['Supabase: Save Complete Analysis'].json.recommendation}}\",\n    \"analysis_id\": \"{{$node['Supabase: Save Complete Analysis'].json.id}}\",\n    \"processing_time_seconds\": {{Math.round((new Date() - new Date($node['Extract Upload Metadata'].json.uploadTimestamp)) / 1000)}},\n    \"dashboard_url\": \"https://dashboard.bpkh-limited.com/investments/{{$node['Supabase: Save Complete Analysis'].json.id}}\"\n  }\n}",
+        "options": {}
+      },
+      "id": "webhook-response",
+      "name": "Webhook Response",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [2880, 180]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook: Upload Investment Document": {
+      "main": [
+        [
+          {
+            "node": "Extract Upload Metadata",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Upload Metadata": {
+      "main": [
+        [
+          {
+            "node": "Cloudflare R2: Store Original PDF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Cloudflare R2: Store Original PDF": {
+      "main": [
+        [
+          {
+            "node": "Unstructured.io: Extract Text & Tables",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Unstructured.io: Extract Text & Tables": {
+      "main": [
+        [
+          {
+            "node": "Parse Extracted Content",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Extracted Content": {
+      "main": [
+        [
+          {
+            "node": "Supabase: Insert Raw Data",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Groq: Create Embeddings",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Supabase: Insert Raw Data": {
+      "main": [
+        [
+          {
+            "node": "Split to Multi-Agent Analysis",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq: Create Embeddings": {
+      "main": [
+        [
+          {
+            "node": "Supabase: Store Vector Embedding",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Supabase: RAG Query Shariah Database",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Supabase: Store Vector Embedding": {
+      "main": [
+        [
+          {
+            "node": "Split to Multi-Agent Analysis",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split to Multi-Agent Analysis": {
+      "main": [
+        [
+          {
+            "node": "Agent 1: Financial Analysis (Groq)",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Agent 2: Risk Assessment (Groq)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Supabase: RAG Query Shariah Database": {
+      "main": [
+        [
+          {
+            "node": "Agent 3: Shariah Compliance (Groq)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Agent 1: Financial Analysis (Groq)": {
+      "main": [
+        [
+          {
+            "node": "Merge All Agent Outputs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Agent 2: Risk Assessment (Groq)": {
+      "main": [
+        [
+          {
+            "node": "Merge All Agent Outputs",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Agent 3: Shariah Compliance (Groq)": {
+      "main": [
+        [
+          {
+            "node": "Merge All Agent Outputs",
+            "type": "main",
+            "index": 2
+          }
+        ]
+      ]
+    },
+    "Merge All Agent Outputs": {
+      "main": [
+        [
+          {
+            "node": "Orchestrator: Generate Investment Memo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Orchestrator: Generate Investment Memo": {
+      "main": [
+        [
+          {
+            "node": "Supabase: Save Complete Analysis",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Supabase: Save Complete Analysis": {
+      "main": [
+        [
+          {
+            "node": "WhatsApp (WAHA): Notify Uploader",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "WhatsApp (WAHA): Alert Board of Mudirs Group",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "WhatsApp (WAHA): Notify Uploader": {
+      "main": [
+        [
+          {
+            "node": "Webhook Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "WhatsApp (WAHA): Alert Board of Mudirs Group": {
+      "main": [
+        [
+          {
+            "node": "Webhook Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "bpkh-invest-dd-whatsapp-v1.0",
+  "id": "investment-due-diligence-whatsapp",
+  "meta": {
+    "instanceId": "bpkh-limited-prod"
+  },
+  "tags": [
+    {
+      "name": "BPKH Limited",
+      "id": "tag-bpkh"
+    },
+    {
+      "name": "Investment",
+      "id": "tag-investment"
+    },
+    {
+      "name": "WhatsApp",
+      "id": "tag-whatsapp"
+    }
+  ]
+}

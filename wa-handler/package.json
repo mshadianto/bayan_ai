@@ -1,0 +1,16 @@
+{
+  "name": "bpkh-wa-handler",
+  "version": "1.0.0",
+  "description": "WhatsApp message handler for BPKH",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "axios": "^1.6.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

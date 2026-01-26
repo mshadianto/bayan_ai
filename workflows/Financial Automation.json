@@ -1,0 +1,857 @@
+{
+  "name": "BPKH Limited - Financial Operations Autopilot (WhatsApp)",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 9 * * *"
+            }
+          ]
+        }
+      },
+      "id": "cron-daily-treasury",
+      "name": "CRON: Daily 9 AM Saudi Time",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "operation": "getAll",
+        "filters": {
+          "query": "from:bank@alrajhi.com OR from:statements@samba.com subject:daily statement"
+        },
+        "options": {
+          "attachments": true
+        }
+      },
+      "id": "gmail-fetch-statements",
+      "name": "Gmail: Fetch Bank Statements",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2,
+      "position": [460, 300],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "gmail-oauth-cred",
+          "name": "BPKH Limited Gmail"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "functionCode": "// Parse bank statement (assuming CSV format)\nconst items = [];\n\nfor (const item of $input.all()) {\n  if (!item.binary || !item.binary.data) continue;\n  \n  const csvData = Buffer.from(item.binary.data.data, 'base64').toString('utf-8');\n  const lines = csvData.split('\\n');\n  \n  // Skip header\n  for (let i = 1; i < lines.length; i++) {\n    const columns = lines[i].split(',');\n    if (columns.length < 5) continue;\n    \n    items.push({\n      json: {\n        transaction_date: columns[0],\n        description: columns[1],\n        debit: parseFloat(columns[2]) || 0,\n        credit: parseFloat(columns[3]) || 0,\n        balance: parseFloat(columns[4]) || 0,\n        bank: item.json.from.includes('alrajhi') ? 'Al Rajhi Bank' : 'Samba Bank',\n        currency: 'SAR',\n        imported_at: new Date().toISOString()\n      }\n    });\n  }\n}\n\nreturn items;"
+      },
+      "id": "parse-bank-transactions",
+      "name": "Parse Bank Transactions",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "operation": "insert",
+        "tableId": "bank_transactions",
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "matchingColumns": [],
+          "schema": []
+        },
+        "options": {
+          "returning": "*"
+        }
+      },
+      "id": "supabase-insert-transactions",
+      "name": "Supabase: Insert Transactions",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [900, 300],
+      "credentials": {
+        "supabaseApi": {
+          "id": "supabase-creds",
+          "name": "Supabase BPKH Limited"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT \n  SUM(credit - debit) as net_cashflow,\n  SUM(credit) as total_inflow,\n  SUM(debit) as total_outflow,\n  COUNT(*) as transaction_count,\n  (SELECT balance FROM bank_transactions ORDER BY transaction_date DESC LIMIT 1) as current_balance\nFROM bank_transactions\nWHERE transaction_date = CURRENT_DATE;",
+        "options": {}
+      },
+      "id": "supabase-daily-summary",
+      "name": "Supabase: Calculate Daily Summary",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [1120, 300],
+      "credentials": {
+        "supabaseApi": {
+          "id": "supabase-creds",
+          "name": "Supabase BPKH Limited"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT \n  DATE(transaction_date) as date,\n  SUM(credit - debit) as daily_cashflow\nFROM bank_transactions\nWHERE transaction_date >= CURRENT_DATE - INTERVAL '30 days'\nGROUP BY DATE(transaction_date)\nORDER BY date DESC;",
+        "options": {}
+      },
+      "id": "supabase-historical-data",
+      "name": "Supabase: Get 30 Days Historical Data",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [1120, 500],
+      "credentials": {
+        "supabaseApi": {
+          "id": "supabase-creds",
+          "name": "Supabase BPKH Limited"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://api.groq.com/openai/v1/chat/completions",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "groqApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer ={{$credentials.apiKey}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "jsonBody": "={\n  \"model\": \"llama-3.3-70b-versatile\",\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"You are a treasury analyst for BPKH Limited. Analyze cashflow patterns and provide forecasts. Respond in bilingual format (Arabic/Indonesian).\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"Analyze cashflow and provide 7-day forecast:\\n\\n**Today's Summary:**\\nNet Cashflow: {{$node['Supabase: Calculate Daily Summary'].json[0].net_cashflow}} SAR\\nTotal Inflow: {{$node['Supabase: Calculate Daily Summary'].json[0].total_inflow}} SAR\\nTotal Outflow: {{$node['Supabase: Calculate Daily Summary'].json[0].total_outflow}} SAR\\nCurrent Balance: {{$node['Supabase: Calculate Daily Summary'].json[0].current_balance}} SAR\\n\\n**30-Day Historical Pattern:**\\n{{JSON.stringify($node['Supabase: Get 30 Days Historical Data'].json, null, 2)}}\\n\\nProvide:\\n1. Cashflow trend analysis\\n2. 7-day forecast (optimistic/realistic/conservative)\\n3. Liquidity risk assessment\\n4. Recommended actions (if balance surplus > 500k SAR suggest sukuk investment)\\n5. Alert if balance < 100k SAR (minimum operating threshold)\\n\\nFormat: JSON with fields {trend_summary, forecast_7day, risk_level, recommendations, alerts}\"\n    }\n  ],\n  \"temperature\": 0.3,\n  \"max_tokens\": 1500,\n  \"response_format\": { \"type\": \"json_object\" }\n}",
+        "options": {}
+      },
+      "id": "groq-cashflow-forecast",
+      "name": "Groq: Cashflow Forecast & Analysis",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [1340, 400],
+      "credentials": {
+        "groqApi": {
+          "id": "groq-api-cred",
+          "name": "Groq API Key"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "functionCode": "const analysis = JSON.parse($json.choices[0].message.content);\nconst currentBalance = $node['Supabase: Calculate Daily Summary'].json[0].current_balance;\n\nlet actionRequired = false;\nlet actionType = '';\nlet actionDetails = '';\n\n// Check for surplus investment opportunity\nif (currentBalance > 500000) {\n  actionRequired = true;\n  actionType = 'INVESTMENT_OPPORTUNITY';\n  actionDetails = `Surplus: ${currentBalance.toLocaleString()} SAR. Recommend sukuk investment.`;\n}\n\n// Check for liquidity warning\nif (currentBalance < 100000) {\n  actionRequired = true;\n  actionType = 'LIQUIDITY_WARNING';\n  actionDetails = `Low balance: ${currentBalance.toLocaleString()} SAR. Immediate action required.`;\n}\n\nreturn {\n  json: {\n    ...analysis,\n    current_balance: currentBalance,\n    action_required: actionRequired,\n    action_type: actionType,\n    action_details: actionDetails,\n    analyzed_at: new Date().toISOString()\n  }\n};"
+      },
+      "id": "treasury-decision-logic",
+      "name": "Treasury Decision Logic",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [1560, 400]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json.action_required}}",
+              "value2": "true"
+            }
+          ]
+        }
+      },
+      "id": "if-action-required",
+      "name": "IF: Action Required?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [1780, 400]
+    },
+    {
+      "parameters": {
+        "url": "=https://waha-qikiufjwa2nh.cgk-max.sumopod.my.id/api/sendText",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-Api-Key",
+              "value": "=5rMMXHU07G5F0cqj5QBcVjFeLCIdSWLI"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "jsonBody": "={\n  \"session\": \"bayan-ai\",\n  \"chatId\": \"966500000003@c.us\",\n  \"text\": \"🚨 *TREASURY ALERT - CFO*\\n\\n*Type:* {{$json.action_type}}\\n*Current Balance:* {{$json.current_balance.toLocaleString()}} SAR\\n\\n*Details:*\\n{{$json.action_details}}\\n\\n*AI Analysis:*\\n{{$json.trend_summary}}\\n\\n*7-Day Forecast:*\\n- Optimistic: {{$json.forecast_7day.optimistic}} SAR\\n- Realistic: {{$json.forecast_7day.realistic}} SAR\\n- Conservative: {{$json.forecast_7day.conservative}} SAR\\n\\n*Risk Level:* {{$json.risk_level}}\\n\\n*Recommendations:*\\n{{$json.recommendations.join('\\n- ')}}\\n\\n⏰ *Immediate Response Required*\\n\\n_Reply with /treasury_approve or /treasury_review_\"\n}",
+        "options": {}
+      },
+      "id": "whatsapp-alert-cfo",
+      "name": "WhatsApp (WAHA): Alert CFO (Mudir 3)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [2000, 300]
+    },
+    {
+      "parameters": {
+        "operation": "insert",
+        "tableId": "treasury_analysis",
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "matchingColumns": [],
+          "schema": []
+        },
+        "options": {}
+      },
+      "id": "supabase-log-analysis",
+      "name": "Supabase: Log Treasury Analysis",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [2000, 500],
+      "credentials": {
+        "supabaseApi": {
+          "id": "supabase-creds",
+          "name": "Supabase BPKH Limited"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "invoice-upload",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-invoice-upload",
+      "name": "Webhook: Invoice Upload",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [240, 800],
+      "webhookId": "bpkh-invoice-001"
+    },
+    {
+      "parameters": {
+        "url": "https://api.unstructured.io/general/v0/general",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "unstructuredApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "unstructured-api-key",
+              "value": "={{$credentials.apiKey}}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "files",
+              "value": "={{$binary.data}}"
+            },
+            {
+              "name": "strategy",
+              "value": "hi_res"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "unstructured-ocr-invoice",
+      "name": "Unstructured.io: OCR Invoice",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [460, 800],
+      "credentials": {
+        "unstructuredApi": {
+          "id": "unstructured-api-cred",
+          "name": "Unstructured API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://api.groq.com/openai/v1/chat/completions",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "groqApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer ={{$credentials.apiKey}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "jsonBody": "={\n  \"model\": \"llama-3.3-70b-versatile\",\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"You are an accounting AI extracting invoice data. Return only valid JSON.\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"Extract invoice information from this text:\\n\\n{{$json.elements.map(e => e.text).join('\\\\n')}}\\n\\nReturn JSON with fields: {vendor_name, invoice_number, invoice_date, due_date, total_amount, currency, line_items: [{description, quantity, unit_price, amount, gl_code_suggestion}], tax_amount, payment_terms}\"\n    }\n  ],\n  \"temperature\": 0.1,\n  \"max_tokens\": 1000,\n  \"response_format\": { \"type\": \"json_object\" }\n}",
+        "options": {}
+      },
+      "id": "groq-extract-invoice-data",
+      "name": "Groq: Extract Invoice Data",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [680, 800],
+      "credentials": {
+        "groqApi": {
+          "id": "groq-api-cred",
+          "name": "Groq API Key"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "=SELECT budget_available FROM divisional_budgets \nWHERE gl_code = '{{JSON.parse($json.choices[0].message.content).line_items[0].gl_code_suggestion}}' \nAND period = DATE_TRUNC('month', CURRENT_DATE);",
+        "options": {}
+      },
+      "id": "supabase-check-budget",
+      "name": "Supabase: Validate Against Budget",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [900, 800],
+      "credentials": {
+        "supabaseApi": {
+          "id": "supabase-creds",
+          "name": "Supabase BPKH Limited"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "functionCode": "const invoiceData = JSON.parse($node['Groq: Extract Invoice Data'].json.choices[0].message.content);\nconst budgetAvailable = $node['Supabase: Validate Against Budget'].json[0]?.budget_available || 0;\nconst whatsappNumber = $node['Webhook: Invoice Upload'].json.from;\n\nconst totalAmount = parseFloat(invoiceData.total_amount);\n\n// Approval matrix for BPKH Limited\nlet approvalRequired = false;\nlet approverPhone = '';\n\nif (totalAmount > 100000) {\n  approvalRequired = true;\n  approverPhone = '966500000003@c.us'; // CFO (Mudir 3)\n} else if (totalAmount > 50000) {\n  approvalRequired = true;\n  approverPhone = '966500000004@c.us'; // Finance Manager\n}\n\nconst budgetCheck = totalAmount <= budgetAvailable;\n\nreturn {\n  json: {\n    ...invoiceData,\n    whatsapp_uploader: whatsappNumber,\n    budget_available: budgetAvailable,\n    budget_check_passed: budgetCheck,\n    approval_required: approvalRequired,\n    approver_phone: approverPhone,\n    processing_status: budgetCheck ? 'VALIDATED' : 'BUDGET_EXCEEDED',\n    validated_at: new Date().toISOString()\n  }\n};"
+      },
+      "id": "invoice-validation-logic",
+      "name": "Invoice Validation Logic",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [1120, 800]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json.approval_required}}",
+              "value2": "true"
+            }
+          ]
+        }
+      },
+      "id": "if-approval-required",
+      "name": "IF: Approval Required?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [1340, 800]
+    },
+    {
+      "parameters": {
+        "url": "=https://waha-qikiufjwa2nh.cgk-max.sumopod.my.id/api/sendText",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-Api-Key",
+              "value": "=5rMMXHU07G5F0cqj5QBcVjFeLCIdSWLI"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "jsonBody": "={\n  \"session\": \"bayan-ai\",\n  \"chatId\": \"{{$json.approver_phone}}\",\n  \"text\": \"💰 *INVOICE APPROVAL REQUEST*\\n\\n*Vendor:* {{$json.vendor_name}}\\n*Invoice #:* {{$json.invoice_number}}\\n*Amount:* {{$json.total_amount}} {{$json.currency}}\\n*Due Date:* {{$json.due_date}}\\n\\n*Budget Status:*\\n- Available: {{$json.budget_available}} SAR\\n- Status: {{$json.budget_check_passed ? '✅ Within Budget' : '⚠️ Over Budget'}}\\n\\n*Line Items:*\\n{{$json.line_items.map(item => '- ' + item.description + ': ' + item.amount + ' ' + $json.currency).join('\\n')}}\\n\\n*Approver Required*\\n\\n*Actions:*\\nReply:\\n/approve_{{$json.invoice_number}}\\n/reject_{{$json.invoice_number}}\\n/info_{{$json.invoice_number}}\"\n}",
+        "options": {}
+      },
+      "id": "whatsapp-request-approval",
+      "name": "WhatsApp (WAHA): Request Approval",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [1560, 700]
+    },
+    {
+      "parameters": {
+        "operation": "insert",
+        "tableId": "journal_entries",
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "entry_date": "={{new Date().toISOString()}}",
+            "description": "={{$json.vendor_name}} - {{$json.invoice_number}}",
+            "debit_account": "={{$json.line_items[0].gl_code_suggestion}}",
+            "debit_amount": "={{$json.total_amount}}",
+            "credit_account": "2100",
+            "credit_amount": "={{$json.total_amount}}",
+            "currency": "={{$json.currency}}",
+            "reference": "={{$json.invoice_number}}",
+            "status": "POSTED",
+            "created_by": "AI Accounting System"
+          }
+        },
+        "options": {}
+      },
+      "id": "supabase-auto-post-journal",
+      "name": "Supabase: Auto-Post Journal Entry",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [1560, 900],
+      "credentials": {
+        "supabaseApi": {
+          "id": "supabase-creds",
+          "name": "Supabase BPKH Limited"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=https://waha-qikiufjwa2nh.cgk-max.sumopod.my.id/api/sendText",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-Api-Key",
+              "value": "=5rMMXHU07G5F0cqj5QBcVjFeLCIdSWLI"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "jsonBody": "={\n  \"session\": \"bayan-ai\",\n  \"chatId\": \"{{$json.whatsapp_uploader}}\",\n  \"text\": \"✅ *INVOICE PROCESSED*\\n\\n*Invoice:* {{$json.invoice_number}}\\n*Vendor:* {{$json.vendor_name}}\\n*Amount:* {{$json.total_amount}} {{$json.currency}}\\n\\n*Status:* {{$json.approval_required ? 'Pending Approval' : 'Auto-Posted to Ledger'}}\\n\\n*Journal Entry:* {{$node['Supabase: Auto-Post Journal Entry'].json.id || 'Awaiting approval'}}\\n\\n📊 View in Dashboard:\\nhttps://dashboard.bpkh-limited.com/accounting/invoices/{{$json.invoice_number}}\"\n}",
+        "options": {}
+      },
+      "id": "whatsapp-confirm-processing",
+      "name": "WhatsApp (WAHA): Confirm to Uploader",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [1780, 800]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"status\": \"success\",\n  \"message\": \"Invoice processed\",\n  \"data\": {\n    \"invoice_number\": \"{{$json.invoice_number}}\",\n    \"amount\": {{$json.total_amount}},\n    \"approval_required\": {{$json.approval_required}},\n    \"journal_entry_id\": \"{{$node['Supabase: Auto-Post Journal Entry'].json.id || 'pending'}}\"\n  }\n}",
+        "options": {}
+      },
+      "id": "webhook-response-invoice",
+      "name": "Webhook Response",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [2000, 800]
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 0 1 * *"
+            }
+          ]
+        }
+      },
+      "id": "cron-monthly-close",
+      "name": "CRON: Monthly Financial Close",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [240, 1200]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "-- Trial Balance\nSELECT \n  gl_code,\n  account_name,\n  SUM(debit_amount) as total_debit,\n  SUM(credit_amount) as total_credit,\n  SUM(debit_amount - credit_amount) as balance\nFROM journal_entries\nWHERE DATE_TRUNC('month', entry_date) = DATE_TRUNC('month', CURRENT_DATE - INTERVAL '1 month')\n  AND status = 'POSTED'\nGROUP BY gl_code, account_name\nORDER BY gl_code;",
+        "options": {}
+      },
+      "id": "supabase-trial-balance",
+      "name": "Supabase: Generate Trial Balance",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [460, 1200],
+      "credentials": {
+        "supabaseApi": {
+          "id": "supabase-creds",
+          "name": "Supabase BPKH Limited"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://api.groq.com/openai/v1/chat/completions",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "groqApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer ={{$credentials.apiKey}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "jsonBody": "={\n  \"model\": \"llama-3.3-70b-versatile\",\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"You are CFO of BPKH Limited. Generate monthly financial statements in bilingual format (Arabic/Indonesian) following IFRS and Saudi GAAP.\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"Generate Financial Statements for {{new Date(new Date().setMonth(new Date().getMonth()-1)).toLocaleDateString('en-US', {month: 'long', year: 'numeric'})}}:\\n\\n**Trial Balance:**\\n{{JSON.stringify($json, null, 2)}}\\n\\nCreate:\\n1. Balance Sheet (Statement of Financial Position)\\n2. Income Statement (Profit & Loss)\\n3. Cash Flow Statement\\n4. Key Financial Ratios\\n5. Management Commentary\\n\\nFormat as professional financial report with bilingual headers.\"\n    }\n  ],\n  \"temperature\": 0.2,\n  \"max_tokens\": 3000\n}",
+        "options": {}
+      },
+      "id": "groq-generate-financials",
+      "name": "Groq: Generate Financial Statements",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [680, 1200],
+      "credentials": {
+        "groqApi": {
+          "id": "groq-api-cred",
+          "name": "Groq API Key"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=https://waha-qikiufjwa2nh.cgk-max.sumopod.my.id/api/sendText",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-Api-Key",
+              "value": "=5rMMXHU07G5F0cqj5QBcVjFeLCIdSWLI"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "json",
+        "jsonBody": "={\n  \"session\": \"bayan-ai\",\n  \"chatId\": \"966500000001-1234567890@g.us\",\n  \"text\": \"📊 *MONTHLY FINANCIAL CLOSE COMPLETE*\\n\\n*Period:* {{new Date(new Date().setMonth(new Date().getMonth()-1)).toLocaleDateString('en-US', {month: 'long', year: 'numeric'})}}\\n\\n*Financial Statements Ready:*\\n✅ Balance Sheet\\n✅ Income Statement\\n✅ Cash Flow Statement\\n✅ Financial Ratios\\n\\n*Closing Time:* {{Math.round((new Date() - new Date($node['CRON: Monthly Financial Close'].json.timestamp)) / 1000 / 60)}} minutes\\n\\n📄 Reports available in dashboard\\n\\n*Required Actions:*\\n- CFO Review & Approve\\n- Accounting Head verification\\n- Audit Committee monthly review\\n\\n🔗 https://dashboard.bpkh-limited.com/finance/monthly-close\"\n}",
+        "options": {}
+      },
+      "id": "whatsapp-monthly-close-alert",
+      "name": "WhatsApp (WAHA): Alert Financial Close",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [900, 1200]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "CRON: Daily 9 AM Saudi Time": {
+      "main": [
+        [
+          {
+            "node": "Gmail: Fetch Bank Statements",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gmail: Fetch Bank Statements": {
+      "main": [
+        [
+          {
+            "node": "Parse Bank Transactions",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Bank Transactions": {
+      "main": [
+        [
+          {
+            "node": "Supabase: Insert Transactions",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Supabase: Insert Transactions": {
+      "main": [
+        [
+          {
+            "node": "Supabase: Calculate Daily Summary",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Supabase: Get 30 Days Historical Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Supabase: Calculate Daily Summary": {
+      "main": [
+        [
+          {
+            "node": "Groq: Cashflow Forecast & Analysis",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Supabase: Get 30 Days Historical Data": {
+      "main": [
+        [
+          {
+            "node": "Groq: Cashflow Forecast & Analysis",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq: Cashflow Forecast & Analysis": {
+      "main": [
+        [
+          {
+            "node": "Treasury Decision Logic",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Treasury Decision Logic": {
+      "main": [
+        [
+          {
+            "node": "IF: Action Required?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF: Action Required?": {
+      "main": [
+        [
+          {
+            "node": "WhatsApp (WAHA): Alert CFO (Mudir 3)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Supabase: Log Treasury Analysis",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "WhatsApp (WAHA): Alert CFO (Mudir 3)": {
+      "main": [
+        [
+          {
+            "node": "Supabase: Log Treasury Analysis",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook: Invoice Upload": {
+      "main": [
+        [
+          {
+            "node": "Unstructured.io: OCR Invoice",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Unstructured.io: OCR Invoice": {
+      "main": [
+        [
+          {
+            "node": "Groq: Extract Invoice Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq: Extract Invoice Data": {
+      "main": [
+        [
+          {
+            "node": "Supabase: Validate Against Budget",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Supabase: Validate Against Budget": {
+      "main": [
+        [
+          {
+            "node": "Invoice Validation Logic",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Invoice Validation Logic": {
+      "main": [
+        [
+          {
+            "node": "IF: Approval Required?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF: Approval Required?": {
+      "main": [
+        [
+          {
+            "node": "WhatsApp (WAHA): Request Approval",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Supabase: Auto-Post Journal Entry",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "WhatsApp (WAHA): Request Approval": {
+      "main": [
+        [
+          {
+            "node": "WhatsApp (WAHA): Confirm to Uploader",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Supabase: Auto-Post Journal Entry": {
+      "main": [
+        [
+          {
+            "node": "WhatsApp (WAHA): Confirm to Uploader",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "WhatsApp (WAHA): Confirm to Uploader": {
+      "main": [
+        [
+          {
+            "node": "Webhook Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "CRON: Monthly Financial Close": {
+      "main": [
+        [
+          {
+            "node": "Supabase: Generate Trial Balance",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Supabase: Generate Trial Balance": {
+      "main": [
+        [
+          {
+            "node": "Groq: Generate Financial Statements",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq: Generate Financial Statements": {
+      "main": [
+        [
+          {
+            "node": "WhatsApp (WAHA): Alert Financial Close",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "saveExecutionProgress": true,
+    "saveManualExecutions": true,
+    "timezone": "Asia/Riyadh"
+  },
+  "versionId": "bpkh-finance-whatsapp-v1.0",
+  "id": "financial-operations-whatsapp",
+  "meta": {
+    "instanceId": "bpkh-limited-prod"
+  },
+  "tags": [
+    {
+      "name": "BPKH Limited",
+      "id": "tag-bpkh"
+    },
+    {
+      "name": "Finance",
+      "id": "tag-finance"
+    },
+    {
+      "name": "WhatsApp",
+      "id": "tag-whatsapp"
+    }
+  ]
+}

@@ -1,0 +1,447 @@
+{
+  "name": "Dashboard API Endpoints",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "GET",
+        "path": "dashboard-data",
+        "responseMode": "responseNode",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              { "name": "Access-Control-Allow-Origin", "value": "*" },
+              { "name": "Access-Control-Allow-Methods", "value": "GET, POST, OPTIONS" },
+              { "name": "Access-Control-Allow-Headers", "value": "Content-Type, Authorization" }
+            ]
+          }
+        }
+      },
+      "id": "dashboard-webhook",
+      "name": "Dashboard Data Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [240, 300],
+      "webhookId": "dashboard-data"
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "investment_analysis",
+        "returnAll": false,
+        "limit": 50,
+        "filterType": "string",
+        "filterString": "order=created_at.desc"
+      },
+      "id": "get-investments",
+      "name": "Get Investments",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [480, 180],
+      "credentials": { "supabaseApi": { "id": "supabase-creds", "name": "Supabase account" } }
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "treasury_analysis",
+        "returnAll": false,
+        "limit": 30,
+        "filterType": "string",
+        "filterString": "order=created_at.desc"
+      },
+      "id": "get-treasury",
+      "name": "Get Treasury Data",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [480, 300],
+      "credentials": { "supabaseApi": { "id": "supabase-creds", "name": "Supabase account" } }
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "journal_entries",
+        "returnAll": false,
+        "limit": 100,
+        "filterType": "string",
+        "filterString": "order=created_at.desc"
+      },
+      "id": "get-invoices",
+      "name": "Get Journal Entries",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [480, 420],
+      "credentials": { "supabaseApi": { "id": "supabase-creds", "name": "Supabase account" } }
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineAll",
+        "options": {}
+      },
+      "id": "merge-data",
+      "name": "Merge All Data",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2.1,
+      "position": [720, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Combine all data into dashboard response\nconst items = $input.all();\n\nconst investments = items.filter(i => i.json.recommendation !== undefined);\nconst treasury = items.filter(i => i.json.current_balance !== undefined);\nconst invoices = items.filter(i => i.json.invoice_number !== undefined);\n\nconst latestTreasury = treasury[0]?.json || {};\n\nreturn {\n  json: {\n    investments: investments.map(i => i.json),\n    treasury: {\n      current_balance: latestTreasury.current_balance || 0,\n      last_updated: latestTreasury.created_at,\n      forecast: latestTreasury.forecast || [],\n      alerts: latestTreasury.alerts || [],\n      history: treasury.map(t => t.json)\n    },\n    invoices: invoices.map(i => i.json),\n    summary: {\n      pending_investments: investments.filter(i => i.json.status === 'pending').length,\n      approved_investments: investments.filter(i => i.json.status === 'approved').length,\n      pending_invoices: invoices.filter(i => i.json.status === 'pending').length,\n      total_invoice_value: invoices.reduce((sum, i) => sum + (i.json.amount || 0), 0)\n    }\n  }\n};"
+      },
+      "id": "format-dashboard",
+      "name": "Format Dashboard Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [940, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify($json) }}",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              { "name": "Access-Control-Allow-Origin", "value": "*" }
+            ]
+          }
+        }
+      },
+      "id": "respond-dashboard",
+      "name": "Respond Dashboard",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [1160, 300]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "approve-invoice",
+        "responseMode": "responseNode",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              { "name": "Access-Control-Allow-Origin", "value": "*" }
+            ]
+          }
+        }
+      },
+      "id": "approve-invoice-webhook",
+      "name": "Approve Invoice Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [240, 520],
+      "webhookId": "approve-invoice"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "journal_entries",
+        "filterType": "string",
+        "filterString": "id=eq.{{ $json.body.id }}",
+        "fieldsToSend": {
+          "fieldValues": [
+            { "fieldName": "status", "fieldValue": "approved" },
+            { "fieldName": "approved_by", "fieldValue": "={{ $json.body.approved_by || 'Dashboard User' }}" },
+            { "fieldName": "approved_at", "fieldValue": "={{ new Date().toISOString() }}" }
+          ]
+        }
+      },
+      "id": "update-invoice-approved",
+      "name": "Update Invoice Approved",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [480, 520],
+      "credentials": { "supabaseApi": { "id": "supabase-creds", "name": "Supabase account" } }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ success: true, message: 'Invoice approved successfully' }) }}"
+      },
+      "id": "respond-approve-invoice",
+      "name": "Respond Approve Invoice",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [720, 520]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "reject-invoice",
+        "responseMode": "responseNode",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              { "name": "Access-Control-Allow-Origin", "value": "*" }
+            ]
+          }
+        }
+      },
+      "id": "reject-invoice-webhook",
+      "name": "Reject Invoice Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [240, 640],
+      "webhookId": "reject-invoice"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "journal_entries",
+        "filterType": "string",
+        "filterString": "id=eq.{{ $json.body.id }}",
+        "fieldsToSend": {
+          "fieldValues": [
+            { "fieldName": "status", "fieldValue": "rejected" },
+            { "fieldName": "rejected_by", "fieldValue": "={{ $json.body.rejected_by || 'Dashboard User' }}" },
+            { "fieldName": "rejected_at", "fieldValue": "={{ new Date().toISOString() }}" },
+            { "fieldName": "rejection_reason", "fieldValue": "={{ $json.body.reason || 'No reason provided' }}" }
+          ]
+        }
+      },
+      "id": "update-invoice-rejected",
+      "name": "Update Invoice Rejected",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [480, 640],
+      "credentials": { "supabaseApi": { "id": "supabase-creds", "name": "Supabase account" } }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ success: true, message: 'Invoice rejected successfully' }) }}"
+      },
+      "id": "respond-reject-invoice",
+      "name": "Respond Reject Invoice",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [720, 640]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "approve-investment",
+        "responseMode": "responseNode",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              { "name": "Access-Control-Allow-Origin", "value": "*" }
+            ]
+          }
+        }
+      },
+      "id": "approve-investment-webhook",
+      "name": "Approve Investment Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [240, 760],
+      "webhookId": "approve-investment"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "investment_analysis",
+        "filterType": "string",
+        "filterString": "id=eq.{{ $json.body.id }}",
+        "fieldsToSend": {
+          "fieldValues": [
+            { "fieldName": "status", "fieldValue": "approved" },
+            { "fieldName": "approved_by", "fieldValue": "={{ $json.body.approved_by || 'Dashboard User' }}" },
+            { "fieldName": "approved_at", "fieldValue": "={{ new Date().toISOString() }}" }
+          ]
+        }
+      },
+      "id": "update-investment-approved",
+      "name": "Update Investment Approved",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [480, 760],
+      "credentials": { "supabaseApi": { "id": "supabase-creds", "name": "Supabase account" } }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ success: true, message: 'Investment approved successfully' }) }}"
+      },
+      "id": "respond-approve-investment",
+      "name": "Respond Approve Investment",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [720, 760]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "reject-investment",
+        "responseMode": "responseNode",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              { "name": "Access-Control-Allow-Origin", "value": "*" }
+            ]
+          }
+        }
+      },
+      "id": "reject-investment-webhook",
+      "name": "Reject Investment Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [240, 880],
+      "webhookId": "reject-investment"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "investment_analysis",
+        "filterType": "string",
+        "filterString": "id=eq.{{ $json.body.id }}",
+        "fieldsToSend": {
+          "fieldValues": [
+            { "fieldName": "status", "fieldValue": "rejected" },
+            { "fieldName": "rejected_by", "fieldValue": "={{ $json.body.rejected_by || 'Dashboard User' }}" },
+            { "fieldName": "rejected_at", "fieldValue": "={{ new Date().toISOString() }}" },
+            { "fieldName": "rejection_reason", "fieldValue": "={{ $json.body.reason || 'No reason provided' }}" }
+          ]
+        }
+      },
+      "id": "update-investment-rejected",
+      "name": "Update Investment Rejected",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [480, 880],
+      "credentials": { "supabaseApi": { "id": "supabase-creds", "name": "Supabase account" } }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ success: true, message: 'Investment rejected successfully' }) }}"
+      },
+      "id": "respond-reject-investment",
+      "name": "Respond Reject Investment",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [720, 880]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "send-whatsapp",
+        "responseMode": "responseNode",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              { "name": "Access-Control-Allow-Origin", "value": "*" }
+            ]
+          }
+        }
+      },
+      "id": "send-whatsapp-webhook",
+      "name": "Send WhatsApp Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [240, 1000],
+      "webhookId": "send-whatsapp"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://waha-qikiufjwa2nh.cgk-max.sumopod.my.id/api/sendText",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            { "name": "chatId", "value": "={{ $json.body.chatId }}" },
+            { "name": "text", "value": "={{ $json.body.message }}" },
+            { "name": "session", "value": "=bayan-ai" }
+          ]
+        }
+      },
+      "id": "send-whatsapp-message",
+      "name": "Send WhatsApp Message",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [480, 1000],
+      "credentials": { "httpHeaderAuth": { "id": "waha-auth", "name": "WAHA API Key" } }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ success: true, message: 'WhatsApp message sent' }) }}"
+      },
+      "id": "respond-whatsapp",
+      "name": "Respond WhatsApp",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [720, 1000]
+    }
+  ],
+  "connections": {
+    "Dashboard Data Webhook": {
+      "main": [
+        [
+          { "node": "Get Investments", "type": "main", "index": 0 },
+          { "node": "Get Treasury Data", "type": "main", "index": 0 },
+          { "node": "Get Journal Entries", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Get Investments": {
+      "main": [[{ "node": "Merge All Data", "type": "main", "index": 0 }]]
+    },
+    "Get Treasury Data": {
+      "main": [[{ "node": "Merge All Data", "type": "main", "index": 0 }]]
+    },
+    "Get Journal Entries": {
+      "main": [[{ "node": "Merge All Data", "type": "main", "index": 0 }]]
+    },
+    "Merge All Data": {
+      "main": [[{ "node": "Format Dashboard Response", "type": "main", "index": 0 }]]
+    },
+    "Format Dashboard Response": {
+      "main": [[{ "node": "Respond Dashboard", "type": "main", "index": 0 }]]
+    },
+    "Approve Invoice Webhook": {
+      "main": [[{ "node": "Update Invoice Approved", "type": "main", "index": 0 }]]
+    },
+    "Update Invoice Approved": {
+      "main": [[{ "node": "Respond Approve Invoice", "type": "main", "index": 0 }]]
+    },
+    "Reject Invoice Webhook": {
+      "main": [[{ "node": "Update Invoice Rejected", "type": "main", "index": 0 }]]
+    },
+    "Update Invoice Rejected": {
+      "main": [[{ "node": "Respond Reject Invoice", "type": "main", "index": 0 }]]
+    },
+    "Approve Investment Webhook": {
+      "main": [[{ "node": "Update Investment Approved", "type": "main", "index": 0 }]]
+    },
+    "Update Investment Approved": {
+      "main": [[{ "node": "Respond Approve Investment", "type": "main", "index": 0 }]]
+    },
+    "Reject Investment Webhook": {
+      "main": [[{ "node": "Update Investment Rejected", "type": "main", "index": 0 }]]
+    },
+    "Update Investment Rejected": {
+      "main": [[{ "node": "Respond Reject Investment", "type": "main", "index": 0 }]]
+    },
+    "Send WhatsApp Webhook": {
+      "main": [[{ "node": "Send WhatsApp Message", "type": "main", "index": 0 }]]
+    },
+    "Send WhatsApp Message": {
+      "main": [[{ "node": "Respond WhatsApp", "type": "main", "index": 0 }]]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "1",
+  "meta": {
+    "instanceId": "bpkh-dashboard-api"
+  },
+  "tags": [
+    { "name": "Dashboard" },
+    { "name": "API" },
+    { "name": "BPKH" }
+  ]
+}

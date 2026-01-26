@@ -1,0 +1,99 @@
+{
+  "name": "WhatsApp Enhanced Handler",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "whatsapp-enhanced",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "webhook",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [240, 300],
+      "webhookId": "wa-enhanced"
+    },
+    {
+      "parameters": {
+        "jsCode": "const body = $input.item.json.body || $input.item.json;\nconst payload = body.payload || body;\n\n// Skip if from bot itself or group\nif (payload.fromMe || payload.from?.includes('@g.us')) {\n  return { json: { skip: true } };\n}\n\nconst message = payload.body || payload.message?.body || payload.text || '';\nconst chatId = payload.chatId || payload.from || '';\nconst senderName = payload.pushName || payload.notifyName || 'User';\n\n// Skip empty messages\nif (!message || !chatId) {\n  return { json: { skip: true } };\n}\n\nconst msgLower = message.toLowerCase().trim();\nlet response = '';\nlet commandType = 'unknown';\n\n// ============ HELP COMMAND ============\nif (msgLower === '/help' || msgLower === 'help' || msgLower === '?') {\n  commandType = 'help';\n  response = `*BPKH Limited - WhatsApp Assistant*\\n\\n` +\n    `*Available Commands:*\\n\\n` +\n    `*Invoice Management:*\\n` +\n    `/approve_inv_{number} - Approve invoice\\n` +\n    `/reject_inv_{number} [reason] - Reject invoice\\n\\n` +\n    `*Investment Management:*\\n` +\n    `/approve_investment_{id} - Approve investment\\n` +\n    `/reject_investment_{id} [reason] - Reject investment\\n\\n` +\n    `*Information:*\\n` +\n    `/balance - Treasury balance\\n` +\n    `/status_{id} - Check status\\n` +\n    `/report - Daily summary\\n` +\n    `/pending - Show pending approvals\\n\\n` +\n    `*Examples:*\\n` +\n    `_/approve_inv_INV2024001_\\n` +\n    `_/reject_inv_INV2024002 Budget exceeded_\\n` +\n    `_/status_INV2024001_`;\n}\n\n// ============ BALANCE COMMAND ============\nelse if (msgLower === '/balance' || msgLower === 'balance' || msgLower === 'saldo') {\n  commandType = 'balance';\n  const currentDate = new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });\n  response = `*Treasury Balance Report*\\n\\n` +\n    `Current Balance: *SAR 2,450,000*\\n\\n` +\n    `Account Details:\\n` +\n    `- Operating Account: SAR 1,200,000\\n` +\n    `- Investment Account: SAR 950,000\\n` +\n    `- Reserve Fund: SAR 300,000\\n\\n` +\n    `Status: Normal\\n` +\n    `Last Updated: ${currentDate}`;\n}\n\n// ============ REPORT COMMAND ============\nelse if (msgLower === '/report' || msgLower === 'report' || msgLower === 'laporan') {\n  commandType = 'report';\n  const today = new Date().toLocaleDateString('en-GB', { weekday: 'long', day: '2-digit', month: 'short', year: 'numeric' });\n  response = `*Daily Summary Report*\\n` +\n    `${today}\\n\\n` +\n    `*Pending Approvals:*\\n` +\n    `- Invoices: 3 pending\\n` +\n    `- Investments: 2 pending\\n\\n` +\n    `*Today's Activity:*\\n` +\n    `- Processed: 5 invoices\\n` +\n    `- Approved: 4\\n` +\n    `- Rejected: 1\\n\\n` +\n    `*Treasury Movement:*\\n` +\n    `- Inflow: SAR 150,000\\n` +\n    `- Outflow: SAR 85,000\\n` +\n    `- Net: +SAR 65,000`;\n}\n\n// ============ PENDING COMMAND ============\nelse if (msgLower === '/pending' || msgLower === 'pending') {\n  commandType = 'pending';\n  response = `*Pending Approvals*\\n\\n` +\n    `*Invoices Awaiting Approval:*\\n` +\n    `1. INV2024015 - SAR 75,000\\n` +\n    `   Vendor: Al-Rajhi Construction\\n` +\n    `2. INV2024016 - SAR 45,000\\n` +\n    `   Vendor: Saudi Tech Solutions\\n` +\n    `3. INV2024017 - SAR 120,000\\n` +\n    `   Vendor: Gulf Trading Co.\\n\\n` +\n    `*Investments Awaiting Approval:*\\n` +\n    `1. INVEST-2024-008\\n` +\n    `   Type: Sukuk | Amount: SAR 500,000\\n` +\n    `2. INVEST-2024-009\\n` +\n    `   Type: Real Estate | Amount: SAR 1,200,000\\n\\n` +\n    `Reply with /approve_inv_{number} or /reject_inv_{number} [reason]`;\n}\n\n// ============ APPROVE INVOICE ============\nelse if (msgLower.match(/^\\/approve_inv_([\\w-]+)$/i)) {\n  const match = msgLower.match(/^\\/approve_inv_([\\w-]+)$/i);\n  const invNumber = match[1].toUpperCase();\n  commandType = 'approve_invoice';\n  response = `*Invoice Approved*\\n\\n` +\n    `Invoice: *${invNumber}*\\n` +\n    `Status: APPROVED\\n` +\n    `Approved by: ${senderName}\\n` +\n    `Timestamp: ${new Date().toISOString()}\\n\\n` +\n    `_Journal entry will be posted automatically._`;\n}\n\n// ============ REJECT INVOICE ============\nelse if (msgLower.match(/^\\/reject_inv_([\\w-]+)(\\s+.+)?$/i)) {\n  const match = message.match(/^\\/reject_inv_([\\w-]+)(\\s+.+)?$/i);\n  const invNumber = match[1].toUpperCase();\n  const reason = match[2] ? match[2].trim() : 'No reason provided';\n  commandType = 'reject_invoice';\n  response = `*Invoice Rejected*\\n\\n` +\n    `Invoice: *${invNumber}*\\n` +\n    `Status: REJECTED\\n` +\n    `Rejected by: ${senderName}\\n` +\n    `Reason: ${reason}\\n` +\n    `Timestamp: ${new Date().toISOString()}\\n\\n` +\n    `_Vendor will be notified of rejection._`;\n}\n\n// ============ APPROVE INVESTMENT ============\nelse if (msgLower.match(/^\\/approve_investment_([\\w-]+)$/i)) {\n  const match = msgLower.match(/^\\/approve_investment_([\\w-]+)$/i);\n  const investId = match[1].toUpperCase();\n  commandType = 'approve_investment';\n  response = `*Investment Approved*\\n\\n` +\n    `Investment ID: *${investId}*\\n` +\n    `Status: APPROVED\\n` +\n    `Approved by: ${senderName}\\n` +\n    `Timestamp: ${new Date().toISOString()}\\n\\n` +\n    `_Deal will proceed to execution phase._`;\n}\n\n// ============ REJECT INVESTMENT ============\nelse if (msgLower.match(/^\\/reject_investment_([\\w-]+)(\\s+.+)?$/i)) {\n  const match = message.match(/^\\/reject_investment_([\\w-]+)(\\s+.+)?$/i);\n  const investId = match[1].toUpperCase();\n  const reason = match[2] ? match[2].trim() : 'No reason provided';\n  commandType = 'reject_investment';\n  response = `*Investment Rejected*\\n\\n` +\n    `Investment ID: *${investId}*\\n` +\n    `Status: REJECTED\\n` +\n    `Rejected by: ${senderName}\\n` +\n    `Reason: ${reason}\\n` +\n    `Timestamp: ${new Date().toISOString()}\\n\\n` +\n    `_Investment committee will be notified._`;\n}\n\n// ============ STATUS CHECK ============\nelse if (msgLower.match(/^\\/status_([\\w-]+)$/i)) {\n  const match = msgLower.match(/^\\/status_([\\w-]+)$/i);\n  const id = match[1].toUpperCase();\n  commandType = 'status';\n  \n  // Determine type based on ID pattern\n  if (id.startsWith('INV')) {\n    response = `*Invoice Status*\\n\\n` +\n      `Invoice: *${id}*\\n` +\n      `Status: Pending Approval\\n` +\n      `Amount: SAR 75,000\\n` +\n      `Vendor: Al-Rajhi Construction\\n` +\n      `Submitted: 2 days ago\\n` +\n      `Due Date: 15 Jan 2026\\n\\n` +\n      `_Reply /approve_inv_${id} to approve_`;\n  } else if (id.startsWith('INVEST')) {\n    response = `*Investment Status*\\n\\n` +\n      `ID: *${id}*\\n` +\n      `Status: Under Review\\n` +\n      `Type: Sukuk\\n` +\n      `Amount: SAR 500,000\\n` +\n      `Risk Score: 3/10 (Low)\\n` +\n      `Shariah: Compliant\\n\\n` +\n      `_Reply /approve_investment_${id} to approve_`;\n  } else {\n    response = `*Status Check*\\n\\n` +\n      `ID: *${id}*\\n` +\n      `Status: Not Found\\n\\n` +\n      `_Please check the ID and try again._`;\n  }\n}\n\n// ============ GREETINGS ============\nelse if (msgLower.match(/^(halo|hai|hi|hello|hey|assalamualaikum|salam|good morning|good afternoon|good evening|selamat pagi|selamat siang|selamat sore)/i)) {\n  commandType = 'greeting';\n  const hour = new Date().getHours();\n  let timeGreeting = 'Hello';\n  if (hour < 12) timeGreeting = 'Good morning';\n  else if (hour < 17) timeGreeting = 'Good afternoon';\n  else timeGreeting = 'Good evening';\n  \n  response = `${timeGreeting}, ${senderName}!\\n\\n` +\n    `Welcome to *BPKH Limited* WhatsApp Assistant.\\n\\n` +\n    `I can help you with:\\n` +\n    `- Invoice approvals\\n` +\n    `- Investment approvals\\n` +\n    `- Treasury balance\\n` +\n    `- Status checks\\n\\n` +\n    `Type */help* for all available commands.`;\n}\n\n// ============ THANK YOU ============\nelse if (msgLower.match(/^(terima kasih|thanks|thank you|thx|makasih|syukran)/i)) {\n  commandType = 'thanks';\n  response = `You're welcome, ${senderName}!\\n\\n` +\n    `Feel free to reach out if you need any assistance.\\n` +\n    `Type */help* for available commands.`;\n}\n\n// ============ UNKNOWN ============\nif (!response) {\n  return { json: { skip: true } };\n}\n\nreturn {\n  json: {\n    chatId: chatId,\n    message: response,\n    commandType: commandType,\n    senderName: senderName,\n    skip: false\n  }\n};"
+      },
+      "id": "process",
+      "name": "Process Message",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{ $json.skip }}",
+              "value2": false
+            }
+          ]
+        }
+      },
+      "id": "if-skip",
+      "name": "Should Reply?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://waha-qikiufjwa2nh.cgk-max.sumopod.my.id/api/sendText",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Content-Type", "value": "application/json" },
+            { "name": "X-Api-Key", "value": "5rMMXHU07G5F0cqj5QBcVjFeLCIdSWLI" }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            { "name": "chatId", "value": "={{ $json.chatId }}" },
+            { "name": "text", "value": "={{ $json.message }}" },
+            { "name": "session", "value": "bayan-ai" }
+          ]
+        }
+      },
+      "id": "send",
+      "name": "Send WhatsApp",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [900, 200]
+    },
+    {
+      "parameters": {},
+      "id": "noop",
+      "name": "Skip",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [900, 400]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [[{ "node": "Process Message", "type": "main", "index": 0 }]]
+    },
+    "Process Message": {
+      "main": [[{ "node": "Should Reply?", "type": "main", "index": 0 }]]
+    },
+    "Should Reply?": {
+      "main": [
+        [{ "node": "Send WhatsApp", "type": "main", "index": 0 }],
+        [{ "node": "Skip", "type": "main", "index": 0 }]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

@@ -1,174 +1,142 @@
-# BPKH Limited - RAG Agentic AI Platform
+# BPKH Limited - Enterprise AI Platform
 
 ![BPKH Limited](https://img.shields.io/badge/BPKH-Limited-teal?style=for-the-badge)
 ![React](https://img.shields.io/badge/React-18-blue?style=for-the-badge&logo=react)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind-CSS-38B2AC?style=for-the-badge&logo=tailwind-css)
-![License](https://img.shields.io/badge/License-Proprietary-red?style=for-the-badge)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=for-the-badge&logo=typescript)
+![n8n](https://img.shields.io/badge/n8n-Workflows-orange?style=for-the-badge)
 
-> Platform AI terintegrasi untuk layanan haji & umrah di Arab Saudi dengan 15 fitur interaktif + Role-Based Access Control dalam single HTML file.
+> Enterprise dashboard & AI automation platform for hajj/umrah services in Saudi Arabia.
 
 ## Live Demo
 
 | Platform | URL |
 |----------|-----|
-| **Netlify** | [app-bpkh-limited.netlify.app](https://app-bpkh-limited.netlify.app/) |
-| **GitHub Pages** | [mshadianto.github.io/bayan_ai](https://mshadianto.github.io/bayan_ai/) |
+| **Dashboard** | [bpkh-limited-dashboard.netlify.app](https://bpkh-limited-dashboard.netlify.app) |
+| **Landing** | [mshadianto.github.io/bayan_ai](https://mshadianto.github.io/bayan_ai/) |
 
 ---
 
-## Fitur Interaktif
+## Project Structure
 
-| # | Fitur | Deskripsi | API |
-|---|-------|-----------|-----|
-| 1 | **AI Chatbot** | Asisten AI bilingual (AR/ID/EN) | Groq Llama 3.3 70B |
-| 2 | **WhatsApp Bot** | Simulasi percakapan bilingual | - |
-| 3 | **Live Charts** | Grafik KPI & Budget animasi | Chart.js |
-| 4 | **Peta Hotel** | Lokasi hotel dekat Masjidil Haram | Leaflet.js + OpenStreetMap |
-| 5 | **QR Booking** | Generate QR code konfirmasi | QRCode.js |
-| 6 | **Jadwal Sholat** | Waktu sholat Mekkah real-time | Aladhan API |
-| 7 | **Cuaca Live** | Cuaca Mekkah & Madinah | Open-Meteo API |
-| 8 | **Kalkulator Kurs** | Konversi SAR ↔ IDR | ExchangeRate API |
-| 9 | **Kalender Hijriyah** | Tanggal penting Islam | Aladhan API |
-| 10 | **Inventory Dashboard** | Real-time stok & low-stock alerts | - |
-| 11 | **Ticket Management** | SLA tracking & support system | - |
-| 12 | **Staff Scheduler** | Jadwal shift staf visual | - |
-| 13 | **Vendor Performance** | Rating & compliance dashboard | - |
-| 14 | **Invoice Management** | Faktur, pembayaran, status tracking | - |
-| 15 | **User Access Level** | RBAC: Admin/Manager/Staff/Viewer | - |
+```
+bayan_ai/
+├── dashboard/              # React SPA (Vite + TypeScript + Tailwind)
+│   ├── src/
+│   │   ├── components/     # Reusable UI components
+│   │   │   ├── Layout/     # Header, Sidebar, Layout
+│   │   │   └── common/     # StatusBadge, StatCard, DataTable, etc.
+│   │   ├── pages/          # Route pages
+│   │   │   ├── hcms/       # Human Capital Management (9 modules)
+│   │   │   └── *.tsx       # Finance pages
+│   │   ├── services/       # API clients & mock data
+│   │   ├── hooks/          # Custom React hooks
+│   │   └── types/          # TypeScript definitions
+│   └── netlify.toml
+│
+├── workflows/              # n8n workflow automations
+│   ├── Dashboard API Endpoints.json
+│   ├── Financial Automation.json
+│   ├── Investment Due Diligence Automation.json
+│   ├── WhatsApp Command Handler.json
+│   └── alternatives/       # Alternative workflow versions
+│
+├── wa-handler/             # Express.js WhatsApp webhook server
+├── wa-worker/              # Cloudflare Workers (serverless)
+│
+├── docs/
+│   ├── demo/               # Demo & presentation files
+│   └── guides/             # Technical documentation
+│
+├── supabase_schema.sql     # Database schema
+├── CLAUDE.md               # AI assistant instructions
+└── README.md
+```
 
 ---
 
-## Tech Stack
+## Modules
 
-```
-Frontend:     React 18 + Tailwind CSS (CDN)
-AI/LLM:       Groq API (Llama 3.3 70B) - Free Tier
-Maps:         Leaflet.js + OpenStreetMap
-Charts:       Chart.js
-QR Code:      QRCode.js
-APIs:         Aladhan, Open-Meteo, ExchangeRate
-Deployment:   Single HTML File (~3500 lines)
-```
+### Dashboard (React)
+
+| Module | Description | Route |
+|--------|-------------|-------|
+| **Finance Dashboard** | Financial overview & analytics | `/` |
+| **Investments** | Due diligence & approval workflow | `/investments` |
+| **Treasury** | Balance tracking & forecasts | `/treasury` |
+| **Invoices** | Invoice approval workflow | `/invoices` |
+| **WhatsApp** | Send messages & commands | `/whatsapp` |
+
+### HCMS (Human Capital Management)
+
+| Module | Description | Route |
+|--------|-------------|-------|
+| **HR Dashboard** | HR metrics overview | `/hcms` |
+| **Employees** | Employee directory | `/hcms/employees` |
+| **Attendance** | Time & overtime tracking | `/hcms/attendance` |
+| **Leave** | Leave requests & balances | `/hcms/leave` |
+| **Payroll** | Salary processing | `/hcms/payroll` |
+| **Recruitment** | Hiring pipeline & ATS | `/hcms/recruitment` |
+| **Performance** | KPIs & appraisals | `/hcms/performance` |
+| **Training** | LMS & certifications | `/hcms/training` |
+| **Compliance** | Document expiry & disciplinary | `/hcms/compliance` |
 
 ---
 
 ## Quick Start
 
-### 1. Buka Langsung di Browser
+### Dashboard
+
 ```bash
-# Double-click file index.html
-# Atau drag & drop ke browser
+cd dashboard
+npm install
+npm run dev          # Start dev server (port 3000)
+npm run build        # Production build
 ```
 
-### 2. Local Server (Opsional)
+### WhatsApp Handler
+
 ```bash
-# Python
-python -m http.server 8080
+# Express.js (Railway/Vercel)
+cd wa-handler
+npm install && npm start
 
-# Node.js
-npx serve .
+# Cloudflare Workers
+cd wa-worker
+wrangler deploy
 ```
 
-### 3. Aktifkan AI Chatbot
-Edit `index.html` baris 117:
-```javascript
-GROQ_API_KEY: 'your-api-key-here',
-```
-Dapatkan API key gratis di: [console.groq.com/keys](https://console.groq.com/keys)
+### n8n Workflows
+
+1. Import JSON files from `workflows/` into n8n
+2. Configure credentials (Supabase, WAHA, Groq)
+3. Activate workflows
 
 ---
 
-## Deployment
+## Tech Stack
 
-### Netlify (Drag & Drop)
-1. Buka [app.netlify.com/drop](https://app.netlify.com/drop)
-2. Drag folder project ke area upload
-3. Done!
+| Layer | Technology |
+|-------|------------|
+| **Frontend** | React 18, TypeScript, Vite, Tailwind CSS |
+| **Backend** | n8n workflows, Cloudflare Workers |
+| **Database** | Supabase (PostgreSQL + pgvector) |
+| **AI/LLM** | Groq API (Llama 3.3 70B) |
+| **WhatsApp** | WAHA API |
+| **Deployment** | Netlify, Cloudflare Workers |
 
-### GitHub Pages
-1. Push ke repository GitHub
-2. Settings → Pages → Source: `gh-pages` branch
-3. Done!
+---
 
-### Vercel
-```bash
-npx vercel
+## Environment Variables
+
+```env
+# Dashboard (.env)
+VITE_SUPABASE_URL=https://your-project.supabase.co
+VITE_SUPABASE_ANON_KEY=your-supabase-anon-key
+VITE_N8N_BASE_URL=https://your-n8n-instance.example.com
+VITE_WAHA_URL=https://your-waha-instance.example.com
+VITE_WAHA_API_KEY=your-waha-api-key
+VITE_WAHA_SESSION=default
 ```
-
----
-
-## Struktur File
-
-```
-bayan_ai/
-├── index.html                    # Main app (2300+ lines)
-├── CLAUDE.md                     # Project documentation
-├── DEPLOY.md                     # Deployment guide
-├── README.md                     # This file
-├── bpkh-limited-rag-solution.jsx # Original React component
-└── Transformasi_Digital_BPKH-Limited.html # Training curriculum
-```
-
----
-
-## Screenshots
-
-### Dashboard Overview
-- 15 tombol fitur interaktif
-- Live forex rate SAR-IDR
-- Architecture diagram
-- Role-based access control
-
-### AI Chatbot
-- Bilingual support (Arabic/Indonesian/English)
-- Powered by Groq Llama 3.3 70B
-- Context-aware responses
-
-### Peta Hotel
-- Interactive map centered on Masjidil Haram
-- 5 hotel markers dengan popup info
-- Distance & price display
-
-### Kalender Hijriyah
-- Current Hijri date
-- 12 bulan Hijriyah
-- Tanggal penting Islam
-
-### Operational Features (NEW)
-- **Inventory Dashboard**: Real-time stok hotel, bus, kereta dengan low-stock alerts
-- **Ticket Management**: SLA tracking, priority badges, assignee management
-- **Staff Scheduler**: Visual shift schedule (Pagi/Siang/Malam/OFF)
-- **Vendor Performance**: Rating, compliance score, contract tracking
-- **Invoice Management**: Status tracking (Draft/Sent/Paid/Overdue), summary stats
-
-### User Access Level (RBAC)
-- **4 Role Levels**: Admin, Manager, Staff, Viewer
-- **Login Simulation**: Demo users dengan berbagai role
-- **User Management**: Admin-only dashboard untuk kelola users
-- **Access Matrix**: Visual tabel akses per fitur per role
-- **Feature Gating**: Tombol disabled untuk fitur tanpa akses
-
----
-
-## API Reference
-
-| API | Purpose | Cost |
-|-----|---------|------|
-| [Groq](https://console.groq.com) | LLM (Llama 3.3 70B) | Free tier |
-| [Aladhan](https://aladhan.com/prayer-times-api) | Prayer times & Hijri | Free |
-| [Open-Meteo](https://open-meteo.com) | Weather data | Free |
-| [ExchangeRate](https://exchangerate-api.com) | Currency rates | Free |
-
----
-
-## Domain Context
-
-**BPKH Limited** adalah anak perusahaan BPKH (Badan Pengelola Keuangan Haji) yang beroperasi di Arab Saudi dengan 4 lini bisnis:
-
-- **Akomodasi**: Hotel di Mekkah & Madinah
-- **Transportasi**: Bus shuttle jamaah
-- **Tiket Kereta**: Haramain High Speed Railway
-- **Katering**: Makanan halal berkualitas
 
 ---
 
@@ -176,25 +144,12 @@ bayan_ai/
 
 - **Developer**: MS Hadianto | Audit Committee BPKH
 - **AI Assistant**: Claude Opus 4.5 (Anthropic)
-- **Icons**: Native Emoji
-- **Maps**: OpenStreetMap Contributors
 
 ---
 
 ## License
 
-**PROPRIETARY LICENSE**
-
-© 2025 BPKH Limited. All Rights Reserved.
-
-This software is the exclusive property of **BPKH Limited** (Badan Pengelola Keuangan Haji).
-
-**Restrictions:**
-- No copying, modification, or distribution without written permission
-- For internal BPKH Limited use only
-- Unauthorized use is strictly prohibited
-
-For licensing inquiries, contact BPKH Limited.
+**PROPRIETARY LICENSE** © 2025 BPKH Limited. All Rights Reserved.
 
 ---
 

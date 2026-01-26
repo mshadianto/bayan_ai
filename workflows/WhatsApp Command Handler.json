@@ -1,0 +1,350 @@
+{
+  "name": "WhatsApp Command Handler",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "whatsapp-command",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-receiver",
+      "name": "WAHA Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [240, 300],
+      "webhookId": "whatsapp-command-handler"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Parse WhatsApp command from WAHA webhook\nconst body = $input.item.json.body || $input.item.json;\nconst message = body.message?.body || body.text || '';\nconst sender = body.from || body.sender || '';\nconst chatId = body.chatId || body.from || '';\n\n// Command patterns\nconst commands = [\n  { pattern: /^\\/approve_inv_(\\w+)$/i, type: 'approve_invoice', extract: 'invoice_number' },\n  { pattern: /^\\/reject_inv_(\\w+)(?:\\s+(.+))?$/i, type: 'reject_invoice', extract: 'invoice_number', hasReason: true },\n  { pattern: /^\\/approve_investment_(\\w+)$/i, type: 'approve_investment', extract: 'investment_id' },\n  { pattern: /^\\/reject_investment_(\\w+)(?:\\s+(.+))?$/i, type: 'reject_investment', extract: 'investment_id', hasReason: true },\n  { pattern: /^\\/status_(\\w+)$/i, type: 'status', extract: 'id' },\n  { pattern: /^\\/balance$/i, type: 'balance' },\n  { pattern: /^\\/help$/i, type: 'help' }\n];\n\nlet result = {\n  command_type: 'unknown',\n  raw_message: message,\n  sender: sender,\n  chatId: chatId,\n  params: {},\n  timestamp: new Date().toISOString()\n};\n\nfor (const cmd of commands) {\n  const match = message.trim().match(cmd.pattern);\n  if (match) {\n    result.command_type = cmd.type;\n    if (cmd.extract) {\n      result.params[cmd.extract] = match[1];\n    }\n    if (cmd.hasReason && match[2]) {\n      result.params.reason = match[2];\n    }\n    break;\n  }\n}\n\nreturn { json: result };"
+      },
+      "id": "parse-command",
+      "name": "Parse Command",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "rules": {
+          "rules": [
+            {
+              "outputKey": "approve_invoice",
+              "conditions": {
+                "options": { "caseSensitive": false, "leftValue": "", "typeValidation": "strict" },
+                "conditions": [
+                  { "leftValue": "={{ $json.command_type }}", "rightValue": "approve_invoice", "operator": { "type": "string", "operation": "equals" } }
+                ]
+              }
+            },
+            {
+              "outputKey": "reject_invoice",
+              "conditions": {
+                "options": { "caseSensitive": false, "leftValue": "", "typeValidation": "strict" },
+                "conditions": [
+                  { "leftValue": "={{ $json.command_type }}", "rightValue": "reject_invoice", "operator": { "type": "string", "operation": "equals" } }
+                ]
+              }
+            },
+            {
+              "outputKey": "approve_investment",
+              "conditions": {
+                "options": { "caseSensitive": false, "leftValue": "", "typeValidation": "strict" },
+                "conditions": [
+                  { "leftValue": "={{ $json.command_type }}", "rightValue": "approve_investment", "operator": { "type": "string", "operation": "equals" } }
+                ]
+              }
+            },
+            {
+              "outputKey": "reject_investment",
+              "conditions": {
+                "options": { "caseSensitive": false, "leftValue": "", "typeValidation": "strict" },
+                "conditions": [
+                  { "leftValue": "={{ $json.command_type }}", "rightValue": "reject_investment", "operator": { "type": "string", "operation": "equals" } }
+                ]
+              }
+            },
+            {
+              "outputKey": "status",
+              "conditions": {
+                "options": { "caseSensitive": false, "leftValue": "", "typeValidation": "strict" },
+                "conditions": [
+                  { "leftValue": "={{ $json.command_type }}", "rightValue": "status", "operator": { "type": "string", "operation": "equals" } }
+                ]
+              }
+            },
+            {
+              "outputKey": "balance",
+              "conditions": {
+                "options": { "caseSensitive": false, "leftValue": "", "typeValidation": "strict" },
+                "conditions": [
+                  { "leftValue": "={{ $json.command_type }}", "rightValue": "balance", "operator": { "type": "string", "operation": "equals" } }
+                ]
+              }
+            },
+            {
+              "outputKey": "help",
+              "conditions": {
+                "options": { "caseSensitive": false, "leftValue": "", "typeValidation": "strict" },
+                "conditions": [
+                  { "leftValue": "={{ $json.command_type }}", "rightValue": "help", "operator": { "type": "string", "operation": "equals" } }
+                ]
+              }
+            }
+          ]
+        },
+        "fallbackOutput": "extra",
+        "options": {}
+      },
+      "id": "route-command",
+      "name": "Route Command",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "journal_entries",
+        "filterType": "string",
+        "filterString": "invoice_number=eq.{{ $json.params.invoice_number }}",
+        "fieldsToSend": {
+          "fieldValues": [
+            { "fieldName": "status", "fieldValue": "approved" },
+            { "fieldName": "approved_by", "fieldValue": "={{ $json.sender }}" },
+            { "fieldName": "approved_at", "fieldValue": "={{ $json.timestamp }}" }
+          ]
+        }
+      },
+      "id": "approve-invoice-db",
+      "name": "Approve Invoice DB",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [920, 60],
+      "credentials": { "supabaseApi": { "id": "rKgAesq4rfkngnc7", "name": "Supabase BPKH" } }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "journal_entries",
+        "filterType": "string",
+        "filterString": "invoice_number=eq.{{ $json.params.invoice_number }}",
+        "fieldsToSend": {
+          "fieldValues": [
+            { "fieldName": "status", "fieldValue": "rejected" },
+            { "fieldName": "rejected_by", "fieldValue": "={{ $json.sender }}" },
+            { "fieldName": "rejected_at", "fieldValue": "={{ $json.timestamp }}" },
+            { "fieldName": "rejection_reason", "fieldValue": "={{ $json.params.reason || 'No reason provided' }}" }
+          ]
+        }
+      },
+      "id": "reject-invoice-db",
+      "name": "Reject Invoice DB",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [920, 160],
+      "credentials": { "supabaseApi": { "id": "rKgAesq4rfkngnc7", "name": "Supabase BPKH" } }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "investment_analysis",
+        "filterType": "string",
+        "filterString": "id=eq.{{ $json.params.investment_id }}",
+        "fieldsToSend": {
+          "fieldValues": [
+            { "fieldName": "status", "fieldValue": "approved" },
+            { "fieldName": "approved_by", "fieldValue": "={{ $json.sender }}" },
+            { "fieldName": "approved_at", "fieldValue": "={{ $json.timestamp }}" }
+          ]
+        }
+      },
+      "id": "approve-investment-db",
+      "name": "Approve Investment DB",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [920, 260],
+      "credentials": { "supabaseApi": { "id": "rKgAesq4rfkngnc7", "name": "Supabase BPKH" } }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "investment_analysis",
+        "filterType": "string",
+        "filterString": "id=eq.{{ $json.params.investment_id }}",
+        "fieldsToSend": {
+          "fieldValues": [
+            { "fieldName": "status", "fieldValue": "rejected" },
+            { "fieldName": "rejected_by", "fieldValue": "={{ $json.sender }}" },
+            { "fieldName": "rejected_at", "fieldValue": "={{ $json.timestamp }}" },
+            { "fieldName": "rejection_reason", "fieldValue": "={{ $json.params.reason || 'No reason provided' }}" }
+          ]
+        }
+      },
+      "id": "reject-investment-db",
+      "name": "Reject Investment DB",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [920, 360],
+      "credentials": { "supabaseApi": { "id": "rKgAesq4rfkngnc7", "name": "Supabase BPKH" } }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Determine which table to query based on ID pattern\nconst id = $json.params.id;\nlet queryTable = 'investment_analysis';\nlet queryField = 'id';\n\nif (id.startsWith('INV') || id.match(/^\\d+$/)) {\n  queryTable = 'journal_entries';\n  queryField = 'invoice_number';\n}\n\nreturn {\n  json: {\n    ...$json,\n    queryTable,\n    queryField\n  }\n};"
+      },
+      "id": "prepare-status-query",
+      "name": "Prepare Status Query",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [920, 460]
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "treasury_analysis",
+        "returnAll": false,
+        "limit": 1,
+        "filterType": "string",
+        "filterString": "order=created_at.desc"
+      },
+      "id": "get-balance",
+      "name": "Get Treasury Balance",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [920, 560],
+      "credentials": { "supabaseApi": { "id": "rKgAesq4rfkngnc7", "name": "Supabase BPKH" } }
+    },
+    {
+      "parameters": {
+        "jsCode": "const helpMessage = `*BPKH WhatsApp Commands*\n\n*Invoice Commands:*\n/approve_inv_{number} - Approve invoice\n/reject_inv_{number} [reason] - Reject invoice\n\n*Investment Commands:*\n/approve_investment_{id} - Approve investment\n/reject_investment_{id} [reason] - Reject investment\n\n*Other Commands:*\n/status_{id} - Check status\n/balance - Get treasury balance\n/help - Show this message\n\n_Example: /approve_inv_INV2024001_`;\n\nreturn {\n  json: {\n    ...$json,\n    responseMessage: helpMessage\n  }\n};"
+      },
+      "id": "help-message",
+      "name": "Generate Help",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [920, 660]
+    },
+    {
+      "parameters": {
+        "jsCode": "const commandType = $json.command_type;\nlet message = '';\n\nswitch(commandType) {\n  case 'approve_invoice':\n    message = `Invoice ${$json.params.invoice_number} has been *APPROVED*. Journal entry will be posted automatically.`;\n    break;\n  case 'reject_invoice':\n    message = `Invoice ${$json.params.invoice_number} has been *REJECTED*.\\nReason: ${$json.params.reason || 'Not specified'}`;\n    break;\n  case 'approve_investment':\n    message = `Investment ${$json.params.investment_id} has been *APPROVED*. The deal will proceed to next stage.`;\n    break;\n  case 'reject_investment':\n    message = `Investment ${$json.params.investment_id} has been *REJECTED*.\\nReason: ${$json.params.reason || 'Not specified'}`;\n    break;\n  case 'balance':\n    const balance = $json.current_balance || 0;\n    const formatted = new Intl.NumberFormat('en-SA', { style: 'currency', currency: 'SAR' }).format(balance);\n    message = `*Current Treasury Balance:* ${formatted}\\n\\nLast updated: ${$json.last_updated || 'N/A'}`;\n    break;\n  case 'help':\n    message = $json.responseMessage;\n    break;\n  case 'unknown':\n  default:\n    message = `Unknown command. Type /help for available commands.`;\n}\n\nreturn {\n  json: {\n    chatId: $json.chatId,\n    message: message\n  }\n};"
+      },
+      "id": "format-response",
+      "name": "Format Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1160, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://waha-qikiufjwa2nh.cgk-max.sumopod.my.id/api/sendText",
+        "authentication": "none",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Content-Type", "value": "application/json" },
+            { "name": "X-Api-Key", "value": "5rMMXHU07G5F0cqj5QBcVjFeLCIdSWLI" }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            { "name": "chatId", "value": "={{ $json.chatId }}" },
+            { "name": "text", "value": "={{ $json.message }}" },
+            { "name": "session", "value": "bayan-ai" }
+          ]
+        }
+      },
+      "id": "send-whatsapp",
+      "name": "Send WhatsApp Response",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1380, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ success: true, message: 'Command processed' }) }}"
+      },
+      "id": "respond-webhook",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [1600, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Handle unknown command\nreturn {\n  json: {\n    ...$json,\n    responseMessage: `Unknown command: \"${$json.raw_message}\"\\n\\nType /help for available commands.`\n  }\n};"
+      },
+      "id": "unknown-command",
+      "name": "Unknown Command",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [920, 760]
+    }
+  ],
+  "connections": {
+    "WAHA Webhook": {
+      "main": [[{ "node": "Parse Command", "type": "main", "index": 0 }]]
+    },
+    "Parse Command": {
+      "main": [[{ "node": "Route Command", "type": "main", "index": 0 }]]
+    },
+    "Route Command": {
+      "main": [
+        [{ "node": "Approve Invoice DB", "type": "main", "index": 0 }],
+        [{ "node": "Reject Invoice DB", "type": "main", "index": 0 }],
+        [{ "node": "Approve Investment DB", "type": "main", "index": 0 }],
+        [{ "node": "Reject Investment DB", "type": "main", "index": 0 }],
+        [{ "node": "Prepare Status Query", "type": "main", "index": 0 }],
+        [{ "node": "Get Treasury Balance", "type": "main", "index": 0 }],
+        [{ "node": "Generate Help", "type": "main", "index": 0 }],
+        [{ "node": "Unknown Command", "type": "main", "index": 0 }]
+      ]
+    },
+    "Approve Invoice DB": {
+      "main": [[{ "node": "Format Response", "type": "main", "index": 0 }]]
+    },
+    "Reject Invoice DB": {
+      "main": [[{ "node": "Format Response", "type": "main", "index": 0 }]]
+    },
+    "Approve Investment DB": {
+      "main": [[{ "node": "Format Response", "type": "main", "index": 0 }]]
+    },
+    "Reject Investment DB": {
+      "main": [[{ "node": "Format Response", "type": "main", "index": 0 }]]
+    },
+    "Prepare Status Query": {
+      "main": [[{ "node": "Format Response", "type": "main", "index": 0 }]]
+    },
+    "Get Treasury Balance": {
+      "main": [[{ "node": "Format Response", "type": "main", "index": 0 }]]
+    },
+    "Generate Help": {
+      "main": [[{ "node": "Format Response", "type": "main", "index": 0 }]]
+    },
+    "Unknown Command": {
+      "main": [[{ "node": "Format Response", "type": "main", "index": 0 }]]
+    },
+    "Format Response": {
+      "main": [[{ "node": "Send WhatsApp Response", "type": "main", "index": 0 }]]
+    },
+    "Send WhatsApp Response": {
+      "main": [[{ "node": "Respond to Webhook", "type": "main", "index": 0 }]]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "1",
+  "meta": {
+    "instanceId": "bpkh-whatsapp-handler"
+  },
+  "tags": [
+    { "name": "WhatsApp" },
+    { "name": "BPKH" },
+    { "name": "Automation" }
+  ]
+}
