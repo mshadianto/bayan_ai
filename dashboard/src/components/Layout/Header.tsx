@@ -1,16 +1,44 @@
 import { Bell, User } from 'lucide-react';
+import { useLocation } from 'react-router-dom';
 
 interface HeaderProps {
   title: string;
   subtitle?: string;
 }
 
+const MODULE_CONFIG = {
+  finance: {
+    label: 'Finance',
+    emoji: '💰',
+    gradient: 'from-teal-600 to-emerald-600',
+    badgeBg: 'bg-teal-500/30',
+    badgeText: 'text-teal-100',
+  },
+  hcms: {
+    label: 'Human Capital',
+    emoji: '👥',
+    gradient: 'from-indigo-600 to-purple-600',
+    badgeBg: 'bg-indigo-500/30',
+    badgeText: 'text-indigo-100',
+  },
+} as const;
+
 export function Header({ title, subtitle }: HeaderProps) {
+  const location = useLocation();
+  const isHCMS = location.pathname.startsWith('/hcms');
+  const module = isHCMS ? MODULE_CONFIG.hcms : MODULE_CONFIG.finance;
+
   return (
-    <header className="bg-gradient-to-r from-teal-600 to-emerald-600 px-6 py-4 flex items-center justify-between">
+    <header className={`bg-gradient-to-r ${module.gradient} px-6 py-4 flex items-center justify-between`}>
       <div>
+        <div className="flex items-center gap-3 mb-1">
+          <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-medium ${module.badgeBg} ${module.badgeText}`}>
+            <span>{module.emoji}</span>
+            {module.label}
+          </span>
+        </div>
         <h2 className="text-2xl font-bold text-white">{title}</h2>
-        {subtitle && <p className="text-teal-100 text-sm mt-0.5">{subtitle}</p>}
+        {subtitle && <p className="text-white/70 text-sm mt-0.5">{subtitle}</p>}
       </div>
 
       <div className="flex items-center gap-4">
