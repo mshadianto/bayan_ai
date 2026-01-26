@@ -3,7 +3,8 @@ import { Header } from '../components/Layout';
 import { StatusBadge, FilterButtons, SearchInput, TableSkeleton, Modal } from '../components/common';
 import { StatCard } from '../components/common/StatCard';
 import type { FinancialRequest, FinancialRequestSummary, ApprovalStep } from '../types';
-import { financeApi } from '../services/mockData/finance';
+import { financeApi, GL_ACCOUNTS, UNITS } from '../services/mockData/finance';
+import type { CreateRequestInput, ApprovalActionInput } from '../services/mockData/finance';
 import { format } from 'date-fns';
 import {
   FileText,
@@ -16,9 +17,13 @@ import {
   ChevronRight,
   FileCheck,
   ArrowRight,
+  Plus,
+  Send,
+  RotateCcw,
+  Upload,
 } from 'lucide-react';
 
-const FILTER_OPTIONS = ['all', 'pending_head', 'pending_finance_staff', 'pending_finance_head', 'pending_mudir', 'approved', 'completed', 'rejected'] as const;
+const FILTER_OPTIONS = ['all', 'draft', 'pending_head', 'pending_finance_staff', 'pending_finance_head', 'pending_mudir', 'approved', 'completed', 'rejected'] as const;
 type FilterOption = typeof FILTER_OPTIONS[number];
 
 const STATUS_CONFIG: Record<string, { label: string; color: string; icon: React.ReactNode }> = {
@@ -47,12 +52,42 @@ const APPROVAL_ROLE_LABELS: Record<string, string> = {
   mudir_3: 'Mudir 3',
 };
 
+// Simulated current user role (in real app, this would come from auth context)
+const CURRENT_USER = {
+  name: 'Admin User',
+  role: 'admin', // can act as any role for demo
+};
+
 function formatCurrency(amount: number, currency: string = 'SAR') {
   return new Intl.NumberFormat('en-SA', {
     style: 'currency',
     currency,
     minimumFractionDigits: 0,
   }).format(amount);
+}
+
+// Toast notification component
+function Toast({ message, type, onClose }: { message: string; type: 'success' | 'error' | 'info'; onClose: () => void }) {
+  useEffect(() => {
+    const timer = setTimeout(onClose, 4000);
+    return () => clearTimeout(timer);
+  }, [onClose]);
+
+  const colors = {
+    success: 'bg-emerald-600 border-emerald-500',
+    error: 'bg-red-600 border-red-500',
+    info: 'bg-blue-600 border-blue-500',
+  };
+
+  return (
+    <div className={`fixed top-4 right-4 z-50 px-6 py-4 rounded-xl border ${colors[type]} text-white shadow-lg animate-fade-in flex items-center gap-3`}>
+      {type === 'success' && <CheckCircle size={20} />}
+      {type === 'error' && <XCircle size={20} />}
+      {type === 'info' && <AlertCircle size={20} />}
+      <span>{message}</span>
+      <button onClick={onClose} className="ml-2 hover:opacity-70">×</button>
+    </div>
+  );
 }
 
 function ApprovalTimeline({ approvals }: { approvals: ApprovalStep[] }) {
@@ -136,6 +171,422 @@ function WorkflowDiagram() {
   );
 }
 
+// Create Request Form
+function CreateRequestForm({ onSubmit, onCancel, isSubmitting }: {
+  onSubmit: (data: CreateRequestInput) => void;
+  onCancel: () => void;
+  isSubmitting: boolean;
+}) {
+  const [formData, setFormData] = useState<CreateRequestInput>({
+    type: 'payment',
+    title: '',
+    description: '',
+    amount: 0,
+    currency: 'SAR',
+    requester_name: CURRENT_USER.name,
+    requester_unit: UNITS[0],
+    beneficiary_name: '',
+    beneficiary_bank: '',
+    beneficiary_account: '',
+    documents: [],
+  });
+  const [docName, setDocName] = useState('');
+  const [docType, setDocType] = useState('invoice');
+
+  const handleAddDocument = () => {
+    if (docName) {
+      setFormData(prev => ({
+        ...prev,
+        documents: [...prev.documents, { name: docName, type: docType }],
+      }));
+      setDocName('');
+    }
+  };
+
+  const handleRemoveDoc = (index: number) => {
+    setFormData(prev => ({
+      ...prev,
+      documents: prev.documents.filter((_, i) => i !== index),
+    }));
+  };
+
+  return (
+    <div className="space-y-4">
+      {/* Type */}
+      <div>
+        <label className="block text-sm text-slate-400 mb-1">Request Type</label>
+        <div className="flex gap-2 flex-wrap">
+          {(['payment', 'transfer', 'reimbursement', 'advance'] as const).map(type => (
+            <button
+              key={type}
+              type="button"
+              onClick={() => setFormData(prev => ({ ...prev, type }))}
+              className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                formData.type === type
+                  ? 'bg-teal-600 text-white'
+                  : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
+              }`}
+            >
+              {TYPE_CONFIG[type].emoji} {TYPE_CONFIG[type].label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Title */}
+      <div>
+        <label className="block text-sm text-slate-400 mb-1">Title</label>
+        <input
+          type="text"
+          value={formData.title}
+          onChange={(e) => setFormData(prev => ({ ...prev, title: e.target.value }))}
+          className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-teal-500"
+          placeholder="e.g., Pembayaran Vendor ABC"
+        />
+      </div>
+
+      {/* Description */}
+      <div>
+        <label className="block text-sm text-slate-400 mb-1">Description</label>
+        <textarea
+          value={formData.description}
+          onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
+          className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-teal-500 min-h-[80px]"
+          placeholder="Detail pengajuan..."
+        />
+      </div>
+
+      {/* Amount & Currency */}
+      <div className="grid grid-cols-2 gap-4">
+        <div>
+          <label className="block text-sm text-slate-400 mb-1">Amount</label>
+          <input
+            type="number"
+            value={formData.amount}
+            onChange={(e) => setFormData(prev => ({ ...prev, amount: Number(e.target.value) }))}
+            className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-teal-500"
+          />
+        </div>
+        <div>
+          <label className="block text-sm text-slate-400 mb-1">Currency</label>
+          <select
+            value={formData.currency}
+            onChange={(e) => setFormData(prev => ({ ...prev, currency: e.target.value as 'SAR' | 'IDR' | 'USD' }))}
+            className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-teal-500"
+          >
+            <option value="SAR">SAR</option>
+            <option value="IDR">IDR</option>
+            <option value="USD">USD</option>
+          </select>
+        </div>
+      </div>
+
+      {/* Requester Unit */}
+      <div>
+        <label className="block text-sm text-slate-400 mb-1">Unit Pengusul</label>
+        <select
+          value={formData.requester_unit}
+          onChange={(e) => setFormData(prev => ({ ...prev, requester_unit: e.target.value }))}
+          className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-teal-500"
+        >
+          {UNITS.map(unit => (
+            <option key={unit} value={unit}>{unit}</option>
+          ))}
+        </select>
+      </div>
+
+      {/* Beneficiary (for payment/transfer) */}
+      {(formData.type === 'payment' || formData.type === 'transfer') && (
+        <div className="space-y-3 p-4 bg-slate-800/50 rounded-xl">
+          <p className="text-sm font-medium text-white">Beneficiary Details</p>
+          <input
+            type="text"
+            value={formData.beneficiary_name}
+            onChange={(e) => setFormData(prev => ({ ...prev, beneficiary_name: e.target.value }))}
+            className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-teal-500"
+            placeholder="Beneficiary Name"
+          />
+          <div className="grid grid-cols-2 gap-3">
+            <input
+              type="text"
+              value={formData.beneficiary_bank}
+              onChange={(e) => setFormData(prev => ({ ...prev, beneficiary_bank: e.target.value }))}
+              className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-teal-500"
+              placeholder="Bank Name"
+            />
+            <input
+              type="text"
+              value={formData.beneficiary_account}
+              onChange={(e) => setFormData(prev => ({ ...prev, beneficiary_account: e.target.value }))}
+              className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-teal-500"
+              placeholder="Account Number"
+            />
+          </div>
+        </div>
+      )}
+
+      {/* Documents */}
+      <div className="p-4 bg-slate-800/50 rounded-xl">
+        <p className="text-sm font-medium text-white mb-3">Documents</p>
+        <div className="flex gap-2 mb-3">
+          <input
+            type="text"
+            value={docName}
+            onChange={(e) => setDocName(e.target.value)}
+            className="flex-1 bg-slate-700 border border-slate-600 rounded-lg px-4 py-2 text-white text-sm focus:outline-none focus:border-teal-500"
+            placeholder="Document name (e.g., Invoice_001.pdf)"
+          />
+          <select
+            value={docType}
+            onChange={(e) => setDocType(e.target.value)}
+            className="bg-slate-700 border border-slate-600 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-teal-500"
+          >
+            <option value="invoice">Invoice</option>
+            <option value="receipt">Receipt</option>
+            <option value="contract">Contract</option>
+            <option value="quotation">Quotation</option>
+            <option value="other">Other</option>
+          </select>
+          <button
+            type="button"
+            onClick={handleAddDocument}
+            className="px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-500 transition-colors"
+          >
+            <Plus size={18} />
+          </button>
+        </div>
+        {formData.documents.length > 0 && (
+          <div className="space-y-2">
+            {formData.documents.map((doc, i) => (
+              <div key={i} className="flex items-center justify-between bg-slate-700 rounded-lg px-3 py-2">
+                <span className="text-sm text-white">{doc.name}</span>
+                <div className="flex items-center gap-2">
+                  <StatusBadge status={doc.type} size="sm" />
+                  <button onClick={() => handleRemoveDoc(i)} className="text-red-400 hover:text-red-300">×</button>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* Actions */}
+      <div className="flex gap-3 pt-4">
+        <button
+          type="button"
+          onClick={onCancel}
+          className="flex-1 px-4 py-3 bg-slate-700 text-white rounded-xl hover:bg-slate-600 transition-colors"
+        >
+          Cancel
+        </button>
+        <button
+          type="button"
+          onClick={() => onSubmit(formData)}
+          disabled={!formData.title || !formData.amount || isSubmitting}
+          className="flex-1 px-4 py-3 bg-teal-600 text-white rounded-xl hover:bg-teal-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+        >
+          {isSubmitting ? 'Creating...' : <><Plus size={18} /> Create Request</>}
+        </button>
+      </div>
+    </div>
+  );
+}
+
+// Approval Actions Component
+function ApprovalActions({ request, onAction, isProcessing }: {
+  request: FinancialRequest;
+  onAction: (action: ApprovalActionInput['action'], role: ApprovalActionInput['role'], comments?: string, glCode?: string, glName?: string) => void;
+  isProcessing: boolean;
+}) {
+  const [comments, setComments] = useState('');
+  const [selectedGL, setSelectedGL] = useState('');
+  const [showRejectModal, setShowRejectModal] = useState(false);
+  const [rejectAction, setRejectAction] = useState<'reject' | 'return'>('reject');
+
+  // Determine which role can act based on status
+  const roleMap: Record<string, ApprovalActionInput['role']> = {
+    pending_head: 'head_division',
+    pending_finance_staff: 'finance_staff',
+    pending_finance_head: 'finance_head',
+    pending_mudir: 'mudir_1', // Will also show mudir_3 option
+  };
+
+  const currentRole = roleMap[request.status];
+  if (!currentRole) return null;
+
+  const isFinanceStaff = request.status === 'pending_finance_staff';
+  const isMudir = request.status === 'pending_mudir';
+
+  const handleApprove = (role: ApprovalActionInput['role']) => {
+    const gl = GL_ACCOUNTS.find(g => g.code === selectedGL);
+    onAction('approve', role, comments || undefined, gl?.code, gl?.name);
+  };
+
+  const handleReject = () => {
+    onAction(rejectAction, currentRole, comments);
+    setShowRejectModal(false);
+  };
+
+  return (
+    <div className="border-t border-slate-700 pt-4 mt-4">
+      <p className="text-sm font-medium text-white mb-3">Approval Actions</p>
+
+      {/* GL Code selection for Finance Staff */}
+      {isFinanceStaff && (
+        <div className="mb-4">
+          <label className="block text-sm text-slate-400 mb-1">Select GL Account</label>
+          <select
+            value={selectedGL}
+            onChange={(e) => setSelectedGL(e.target.value)}
+            className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-teal-500"
+          >
+            <option value="">-- Select GL Account --</option>
+            {GL_ACCOUNTS.map(gl => (
+              <option key={gl.code} value={gl.code}>{gl.code} - {gl.name}</option>
+            ))}
+          </select>
+        </div>
+      )}
+
+      {/* Comments */}
+      <div className="mb-4">
+        <label className="block text-sm text-slate-400 mb-1">Comments (optional)</label>
+        <textarea
+          value={comments}
+          onChange={(e) => setComments(e.target.value)}
+          className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-teal-500 min-h-[60px]"
+          placeholder="Add comments..."
+        />
+      </div>
+
+      {/* Action Buttons */}
+      <div className="flex gap-3">
+        {isMudir ? (
+          <>
+            <button
+              onClick={() => handleApprove('mudir_1')}
+              disabled={isProcessing}
+              className="flex-1 px-4 py-3 bg-emerald-600 text-white rounded-xl hover:bg-emerald-500 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+            >
+              <CheckCircle size={18} /> Approve (Mudir 1)
+            </button>
+            <button
+              onClick={() => handleApprove('mudir_3')}
+              disabled={isProcessing}
+              className="flex-1 px-4 py-3 bg-emerald-600 text-white rounded-xl hover:bg-emerald-500 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+            >
+              <CheckCircle size={18} /> Approve (Mudir 3)
+            </button>
+          </>
+        ) : (
+          <button
+            onClick={() => handleApprove(currentRole)}
+            disabled={isProcessing || (isFinanceStaff && !selectedGL)}
+            className="flex-1 px-4 py-3 bg-emerald-600 text-white rounded-xl hover:bg-emerald-500 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+          >
+            <CheckCircle size={18} /> Approve
+          </button>
+        )}
+        <button
+          onClick={() => { setRejectAction('return'); setShowRejectModal(true); }}
+          disabled={isProcessing}
+          className="px-4 py-3 bg-amber-600 text-white rounded-xl hover:bg-amber-500 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+        >
+          <RotateCcw size={18} /> Return
+        </button>
+        <button
+          onClick={() => { setRejectAction('reject'); setShowRejectModal(true); }}
+          disabled={isProcessing}
+          className="px-4 py-3 bg-red-600 text-white rounded-xl hover:bg-red-500 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+        >
+          <XCircle size={18} /> Reject
+        </button>
+      </div>
+
+      {/* Reject/Return Confirmation Modal */}
+      {showRejectModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <div className="bg-slate-800 rounded-xl p-6 max-w-md w-full mx-4">
+            <h3 className="text-lg font-semibold text-white mb-4">
+              {rejectAction === 'reject' ? 'Reject Request' : 'Return to Requester'}
+            </h3>
+            <p className="text-slate-400 mb-4">
+              {rejectAction === 'reject'
+                ? 'This will permanently reject the request.'
+                : 'This will return the request to the requester for revision.'}
+            </p>
+            <textarea
+              value={comments}
+              onChange={(e) => setComments(e.target.value)}
+              className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-red-500 min-h-[80px] mb-4"
+              placeholder="Reason for rejection/return..."
+              required
+            />
+            <div className="flex gap-3">
+              <button
+                onClick={() => setShowRejectModal(false)}
+                className="flex-1 px-4 py-2 bg-slate-700 text-white rounded-lg hover:bg-slate-600"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleReject}
+                disabled={!comments}
+                className={`flex-1 px-4 py-2 text-white rounded-lg disabled:opacity-50 ${
+                  rejectAction === 'reject' ? 'bg-red-600 hover:bg-red-500' : 'bg-amber-600 hover:bg-amber-500'
+                }`}
+              >
+                Confirm
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// Complete Transaction Component
+function CompleteTransactionForm({ request, onComplete, isProcessing }: {
+  request: FinancialRequest;
+  onComplete: (reference: string, proofUrl: string) => void;
+  isProcessing: boolean;
+}) {
+  const [reference, setReference] = useState('');
+  const [proofUrl, setProofUrl] = useState('');
+
+  if (request.status !== 'approved') return null;
+
+  return (
+    <div className="border-t border-slate-700 pt-4 mt-4">
+      <p className="text-sm font-medium text-white mb-3">Complete Transaction</p>
+      <div className="space-y-3">
+        <input
+          type="text"
+          value={reference}
+          onChange={(e) => setReference(e.target.value)}
+          className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-teal-500"
+          placeholder="Transaction Reference (e.g., TRX-2025-001)"
+        />
+        <input
+          type="text"
+          value={proofUrl}
+          onChange={(e) => setProofUrl(e.target.value)}
+          className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-teal-500"
+          placeholder="Proof Document URL"
+        />
+        <button
+          onClick={() => onComplete(reference, proofUrl)}
+          disabled={!reference || !proofUrl || isProcessing}
+          className="w-full px-4 py-3 bg-teal-600 text-white rounded-xl hover:bg-teal-500 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+        >
+          <Upload size={18} /> Complete Transaction
+        </button>
+      </div>
+    </div>
+  );
+}
+
 export function FinancialRequests() {
   const [requests, setRequests] = useState<FinancialRequest[]>([]);
   const [summary, setSummary] = useState<FinancialRequestSummary | null>(null);
@@ -143,22 +594,107 @@ export function FinancialRequests() {
   const [filter, setFilter] = useState<FilterOption>('all');
   const [search, setSearch] = useState('');
   const [selectedRequest, setSelectedRequest] = useState<FinancialRequest | null>(null);
+  const [showCreateModal, setShowCreateModal] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' | 'info' } | null>(null);
+
+  const fetchData = async () => {
+    try {
+      const [requestsData, summaryData] = await Promise.all([
+        financeApi.requests.getAll(),
+        financeApi.requests.getSummary(),
+      ]);
+      setRequests(requestsData);
+      setSummary(summaryData);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [requestsData, summaryData] = await Promise.all([
-          financeApi.requests.getAll(),
-          financeApi.requests.getSummary(),
-        ]);
-        setRequests(requestsData);
-        setSummary(summaryData);
-      } finally {
-        setLoading(false);
-      }
-    };
     fetchData();
   }, []);
+
+  const showToast = (message: string, type: 'success' | 'error' | 'info') => {
+    setToast({ message, type });
+  };
+
+  const handleCreateRequest = async (data: CreateRequestInput) => {
+    setIsSubmitting(true);
+    try {
+      const newRequest = await financeApi.requests.create(data);
+      showToast(`Request ${newRequest.request_number} created successfully!`, 'success');
+      setShowCreateModal(false);
+      await fetchData();
+    } catch (error) {
+      showToast('Failed to create request', 'error');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleSubmitDraft = async (id: string) => {
+    setIsSubmitting(true);
+    try {
+      await financeApi.requests.submit(id);
+      showToast('Request submitted for approval!', 'success');
+      setSelectedRequest(null);
+      await fetchData();
+    } catch (error) {
+      showToast('Failed to submit request', 'error');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleApprovalAction = async (
+    action: ApprovalActionInput['action'],
+    role: ApprovalActionInput['role'],
+    comments?: string,
+    glCode?: string,
+    glName?: string
+  ) => {
+    if (!selectedRequest) return;
+    setIsSubmitting(true);
+    try {
+      await financeApi.requests.processApproval({
+        requestId: selectedRequest.id,
+        action,
+        role,
+        approverName: CURRENT_USER.name,
+        comments,
+        glCode,
+        glName,
+      });
+      const actionLabel = action === 'approve' ? 'approved' : action === 'reject' ? 'rejected' : 'returned';
+      showToast(`Request ${actionLabel} successfully!`, action === 'approve' ? 'success' : 'info');
+      setSelectedRequest(null);
+      await fetchData();
+    } catch (error) {
+      showToast('Failed to process approval', 'error');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleCompleteTransaction = async (reference: string, proofUrl: string) => {
+    if (!selectedRequest) return;
+    setIsSubmitting(true);
+    try {
+      await financeApi.requests.completeTransaction({
+        requestId: selectedRequest.id,
+        transactionReference: reference,
+        transactionProofUrl: proofUrl,
+      });
+      showToast('Transaction completed successfully!', 'success');
+      setSelectedRequest(null);
+      await fetchData();
+    } catch (error) {
+      showToast('Failed to complete transaction', 'error');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   const filteredRequests = requests.filter(req => {
     const matchesFilter = filter === 'all' || req.status === filter;
@@ -173,6 +709,9 @@ export function FinancialRequests() {
     <div className="animate-fade-in">
       <Header title="Financial Requests" subtitle="Payment & transfer approval workflow" />
       <div className="p-6">
+        {/* Toast */}
+        {toast && <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />}
+
         {/* Workflow Diagram */}
         <WorkflowDiagram />
 
@@ -204,8 +743,14 @@ export function FinancialRequests() {
           />
         </div>
 
-        {/* Filters */}
+        {/* Actions & Filters */}
         <div className="flex flex-col md:flex-row gap-4 mb-6">
+          <button
+            onClick={() => setShowCreateModal(true)}
+            className="px-6 py-3 bg-teal-600 text-white rounded-xl hover:bg-teal-500 transition-colors flex items-center gap-2 font-medium"
+          >
+            <Plus size={20} /> New Request
+          </button>
           <div className="flex-1">
             <SearchInput
               value={search}
@@ -213,6 +758,10 @@ export function FinancialRequests() {
               placeholder="Search by title, number, or requester..."
             />
           </div>
+        </div>
+
+        {/* Filter Buttons */}
+        <div className="mb-6 overflow-x-auto">
           <FilterButtons
             options={FILTER_OPTIONS}
             value={filter}
@@ -293,6 +842,20 @@ export function FinancialRequests() {
             )}
           </div>
         )}
+
+        {/* Create Request Modal */}
+        <Modal
+          isOpen={showCreateModal}
+          onClose={() => setShowCreateModal(false)}
+          title="Create Financial Request"
+          size="lg"
+        >
+          <CreateRequestForm
+            onSubmit={handleCreateRequest}
+            onCancel={() => setShowCreateModal(false)}
+            isSubmitting={isSubmitting}
+          />
+        </Modal>
 
         {/* Detail Modal */}
         <Modal
@@ -381,11 +944,40 @@ export function FinancialRequests() {
                 </div>
               </div>
 
+              {/* Submit Draft Button */}
+              {selectedRequest.status === 'draft' && (
+                <button
+                  onClick={() => handleSubmitDraft(selectedRequest.id)}
+                  disabled={isSubmitting}
+                  className="w-full px-4 py-3 bg-teal-600 text-white rounded-xl hover:bg-teal-500 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+                >
+                  <Send size={18} /> Submit for Approval
+                </button>
+              )}
+
               {/* Approval Timeline */}
-              <div>
-                <p className="text-xs text-slate-400 mb-3">Approval History</p>
-                <ApprovalTimeline approvals={selectedRequest.approvals} />
-              </div>
+              {selectedRequest.approvals.length > 0 && (
+                <div>
+                  <p className="text-xs text-slate-400 mb-3">Approval History</p>
+                  <ApprovalTimeline approvals={selectedRequest.approvals} />
+                </div>
+              )}
+
+              {/* Approval Actions */}
+              {['pending_head', 'pending_finance_staff', 'pending_finance_head', 'pending_mudir'].includes(selectedRequest.status) && (
+                <ApprovalActions
+                  request={selectedRequest}
+                  onAction={handleApprovalAction}
+                  isProcessing={isSubmitting}
+                />
+              )}
+
+              {/* Complete Transaction */}
+              <CompleteTransactionForm
+                request={selectedRequest}
+                onComplete={handleCompleteTransaction}
+                isProcessing={isSubmitting}
+              />
 
               {/* Transaction Proof (if completed) */}
               {selectedRequest.transaction_reference && (

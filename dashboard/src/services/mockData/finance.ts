@@ -240,11 +240,77 @@ const mockFinancialRequests: FinancialRequest[] = [
   },
 ];
 
+// GL Accounts for categorization
+export const GL_ACCOUNTS = [
+  { code: '5000', name: 'Beban Gaji' },
+  { code: '5100', name: 'Beban Catering' },
+  { code: '5200', name: 'Beban Operasional' },
+  { code: '6100', name: 'Beban Sewa' },
+  { code: '6150', name: 'Beban Utilities' },
+  { code: '6200', name: 'Beban Pemeliharaan' },
+  { code: '6300', name: 'Beban Perjalanan Dinas' },
+  { code: '6400', name: 'Beban Marketing' },
+  { code: '1500', name: 'Uang Muka' },
+];
+
+// Units for dropdown
+export const UNITS = [
+  'General Affairs',
+  'Operations',
+  'Procurement',
+  'Human Resources',
+  'Food & Beverage',
+  'Transportation',
+  'Finance',
+  'IT',
+  'Marketing',
+];
+
+// Helper to generate IDs
+let requestCounter = mockFinancialRequests.length + 1;
+const generateId = () => `FR${String(requestCounter++).padStart(3, '0')}`;
+const generateRequestNumber = () => `REQ-2025-${String(requestCounter).padStart(3, '0')}`;
+
+// Input type for creating request
+export interface CreateRequestInput {
+  type: 'payment' | 'transfer' | 'reimbursement' | 'advance';
+  title: string;
+  description: string;
+  amount: number;
+  currency: 'SAR' | 'IDR' | 'USD';
+  requester_name: string;
+  requester_unit: string;
+  beneficiary_name?: string;
+  beneficiary_bank?: string;
+  beneficiary_account?: string;
+  documents: { name: string; type: string }[];
+}
+
+// Approval action input
+export interface ApprovalActionInput {
+  requestId: string;
+  action: 'approve' | 'reject' | 'return';
+  role: 'head_division' | 'finance_staff' | 'finance_head' | 'mudir_1' | 'mudir_3';
+  approverName: string;
+  comments?: string;
+  glCode?: string;
+  glName?: string;
+}
+
+// Transaction completion input
+export interface CompleteTransactionInput {
+  requestId: string;
+  transactionReference: string;
+  transactionProofUrl: string;
+}
+
 export const financeApi = {
   requests: {
     getAll: async (): Promise<FinancialRequest[]> => {
       await delay(400);
-      return mockFinancialRequests;
+      return [...mockFinancialRequests].sort((a, b) =>
+        new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+      );
     },
 
     getById: async (id: string): Promise<FinancialRequest | undefined> => {
@@ -294,5 +360,165 @@ export const financeApi = {
         by_type: byType,
       };
     },
+
+    // CREATE - Submit new request
+    create: async (input: CreateRequestInput): Promise<FinancialRequest> => {
+      await delay(500);
+      const now = new Date().toISOString();
+      const newRequest: FinancialRequest = {
+        id: generateId(),
+        request_number: generateRequestNumber(),
+        type: input.type,
+        title: input.title,
+        description: input.description,
+        amount: input.amount,
+        currency: input.currency,
+        requester_id: 'CURRENT_USER',
+        requester_name: input.requester_name,
+        requester_unit: input.requester_unit,
+        beneficiary_name: input.beneficiary_name,
+        beneficiary_bank: input.beneficiary_bank,
+        beneficiary_account: input.beneficiary_account,
+        documents: input.documents.map((doc, i) => ({
+          id: `DOC${Date.now()}${i}`,
+          name: doc.name,
+          type: doc.type as 'invoice' | 'receipt' | 'contract' | 'quotation' | 'other',
+          url: '#',
+          uploaded_at: now,
+        })),
+        status: 'draft',
+        approvals: [],
+        created_at: now,
+      };
+      mockFinancialRequests.unshift(newRequest);
+      return newRequest;
+    },
+
+    // SUBMIT - Send draft to approval
+    submit: async (id: string): Promise<FinancialRequest> => {
+      await delay(300);
+      const request = mockFinancialRequests.find(r => r.id === id);
+      if (!request) throw new Error('Request not found');
+      if (request.status !== 'draft') throw new Error('Only draft can be submitted');
+
+      request.status = 'pending_head';
+      request.current_approver = 'Head Division';
+      request.approvals = [
+        { id: `APR${Date.now()}`, step: 1, role: 'head_division', status: 'pending' },
+      ];
+      request.updated_at = new Date().toISOString();
+      return request;
+    },
+
+    // PROCESS - Approval action
+    processApproval: async (input: ApprovalActionInput): Promise<FinancialRequest> => {
+      await delay(400);
+      const request = mockFinancialRequests.find(r => r.id === input.requestId);
+      if (!request) throw new Error('Request not found');
+
+      const now = new Date().toISOString();
+      const currentApproval = request.approvals.find(
+        a => a.role === input.role && a.status === 'pending'
+      );
+
+      if (!currentApproval) throw new Error('No pending approval for this role');
+
+      // Update current approval
+      currentApproval.status = input.action === 'approve' ? 'approved' :
+                               input.action === 'reject' ? 'rejected' : 'returned';
+      currentApproval.approver_name = input.approverName;
+      currentApproval.approver_id = 'APPROVER_ID';
+      currentApproval.comments = input.comments;
+      currentApproval.action_at = now;
+
+      // Update GL code if finance staff
+      if (input.role === 'finance_staff' && input.glCode) {
+        request.gl_code = input.glCode;
+        request.gl_name = input.glName;
+      }
+
+      // Handle rejection/return
+      if (input.action === 'reject' || input.action === 'return') {
+        request.status = 'rejected';
+        request.current_approver = undefined;
+        request.updated_at = now;
+        return request;
+      }
+
+      // Progress to next step
+      const statusFlow: Record<string, { next: FinancialRequest['status']; nextRole?: string; nextApprovals?: { role: string; step: number }[] }> = {
+        pending_head: {
+          next: 'pending_finance_staff',
+          nextRole: 'Finance Staff',
+          nextApprovals: [{ role: 'finance_staff', step: 2 }]
+        },
+        pending_finance_staff: {
+          next: 'pending_finance_head',
+          nextRole: 'Finance Head',
+          nextApprovals: [{ role: 'finance_head', step: 3 }]
+        },
+        pending_finance_head: {
+          next: 'pending_mudir',
+          nextRole: 'Mudir 1 & Mudir 3',
+          nextApprovals: [
+            { role: 'mudir_1', step: 4 },
+            { role: 'mudir_3', step: 4 },
+          ]
+        },
+        pending_mudir: { next: 'approved' },
+      };
+
+      const flow = statusFlow[request.status];
+
+      // For mudir, check if both approved
+      if (request.status === 'pending_mudir') {
+        const mudir1 = request.approvals.find(a => a.role === 'mudir_1');
+        const mudir3 = request.approvals.find(a => a.role === 'mudir_3');
+        if (mudir1?.status === 'approved' && mudir3?.status === 'approved') {
+          request.status = 'approved';
+          request.current_approver = undefined;
+        }
+      } else if (flow) {
+        request.status = flow.next;
+        request.current_approver = flow.nextRole;
+        if (flow.nextApprovals) {
+          flow.nextApprovals.forEach(na => {
+            request.approvals.push({
+              id: `APR${Date.now()}${na.role}`,
+              step: na.step,
+              role: na.role as 'head_division' | 'finance_staff' | 'finance_head' | 'mudir_1' | 'mudir_3',
+              status: 'pending',
+            });
+          });
+        }
+      }
+
+      request.updated_at = now;
+      return request;
+    },
+
+    // COMPLETE - Mark transaction as completed
+    completeTransaction: async (input: CompleteTransactionInput): Promise<FinancialRequest> => {
+      await delay(400);
+      const request = mockFinancialRequests.find(r => r.id === input.requestId);
+      if (!request) throw new Error('Request not found');
+      if (request.status !== 'approved') throw new Error('Only approved requests can be completed');
+
+      const now = new Date().toISOString();
+      request.status = 'completed';
+      request.transaction_reference = input.transactionReference;
+      request.transaction_proof_url = input.transactionProofUrl;
+      request.transaction_date = now;
+      request.completed_at = now;
+      request.updated_at = now;
+
+      return request;
+    },
   },
+
+  // Get GL accounts
+  getGLAccounts: () => GL_ACCOUNTS,
+
+  // Get units
+  getUnits: () => UNITS,
 };
