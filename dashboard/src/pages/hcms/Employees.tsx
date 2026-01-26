@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 import { Header } from '../../components/Layout';
 import {
   StatCard,
@@ -11,12 +11,431 @@ import {
   EmptyState
 } from '../../components/common';
 import type { Employee } from '../../types';
-import { Users, UserCheck, UserMinus, Clock, Mail, Phone, Building, Calendar, Eye, Edit, Plus } from 'lucide-react';
+import { Users, UserCheck, UserMinus, Clock, Mail, Phone, Building, Calendar, Eye, Edit, Plus, X, CheckCircle, XCircle, UserX } from 'lucide-react';
 import { format } from 'date-fns';
-import { hcmsApi } from '../../services/mockData/hcms';
+import { hcmsApi, type CreateEmployeeInput, type UpdateEmployeeInput } from '../../services/mockData/hcms';
 
 const FILTER_OPTIONS = ['all', 'active', 'probation', 'resigned'] as const;
 type FilterType = typeof FILTER_OPTIONS[number];
+
+const DEPARTMENTS = ['Executive', 'Finance', 'IT', 'HR', 'Operations', 'Legal', 'Marketing'];
+
+// Toast Component
+function Toast({ message, type, onClose }: { message: string; type: 'success' | 'error'; onClose: () => void }) {
+  useEffect(() => {
+    const timer = setTimeout(onClose, 4000);
+    return () => clearTimeout(timer);
+  }, [onClose]);
+
+  return (
+    <div className={`fixed bottom-4 right-4 z-50 flex items-center gap-3 px-4 py-3 rounded-xl shadow-lg border ${
+      type === 'success'
+        ? 'bg-emerald-900/90 border-emerald-600 text-emerald-100'
+        : 'bg-red-900/90 border-red-600 text-red-100'
+    }`}>
+      {type === 'success' ? <CheckCircle size={20} /> : <XCircle size={20} />}
+      <span className="font-medium">{message}</span>
+      <button onClick={onClose} className="ml-2 hover:opacity-70">
+        <X size={16} />
+      </button>
+    </div>
+  );
+}
+
+// Add Employee Form
+function AddEmployeeForm({
+  onSubmit,
+  onCancel,
+}: {
+  onSubmit: (data: CreateEmployeeInput) => void;
+  onCancel: () => void;
+}) {
+  const [formData, setFormData] = useState({
+    first_name: '',
+    last_name: '',
+    email: '',
+    phone: '',
+    department: '',
+    position: '',
+    salary: '',
+    hire_date: format(new Date(), 'yyyy-MM-dd'),
+    iqamah_expiry: '',
+    visa_expiry: '',
+    passport_expiry: '',
+  });
+
+  const handleSubmit = () => {
+    if (!formData.first_name || !formData.last_name || !formData.email || !formData.department || !formData.position) return;
+    onSubmit({
+      ...formData,
+      salary: parseFloat(formData.salary) || 0,
+    });
+  };
+
+  return (
+    <div className="space-y-4">
+      <div className="grid grid-cols-2 gap-4">
+        <div>
+          <label className="block text-sm font-medium text-slate-300 mb-2">First Name *</label>
+          <input
+            type="text"
+            value={formData.first_name}
+            onChange={(e) => setFormData({ ...formData, first_name: e.target.value })}
+            className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-slate-300 mb-2">Last Name *</label>
+          <input
+            type="text"
+            value={formData.last_name}
+            onChange={(e) => setFormData({ ...formData, last_name: e.target.value })}
+            className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+          />
+        </div>
+      </div>
+
+      <div className="grid grid-cols-2 gap-4">
+        <div>
+          <label className="block text-sm font-medium text-slate-300 mb-2">Email *</label>
+          <input
+            type="email"
+            value={formData.email}
+            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+            className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-slate-300 mb-2">Phone</label>
+          <input
+            type="tel"
+            value={formData.phone}
+            onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+            placeholder="+966..."
+            className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+          />
+        </div>
+      </div>
+
+      <div className="grid grid-cols-2 gap-4">
+        <div>
+          <label className="block text-sm font-medium text-slate-300 mb-2">Department *</label>
+          <select
+            value={formData.department}
+            onChange={(e) => setFormData({ ...formData, department: e.target.value })}
+            className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+          >
+            <option value="">Select Department</option>
+            {DEPARTMENTS.map(dept => (
+              <option key={dept} value={dept}>{dept}</option>
+            ))}
+          </select>
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-slate-300 mb-2">Position *</label>
+          <input
+            type="text"
+            value={formData.position}
+            onChange={(e) => setFormData({ ...formData, position: e.target.value })}
+            className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+          />
+        </div>
+      </div>
+
+      <div className="grid grid-cols-2 gap-4">
+        <div>
+          <label className="block text-sm font-medium text-slate-300 mb-2">Monthly Salary (SAR)</label>
+          <input
+            type="number"
+            value={formData.salary}
+            onChange={(e) => setFormData({ ...formData, salary: e.target.value })}
+            className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-slate-300 mb-2">Hire Date</label>
+          <input
+            type="date"
+            value={formData.hire_date}
+            onChange={(e) => setFormData({ ...formData, hire_date: e.target.value })}
+            className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+          />
+        </div>
+      </div>
+
+      <div className="border-t border-slate-700 pt-4">
+        <h4 className="text-sm font-medium text-slate-300 mb-3">Document Expiry Dates (Optional)</h4>
+        <div className="grid grid-cols-3 gap-4">
+          <div>
+            <label className="block text-xs text-slate-400 mb-1">Iqamah</label>
+            <input
+              type="date"
+              value={formData.iqamah_expiry}
+              onChange={(e) => setFormData({ ...formData, iqamah_expiry: e.target.value })}
+              className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white text-sm focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+            />
+          </div>
+          <div>
+            <label className="block text-xs text-slate-400 mb-1">Visa</label>
+            <input
+              type="date"
+              value={formData.visa_expiry}
+              onChange={(e) => setFormData({ ...formData, visa_expiry: e.target.value })}
+              className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white text-sm focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+            />
+          </div>
+          <div>
+            <label className="block text-xs text-slate-400 mb-1">Passport</label>
+            <input
+              type="date"
+              value={formData.passport_expiry}
+              onChange={(e) => setFormData({ ...formData, passport_expiry: e.target.value })}
+              className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white text-sm focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div className="flex gap-3 pt-4">
+        <button
+          onClick={onCancel}
+          className="flex-1 px-4 py-2 bg-slate-700 text-slate-300 rounded-xl text-sm font-medium hover:bg-slate-600 transition-colors"
+        >
+          Cancel
+        </button>
+        <button
+          onClick={handleSubmit}
+          disabled={!formData.first_name || !formData.last_name || !formData.email || !formData.department || !formData.position}
+          className="flex-1 px-4 py-2 bg-indigo-600 text-white rounded-xl text-sm font-medium hover:bg-indigo-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          Add Employee
+        </button>
+      </div>
+    </div>
+  );
+}
+
+// Edit Employee Form
+function EditEmployeeForm({
+  employee,
+  onSubmit,
+  onCancel,
+}: {
+  employee: Employee;
+  onSubmit: (data: UpdateEmployeeInput) => void;
+  onCancel: () => void;
+}) {
+  const [formData, setFormData] = useState({
+    first_name: employee.first_name,
+    last_name: employee.last_name,
+    email: employee.email,
+    phone: employee.phone || '',
+    department: employee.department,
+    position: employee.position,
+    salary: employee.salary?.toString() || '',
+    iqamah_expiry: employee.iqamah_expiry || '',
+    visa_expiry: employee.visa_expiry || '',
+    passport_expiry: employee.passport_expiry || '',
+  });
+
+  const handleSubmit = () => {
+    onSubmit({
+      id: employee.id,
+      ...formData,
+      salary: parseFloat(formData.salary) || undefined,
+    });
+  };
+
+  return (
+    <div className="space-y-4">
+      <div className="grid grid-cols-2 gap-4">
+        <div>
+          <label className="block text-sm font-medium text-slate-300 mb-2">First Name</label>
+          <input
+            type="text"
+            value={formData.first_name}
+            onChange={(e) => setFormData({ ...formData, first_name: e.target.value })}
+            className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-slate-300 mb-2">Last Name</label>
+          <input
+            type="text"
+            value={formData.last_name}
+            onChange={(e) => setFormData({ ...formData, last_name: e.target.value })}
+            className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+          />
+        </div>
+      </div>
+
+      <div className="grid grid-cols-2 gap-4">
+        <div>
+          <label className="block text-sm font-medium text-slate-300 mb-2">Email</label>
+          <input
+            type="email"
+            value={formData.email}
+            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+            className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-slate-300 mb-2">Phone</label>
+          <input
+            type="tel"
+            value={formData.phone}
+            onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+            className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+          />
+        </div>
+      </div>
+
+      <div className="grid grid-cols-2 gap-4">
+        <div>
+          <label className="block text-sm font-medium text-slate-300 mb-2">Department</label>
+          <select
+            value={formData.department}
+            onChange={(e) => setFormData({ ...formData, department: e.target.value })}
+            className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+          >
+            {DEPARTMENTS.map(dept => (
+              <option key={dept} value={dept}>{dept}</option>
+            ))}
+          </select>
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-slate-300 mb-2">Position</label>
+          <input
+            type="text"
+            value={formData.position}
+            onChange={(e) => setFormData({ ...formData, position: e.target.value })}
+            className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+          />
+        </div>
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium text-slate-300 mb-2">Monthly Salary (SAR)</label>
+        <input
+          type="number"
+          value={formData.salary}
+          onChange={(e) => setFormData({ ...formData, salary: e.target.value })}
+          className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+        />
+      </div>
+
+      <div className="border-t border-slate-700 pt-4">
+        <h4 className="text-sm font-medium text-slate-300 mb-3">Document Expiry Dates</h4>
+        <div className="grid grid-cols-3 gap-4">
+          <div>
+            <label className="block text-xs text-slate-400 mb-1">Iqamah</label>
+            <input
+              type="date"
+              value={formData.iqamah_expiry}
+              onChange={(e) => setFormData({ ...formData, iqamah_expiry: e.target.value })}
+              className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white text-sm focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+            />
+          </div>
+          <div>
+            <label className="block text-xs text-slate-400 mb-1">Visa</label>
+            <input
+              type="date"
+              value={formData.visa_expiry}
+              onChange={(e) => setFormData({ ...formData, visa_expiry: e.target.value })}
+              className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white text-sm focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+            />
+          </div>
+          <div>
+            <label className="block text-xs text-slate-400 mb-1">Passport</label>
+            <input
+              type="date"
+              value={formData.passport_expiry}
+              onChange={(e) => setFormData({ ...formData, passport_expiry: e.target.value })}
+              className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white text-sm focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div className="flex gap-3 pt-4">
+        <button
+          onClick={onCancel}
+          className="flex-1 px-4 py-2 bg-slate-700 text-slate-300 rounded-xl text-sm font-medium hover:bg-slate-600 transition-colors"
+        >
+          Cancel
+        </button>
+        <button
+          onClick={handleSubmit}
+          className="flex-1 px-4 py-2 bg-indigo-600 text-white rounded-xl text-sm font-medium hover:bg-indigo-500 transition-colors"
+        >
+          Save Changes
+        </button>
+      </div>
+    </div>
+  );
+}
+
+// Terminate Employee Form
+function TerminateEmployeeForm({
+  employee,
+  onSubmit,
+  onCancel,
+}: {
+  employee: Employee;
+  onSubmit: (reason: string, date: string) => void;
+  onCancel: () => void;
+}) {
+  const [reason, setReason] = useState('');
+  const [effectiveDate, setEffectiveDate] = useState(format(new Date(), 'yyyy-MM-dd'));
+
+  return (
+    <div className="space-y-4">
+      <div className="bg-red-900/30 border border-red-600/50 rounded-lg p-4">
+        <p className="text-red-300 font-medium">Warning: This action cannot be undone</p>
+        <p className="text-sm text-red-400 mt-1">
+          You are about to terminate {employee.first_name} {employee.last_name} ({employee.employee_id})
+        </p>
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium text-slate-300 mb-2">Effective Date</label>
+        <input
+          type="date"
+          value={effectiveDate}
+          onChange={(e) => setEffectiveDate(e.target.value)}
+          className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-red-500 focus:border-transparent"
+        />
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium text-slate-300 mb-2">Reason for Termination</label>
+        <textarea
+          value={reason}
+          onChange={(e) => setReason(e.target.value)}
+          rows={3}
+          placeholder="Enter reason for termination..."
+          className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:ring-2 focus:ring-red-500 focus:border-transparent"
+        />
+      </div>
+
+      <div className="flex gap-3 pt-4">
+        <button
+          onClick={onCancel}
+          className="flex-1 px-4 py-2 bg-slate-700 text-slate-300 rounded-xl text-sm font-medium hover:bg-slate-600 transition-colors"
+        >
+          Cancel
+        </button>
+        <button
+          onClick={() => onSubmit(reason, effectiveDate)}
+          disabled={!reason}
+          className="flex-1 px-4 py-2 bg-red-600 text-white rounded-xl text-sm font-medium hover:bg-red-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          Terminate Employee
+        </button>
+      </div>
+    </div>
+  );
+}
 
 export default function Employees() {
   const [employees, setEmployees] = useState<Employee[]>([]);
@@ -25,17 +444,69 @@ export default function Employees() {
   const [search, setSearch] = useState('');
   const [selectedEmployee, setSelectedEmployee] = useState<Employee | null>(null);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await hcmsApi.employees.getAll();
-        setEmployees(data);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchData();
+  // Modal states
+  const [showAddModal, setShowAddModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [showTerminateModal, setShowTerminateModal] = useState(false);
+  const [employeeToEdit, setEmployeeToEdit] = useState<Employee | null>(null);
+  const [employeeToTerminate, setEmployeeToTerminate] = useState<Employee | null>(null);
+
+  // Toast state
+  const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
+
+  const loadData = useCallback(async () => {
+    try {
+      setLoading(true);
+      const data = await hcmsApi.employees.getAll();
+      setEmployees(data);
+    } finally {
+      setLoading(false);
+    }
   }, []);
+
+  useEffect(() => {
+    loadData();
+  }, [loadData]);
+
+  const handleAddEmployee = async (data: CreateEmployeeInput) => {
+    try {
+      await hcmsApi.employees.create(data);
+      setShowAddModal(false);
+      setToast({ message: 'Employee added successfully', type: 'success' });
+      loadData();
+    } catch {
+      setToast({ message: 'Failed to add employee', type: 'error' });
+    }
+  };
+
+  const handleUpdateEmployee = async (data: UpdateEmployeeInput) => {
+    try {
+      await hcmsApi.employees.update(data);
+      setShowEditModal(false);
+      setEmployeeToEdit(null);
+      setToast({ message: 'Employee updated successfully', type: 'success' });
+      loadData();
+    } catch {
+      setToast({ message: 'Failed to update employee', type: 'error' });
+    }
+  };
+
+  const handleTerminateEmployee = async (reason: string, effectiveDate: string) => {
+    if (!employeeToTerminate) return;
+    try {
+      await hcmsApi.employees.terminate({
+        id: employeeToTerminate.id,
+        reason,
+        effective_date: effectiveDate,
+      });
+      setShowTerminateModal(false);
+      setEmployeeToTerminate(null);
+      setToast({ message: 'Employee terminated', type: 'success' });
+      loadData();
+    } catch {
+      setToast({ message: 'Failed to terminate employee', type: 'error' });
+    }
+  };
 
   const filteredEmployees = useMemo(() => {
     return employees.filter((emp) => {
@@ -94,7 +565,10 @@ export default function Employees() {
             onChange={setFilter}
             colorMap={{ active: 'success', probation: 'warning' }}
           />
-          <button className="flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-xl hover:bg-indigo-500 transition-colors whitespace-nowrap">
+          <button
+            onClick={() => setShowAddModal(true)}
+            className="flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-xl hover:bg-indigo-500 transition-colors whitespace-nowrap"
+          >
             <Plus size={20} />
             Add Employee
           </button>
@@ -158,11 +632,27 @@ export default function Employees() {
                             <Eye size={16} />
                           </button>
                           <button
+                            onClick={() => {
+                              setEmployeeToEdit(emp);
+                              setShowEditModal(true);
+                            }}
                             className="p-2 bg-indigo-900/50 text-indigo-400 rounded-lg hover:bg-indigo-800/50 transition-colors"
                             aria-label="Edit"
                           >
                             <Edit size={16} />
                           </button>
+                          {emp.employment_status !== 'resigned' && (
+                            <button
+                              onClick={() => {
+                                setEmployeeToTerminate(emp);
+                                setShowTerminateModal(true);
+                              }}
+                              className="p-2 bg-red-900/50 text-red-400 rounded-lg hover:bg-red-800/50 transition-colors"
+                              aria-label="Terminate"
+                            >
+                              <UserX size={16} />
+                            </button>
+                          )}
                         </div>
                       </td>
                     </tr>
@@ -242,7 +732,69 @@ export default function Employees() {
             </div>
           )}
         </Modal>
+
+        {/* Add Employee Modal */}
+        <Modal
+          isOpen={showAddModal}
+          onClose={() => setShowAddModal(false)}
+          title="Add New Employee"
+          size="lg"
+        >
+          <AddEmployeeForm
+            onSubmit={handleAddEmployee}
+            onCancel={() => setShowAddModal(false)}
+          />
+        </Modal>
+
+        {/* Edit Employee Modal */}
+        <Modal
+          isOpen={showEditModal}
+          onClose={() => {
+            setShowEditModal(false);
+            setEmployeeToEdit(null);
+          }}
+          title="Edit Employee"
+          size="lg"
+        >
+          {employeeToEdit && (
+            <EditEmployeeForm
+              employee={employeeToEdit}
+              onSubmit={handleUpdateEmployee}
+              onCancel={() => {
+                setShowEditModal(false);
+                setEmployeeToEdit(null);
+              }}
+            />
+          )}
+        </Modal>
+
+        {/* Terminate Employee Modal */}
+        <Modal
+          isOpen={showTerminateModal}
+          onClose={() => {
+            setShowTerminateModal(false);
+            setEmployeeToTerminate(null);
+          }}
+          title="Terminate Employee"
+          size="md"
+        >
+          {employeeToTerminate && (
+            <TerminateEmployeeForm
+              employee={employeeToTerminate}
+              onSubmit={handleTerminateEmployee}
+              onCancel={() => {
+                setShowTerminateModal(false);
+                setEmployeeToTerminate(null);
+              }}
+            />
+          )}
+        </Modal>
       </div>
+
+      {/* Toast Notification */}
+      {toast && (
+        <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />
+      )}
     </div>
   );
 }

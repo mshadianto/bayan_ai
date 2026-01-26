@@ -219,7 +219,7 @@ export interface PayrollRecord {
   gosi_employer?: number;
   net_salary: number;
   currency?: 'SAR' | 'IDR';
-  status: 'draft' | 'processing' | 'processed' | 'paid';
+  status: 'draft' | 'pending' | 'processing' | 'processed' | 'paid';
   payment_date?: string;
   paid_at?: string;
 }

@@ -33,3 +33,12 @@ export { hcmsApi } from './mockData/hcms';
 
 // Finance API
 export { financeApi } from './mockData/finance';
+
+// Invoices API
+export { invoicesApi } from './mockData/invoices';
+
+// Treasury API
+export { treasuryApi } from './mockData/treasury';
+
+// Investments API
+export { investmentsApi } from './mockData/investments';

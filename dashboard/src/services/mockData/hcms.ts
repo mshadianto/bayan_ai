@@ -154,6 +154,177 @@ export const mockHCMSDashboard: HCMSDashboard = {
   ],
 };
 
+// ==================== INPUT TYPES ====================
+export interface CreateEmployeeInput {
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone: string;
+  department: string;
+  position: string;
+  salary: number;
+  hire_date: string;
+  iqamah_expiry?: string;
+  visa_expiry?: string;
+  passport_expiry?: string;
+}
+
+export interface UpdateEmployeeInput {
+  id: string;
+  first_name?: string;
+  last_name?: string;
+  email?: string;
+  phone?: string;
+  department?: string;
+  position?: string;
+  salary?: number;
+  iqamah_expiry?: string;
+  visa_expiry?: string;
+  passport_expiry?: string;
+}
+
+export interface TerminateEmployeeInput {
+  id: string;
+  reason: string;
+  effective_date: string;
+}
+
+export interface CreateLeaveInput {
+  employee_id: string;
+  employee_name: string;
+  leave_type: 'annual' | 'sick' | 'emergency' | 'unpaid' | 'maternity' | 'paternity';
+  start_date: string;
+  end_date: string;
+  reason: string;
+}
+
+export interface ApproveLeaveInput {
+  id: string;
+  approved_by: string;
+}
+
+export interface RejectLeaveInput {
+  id: string;
+  rejected_by: string;
+  reason: string;
+}
+
+// Attendance CRUD types
+export interface ManualCheckInput {
+  employee_id: string;
+  employee_name: string;
+  date: string;
+  check_in?: string;
+  check_out?: string;
+  status: 'present' | 'late' | 'absent' | 'leave' | 'holiday';
+  notes?: string;
+  location?: string;
+}
+
+export interface UpdateAttendanceInput {
+  id: string;
+  check_in?: string;
+  check_out?: string;
+  status?: 'present' | 'late' | 'absent' | 'leave' | 'holiday';
+  notes?: string;
+  reason?: string;
+}
+
+export interface MarkAbsentInput {
+  employee_id: string;
+  employee_name: string;
+  date: string;
+  reason?: string;
+}
+
+// Payroll CRUD types
+export interface InitiatePayrollInput {
+  period: string;
+  notes?: string;
+}
+
+export interface ApprovePayrollInput {
+  id: string;
+  approved_by: string;
+}
+
+export interface ProcessPayrollInput {
+  id: string;
+  bank_reference: string;
+  processed_by: string;
+}
+
+export interface AdjustSalaryInput {
+  id: string;
+  adjustment_type: 'bonus' | 'deduction' | 'overtime';
+  amount: number;
+  reason: string;
+}
+
+// Recruitment CRUD types
+export interface CreateRequisitionInput {
+  position: string;
+  department: string;
+  hiring_manager: string;
+  closing_date: string;
+  description?: string;
+}
+
+export interface MoveCandidateStageInput {
+  id: string;
+  status: 'applied' | 'screening' | 'interview' | 'offer' | 'hired' | 'rejected';
+}
+
+// Training CRUD types
+export interface CreateTrainingInput {
+  title: string;
+  type: 'internal' | 'external' | 'online';
+  category: 'mandatory' | 'technical' | 'soft_skill' | 'leadership';
+  start_date: string;
+  end_date: string;
+  duration_hours: number;
+  max_participants: number;
+  provider?: string;
+}
+
+export interface EnrollEmployeeInput {
+  training_id: string;
+  employee_id: string;
+  employee_name: string;
+}
+
+// Performance CRUD types
+export interface CreateReviewInput {
+  employee_id: string;
+  employee_name: string;
+  period: string;
+  review_type: 'mid_year' | 'annual';
+  reviewer_id: string;
+  reviewer_name: string;
+}
+
+export interface SubmitReviewInput {
+  id: string;
+  overall_score: number;
+  rating: 'exceptional' | 'exceeds' | 'meets' | 'below' | 'unsatisfactory';
+  comments?: string;
+}
+
+// Compliance CRUD types
+export interface LogCaseInput {
+  employee_id: string;
+  employee_name: string;
+  case_type: 'warning' | 'suspension' | 'termination';
+  severity: 'minor' | 'major' | 'gross';
+  description: string;
+}
+
+export interface UpdateCaseStatusInput {
+  id: string;
+  status: 'open' | 'investigation' | 'resolved';
+  action_taken?: string;
+}
+
 // ==================== FETCHER FUNCTIONS ====================
 // These simulate API calls with a small delay
 
@@ -163,24 +334,299 @@ export const hcmsApi = {
   employees: {
     getAll: async () => { await delay(300); return mockEmployees; },
     getById: async (id: string) => { await delay(200); return mockEmployees.find(e => e.id === id); },
+    create: async (input: CreateEmployeeInput): Promise<Employee> => {
+      await delay(400);
+      const newId = String(mockEmployees.length + 1);
+      const employeeId = `BPKH${String(mockEmployees.length + 1).padStart(3, '0')}`;
+      const newEmployee: Employee = {
+        id: newId,
+        employee_id: employeeId,
+        ...input,
+        employment_status: 'probation',
+      };
+      mockEmployees.push(newEmployee);
+      return newEmployee;
+    },
+    update: async (input: UpdateEmployeeInput): Promise<Employee> => {
+      await delay(400);
+      const employee = mockEmployees.find(e => e.id === input.id);
+      if (!employee) throw new Error('Employee not found');
+      Object.assign(employee, input);
+      return employee;
+    },
+    terminate: async (input: TerminateEmployeeInput): Promise<Employee> => {
+      await delay(400);
+      const employee = mockEmployees.find(e => e.id === input.id);
+      if (!employee) throw new Error('Employee not found');
+      employee.employment_status = 'resigned';
+      return employee;
+    },
+    getSummary: async () => {
+      await delay(200);
+      return {
+        total: mockEmployees.length,
+        active: mockEmployees.filter(e => e.employment_status === 'active').length,
+        probation: mockEmployees.filter(e => e.employment_status === 'probation').length,
+        resigned: mockEmployees.filter(e => e.employment_status === 'resigned').length,
+      };
+    },
   },
   attendance: {
     getAll: async () => { await delay(300); return mockAttendance; },
     getByDate: async (date: string) => { await delay(200); return mockAttendance.filter(a => a.date === date); },
+    getById: async (id: string) => { await delay(200); return mockAttendance.find(a => a.id === id); },
+
+    manualCheck: async (input: ManualCheckInput): Promise<Attendance> => {
+      await delay(400);
+      // Check if record already exists for this employee on this date
+      const existing = mockAttendance.find(
+        a => a.employee_id === input.employee_id && a.date === input.date
+      );
+      if (existing) {
+        throw new Error('Attendance record already exists for this employee on this date');
+      }
+
+      // Calculate work hours if both check_in and check_out are provided
+      let work_hours: number | undefined;
+      let late_minutes: number | undefined;
+
+      if (input.check_in && input.check_out) {
+        const checkIn = new Date(`2024-01-01T${input.check_in}`);
+        const checkOut = new Date(`2024-01-01T${input.check_out}`);
+        work_hours = (checkOut.getTime() - checkIn.getTime()) / (1000 * 60 * 60);
+      }
+
+      if (input.check_in && input.status === 'late') {
+        const checkIn = new Date(`2024-01-01T${input.check_in}`);
+        const expectedStart = new Date(`2024-01-01T08:00`);
+        late_minutes = Math.round((checkIn.getTime() - expectedStart.getTime()) / (1000 * 60));
+      }
+
+      const newRecord: Attendance = {
+        id: String(mockAttendance.length + 1),
+        employee_id: input.employee_id,
+        employee_name: input.employee_name,
+        date: input.date,
+        check_in: input.check_in,
+        check_out: input.check_out,
+        status: input.status,
+        work_hours,
+        late_minutes,
+        notes: input.notes,
+        location: input.location,
+      };
+
+      mockAttendance.push(newRecord);
+      return newRecord;
+    },
+
+    update: async (input: UpdateAttendanceInput): Promise<Attendance> => {
+      await delay(400);
+      const record = mockAttendance.find(a => a.id === input.id);
+      if (!record) throw new Error('Attendance record not found');
+
+      if (input.check_in !== undefined) record.check_in = input.check_in;
+      if (input.check_out !== undefined) record.check_out = input.check_out;
+      if (input.status !== undefined) record.status = input.status;
+      if (input.notes !== undefined) record.notes = input.notes;
+
+      // Recalculate work hours
+      if (record.check_in && record.check_out) {
+        const checkIn = new Date(`2024-01-01T${record.check_in}`);
+        const checkOut = new Date(`2024-01-01T${record.check_out}`);
+        record.work_hours = (checkOut.getTime() - checkIn.getTime()) / (1000 * 60 * 60);
+      }
+
+      return record;
+    },
+
+    markAbsent: async (input: MarkAbsentInput): Promise<Attendance> => {
+      await delay(400);
+      const existing = mockAttendance.find(
+        a => a.employee_id === input.employee_id && a.date === input.date
+      );
+      if (existing) {
+        existing.status = 'absent';
+        existing.notes = input.reason;
+        return existing;
+      }
+
+      const newRecord: Attendance = {
+        id: String(mockAttendance.length + 1),
+        employee_id: input.employee_id,
+        employee_name: input.employee_name,
+        date: input.date,
+        status: 'absent',
+        notes: input.reason,
+      };
+      mockAttendance.push(newRecord);
+      return newRecord;
+    },
+
+    getSummary: async (date: string) => {
+      await delay(200);
+      const records = mockAttendance.filter(a => a.date === date);
+      return {
+        present: records.filter(r => r.status === 'present').length,
+        late: records.filter(r => r.status === 'late').length,
+        absent: records.filter(r => r.status === 'absent').length,
+        leave: records.filter(r => r.status === 'leave').length,
+        total: records.length,
+      };
+    },
   },
   leave: {
     getAll: async () => { await delay(300); return mockLeaveRequests; },
     getPending: async () => { await delay(200); return mockLeaveRequests.filter(l => l.status === 'pending'); },
+    create: async (input: CreateLeaveInput): Promise<LeaveRequest> => {
+      await delay(400);
+      const startDate = new Date(input.start_date);
+      const endDate = new Date(input.end_date);
+      const days = Math.ceil((endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24)) + 1;
+      const newLeave: LeaveRequest = {
+        id: String(mockLeaveRequests.length + 1),
+        ...input,
+        days,
+        status: 'pending',
+      };
+      mockLeaveRequests.push(newLeave);
+      return newLeave;
+    },
+    approve: async (input: ApproveLeaveInput): Promise<LeaveRequest> => {
+      await delay(400);
+      const leave = mockLeaveRequests.find(l => l.id === input.id);
+      if (!leave) throw new Error('Leave request not found');
+      leave.status = 'approved';
+      leave.approved_by = input.approved_by;
+      return leave;
+    },
+    reject: async (input: RejectLeaveInput): Promise<LeaveRequest> => {
+      await delay(400);
+      const leave = mockLeaveRequests.find(l => l.id === input.id);
+      if (!leave) throw new Error('Leave request not found');
+      leave.status = 'rejected';
+      return leave;
+    },
+    cancel: async (id: string): Promise<LeaveRequest> => {
+      await delay(300);
+      const leave = mockLeaveRequests.find(l => l.id === id);
+      if (!leave) throw new Error('Leave request not found');
+      if (leave.status !== 'pending') throw new Error('Can only cancel pending requests');
+      leave.status = 'rejected';
+      return leave;
+    },
+    getSummary: async () => {
+      await delay(200);
+      return {
+        total: mockLeaveRequests.length,
+        pending: mockLeaveRequests.filter(l => l.status === 'pending').length,
+        approved: mockLeaveRequests.filter(l => l.status === 'approved').length,
+        rejected: mockLeaveRequests.filter(l => l.status === 'rejected').length,
+      };
+    },
   },
   payroll: {
     getAll: async () => { await delay(300); return mockPayroll; },
     getByPeriod: async (period: string) => { await delay(200); return mockPayroll.filter(p => p.period === period); },
+    getById: async (id: string) => { await delay(200); return mockPayroll.find(p => p.id === id); },
+
+    initiate: async (input: InitiatePayrollInput): Promise<PayrollRecord[]> => {
+      await delay(500);
+      // In a real scenario, this would generate payroll records for all active employees
+      // For mock, we'll update the period and set status to 'draft' (pending approval)
+      const periodRecords = mockPayroll.filter(p => p.period === input.period);
+      periodRecords.forEach(record => {
+        record.status = 'draft';
+      });
+      return periodRecords;
+    },
+
+    approve: async (input: ApprovePayrollInput): Promise<PayrollRecord> => {
+      await delay(400);
+      const record = mockPayroll.find(p => p.id === input.id);
+      if (!record) throw new Error('Payroll record not found');
+      if (record.status !== 'pending' && record.status !== 'draft') throw new Error('Can only approve pending records');
+      record.status = 'processing';
+      return record;
+    },
+
+    process: async (input: ProcessPayrollInput): Promise<PayrollRecord> => {
+      await delay(400);
+      const record = mockPayroll.find(p => p.id === input.id);
+      if (!record) throw new Error('Payroll record not found');
+      if (record.status !== 'processing') throw new Error('Record must be in processing status');
+      record.status = 'paid';
+      record.payment_date = new Date().toISOString().split('T')[0];
+      return record;
+    },
+
+    adjustSalary: async (input: AdjustSalaryInput): Promise<PayrollRecord> => {
+      await delay(400);
+      const record = mockPayroll.find(p => p.id === input.id);
+      if (!record) throw new Error('Payroll record not found');
+      if (record.status === 'paid') throw new Error('Cannot adjust paid payroll');
+
+      switch (input.adjustment_type) {
+        case 'bonus':
+          record.other_allowances = (record.other_allowances || 0) + input.amount;
+          record.net_salary += input.amount;
+          break;
+        case 'deduction':
+          record.deductions += input.amount;
+          record.net_salary -= input.amount;
+          break;
+        case 'overtime':
+          record.overtime_pay = (record.overtime_pay || 0) + input.amount;
+          record.net_salary += input.amount;
+          break;
+      }
+
+      return record;
+    },
+
+    getSummary: async (period: string) => {
+      await delay(200);
+      const periodRecords = mockPayroll.filter(p => p.period === period);
+      return {
+        total_records: periodRecords.length,
+        pending: periodRecords.filter(r => r.status === 'pending' || r.status === 'draft').length,
+        processing: periodRecords.filter(r => r.status === 'processing').length,
+        paid: periodRecords.filter(r => r.status === 'paid').length,
+        total_gross: periodRecords.reduce((sum, r) => sum + r.basic_salary + (r.allowances || 0), 0),
+        total_deductions: periodRecords.reduce((sum, r) => sum + r.deductions, 0),
+        total_net: periodRecords.reduce((sum, r) => sum + r.net_salary, 0),
+        total_gosi: periodRecords.reduce((sum, r) => sum + (r.gosi || 0), 0),
+      };
+    },
   },
   recruitment: {
     getAll: async () => { await delay(300); return mockRecruitments; },
     getCandidates: async (recruitmentId?: string) => {
       await delay(200);
       return recruitmentId ? mockCandidates.filter(c => c.recruitment_id === recruitmentId) : mockCandidates;
+    },
+    createRequisition: async (input: CreateRequisitionInput): Promise<Recruitment> => {
+      await delay(400);
+      const newRequisition: Recruitment = {
+        id: String(mockRecruitments.length + 1),
+        position: input.position,
+        department: input.department,
+        status: 'open',
+        applicants: 0,
+        shortlisted: 0,
+        posted_date: new Date().toISOString().split('T')[0],
+        closing_date: input.closing_date,
+        hiring_manager: input.hiring_manager,
+      };
+      mockRecruitments.push(newRequisition);
+      return newRequisition;
+    },
+    moveCandidate: async (input: MoveCandidateStageInput): Promise<Candidate> => {
+      await delay(400);
+      const candidate = mockCandidates.find(c => c.id === input.id);
+      if (!candidate) throw new Error('Candidate not found');
+      candidate.status = input.status;
+      return candidate;
     },
   },
   performance: {
@@ -189,6 +635,34 @@ export const hcmsApi = {
       await delay(200);
       return employeeId ? mockKPIs.filter(k => k.employee_id === employeeId) : mockKPIs;
     },
+    createReview: async (input: CreateReviewInput): Promise<PerformanceReview> => {
+      await delay(400);
+      const newReview: PerformanceReview = {
+        id: String(mockReviews.length + 1),
+        employee_id: input.employee_id,
+        employee_name: input.employee_name,
+        period: input.period,
+        review_type: input.review_type,
+        overall_score: 0,
+        rating: 'meets',
+        reviewer_id: input.reviewer_id,
+        reviewer_name: input.reviewer_name,
+        status: 'draft',
+        created_at: new Date().toISOString(),
+      };
+      mockReviews.push(newReview);
+      return newReview;
+    },
+    submitReview: async (input: SubmitReviewInput): Promise<PerformanceReview> => {
+      await delay(400);
+      const review = mockReviews.find(r => r.id === input.id);
+      if (!review) throw new Error('Review not found');
+      review.overall_score = input.overall_score;
+      review.rating = input.rating;
+      review.comments = input.comments;
+      review.status = 'submitted';
+      return review;
+    },
   },
   training: {
     getAll: async () => { await delay(300); return mockTrainings; },
@@ -196,10 +670,71 @@ export const hcmsApi = {
       await delay(200);
       return trainingId ? mockEnrollments.filter(e => e.training_id === trainingId) : mockEnrollments;
     },
+    createProgram: async (input: CreateTrainingInput): Promise<Training> => {
+      await delay(400);
+      const newTraining: Training = {
+        id: String(mockTrainings.length + 1),
+        title: input.title,
+        type: input.type,
+        category: input.category,
+        start_date: input.start_date,
+        end_date: input.end_date,
+        duration_hours: input.duration_hours,
+        max_participants: input.max_participants,
+        enrolled: 0,
+        status: 'upcoming',
+        provider: input.provider,
+      };
+      mockTrainings.push(newTraining);
+      return newTraining;
+    },
+    enrollEmployee: async (input: EnrollEmployeeInput): Promise<TrainingEnrollment> => {
+      await delay(400);
+      const training = mockTrainings.find(t => t.id === input.training_id);
+      if (!training) throw new Error('Training not found');
+      if (training.enrolled >= training.max_participants) throw new Error('Training is full');
+      training.enrolled++;
+      const enrollment: TrainingEnrollment = {
+        id: String(mockEnrollments.length + 1),
+        training_id: input.training_id,
+        employee_id: input.employee_id,
+        employee_name: input.employee_name,
+        status: 'enrolled',
+      };
+      mockEnrollments.push(enrollment);
+      return enrollment;
+    },
   },
   compliance: {
     getAlerts: async () => { await delay(300); return mockComplianceAlerts; },
     getCases: async () => { await delay(300); return mockDisciplinaryCases; },
+    logCase: async (input: LogCaseInput): Promise<DisciplinaryCase> => {
+      await delay(400);
+      const newCase: DisciplinaryCase = {
+        id: String(mockDisciplinaryCases.length + 1),
+        employee_id: input.employee_id,
+        employee_name: input.employee_name,
+        case_type: input.case_type,
+        severity: input.severity,
+        description: input.description,
+        action_taken: 'Pending investigation',
+        status: 'open',
+        created_at: new Date().toISOString(),
+      };
+      mockDisciplinaryCases.push(newCase);
+      return newCase;
+    },
+    updateCaseStatus: async (input: UpdateCaseStatusInput): Promise<DisciplinaryCase> => {
+      await delay(400);
+      const caseItem = mockDisciplinaryCases.find(c => c.id === input.id);
+      if (!caseItem) throw new Error('Case not found');
+      caseItem.status = input.status;
+      if (input.action_taken) caseItem.action_taken = input.action_taken;
+      if (input.status === 'resolved') {
+        caseItem.resolved_at = new Date().toISOString();
+      }
+      return caseItem;
+    },
   },
   dashboard: {
     getSummary: async () => { await delay(400); return mockHCMSDashboard; },
