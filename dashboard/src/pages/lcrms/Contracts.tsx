@@ -279,7 +279,7 @@ export default function Contracts() {
               )}
 
               {/* Obligations */}
-              {selectedContract.obligations.length > 0 && (
+              {(selectedContract.obligations?.length ?? 0) > 0 && (
                 <div>
                   <h4 className="text-white font-medium mb-2">Obligations</h4>
                   <div className="space-y-2">

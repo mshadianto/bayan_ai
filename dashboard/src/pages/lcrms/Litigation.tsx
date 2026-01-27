@@ -48,7 +48,7 @@ export default function Litigation() {
   }, [cases, filter, search]);
 
   const summary = useMemo(() => {
-    const totalCosts = cases.reduce((sum, c) => sum + c.costs.reduce((cs, cost) => cs + cost.amount, 0), 0);
+    const totalCosts = cases.reduce((sum, c) => sum + (c.costs ?? []).reduce((cs, cost) => cs + cost.amount, 0), 0);
     const totalExposure = cases.filter(c => ['open', 'trial', 'discovery', 'appeal'].includes(c.status))
       .reduce((sum, c) => sum + (c.claim_amount || 0), 0);
     return {
@@ -193,7 +193,7 @@ export default function Litigation() {
 }
 
 function CaseDetail({ caseItem }: { caseItem: LitigationCase }) {
-  const totalCosts = caseItem.costs.reduce((sum, c) => sum + c.amount, 0);
+  const totalCosts = (caseItem.costs ?? []).reduce((sum, c) => sum + c.amount, 0);
 
   return (
     <div className="space-y-6">
@@ -257,7 +257,7 @@ function CaseDetail({ caseItem }: { caseItem: LitigationCase }) {
       </div>
 
       {/* Timeline */}
-      {caseItem.timeline.length > 0 && (
+      {(caseItem.timeline?.length ?? 0) > 0 && (
         <div>
           <h4 className="text-white font-medium mb-3 flex items-center gap-2">
             <Calendar size={18} /> Timeline
@@ -281,7 +281,7 @@ function CaseDetail({ caseItem }: { caseItem: LitigationCase }) {
       )}
 
       {/* Documents */}
-      {caseItem.documents.length > 0 && (
+      {(caseItem.documents?.length ?? 0) > 0 && (
         <div>
           <h4 className="text-white font-medium mb-3 flex items-center gap-2">
             <FileText size={18} /> Documents
@@ -301,7 +301,7 @@ function CaseDetail({ caseItem }: { caseItem: LitigationCase }) {
       )}
 
       {/* Costs */}
-      {caseItem.costs.length > 0 && (
+      {(caseItem.costs?.length ?? 0) > 0 && (
         <div>
           <h4 className="text-white font-medium mb-3 flex items-center gap-2">
             <DollarSign size={18} /> Costs

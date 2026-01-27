@@ -57,7 +57,7 @@ export const lcrmsApi = {
           console.log('LCRMS Contracts: Using mock data');
           return mockLcrmsApi.contracts.getAll();
         }
-        return data;
+        return data.map(c => ({ ...c, obligations: c.obligations ?? [], versions: c.versions ?? [] }));
       } catch {
         return mockLcrmsApi.contracts.getAll();
       }

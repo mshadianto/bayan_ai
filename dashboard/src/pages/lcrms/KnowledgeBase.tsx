@@ -451,7 +451,7 @@ export default function KnowledgeBase() {
               <div>
                 <p className="text-sm text-gray-500 mb-2">Kata Kunci</p>
                 <div className="flex flex-wrap gap-2">
-                  {selectedDocument.keywords.map((kw, idx) => (
+                  {(selectedDocument.keywords ?? []).map((kw, idx) => (
                     <span key={idx} className="px-3 py-1 bg-amber-100 text-amber-700 rounded-full text-sm">
                       {kw}
                     </span>

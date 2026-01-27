@@ -180,7 +180,7 @@ function MeetingsList({ meetings, onView }: { meetings: MeetingMinutes[]; onView
               </div>
               <div className="text-right">
                 <p className="text-slate-400 text-xs">Decisions</p>
-                <p className="text-white">{meeting.decisions.length}</p>
+                <p className="text-white">{meeting.decisions?.length ?? 0}</p>
               </div>
               <Eye size={18} className="text-slate-400" />
             </div>
@@ -276,8 +276,8 @@ function ResolutionsList({ resolutions, onView }: { resolutions: CircularResolut
   return (
     <div className="space-y-4">
       {resolutions.map((resolution, index) => {
-        const approvedCount = resolution.approvals.filter(a => a.decision === 'approved').length;
-        const totalApprovers = resolution.approvals.length;
+        const approvedCount = (resolution.approvals ?? []).filter(a => a.decision === 'approved').length;
+        const totalApprovers = (resolution.approvals ?? []).length;
 
         return (
           <div
@@ -352,7 +352,7 @@ function MeetingDetail({ meeting }: { meeting: MeetingMinutes }) {
       <div>
         <h4 className="text-white font-medium mb-3">Attendees</h4>
         <div className="grid grid-cols-2 gap-3">
-          {meeting.attendees.map((attendee) => (
+          {(meeting.attendees ?? []).map((attendee) => (
             <div key={attendee.id} className="bg-slate-800 rounded-lg p-3 flex items-center justify-between">
               <div>
                 <p className="text-white">{attendee.name}</p>
@@ -368,14 +368,14 @@ function MeetingDetail({ meeting }: { meeting: MeetingMinutes }) {
       <div>
         <h4 className="text-white font-medium mb-3">Agenda</h4>
         <ol className="list-decimal list-inside space-y-1">
-          {meeting.agenda.map((item, i) => (
+          {(meeting.agenda ?? []).map((item, i) => (
             <li key={i} className="text-slate-300">{item}</li>
           ))}
         </ol>
       </div>
 
       {/* Decisions */}
-      {meeting.decisions.length > 0 && (
+      {(meeting.decisions?.length ?? 0) > 0 && (
         <div>
           <h4 className="text-white font-medium mb-3">Decisions</h4>
           <div className="space-y-3">
@@ -391,7 +391,7 @@ function MeetingDetail({ meeting }: { meeting: MeetingMinutes }) {
       )}
 
       {/* Action Items */}
-      {meeting.action_items.length > 0 && (
+      {(meeting.action_items?.length ?? 0) > 0 && (
         <div>
           <h4 className="text-white font-medium mb-3">Action Items</h4>
           <div className="space-y-2">
@@ -495,7 +495,7 @@ function ResolutionDetail({ resolution }: { resolution: CircularResolution }) {
       <div>
         <h4 className="text-white font-medium mb-3">Approvals</h4>
         <div className="space-y-2">
-          {resolution.approvals.map((approval) => (
+          {(resolution.approvals ?? []).map((approval) => (
             <div key={approval.id} className="flex items-center justify-between bg-slate-800 rounded-lg p-3">
               <div>
                 <p className="text-white">{approval.approver_name}</p>
