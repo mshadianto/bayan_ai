@@ -198,7 +198,7 @@ VITE_WAHA_SESSION=default
 
 ## License
 
-**PROPRIETARY LICENSE** © 2025 BPKH Limited. All Rights Reserved.
+**PROPRIETARY LICENSE** © 2026 BPKH Limited. All Rights Reserved.
 
 ---
 
