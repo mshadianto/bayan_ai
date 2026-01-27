@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
-import { ChevronDown, ChevronRight } from 'lucide-react';
+import { ChevronDown, ChevronRight, Lock } from 'lucide-react';
+import { useUser } from '../../contexts/UserContext';
 
 const financeItems = [
   { path: '/', label: 'Dashboard', emoji: '📊' },
@@ -34,9 +35,14 @@ const lcrmsItems = [
 ];
 
 export function Sidebar() {
+  const { canAccess } = useUser();
   const [financeOpen, setFinanceOpen] = useState(true);
   const [hcmsOpen, setHcmsOpen] = useState(true);
   const [lcrmsOpen, setLcrmsOpen] = useState(true);
+
+  const hasFinanceAccess = canAccess('finance');
+  const hasHcmsAccess = canAccess('hcms');
+  const hasLcrmsAccess = canAccess('lcrms');
 
   return (
     <aside className="w-64 bg-slate-900 text-white min-h-screen fixed left-0 top-0 border-r border-slate-700 overflow-y-auto">
@@ -58,12 +64,17 @@ export function Sidebar() {
         {/* Finance Section */}
         <button
           onClick={() => setFinanceOpen(!financeOpen)}
-          className="w-full flex items-center justify-between px-4 py-2 text-slate-400 hover:text-white transition-colors"
+          className={`w-full flex items-center justify-between px-4 py-2 transition-colors ${
+            hasFinanceAccess ? 'text-slate-400 hover:text-white' : 'text-slate-600 cursor-not-allowed'
+          }`}
         >
-          <span className="text-xs font-semibold uppercase tracking-wider">Finance</span>
-          {financeOpen ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
+          <span className="text-xs font-semibold uppercase tracking-wider flex items-center gap-2">
+            Finance
+            {!hasFinanceAccess && <Lock size={12} />}
+          </span>
+          {hasFinanceAccess && (financeOpen ? <ChevronDown size={16} /> : <ChevronRight size={16} />)}
         </button>
-        {financeOpen && (
+        {financeOpen && hasFinanceAccess && (
           <div className="mt-1 mb-4">
             {financeItems.map(({ path, label, emoji }) => (
               <NavLink
@@ -88,12 +99,17 @@ export function Sidebar() {
         {/* HCMS Section */}
         <button
           onClick={() => setHcmsOpen(!hcmsOpen)}
-          className="w-full flex items-center justify-between px-4 py-2 text-slate-400 hover:text-white transition-colors"
+          className={`w-full flex items-center justify-between px-4 py-2 transition-colors ${
+            hasHcmsAccess ? 'text-slate-400 hover:text-white' : 'text-slate-600 cursor-not-allowed'
+          }`}
         >
-          <span className="text-xs font-semibold uppercase tracking-wider">Human Capital</span>
-          {hcmsOpen ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
+          <span className="text-xs font-semibold uppercase tracking-wider flex items-center gap-2">
+            Human Capital
+            {!hasHcmsAccess && <Lock size={12} />}
+          </span>
+          {hasHcmsAccess && (hcmsOpen ? <ChevronDown size={16} /> : <ChevronRight size={16} />)}
         </button>
-        {hcmsOpen && (
+        {hcmsOpen && hasHcmsAccess && (
           <div className="mt-1 mb-4">
             {hcmsItems.map(({ path, label, emoji }) => (
               <NavLink
@@ -118,12 +134,17 @@ export function Sidebar() {
         {/* LCRMS Section */}
         <button
           onClick={() => setLcrmsOpen(!lcrmsOpen)}
-          className="w-full flex items-center justify-between px-4 py-2 text-slate-400 hover:text-white transition-colors"
+          className={`w-full flex items-center justify-between px-4 py-2 transition-colors ${
+            hasLcrmsAccess ? 'text-slate-400 hover:text-white' : 'text-slate-600 cursor-not-allowed'
+          }`}
         >
-          <span className="text-xs font-semibold uppercase tracking-wider">Legal & Compliance</span>
-          {lcrmsOpen ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
+          <span className="text-xs font-semibold uppercase tracking-wider flex items-center gap-2">
+            Legal & Compliance
+            {!hasLcrmsAccess && <Lock size={12} />}
+          </span>
+          {hasLcrmsAccess && (lcrmsOpen ? <ChevronDown size={16} /> : <ChevronRight size={16} />)}
         </button>
-        {lcrmsOpen && (
+        {lcrmsOpen && hasLcrmsAccess && (
           <div className="mt-1">
             {lcrmsItems.map(({ path, label, emoji }) => (
               <NavLink

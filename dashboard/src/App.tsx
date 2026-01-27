@@ -2,6 +2,7 @@ import { lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Layout } from './components/Layout';
 import { PageSkeleton } from './components/common';
+import { UserProvider } from './contexts/UserContext';
 
 // Lazy load Finance pages for code splitting
 const Dashboard = lazy(() => import('./pages/Dashboard'));
@@ -33,8 +34,9 @@ const Secretarial = lazy(() => import('./pages/lcrms/Secretarial'));
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
+    <UserProvider>
+      <BrowserRouter>
+        <Routes>
         <Route path="/" element={<Layout />}>
           {/* Finance Routes - Lazy loaded */}
           <Route index element={<Suspense fallback={<PageSkeleton />}><Dashboard /></Suspense>} />
@@ -174,8 +176,9 @@ function App() {
             }
           />
         </Route>
-      </Routes>
-    </BrowserRouter>
+        </Routes>
+      </BrowserRouter>
+    </UserProvider>
   );
 }
 
