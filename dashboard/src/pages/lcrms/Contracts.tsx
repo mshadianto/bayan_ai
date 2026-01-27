@@ -3,7 +3,7 @@ import { Header } from '../../components/Layout';
 import { StatCard, StatusBadge, FilterButtons, SearchInput, Modal, CardGridSkeleton, EmptyState } from '../../components/common';
 import type { Contract, ContractAlert } from '../../types';
 import { FileText, AlertTriangle, Clock, CheckCircle, Plus, Eye, Calendar } from 'lucide-react';
-import { lcrmsApi, CreateContractInput } from '../../services/mockData/lcrms';
+import { lcrmsApi, CreateContractInput } from '../../services/supabaseLcrms';
 
 const CONTRACT_FILTERS = ['all', 'active', 'expiring', 'expired', 'draft'] as const;
 type ContractFilter = typeof CONTRACT_FILTERS[number];

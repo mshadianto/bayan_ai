@@ -3,7 +3,7 @@ import { Header } from '../../components/Layout';
 import { StatCard, StatusBadge, SearchInput, Modal, CardGridSkeleton, EmptyState } from '../../components/common';
 import type { License, COIDeclaration, EmployeeViolation } from '../../types';
 import { Shield, FileCheck, AlertTriangle, Users, Eye, CheckCircle } from 'lucide-react';
-import { lcrmsApi } from '../../services/mockData/lcrms';
+import { lcrmsApi } from '../../services/supabaseLcrms';
 
 type TabType = 'licenses' | 'coi' | 'violations';
 

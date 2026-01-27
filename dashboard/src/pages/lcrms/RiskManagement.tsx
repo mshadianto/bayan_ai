@@ -3,7 +3,7 @@ import { Header } from '../../components/Layout';
 import { StatCard, StatusBadge, FilterButtons, SearchInput, Modal, CardGridSkeleton, EmptyState } from '../../components/common';
 import type { Risk, RiskHeatmapCell } from '../../types';
 import { AlertTriangle, Shield, TrendingDown, CheckCircle, Plus, Eye } from 'lucide-react';
-import { lcrmsApi, CreateRiskInput } from '../../services/mockData/lcrms';
+import { lcrmsApi, CreateRiskInput } from '../../services/supabaseLcrms';
 
 const RISK_FILTERS = ['all', 'critical', 'high', 'medium', 'low'] as const;
 type RiskFilter = typeof RISK_FILTERS[number];

@@ -3,7 +3,7 @@ import { Header } from '../../components/Layout';
 import { StatCard, StatusBadge, FilterButtons, SearchInput, Modal, CardGridSkeleton, EmptyState } from '../../components/common';
 import type { LitigationCase, ExternalCounsel } from '../../types';
 import { Scale, DollarSign, Users, AlertTriangle, Plus, Eye, Calendar, FileText } from 'lucide-react';
-import { lcrmsApi, CreateCaseInput } from '../../services/mockData/lcrms';
+import { lcrmsApi, CreateCaseInput } from '../../services/supabaseLcrms';
 
 const CASE_FILTERS = ['all', 'open', 'trial', 'settled', 'won', 'lost'] as const;
 type CaseFilter = typeof CASE_FILTERS[number];

@@ -3,7 +3,7 @@ import { Header } from '../../components/Layout';
 import { StatCard, StatusBadge, Modal, CardGridSkeleton, EmptyState } from '../../components/common';
 import type { MeetingMinutes, Shareholder, CircularResolution } from '../../types';
 import { FileText, Users, Vote, Eye, PieChart } from 'lucide-react';
-import { lcrmsApi } from '../../services/mockData/lcrms';
+import { lcrmsApi } from '../../services/supabaseLcrms';
 import { PieChart as RechartsPC, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
 
 type TabType = 'meetings' | 'shareholders' | 'resolutions';

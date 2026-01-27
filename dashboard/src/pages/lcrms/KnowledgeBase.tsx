@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { lcrmsApi } from '../../services/mockData/lcrms';
+import { lcrmsApi } from '../../services/supabaseLcrms';
 import type { LegalDocument } from '../../types';
 
 interface ChatMessage {

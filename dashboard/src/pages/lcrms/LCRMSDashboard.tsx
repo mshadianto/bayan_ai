@@ -15,7 +15,7 @@ import {
   Pie,
   Cell,
 } from 'recharts';
-import { lcrmsApi } from '../../services/mockData/lcrms';
+import { lcrmsApi } from '../../services/supabaseLcrms';
 
 const tooltipStyle = {
   backgroundColor: '#1e293b',
