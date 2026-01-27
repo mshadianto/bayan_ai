@@ -235,7 +235,7 @@ export const lcrmsApi = {
           .order('created_at', { ascending: false });
 
         if (error || !data?.length) return mockLcrmsApi.litigation.getCases();
-        return data;
+        return data.map(c => ({ ...c, timeline: c.timeline ?? [], documents: c.documents ?? [], costs: c.costs ?? [] }));
       } catch {
         return mockLcrmsApi.litigation.getCases();
       }
@@ -277,7 +277,13 @@ export const lcrmsApi = {
           .order('meeting_date', { ascending: false });
 
         if (error || !data?.length) return mockLcrmsApi.secretarial.getMeetings();
-        return data;
+        return data.map(m => ({
+          ...m,
+          attendees: m.attendees ?? [],
+          agenda: m.agenda ?? [],
+          decisions: m.decisions ?? [],
+          action_items: m.action_items ?? [],
+        }));
       } catch {
         return mockLcrmsApi.secretarial.getMeetings();
       }
@@ -312,7 +318,7 @@ export const lcrmsApi = {
           .order('proposed_date', { ascending: false });
 
         if (error || !data?.length) return mockLcrmsApi.secretarial.getResolutions();
-        return data;
+        return data.map(r => ({ ...r, approvals: r.approvals ?? [] }));
       } catch {
         return mockLcrmsApi.secretarial.getResolutions();
       }
