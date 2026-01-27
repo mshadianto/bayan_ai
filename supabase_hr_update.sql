@@ -38,31 +38,31 @@ ON CONFLICT (employee_id) DO NOTHING;
 
 -- Attendance Records (Today)
 INSERT INTO hcms_attendance (employee_id, employee_code, employee_name, date, check_in, check_out, status, work_hours, late_minutes, check_in_location) VALUES
-((SELECT id FROM hcms_employees WHERE employee_id = '2024001'), '2024001', 'Sidiq Haryono', CURRENT_DATE, '08:00', '17:00', 'present', 9, 0, 'Office'),
-((SELECT id FROM hcms_employees WHERE employee_id = '2024002'), '2024002', 'Iman Nimatullah Muhdi', CURRENT_DATE, '08:10', '17:30', 'present', 9.33, 10, 'Office'),
-((SELECT id FROM hcms_employees WHERE employee_id = '2024003'), '2024003', 'Mujiburahman Yaqub Abdurahman', CURRENT_DATE, '08:00', '17:00', 'present', 9, 0, 'Office'),
-((SELECT id FROM hcms_employees WHERE employee_id = '2024004'), '2024004', 'Zoehelmy Husen Muhammad Husen', CURRENT_DATE, '07:55', '17:15', 'present', 9.33, 0, 'Office'),
-((SELECT id FROM hcms_employees WHERE employee_id = '2024005'), '2024005', 'Ibrahim Mohmmed Yasin Abdulghani', CURRENT_DATE, '09:15', '18:00', 'late', 8.75, 75, 'Office'),
-((SELECT id FROM hcms_employees WHERE employee_id = '2024006'), '2024006', 'Karimah Abdulkhoir', CURRENT_DATE, '08:05', '17:00', 'present', 8.92, 5, 'Office'),
-((SELECT id FROM hcms_employees WHERE employee_id = '2024007'), '2024007', 'Nebras Faishal Bin Abdul Aziz Maas', CURRENT_DATE, '08:00', '17:00', 'present', 9, 0, 'Office'),
-((SELECT id FROM hcms_employees WHERE employee_id = '2024008'), '2024008', 'Samer Sholeh Bin Muhamad Thoyib Kamfar', CURRENT_DATE, NULL, NULL, 'leave', NULL, NULL, NULL),
-((SELECT id FROM hcms_employees WHERE employee_id = '2024009'), '2024009', 'Muhammad Nabil Abdullah Jambi', CURRENT_DATE, '08:00', '17:00', 'present', 9, 0, 'Office'),
-((SELECT id FROM hcms_employees WHERE employee_id = '2024010'), '2024010', 'Khawlah Omar Bin Raziq Harbi', CURRENT_DATE, '08:20', '17:30', 'late', 9.17, 20, 'Office'),
-((SELECT id FROM hcms_employees WHERE employee_id = '2024011'), '2024011', 'Ulfah Putri Nastiti', CURRENT_DATE, '08:00', '17:00', 'present', 9, 0, 'Office'),
-((SELECT id FROM hcms_employees WHERE employee_id = '2024012'), '2024012', 'Raditia Rahman Susanto', CURRENT_DATE, '08:00', '17:00', 'present', 9, 0, 'Office'),
-((SELECT id FROM hcms_employees WHERE employee_id = '2025016'), '2025016', 'Abdul Gofur Mahmudin', CURRENT_DATE, '06:00', '14:00', 'present', 8, 0, 'Kitchen'),
-((SELECT id FROM hcms_employees WHERE employee_id = '2025017'), '2025017', 'Dilal Adlin Fadil', CURRENT_DATE, NULL, NULL, 'absent', NULL, NULL, NULL),
-((SELECT id FROM hcms_employees WHERE employee_id = '2025018'), '2025018', 'Effat Fuad Muhammad Sholeh Minkabau', CURRENT_DATE, '08:00', '17:00', 'present', 9, 0, 'Office'),
-((SELECT id FROM hcms_employees WHERE employee_id = '2025020'), '2025020', 'Myar Mahdi Bin Zainab Qorut', CURRENT_DATE, '08:00', '17:00', 'present', 9, 0, 'Office'),
-((SELECT id FROM hcms_employees WHERE employee_id = '2025021'), '2025021', 'Raghad Alo Husna Alotaibi', CURRENT_DATE, '08:00', '17:00', 'present', 9, 0, 'Office')
+((SELECT id FROM hcms_employees WHERE employee_id = '2024001' LIMIT 1), '2024001', 'Sidiq Haryono', CURRENT_DATE, '08:00', '17:00', 'present', 9, 0, 'Office'),
+((SELECT id FROM hcms_employees WHERE employee_id = '2024002' LIMIT 1), '2024002', 'Iman Nimatullah Muhdi', CURRENT_DATE, '08:10', '17:30', 'present', 9.33, 10, 'Office'),
+((SELECT id FROM hcms_employees WHERE employee_id = '2024003' LIMIT 1), '2024003', 'Mujiburahman Yaqub Abdurahman', CURRENT_DATE, '08:00', '17:00', 'present', 9, 0, 'Office'),
+((SELECT id FROM hcms_employees WHERE employee_id = '2024004' LIMIT 1), '2024004', 'Zoehelmy Husen Muhammad Husen', CURRENT_DATE, '07:55', '17:15', 'present', 9.33, 0, 'Office'),
+((SELECT id FROM hcms_employees WHERE employee_id = '2024005' LIMIT 1), '2024005', 'Ibrahim Mohmmed Yasin Abdulghani', CURRENT_DATE, '09:15', '18:00', 'late', 8.75, 75, 'Office'),
+((SELECT id FROM hcms_employees WHERE employee_id = '2024006' LIMIT 1), '2024006', 'Karimah Abdulkhoir', CURRENT_DATE, '08:05', '17:00', 'present', 8.92, 5, 'Office'),
+((SELECT id FROM hcms_employees WHERE employee_id = '2024007' LIMIT 1), '2024007', 'Nebras Faishal Bin Abdul Aziz Maas', CURRENT_DATE, '08:00', '17:00', 'present', 9, 0, 'Office'),
+((SELECT id FROM hcms_employees WHERE employee_id = '2024008' LIMIT 1), '2024008', 'Samer Sholeh Bin Muhamad Thoyib Kamfar', CURRENT_DATE, NULL, NULL, 'leave', NULL, NULL, NULL),
+((SELECT id FROM hcms_employees WHERE employee_id = '2024009' LIMIT 1), '2024009', 'Muhammad Nabil Abdullah Jambi', CURRENT_DATE, '08:00', '17:00', 'present', 9, 0, 'Office'),
+((SELECT id FROM hcms_employees WHERE employee_id = '2024010' LIMIT 1), '2024010', 'Khawlah Omar Bin Raziq Harbi', CURRENT_DATE, '08:20', '17:30', 'late', 9.17, 20, 'Office'),
+((SELECT id FROM hcms_employees WHERE employee_id = '2024011' LIMIT 1), '2024011', 'Ulfah Putri Nastiti', CURRENT_DATE, '08:00', '17:00', 'present', 9, 0, 'Office'),
+((SELECT id FROM hcms_employees WHERE employee_id = '2024012' LIMIT 1), '2024012', 'Raditia Rahman Susanto', CURRENT_DATE, '08:00', '17:00', 'present', 9, 0, 'Office'),
+((SELECT id FROM hcms_employees WHERE employee_id = '2025016' LIMIT 1), '2025016', 'Abdul Gofur Mahmudin', CURRENT_DATE, '06:00', '14:00', 'present', 8, 0, 'Kitchen'),
+((SELECT id FROM hcms_employees WHERE employee_id = '2025017' LIMIT 1), '2025017', 'Dilal Adlin Fadil', CURRENT_DATE, NULL, NULL, 'absent', NULL, NULL, NULL),
+((SELECT id FROM hcms_employees WHERE employee_id = '2025018' LIMIT 1), '2025018', 'Effat Fuad Muhammad Sholeh Minkabau', CURRENT_DATE, '08:00', '17:00', 'present', 9, 0, 'Office'),
+((SELECT id FROM hcms_employees WHERE employee_id = '2025020' LIMIT 1), '2025020', 'Myar Mahdi Bin Zainab Qorut', CURRENT_DATE, '08:00', '17:00', 'present', 9, 0, 'Office'),
+((SELECT id FROM hcms_employees WHERE employee_id = '2025021' LIMIT 1), '2025021', 'Raghad Alo Husna Alotaibi', CURRENT_DATE, '08:00', '17:00', 'present', 9, 0, 'Office')
 ON CONFLICT (employee_id, date) DO NOTHING;
 
 -- Leave Requests
 INSERT INTO hcms_leave_requests (employee_id, employee_code, employee_name, leave_type_id, leave_type, start_date, end_date, days, reason, status, approved_by, approved_at) VALUES
-((SELECT id FROM hcms_employees WHERE employee_id = '2024008'), '2024008', 'Samer Sholeh Bin Muhamad Thoyib Kamfar', (SELECT id FROM hcms_leave_types WHERE name = 'Annual Leave'), 'Annual Leave', CURRENT_DATE, CURRENT_DATE + 3, 4, 'Family visit', 'approved', 'Sidiq Haryono', NOW() - INTERVAL '3 days'),
-((SELECT id FROM hcms_employees WHERE employee_id = '2024006'), '2024006', 'Karimah Abdulkhoir', (SELECT id FROM hcms_leave_types WHERE name = 'Annual Leave'), 'Annual Leave', CURRENT_DATE + 14, CURRENT_DATE + 18, 5, 'Personal travel', 'pending', NULL, NULL),
-((SELECT id FROM hcms_employees WHERE employee_id = '2024003'), '2024003', 'Mujiburahman Yaqub Abdurahman', (SELECT id FROM hcms_leave_types WHERE name = 'Sick Leave'), 'Sick Leave', CURRENT_DATE - 5, CURRENT_DATE - 4, 2, 'Medical treatment', 'approved', 'Sidiq Haryono', NOW() - INTERVAL '6 days'),
-((SELECT id FROM hcms_employees WHERE employee_id = '2024004'), '2024004', 'Zoehelmy Husen Muhammad Husen', (SELECT id FROM hcms_leave_types WHERE name = 'Hajj Leave'), 'Hajj Leave', '2025-06-01', '2025-06-15', 15, 'Hajj pilgrimage', 'approved', 'Sidiq Haryono', NOW() - INTERVAL '30 days');
+((SELECT id FROM hcms_employees WHERE employee_id = '2024008' LIMIT 1), '2024008', 'Samer Sholeh Bin Muhamad Thoyib Kamfar', (SELECT id FROM hcms_leave_types WHERE name = 'Annual Leave' LIMIT 1), 'Annual Leave', CURRENT_DATE, CURRENT_DATE + 3, 4, 'Family visit', 'approved', 'Sidiq Haryono', NOW() - INTERVAL '3 days'),
+((SELECT id FROM hcms_employees WHERE employee_id = '2024006' LIMIT 1), '2024006', 'Karimah Abdulkhoir', (SELECT id FROM hcms_leave_types WHERE name = 'Annual Leave' LIMIT 1), 'Annual Leave', CURRENT_DATE + 14, CURRENT_DATE + 18, 5, 'Personal travel', 'pending', NULL, NULL),
+((SELECT id FROM hcms_employees WHERE employee_id = '2024003' LIMIT 1), '2024003', 'Mujiburahman Yaqub Abdurahman', (SELECT id FROM hcms_leave_types WHERE name = 'Sick Leave' LIMIT 1), 'Sick Leave', CURRENT_DATE - 5, CURRENT_DATE - 4, 2, 'Medical treatment', 'approved', 'Sidiq Haryono', NOW() - INTERVAL '6 days'),
+((SELECT id FROM hcms_employees WHERE employee_id = '2024004' LIMIT 1), '2024004', 'Zoehelmy Husen Muhammad Husen', (SELECT id FROM hcms_leave_types WHERE name = 'Hajj Leave' LIMIT 1), 'Hajj Leave', '2025-06-01', '2025-06-15', 15, 'Hajj pilgrimage', 'approved', 'Sidiq Haryono', NOW() - INTERVAL '30 days');
 
 -- Payroll Periods (keep existing)
 INSERT INTO hcms_payroll_periods (period_code, year, month, start_date, end_date, status, paid_at) VALUES
@@ -77,7 +77,7 @@ SELECT
   e.id,
   e.employee_id,
   e.first_name || ' ' || e.last_name,
-  (SELECT id FROM hcms_payroll_periods WHERE period_code = '2025-01'),
+  (SELECT id FROM hcms_payroll_periods WHERE period_code = '2025-01' LIMIT 1),
   'January 2025',
   e.salary,
   e.salary * 0.25,
@@ -101,28 +101,28 @@ ON CONFLICT (job_code) DO NOTHING;
 
 -- Candidates
 INSERT INTO hcms_candidates (job_posting_id, first_name, last_name, email, phone, resume_url, status, score, interview_notes) VALUES
-((SELECT id FROM hcms_job_postings WHERE job_code = 'JOB-2025-001'), 'Ahmed', 'Al-Mutairi', 'ahmed.mutairi@email.com', '+966551234567', '/resumes/ahmed_mutairi.pdf', 'interview', 82, 'Strong technical skills'),
-((SELECT id FROM hcms_job_postings WHERE job_code = 'JOB-2025-002'), 'Fatimah', 'Al-Dosari', 'fatimah.dosari@email.com', '+966552345678', '/resumes/fatimah_dosari.pdf', 'screening', 75, 'Good Hajj experience'),
-((SELECT id FROM hcms_job_postings WHERE job_code = 'JOB-2025-003'), 'Omar', 'Baswedan', 'omar.baswedan@email.com', '+966553456789', '/resumes/omar_baswedan.pdf', 'interview', 88, 'SOCPA certified');
+((SELECT id FROM hcms_job_postings WHERE job_code = 'JOB-2025-001' LIMIT 1), 'Ahmed', 'Al-Mutairi', 'ahmed.mutairi@email.com', '+966551234567', '/resumes/ahmed_mutairi.pdf', 'interview', 82, 'Strong technical skills'),
+((SELECT id FROM hcms_job_postings WHERE job_code = 'JOB-2025-002' LIMIT 1), 'Fatimah', 'Al-Dosari', 'fatimah.dosari@email.com', '+966552345678', '/resumes/fatimah_dosari.pdf', 'screening', 75, 'Good Hajj experience'),
+((SELECT id FROM hcms_job_postings WHERE job_code = 'JOB-2025-003' LIMIT 1), 'Omar', 'Baswedan', 'omar.baswedan@email.com', '+966553456789', '/resumes/omar_baswedan.pdf', 'interview', 88, 'SOCPA certified');
 
--- Performance Cycles
+-- Performance Cycles (delete existing first to avoid conflicts)
+DELETE FROM hcms_performance_cycles WHERE name IN ('2024 Annual Review', '2025 Annual Review');
 INSERT INTO hcms_performance_cycles (name, year, type, start_date, end_date, status) VALUES
 ('2024 Annual Review', 2024, 'annual', '2024-01-01', '2024-12-31', 'completed'),
-('2025 Annual Review', 2025, 'annual', '2025-01-01', '2025-12-31', 'active')
-ON CONFLICT DO NOTHING;
+('2025 Annual Review', 2025, 'annual', '2025-01-01', '2025-12-31', 'active');
 
 -- Performance Reviews
 INSERT INTO hcms_performance_reviews (employee_id, employee_name, period, cycle_id, reviewer_id, reviewer_name, overall_score, rating, status, achievements, submitted_at, acknowledged_at) VALUES
-((SELECT id FROM hcms_employees WHERE employee_id = '2024003'), 'Mujiburahman Yaqub Abdurahman', '2024', (SELECT id FROM hcms_performance_cycles WHERE name = '2024 Annual Review'), (SELECT id FROM hcms_employees WHERE employee_id = '2024001'), 'Sidiq Haryono', 4.2, 'exceeds', 'acknowledged', 'Excellent financial reporting accuracy', NOW() - INTERVAL '15 days', NOW() - INTERVAL '8 days'),
-((SELECT id FROM hcms_employees WHERE employee_id = '2024004'), 'Zoehelmy Husen Muhammad Husen', '2024', (SELECT id FROM hcms_performance_cycles WHERE name = '2024 Annual Review'), (SELECT id FROM hcms_employees WHERE employee_id = '2024001'), 'Sidiq Haryono', 4.5, 'exceeds', 'acknowledged', 'Outstanding Hajj operations management', NOW() - INTERVAL '12 days', NOW() - INTERVAL '5 days'),
-((SELECT id FROM hcms_employees WHERE employee_id = '2024010'), 'Khawlah Omar Bin Raziq Harbi', '2024', (SELECT id FROM hcms_performance_cycles WHERE name = '2024 Annual Review'), (SELECT id FROM hcms_employees WHERE employee_id = '2024001'), 'Sidiq Haryono', 4.0, 'meets', 'submitted', 'Good marketing campaign results', NOW() - INTERVAL '10 days', NULL);
+((SELECT id FROM hcms_employees WHERE employee_id = '2024003' LIMIT 1), 'Mujiburahman Yaqub Abdurahman', '2024', (SELECT id FROM hcms_performance_cycles WHERE name = '2024 Annual Review' LIMIT 1), (SELECT id FROM hcms_employees WHERE employee_id = '2024001' LIMIT 1), 'Sidiq Haryono', 4.2, 'exceeds', 'acknowledged', 'Excellent financial reporting accuracy', NOW() - INTERVAL '15 days', NOW() - INTERVAL '8 days'),
+((SELECT id FROM hcms_employees WHERE employee_id = '2024004' LIMIT 1), 'Zoehelmy Husen Muhammad Husen', '2024', (SELECT id FROM hcms_performance_cycles WHERE name = '2024 Annual Review' LIMIT 1), (SELECT id FROM hcms_employees WHERE employee_id = '2024001' LIMIT 1), 'Sidiq Haryono', 4.5, 'exceeds', 'acknowledged', 'Outstanding Hajj operations management', NOW() - INTERVAL '12 days', NOW() - INTERVAL '5 days'),
+((SELECT id FROM hcms_employees WHERE employee_id = '2024010' LIMIT 1), 'Khawlah Omar Bin Raziq Harbi', '2024', (SELECT id FROM hcms_performance_cycles WHERE name = '2024 Annual Review' LIMIT 1), (SELECT id FROM hcms_employees WHERE employee_id = '2024001' LIMIT 1), 'Sidiq Haryono', 4.0, 'meets', 'submitted', 'Good marketing campaign results', NOW() - INTERVAL '10 days', NULL);
 
 -- KPIs
 INSERT INTO hcms_kpis (employee_id, employee_name, period, kpi_name, description, target, actual, weight, unit, category) VALUES
-((SELECT id FROM hcms_employees WHERE employee_id = '2024001'), 'Sidiq Haryono', '2025', 'Revenue Growth', 'Achieve annual revenue target', 20, 22, 30, 'percentage', 'quantitative'),
-((SELECT id FROM hcms_employees WHERE employee_id = '2024001'), 'Sidiq Haryono', '2025', 'Cost Efficiency', 'Maintain operational cost within budget', 95, 97, 20, 'percentage', 'quantitative'),
-((SELECT id FROM hcms_employees WHERE employee_id = '2024004'), 'Zoehelmy Husen Muhammad Husen', '2025', 'Pilgrim Satisfaction', 'Customer satisfaction score', 90, 92, 40, 'percentage', 'quantitative'),
-((SELECT id FROM hcms_employees WHERE employee_id = '2024003'), 'Mujiburahman Yaqub Abdurahman', '2025', 'Report Accuracy', 'Financial report accuracy rate', 99, 99.5, 40, 'percentage', 'quantitative');
+((SELECT id FROM hcms_employees WHERE employee_id = '2024001' LIMIT 1), 'Sidiq Haryono', '2025', 'Revenue Growth', 'Achieve annual revenue target', 20, 22, 30, 'percentage', 'quantitative'),
+((SELECT id FROM hcms_employees WHERE employee_id = '2024001' LIMIT 1), 'Sidiq Haryono', '2025', 'Cost Efficiency', 'Maintain operational cost within budget', 95, 97, 20, 'percentage', 'quantitative'),
+((SELECT id FROM hcms_employees WHERE employee_id = '2024004' LIMIT 1), 'Zoehelmy Husen Muhammad Husen', '2025', 'Pilgrim Satisfaction', 'Customer satisfaction score', 90, 92, 40, 'percentage', 'quantitative'),
+((SELECT id FROM hcms_employees WHERE employee_id = '2024003' LIMIT 1), 'Mujiburahman Yaqub Abdurahman', '2025', 'Report Accuracy', 'Financial report accuracy rate', 99, 99.5, 40, 'percentage', 'quantitative');
 
 -- Training Courses
 INSERT INTO hcms_training_courses (code, title, description, type, category, provider, start_date, end_date, duration_hours, location, max_participants, enrolled, status) VALUES
@@ -133,20 +133,20 @@ ON CONFLICT (code) DO NOTHING;
 
 -- Training Enrollments
 INSERT INTO hcms_training_enrollments (course_id, employee_id, employee_name, status, enrolled_at, completed_at, score, certificate_url) VALUES
-((SELECT id FROM hcms_training_courses WHERE code = 'TRN-2025-002'), (SELECT id FROM hcms_employees WHERE employee_id = '2024003'), 'Mujiburahman Yaqub Abdurahman', 'enrolled', NOW() - INTERVAL '5 days', NULL, NULL, NULL),
-((SELECT id FROM hcms_training_courses WHERE code = 'TRN-2025-002'), (SELECT id FROM hcms_employees WHERE employee_id = '2025021'), 'Raghad Alo Husna Alotaibi', 'enrolled', NOW() - INTERVAL '5 days', NULL, NULL, NULL),
-((SELECT id FROM hcms_training_courses WHERE code = 'TRN-2025-003'), (SELECT id FROM hcms_employees WHERE employee_id = '2024006'), 'Karimah Abdulkhoir', 'enrolled', NOW() - INTERVAL '10 days', NULL, NULL, NULL),
-((SELECT id FROM hcms_training_courses WHERE code = 'TRN-2025-001'), (SELECT id FROM hcms_employees WHERE employee_id = '2024004'), 'Zoehelmy Husen Muhammad Husen', 'enrolled', NOW() - INTERVAL '3 days', NULL, NULL, NULL);
+((SELECT id FROM hcms_training_courses WHERE code = 'TRN-2025-002' LIMIT 1), (SELECT id FROM hcms_employees WHERE employee_id = '2024003' LIMIT 1), 'Mujiburahman Yaqub Abdurahman', 'enrolled', NOW() - INTERVAL '5 days', NULL, NULL, NULL),
+((SELECT id FROM hcms_training_courses WHERE code = 'TRN-2025-002' LIMIT 1), (SELECT id FROM hcms_employees WHERE employee_id = '2025021' LIMIT 1), 'Raghad Alo Husna Alotaibi', 'enrolled', NOW() - INTERVAL '5 days', NULL, NULL, NULL),
+((SELECT id FROM hcms_training_courses WHERE code = 'TRN-2025-003' LIMIT 1), (SELECT id FROM hcms_employees WHERE employee_id = '2024006' LIMIT 1), 'Karimah Abdulkhoir', 'enrolled', NOW() - INTERVAL '10 days', NULL, NULL, NULL),
+((SELECT id FROM hcms_training_courses WHERE code = 'TRN-2025-001' LIMIT 1), (SELECT id FROM hcms_employees WHERE employee_id = '2024004' LIMIT 1), 'Zoehelmy Husen Muhammad Husen', 'enrolled', NOW() - INTERVAL '3 days', NULL, NULL, NULL);
 
 -- Compliance Alerts (based on actual ID expiry dates)
 INSERT INTO hcms_compliance_alerts (employee_id, employee_name, alert_type, expiry_date, days_remaining, severity, status, notes) VALUES
-((SELECT id FROM hcms_employees WHERE employee_id = '2025018'), 'Effat Fuad Muhammad Sholeh Minkabau', 'iqamah_expiry', '2025-05-23', 116, 'warning', 'active', 'National ID expiring in 4 months'),
-((SELECT id FROM hcms_employees WHERE employee_id = '2024005'), 'Ibrahim Mohmmed Yasin Abdulghani', 'iqamah_expiry', '2025-06-11', 135, 'info', 'active', 'Iqama renewal needed'),
-((SELECT id FROM hcms_employees WHERE employee_id = '2024006'), 'Karimah Abdulkhoir', 'iqamah_expiry', '2025-07-23', 177, 'info', 'active', 'Plan iqama renewal'),
-((SELECT id FROM hcms_employees WHERE employee_id = '2024003'), 'Mujiburahman Yaqub Abdurahman', 'iqamah_expiry', '2025-08-07', 192, 'info', 'active', 'Iqama renewal planning'),
-((SELECT id FROM hcms_employees WHERE employee_id = '2024001'), 'Sidiq Haryono', 'iqamah_expiry', '2025-10-06', 252, 'info', 'active', 'GM iqama renewal due'),
-((SELECT id FROM hcms_employees WHERE employee_id = '2024002'), 'Iman Nimatullah Muhdi', 'iqamah_expiry', '2025-10-06', 252, 'info', 'active', 'GM iqama renewal due'),
-((SELECT id FROM hcms_employees WHERE employee_id = '2025016'), 'Abdul Gofur Mahmudin', 'iqamah_expiry', '2025-10-26', 272, 'info', 'active', 'Iqama renewal planning');
+((SELECT id FROM hcms_employees WHERE employee_id = '2025018' LIMIT 1), 'Effat Fuad Muhammad Sholeh Minkabau', 'iqamah_expiry', '2025-05-23', 116, 'warning', 'active', 'National ID expiring in 4 months'),
+((SELECT id FROM hcms_employees WHERE employee_id = '2024005' LIMIT 1), 'Ibrahim Mohmmed Yasin Abdulghani', 'iqamah_expiry', '2025-06-11', 135, 'info', 'active', 'Iqama renewal needed'),
+((SELECT id FROM hcms_employees WHERE employee_id = '2024006' LIMIT 1), 'Karimah Abdulkhoir', 'iqamah_expiry', '2025-07-23', 177, 'info', 'active', 'Plan iqama renewal'),
+((SELECT id FROM hcms_employees WHERE employee_id = '2024003' LIMIT 1), 'Mujiburahman Yaqub Abdurahman', 'iqamah_expiry', '2025-08-07', 192, 'info', 'active', 'Iqama renewal planning'),
+((SELECT id FROM hcms_employees WHERE employee_id = '2024001' LIMIT 1), 'Sidiq Haryono', 'iqamah_expiry', '2025-10-06', 252, 'info', 'active', 'GM iqama renewal due'),
+((SELECT id FROM hcms_employees WHERE employee_id = '2024002' LIMIT 1), 'Iman Nimatullah Muhdi', 'iqamah_expiry', '2025-10-06', 252, 'info', 'active', 'GM iqama renewal due'),
+((SELECT id FROM hcms_employees WHERE employee_id = '2025016' LIMIT 1), 'Abdul Gofur Mahmudin', 'iqamah_expiry', '2025-10-26', 272, 'info', 'active', 'Iqama renewal planning');
 
 -- Update UserContext with real employee names
 -- Note: Run this after inserting employees to update the role dropdown
