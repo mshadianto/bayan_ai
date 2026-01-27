@@ -1,36 +1,54 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, ComponentType } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Layout } from './components/Layout';
 import { PageSkeleton } from './components/common';
 import { UserProvider } from './contexts/UserContext';
 
+// Retry dynamic import on failure (handles stale chunks after deploy)
+function lazyWithRetry(importFn: () => Promise<{ default: ComponentType }>) {
+  return lazy(() =>
+    importFn().catch(() => {
+      // If chunk fails to load, reload page once to get fresh index.html
+      const key = 'chunk_reload';
+      const hasReloaded = sessionStorage.getItem(key);
+      if (!hasReloaded) {
+        sessionStorage.setItem(key, '1');
+        window.location.reload();
+        return new Promise(() => {}); // never resolves, page is reloading
+      }
+      sessionStorage.removeItem(key);
+      return importFn(); // retry once more after reload
+    })
+  );
+}
+
 // Lazy load Finance pages for code splitting
-const Dashboard = lazy(() => import('./pages/Dashboard'));
-const Investments = lazy(() => import('./pages/Investments'));
-const Treasury = lazy(() => import('./pages/Treasury'));
-const Invoices = lazy(() => import('./pages/Invoices'));
-const WhatsApp = lazy(() => import('./pages/WhatsApp'));
-const FinancialRequests = lazy(() => import('./pages/FinancialRequests'));
+const Dashboard = lazyWithRetry(() => import('./pages/Dashboard'));
+const Investments = lazyWithRetry(() => import('./pages/Investments'));
+const Treasury = lazyWithRetry(() => import('./pages/Treasury'));
+const Invoices = lazyWithRetry(() => import('./pages/Invoices'));
+const WhatsApp = lazyWithRetry(() => import('./pages/WhatsApp'));
+const FinancialRequests = lazyWithRetry(() => import('./pages/FinancialRequests'));
 
 // Lazy load HCMS pages for code splitting
-const HCMSDashboard = lazy(() => import('./pages/hcms/HCMSDashboard'));
-const Employees = lazy(() => import('./pages/hcms/Employees'));
-const Attendance = lazy(() => import('./pages/hcms/Attendance'));
-const Leave = lazy(() => import('./pages/hcms/Leave'));
-const Payroll = lazy(() => import('./pages/hcms/Payroll'));
-const Recruitment = lazy(() => import('./pages/hcms/Recruitment'));
-const Performance = lazy(() => import('./pages/hcms/Performance'));
-const Training = lazy(() => import('./pages/hcms/Training'));
-const HCMSCompliance = lazy(() => import('./pages/hcms/Compliance'));
+const HCMSDashboard = lazyWithRetry(() => import('./pages/hcms/HCMSDashboard'));
+const Employees = lazyWithRetry(() => import('./pages/hcms/Employees'));
+const Attendance = lazyWithRetry(() => import('./pages/hcms/Attendance'));
+const Leave = lazyWithRetry(() => import('./pages/hcms/Leave'));
+const Payroll = lazyWithRetry(() => import('./pages/hcms/Payroll'));
+const Recruitment = lazyWithRetry(() => import('./pages/hcms/Recruitment'));
+const Performance = lazyWithRetry(() => import('./pages/hcms/Performance'));
+const Training = lazyWithRetry(() => import('./pages/hcms/Training'));
+const HCMSCompliance = lazyWithRetry(() => import('./pages/hcms/Compliance'));
 
 // Lazy load LCRMS pages for code splitting
-const LCRMSDashboard = lazy(() => import('./pages/lcrms/LCRMSDashboard'));
-const Contracts = lazy(() => import('./pages/lcrms/Contracts'));
-const LCRMSCompliance = lazy(() => import('./pages/lcrms/Compliance'));
-const KnowledgeBase = lazy(() => import('./pages/lcrms/KnowledgeBase'));
-const RiskManagement = lazy(() => import('./pages/lcrms/RiskManagement'));
-const Litigation = lazy(() => import('./pages/lcrms/Litigation'));
-const Secretarial = lazy(() => import('./pages/lcrms/Secretarial'));
+const LCRMSDashboard = lazyWithRetry(() => import('./pages/lcrms/LCRMSDashboard'));
+const Contracts = lazyWithRetry(() => import('./pages/lcrms/Contracts'));
+const LCRMSCompliance = lazyWithRetry(() => import('./pages/lcrms/Compliance'));
+const KnowledgeBase = lazyWithRetry(() => import('./pages/lcrms/KnowledgeBase'));
+const RiskManagement = lazyWithRetry(() => import('./pages/lcrms/RiskManagement'));
+const Litigation = lazyWithRetry(() => import('./pages/lcrms/Litigation'));
+const Secretarial = lazyWithRetry(() => import('./pages/lcrms/Secretarial'));
 
 function App() {
   return (
