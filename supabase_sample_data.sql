@@ -21,24 +21,24 @@ INSERT INTO hcms_employees (employee_id, first_name, last_name, email, phone, de
 ('BPKH010', 'Omar', 'Farooq', 'omar.farooq@bpkh.sa', '+966510123456', 'Marketing', 'Marketing Specialist', 'S1', 'active', 'full_time', '2023-06-01', 32000, 'JO', 'IQ567890123', '2025-08-20', 'D01234567', '2027-01-15', '2025-12-31');
 
 -- Attendance (last 7 days)
-INSERT INTO hcms_attendance (employee_id, date, check_in, check_out, status, work_hours, late_minutes, location) VALUES
+INSERT INTO hcms_attendance (employee_id, employee_code, employee_name, date, check_in, check_out, status, work_hours, late_minutes, check_in_location) VALUES
 -- Today
-((SELECT id FROM hcms_employees WHERE employee_id = 'BPKH001'), CURRENT_DATE, '08:00', '17:00', 'present', 9, 0, 'Office'),
-((SELECT id FROM hcms_employees WHERE employee_id = 'BPKH002'), CURRENT_DATE, '08:15', '17:30', 'present', 9.25, 15, 'Office'),
-((SELECT id FROM hcms_employees WHERE employee_id = 'BPKH003'), CURRENT_DATE, '09:10', '18:00', 'late', 8.83, 70, 'Office'),
-((SELECT id FROM hcms_employees WHERE employee_id = 'BPKH004'), CURRENT_DATE, NULL, NULL, 'absent', NULL, NULL, NULL),
-((SELECT id FROM hcms_employees WHERE employee_id = 'BPKH005'), CURRENT_DATE, '08:05', '17:15', 'present', 9.17, 5, 'Office'),
-((SELECT id FROM hcms_employees WHERE employee_id = 'BPKH006'), CURRENT_DATE, NULL, NULL, 'leave', NULL, NULL, NULL),
-((SELECT id FROM hcms_employees WHERE employee_id = 'BPKH007'), CURRENT_DATE, '08:30', '17:45', 'late', 9.25, 30, 'Office'),
-((SELECT id FROM hcms_employees WHERE employee_id = 'BPKH008'), CURRENT_DATE, '07:55', '17:00', 'present', 9.08, 0, 'Office'),
-((SELECT id FROM hcms_employees WHERE employee_id = 'BPKH009'), CURRENT_DATE, '08:00', '17:30', 'present', 9.5, 0, 'Office'),
-((SELECT id FROM hcms_employees WHERE employee_id = 'BPKH010'), CURRENT_DATE, '08:20', '17:00', 'late', 8.67, 20, 'Office'),
+((SELECT id FROM hcms_employees WHERE employee_id = 'BPKH001'), 'BPKH001', 'Abdullah Al-Faisal', CURRENT_DATE, '08:00', '17:00', 'present', 9, 0, 'Office'),
+((SELECT id FROM hcms_employees WHERE employee_id = 'BPKH002'), 'BPKH002', 'Fatima Hassan', CURRENT_DATE, '08:15', '17:30', 'present', 9.25, 15, 'Office'),
+((SELECT id FROM hcms_employees WHERE employee_id = 'BPKH003'), 'BPKH003', 'Ahmad Al-Rashid', CURRENT_DATE, '09:10', '18:00', 'late', 8.83, 70, 'Office'),
+((SELECT id FROM hcms_employees WHERE employee_id = 'BPKH004'), 'BPKH004', 'Mohammad Khan', CURRENT_DATE, NULL, NULL, 'absent', NULL, NULL, NULL),
+((SELECT id FROM hcms_employees WHERE employee_id = 'BPKH005'), 'BPKH005', 'Sarah Al-Qahtani', CURRENT_DATE, '08:05', '17:15', 'present', 9.17, 5, 'Office'),
+((SELECT id FROM hcms_employees WHERE employee_id = 'BPKH006'), 'BPKH006', 'Khalid Bin Salman', CURRENT_DATE, NULL, NULL, 'leave', NULL, NULL, NULL),
+((SELECT id FROM hcms_employees WHERE employee_id = 'BPKH007'), 'BPKH007', 'Noor Ahmad', CURRENT_DATE, '08:30', '17:45', 'late', 9.25, 30, 'Office'),
+((SELECT id FROM hcms_employees WHERE employee_id = 'BPKH008'), 'BPKH008', 'Yusuf Ibrahim', CURRENT_DATE, '07:55', '17:00', 'present', 9.08, 0, 'Office'),
+((SELECT id FROM hcms_employees WHERE employee_id = 'BPKH009'), 'BPKH009', 'Aisha Rahman', CURRENT_DATE, '08:00', '17:30', 'present', 9.5, 0, 'Office'),
+((SELECT id FROM hcms_employees WHERE employee_id = 'BPKH010'), 'BPKH010', 'Omar Farooq', CURRENT_DATE, '08:20', '17:00', 'late', 8.67, 20, 'Office'),
 -- Yesterday
-((SELECT id FROM hcms_employees WHERE employee_id = 'BPKH001'), CURRENT_DATE - 1, '08:00', '17:00', 'present', 9, 0, 'Office'),
-((SELECT id FROM hcms_employees WHERE employee_id = 'BPKH002'), CURRENT_DATE - 1, '08:00', '17:00', 'present', 9, 0, 'Office'),
-((SELECT id FROM hcms_employees WHERE employee_id = 'BPKH003'), CURRENT_DATE - 1, '08:00', '17:00', 'present', 9, 0, 'Office'),
-((SELECT id FROM hcms_employees WHERE employee_id = 'BPKH004'), CURRENT_DATE - 1, '08:00', '17:00', 'present', 9, 0, 'Office'),
-((SELECT id FROM hcms_employees WHERE employee_id = 'BPKH005'), CURRENT_DATE - 1, '08:00', '17:00', 'present', 9, 0, 'Office');
+((SELECT id FROM hcms_employees WHERE employee_id = 'BPKH001'), 'BPKH001', 'Abdullah Al-Faisal', CURRENT_DATE - 1, '08:00', '17:00', 'present', 9, 0, 'Office'),
+((SELECT id FROM hcms_employees WHERE employee_id = 'BPKH002'), 'BPKH002', 'Fatima Hassan', CURRENT_DATE - 1, '08:00', '17:00', 'present', 9, 0, 'Office'),
+((SELECT id FROM hcms_employees WHERE employee_id = 'BPKH003'), 'BPKH003', 'Ahmad Al-Rashid', CURRENT_DATE - 1, '08:00', '17:00', 'present', 9, 0, 'Office'),
+((SELECT id FROM hcms_employees WHERE employee_id = 'BPKH004'), 'BPKH004', 'Mohammad Khan', CURRENT_DATE - 1, '08:00', '17:00', 'present', 9, 0, 'Office'),
+((SELECT id FROM hcms_employees WHERE employee_id = 'BPKH005'), 'BPKH005', 'Sarah Al-Qahtani', CURRENT_DATE - 1, '08:00', '17:00', 'present', 9, 0, 'Office');
 
 -- Leave Balances
 INSERT INTO hcms_leave_balances (employee_id, leave_type_id, year, entitled_days, used_days, pending_days, remaining_days)
