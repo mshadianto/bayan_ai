@@ -48,9 +48,9 @@ export default function RiskManagement() {
     return risks.filter((risk) => {
       const matchesFilter = filter === 'all' || risk.level === filter;
       const matchesSearch = !search ||
-        risk.name.toLowerCase().includes(search.toLowerCase()) ||
-        risk.division.toLowerCase().includes(search.toLowerCase()) ||
-        risk.risk_code.toLowerCase().includes(search.toLowerCase());
+        (risk.name ?? '').toLowerCase().includes(search.toLowerCase()) ||
+        (risk.division ?? '').toLowerCase().includes(search.toLowerCase()) ||
+        (risk.risk_code ?? '').toLowerCase().includes(search.toLowerCase());
       return matchesFilter && matchesSearch;
     });
   }, [risks, filter, search]);

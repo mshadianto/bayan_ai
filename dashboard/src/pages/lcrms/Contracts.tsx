@@ -49,9 +49,9 @@ export default function Contracts() {
     return contracts.filter((contract) => {
       const matchesFilter = filter === 'all' || contract.status === filter;
       const matchesSearch = !search ||
-        contract.name.toLowerCase().includes(search.toLowerCase()) ||
-        contract.partner_name.toLowerCase().includes(search.toLowerCase()) ||
-        contract.contract_number.toLowerCase().includes(search.toLowerCase());
+        (contract.name ?? '').toLowerCase().includes(search.toLowerCase()) ||
+        (contract.partner_name ?? '').toLowerCase().includes(search.toLowerCase()) ||
+        (contract.contract_number ?? '').toLowerCase().includes(search.toLowerCase());
       return matchesFilter && matchesSearch;
     });
   }, [contracts, filter, search]);

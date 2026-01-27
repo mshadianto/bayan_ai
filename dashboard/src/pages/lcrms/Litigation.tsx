@@ -41,8 +41,8 @@ export default function Litigation() {
     return cases.filter((c) => {
       const matchesFilter = filter === 'all' || c.status === filter;
       const matchesSearch = !search ||
-        c.title.toLowerCase().includes(search.toLowerCase()) ||
-        c.case_number.toLowerCase().includes(search.toLowerCase());
+        (c.title ?? '').toLowerCase().includes(search.toLowerCase()) ||
+        (c.case_number ?? '').toLowerCase().includes(search.toLowerCase());
       return matchesFilter && matchesSearch;
     });
   }, [cases, filter, search]);

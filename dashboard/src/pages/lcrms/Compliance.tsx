@@ -50,24 +50,24 @@ export default function Compliance() {
   const filteredLicenses = useMemo(() => {
     if (!search) return licenses;
     return licenses.filter(l =>
-      l.name.toLowerCase().includes(search.toLowerCase()) ||
-      l.license_number.toLowerCase().includes(search.toLowerCase())
+      (l.name ?? '').toLowerCase().includes(search.toLowerCase()) ||
+      (l.license_number ?? '').toLowerCase().includes(search.toLowerCase())
     );
   }, [licenses, search]);
 
   const filteredCOI = useMemo(() => {
     if (!search) return coiDeclarations;
     return coiDeclarations.filter(c =>
-      c.employee_name.toLowerCase().includes(search.toLowerCase()) ||
-      c.department.toLowerCase().includes(search.toLowerCase())
+      (c.employee_name ?? '').toLowerCase().includes(search.toLowerCase()) ||
+      (c.department ?? '').toLowerCase().includes(search.toLowerCase())
     );
   }, [coiDeclarations, search]);
 
   const filteredViolations = useMemo(() => {
     if (!search) return violations;
     return violations.filter(v =>
-      v.employee_name.toLowerCase().includes(search.toLowerCase()) ||
-      v.description.toLowerCase().includes(search.toLowerCase())
+      (v.employee_name ?? '').toLowerCase().includes(search.toLowerCase()) ||
+      (v.description ?? '').toLowerCase().includes(search.toLowerCase())
     );
   }, [violations, search]);
 
@@ -282,7 +282,7 @@ function ViolationsList({ violations, onView }: { violations: EmployeeViolation[
                 <StatusBadge status={violation.severity} />
                 <StatusBadge status={violation.investigation_status} variant="outline" />
               </div>
-              <p className="text-slate-400 text-sm">{violation.description.substring(0, 60)}...</p>
+              <p className="text-slate-400 text-sm">{(violation.description ?? '').substring(0, 60)}...</p>
             </div>
             <div className="flex items-center gap-4">
               <div className="text-right">
