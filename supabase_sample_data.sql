@@ -56,7 +56,7 @@ INSERT INTO hcms_payroll_periods (period_code, year, month, start_date, end_date
 ON CONFLICT (period_code) DO NOTHING;
 
 -- Payroll Records (January 2025)
-INSERT INTO hcms_payroll_records (employee_id, employee_code, employee_name, period_id, period, basic_salary, housing_allowance, transport_allowance, other_allowances, overtime_hours, overtime_pay, deductions, gosi_employee, gosi_employer, currency, status, payment_date)
+INSERT INTO hcms_payroll_records (employee_id, employee_code, employee_name, period_id, period, basic_salary, housing_allowance, transport_allowance, other_allowances, overtime_pay, gosi_employee, gosi_employer, net_salary, status, payment_date)
 SELECT
   e.id,
   e.employee_id,
@@ -68,11 +68,9 @@ SELECT
   2000,
   1000,
   0,
-  0,
-  e.salary * 0.02,
   e.salary * 0.0975,
   e.salary * 0.12,
-  'SAR',
+  e.salary + (e.salary * 0.25) + 2000 + 1000 - (e.salary * 0.0975),
   'paid',
   '2025-01-28'
 FROM hcms_employees e
