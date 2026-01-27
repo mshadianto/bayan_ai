@@ -435,7 +435,7 @@ function ShareholderDetail({ shareholder }: { shareholder: Shareholder }) {
         </div>
         <div className="bg-slate-800 rounded-lg p-4">
           <p className="text-slate-400 text-sm">Acquisition Type</p>
-          <p className="text-white capitalize">{shareholder.acquisition_type.replace('_', ' ')}</p>
+          <p className="text-white capitalize">{(shareholder.acquisition_type ?? '').replace('_', ' ')}</p>
         </div>
       </div>
 

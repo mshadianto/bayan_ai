@@ -323,7 +323,7 @@ function CaseDetail({ caseItem }: { caseItem: LitigationCase }) {
                 {caseItem.costs.map((cost) => (
                   <tr key={cost.id} className="border-t border-slate-700">
                     <td className="p-3 text-white">{cost.description}</td>
-                    <td className="p-3"><StatusBadge status={cost.category.replace('_', ' ')} variant="outline" size="sm" /></td>
+                    <td className="p-3"><StatusBadge status={(cost.category ?? '').replace('_', ' ')} variant="outline" size="sm" /></td>
                     <td className="p-3 text-white">{new Intl.NumberFormat('id-ID', { style: 'currency', currency: cost.currency }).format(cost.amount)}</td>
                     <td className="p-3"><StatusBadge status={cost.paid ? 'paid' : 'pending'} size="sm" /></td>
                   </tr>

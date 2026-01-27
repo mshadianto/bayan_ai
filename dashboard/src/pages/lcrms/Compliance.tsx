@@ -394,7 +394,7 @@ function ViolationDetail({ violation }: { violation: EmployeeViolation }) {
       <div className="flex items-center gap-3">
         <StatusBadge status={violation.severity} />
         <StatusBadge status={violation.investigation_status} variant="outline" />
-        <StatusBadge status={violation.violation_type.replace('_', ' ')} variant="outline" />
+        <StatusBadge status={(violation.violation_type ?? '').replace('_', ' ')} variant="outline" />
       </div>
       <div className="grid grid-cols-2 gap-4">
         <div className="bg-slate-800 rounded-lg p-4">

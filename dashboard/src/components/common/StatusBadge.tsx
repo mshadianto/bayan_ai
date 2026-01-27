@@ -67,14 +67,15 @@ const STATUS_STYLES: Record<string, { bg: string; text: string; dot: string }> =
 const DEFAULT_STYLE = { bg: 'bg-slate-700', text: 'text-slate-300', dot: 'bg-slate-400' };
 
 export function StatusBadge({ status, variant = 'default', size = 'sm', children }: StatusBadgeProps) {
-  const normalizedStatus = status.toLowerCase().replace(/[_\s-]/g, '');
+  const safeStatus = status ?? '';
+  const normalizedStatus = safeStatus.toLowerCase().replace(/[_\s-]/g, '');
   const style = STATUS_STYLES[normalizedStatus] || DEFAULT_STYLE;
 
   const sizeClasses = size === 'sm'
     ? 'px-2 py-0.5 text-xs'
     : 'px-2.5 py-1 text-sm';
 
-  const displayText = children || status.charAt(0).toUpperCase() + status.slice(1).replace(/_/g, ' ');
+  const displayText = children || (safeStatus.charAt(0).toUpperCase() + safeStatus.slice(1).replace(/_/g, ' ') || '—');
 
   if (variant === 'dot') {
     return (
