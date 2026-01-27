@@ -41,12 +41,12 @@ INSERT INTO hcms_attendance (employee_id, employee_code, employee_name, date, ch
 ON CONFLICT (employee_id, date) DO NOTHING;
 
 -- Leave Requests
-INSERT INTO hcms_leave_requests (employee_id, leave_type_id, start_date, end_date, days, reason, status, approved_by, approved_at) VALUES
-((SELECT id FROM hcms_employees WHERE employee_id = 'BPKH004'), (SELECT id FROM hcms_leave_types WHERE name = 'Annual Leave'), CURRENT_DATE, CURRENT_DATE + 2, 3, 'Family vacation', 'approved', 'Abdullah Al-Faisal', NOW() - INTERVAL '2 days'),
-((SELECT id FROM hcms_employees WHERE employee_id = 'BPKH006'), (SELECT id FROM hcms_leave_types WHERE name = 'Sick Leave'), CURRENT_DATE, CURRENT_DATE, 1, 'Medical appointment', 'approved', 'Fatima Hassan', NOW() - INTERVAL '1 day'),
-((SELECT id FROM hcms_employees WHERE employee_id = 'BPKH003'), (SELECT id FROM hcms_leave_types WHERE name = 'Annual Leave'), CURRENT_DATE + 7, CURRENT_DATE + 11, 5, 'Personal travel', 'pending', NULL, NULL),
-((SELECT id FROM hcms_employees WHERE employee_id = 'BPKH005'), (SELECT id FROM hcms_leave_types WHERE name = 'Emergency Leave'), CURRENT_DATE + 3, CURRENT_DATE + 4, 2, 'Family emergency', 'pending', NULL, NULL),
-((SELECT id FROM hcms_employees WHERE employee_id = 'BPKH008'), (SELECT id FROM hcms_leave_types WHERE name = 'Hajj Leave'), '2025-06-01', '2025-06-15', 15, 'Hajj pilgrimage', 'approved', 'Ahmad Al-Rashid', NOW() - INTERVAL '30 days');
+INSERT INTO hcms_leave_requests (employee_id, employee_code, employee_name, leave_type_id, leave_type, start_date, end_date, days, reason, status, approved_by, approved_at) VALUES
+((SELECT id FROM hcms_employees WHERE employee_id = 'BPKH004'), 'BPKH004', 'Mohammad Khan', (SELECT id FROM hcms_leave_types WHERE name = 'Annual Leave'), 'Annual Leave', CURRENT_DATE, CURRENT_DATE + 2, 3, 'Family vacation', 'approved', 'Abdullah Al-Faisal', NOW() - INTERVAL '2 days'),
+((SELECT id FROM hcms_employees WHERE employee_id = 'BPKH006'), 'BPKH006', 'Khalid Bin Salman', (SELECT id FROM hcms_leave_types WHERE name = 'Sick Leave'), 'Sick Leave', CURRENT_DATE, CURRENT_DATE, 1, 'Medical appointment', 'approved', 'Fatima Hassan', NOW() - INTERVAL '1 day'),
+((SELECT id FROM hcms_employees WHERE employee_id = 'BPKH003'), 'BPKH003', 'Ahmad Al-Rashid', (SELECT id FROM hcms_leave_types WHERE name = 'Annual Leave'), 'Annual Leave', CURRENT_DATE + 7, CURRENT_DATE + 11, 5, 'Personal travel', 'pending', NULL, NULL),
+((SELECT id FROM hcms_employees WHERE employee_id = 'BPKH005'), 'BPKH005', 'Sarah Al-Qahtani', (SELECT id FROM hcms_leave_types WHERE name = 'Emergency Leave'), 'Emergency Leave', CURRENT_DATE + 3, CURRENT_DATE + 4, 2, 'Family emergency', 'pending', NULL, NULL),
+((SELECT id FROM hcms_employees WHERE employee_id = 'BPKH008'), 'BPKH008', 'Yusuf Ibrahim', (SELECT id FROM hcms_leave_types WHERE name = 'Hajj Leave'), 'Hajj Leave', '2025-06-01', '2025-06-15', 15, 'Hajj pilgrimage', 'approved', 'Ahmad Al-Rashid', NOW() - INTERVAL '30 days');
 
 -- Payroll Periods
 INSERT INTO hcms_payroll_periods (period_code, year, month, start_date, end_date, status, paid_at) VALUES
