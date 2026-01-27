@@ -1,5 +1,5 @@
-import { ReactNode, useEffect, useCallback } from 'react';
-import { X } from 'lucide-react';
+import { ReactNode, useEffect, useCallback, useRef, useState } from 'react';
+import { X, GripHorizontal } from 'lucide-react';
 
 interface ModalProps {
   isOpen: boolean;
@@ -26,6 +26,10 @@ export function Modal({
   children,
   footer,
 }: ModalProps) {
+  const [position, setPosition] = useState<{ x: number; y: number } | null>(null);
+  const dragRef = useRef<{ startX: number; startY: number; initialX: number; initialY: number } | null>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
+
   // Handle escape key
   const handleEscape = useCallback(
     (e: KeyboardEvent) => {
@@ -36,8 +40,10 @@ export function Modal({
     [onClose]
   );
 
+  // Reset position when modal opens
   useEffect(() => {
     if (isOpen) {
+      setPosition(null);
       document.addEventListener('keydown', handleEscape);
       document.body.style.overflow = 'hidden';
     }
@@ -48,7 +54,45 @@ export function Modal({
     };
   }, [isOpen, handleEscape]);
 
+  // Drag handlers
+  const handleMouseDown = useCallback((e: React.MouseEvent) => {
+    e.preventDefault();
+    const modal = modalRef.current;
+    if (!modal) return;
+
+    const rect = modal.getBoundingClientRect();
+    dragRef.current = {
+      startX: e.clientX,
+      startY: e.clientY,
+      initialX: rect.left + rect.width / 2 - window.innerWidth / 2,
+      initialY: rect.top + rect.height / 2 - window.innerHeight / 2,
+    };
+
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!dragRef.current) return;
+      const dx = e.clientX - dragRef.current.startX;
+      const dy = e.clientY - dragRef.current.startY;
+      setPosition({
+        x: dragRef.current.initialX + dx,
+        y: dragRef.current.initialY + dy,
+      });
+    };
+
+    const handleMouseUp = () => {
+      dragRef.current = null;
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseup', handleMouseUp);
+    };
+
+    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseup', handleMouseUp);
+  }, []);
+
   if (!isOpen) return null;
+
+  const transformStyle = position
+    ? { transform: `translate(${position.x}px, ${position.y}px)` }
+    : {};
 
   return (
     <div
@@ -68,15 +112,24 @@ export function Modal({
       <div className="min-h-full flex items-center justify-center p-4">
         {/* Modal content */}
         <div
+          ref={modalRef}
+          style={transformStyle}
           className={`relative bg-slate-800 rounded-2xl border border-slate-700 w-full ${SIZE_CLASSES[size]} max-h-[85vh] flex flex-col shadow-2xl animate-modal-slide-up`}
         >
-          {/* Header - sticky */}
-          <div className="flex-shrink-0 flex items-center justify-between p-4 border-b border-slate-700 bg-slate-800 rounded-t-2xl">
-            <h2 id="modal-title" className="text-lg font-semibold text-white pr-8 truncate">
-              {title}
-            </h2>
+          {/* Header - draggable */}
+          <div
+            className="flex-shrink-0 flex items-center justify-between p-4 border-b border-slate-700 bg-slate-800 rounded-t-2xl cursor-grab active:cursor-grabbing select-none"
+            onMouseDown={handleMouseDown}
+          >
+            <div className="flex items-center gap-2">
+              <GripHorizontal size={16} className="text-slate-500" />
+              <h2 id="modal-title" className="text-lg font-semibold text-white pr-8 truncate">
+                {title}
+              </h2>
+            </div>
             <button
-              onClick={onClose}
+              onClick={(e) => { e.stopPropagation(); onClose(); }}
+              onMouseDown={(e) => e.stopPropagation()}
               className="absolute right-4 top-4 p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-700 transition-colors"
               aria-label="Close modal"
             >
@@ -85,7 +138,7 @@ export function Modal({
           </div>
 
           {/* Body - scrollable */}
-          <div className="flex-1 overflow-y-auto p-4 overscroll-contain">
+          <div className="flex-1 min-h-0 overflow-y-auto p-4 overscroll-contain">
             {children}
           </div>
 
