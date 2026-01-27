@@ -245,3 +245,5 @@ function StatusBadge({ status }: { status: string }) {
     </span>
   );
 }
+
+export default Dashboard;

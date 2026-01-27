@@ -1,8 +1,15 @@
 import { lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Layout } from './components/Layout';
-import { Dashboard, Investments, Treasury, Invoices, WhatsApp, FinancialRequests } from './pages';
 import { PageSkeleton } from './components/common';
+
+// Lazy load Finance pages for code splitting
+const Dashboard = lazy(() => import('./pages/Dashboard'));
+const Investments = lazy(() => import('./pages/Investments'));
+const Treasury = lazy(() => import('./pages/Treasury'));
+const Invoices = lazy(() => import('./pages/Invoices'));
+const WhatsApp = lazy(() => import('./pages/WhatsApp'));
+const FinancialRequests = lazy(() => import('./pages/FinancialRequests'));
 
 // Lazy load HCMS pages for code splitting
 const HCMSDashboard = lazy(() => import('./pages/hcms/HCMSDashboard'));
@@ -29,12 +36,13 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<Dashboard />} />
-          <Route path="investments" element={<Investments />} />
-          <Route path="treasury" element={<Treasury />} />
-          <Route path="invoices" element={<Invoices />} />
-          <Route path="financial-requests" element={<FinancialRequests />} />
-          <Route path="whatsapp" element={<WhatsApp />} />
+          {/* Finance Routes - Lazy loaded */}
+          <Route index element={<Suspense fallback={<PageSkeleton />}><Dashboard /></Suspense>} />
+          <Route path="investments" element={<Suspense fallback={<PageSkeleton />}><Investments /></Suspense>} />
+          <Route path="treasury" element={<Suspense fallback={<PageSkeleton />}><Treasury /></Suspense>} />
+          <Route path="invoices" element={<Suspense fallback={<PageSkeleton />}><Invoices /></Suspense>} />
+          <Route path="financial-requests" element={<Suspense fallback={<PageSkeleton />}><FinancialRequests /></Suspense>} />
+          <Route path="whatsapp" element={<Suspense fallback={<PageSkeleton />}><WhatsApp /></Suspense>} />
           {/* HCMS Routes - Lazy loaded */}
           <Route
             path="hcms"

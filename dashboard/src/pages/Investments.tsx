@@ -972,3 +972,5 @@ export function Investments() {
     </div>
   );
 }
+
+export default Investments;

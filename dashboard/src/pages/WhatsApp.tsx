@@ -241,3 +241,5 @@ export function WhatsApp() {
     </div>
   );
 }
+
+export default WhatsApp;

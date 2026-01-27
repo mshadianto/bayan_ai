@@ -884,3 +884,5 @@ export function Treasury() {
     </div>
   );
 }
+
+export default Treasury;
