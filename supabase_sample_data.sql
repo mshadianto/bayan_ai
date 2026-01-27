@@ -49,17 +49,20 @@ INSERT INTO hcms_leave_requests (employee_id, leave_type_id, start_date, end_dat
 ((SELECT id FROM hcms_employees WHERE employee_id = 'BPKH008'), (SELECT id FROM hcms_leave_types WHERE name = 'Hajj Leave'), '2025-06-01', '2025-06-15', 15, 'Hajj pilgrimage', 'approved', 'Ahmad Al-Rashid', NOW() - INTERVAL '30 days');
 
 -- Payroll Periods
-INSERT INTO hcms_payroll_periods (period_name, start_date, end_date, status, processed_at) VALUES
-('January 2025', '2025-01-01', '2025-01-31', 'paid', '2025-01-28'),
-('December 2024', '2024-12-01', '2024-12-31', 'paid', '2024-12-28'),
-('November 2024', '2024-11-01', '2024-11-30', 'paid', '2024-11-28')
-ON CONFLICT DO NOTHING;
+INSERT INTO hcms_payroll_periods (period_code, year, month, start_date, end_date, status, paid_at) VALUES
+('2025-01', 2025, 1, '2025-01-01', '2025-01-31', 'paid', '2025-01-28'),
+('2024-12', 2024, 12, '2024-12-01', '2024-12-31', 'paid', '2024-12-28'),
+('2024-11', 2024, 11, '2024-11-01', '2024-11-30', 'paid', '2024-11-28')
+ON CONFLICT (period_code) DO NOTHING;
 
 -- Payroll Records (January 2025)
-INSERT INTO hcms_payroll_records (employee_id, period_id, basic_salary, housing_allowance, transport_allowance, other_allowances, overtime_hours, overtime_pay, deductions, gosi_employee, gosi_employer, net_salary, currency, status, payment_date)
+INSERT INTO hcms_payroll_records (employee_id, employee_code, employee_name, period_id, period, basic_salary, housing_allowance, transport_allowance, other_allowances, overtime_hours, overtime_pay, deductions, gosi_employee, gosi_employer, currency, status, payment_date)
 SELECT
   e.id,
-  (SELECT id FROM hcms_payroll_periods WHERE period_name = 'January 2025'),
+  e.employee_id,
+  e.first_name || ' ' || e.last_name,
+  (SELECT id FROM hcms_payroll_periods WHERE period_code = '2025-01'),
+  'January 2025',
   e.salary,
   e.salary * 0.25,
   2000,
@@ -69,7 +72,6 @@ SELECT
   e.salary * 0.02,
   e.salary * 0.0975,
   e.salary * 0.12,
-  e.salary + (e.salary * 0.25) + 2000 + 1000 - (e.salary * 0.02) - (e.salary * 0.0975),
   'SAR',
   'paid',
   '2025-01-28'
@@ -77,63 +79,65 @@ FROM hcms_employees e
 WHERE e.employee_id LIKE 'BPKH%';
 
 -- Job Postings
-INSERT INTO hcms_job_postings (title, department, description, requirements, employment_type, salary_min, salary_max, currency, status, posted_date, closing_date, hiring_manager) VALUES
-('Senior Software Engineer', 'Information Technology', 'We are looking for an experienced software engineer to join our IT team.', 'Bachelor degree in CS, 5+ years experience, React/Node.js', 'full_time', 40000, 55000, 'SAR', 'open', CURRENT_DATE - 25, CURRENT_DATE + 5, 'Ahmad Al-Rashid'),
-('Financial Analyst', 'Finance', 'Join our finance team to support investment analysis and reporting.', 'Bachelor in Finance/Accounting, CFA preferred, 3+ years experience', 'full_time', 30000, 40000, 'SAR', 'screening', CURRENT_DATE - 15, CURRENT_DATE + 15, 'Abdullah Al-Faisal'),
-('HR Coordinator', 'Human Resources', 'Support HR operations including recruitment and employee relations.', 'Bachelor in HR/Business, 2+ years experience, Arabic & English fluent', 'full_time', 22000, 28000, 'SAR', 'open', CURRENT_DATE - 10, CURRENT_DATE + 20, 'Fatima Hassan'),
-('Operations Specialist', 'Operations', 'Manage daily operations and process improvements.', 'Bachelor degree, 3+ years operations experience, strong analytical skills', 'full_time', 28000, 35000, 'SAR', 'offer', CURRENT_DATE - 30, CURRENT_DATE - 1, 'Mohammad Khan');
+INSERT INTO hcms_job_postings (job_code, position, department, description, requirements, employment_type, salary_min, salary_max, currency, status, posted_date, closing_date, hiring_manager) VALUES
+('JOB-2025-001', 'Senior Software Engineer', 'Information Technology', 'We are looking for an experienced software engineer to join our IT team.', 'Bachelor degree in CS, 5+ years experience, React/Node.js', 'full_time', 40000, 55000, 'SAR', 'open', CURRENT_DATE - 25, CURRENT_DATE + 5, 'Ahmad Al-Rashid'),
+('JOB-2025-002', 'Financial Analyst', 'Finance', 'Join our finance team to support investment analysis and reporting.', 'Bachelor in Finance/Accounting, CFA preferred, 3+ years experience', 'full_time', 30000, 40000, 'SAR', 'screening', CURRENT_DATE - 15, CURRENT_DATE + 15, 'Abdullah Al-Faisal'),
+('JOB-2025-003', 'HR Coordinator', 'Human Resources', 'Support HR operations including recruitment and employee relations.', 'Bachelor in HR/Business, 2+ years experience, Arabic & English fluent', 'full_time', 22000, 28000, 'SAR', 'open', CURRENT_DATE - 10, CURRENT_DATE + 20, 'Fatima Hassan'),
+('JOB-2025-004', 'Operations Specialist', 'Operations', 'Manage daily operations and process improvements.', 'Bachelor degree, 3+ years operations experience, strong analytical skills', 'full_time', 28000, 35000, 'SAR', 'offer', CURRENT_DATE - 30, CURRENT_DATE - 1, 'Mohammad Khan')
+ON CONFLICT (job_code) DO NOTHING;
 
 -- Candidates
-INSERT INTO hcms_candidates (job_posting_id, name, email, phone, resume_url, status, rating, notes) VALUES
-((SELECT id FROM hcms_job_postings WHERE title = 'Senior Software Engineer' LIMIT 1), 'Ali Hassan', 'ali.hassan@email.com', '+966551234567', '/resumes/ali_hassan.pdf', 'interview', 4.5, 'Strong technical background'),
-((SELECT id FROM hcms_job_postings WHERE title = 'Senior Software Engineer' LIMIT 1), 'Layla Ahmed', 'layla.ahmed@email.com', '+966552345678', '/resumes/layla_ahmed.pdf', 'interview', 4.8, 'Excellent React experience'),
-((SELECT id FROM hcms_job_postings WHERE title = 'Operations Specialist' LIMIT 1), 'Maryam Khan', 'maryam.khan@email.com', '+966554567890', '/resumes/maryam_khan.pdf', 'offer', 4.7, 'Outstanding candidate'),
-((SELECT id FROM hcms_job_postings WHERE title = 'Financial Analyst' LIMIT 1), 'Tariq Rahman', 'tariq.rahman@email.com', '+966555678901', '/resumes/tariq_rahman.pdf', 'screening', 4.0, 'CFA Level 2');
+INSERT INTO hcms_candidates (job_posting_id, first_name, last_name, email, phone, resume_url, status, score, interview_notes) VALUES
+((SELECT id FROM hcms_job_postings WHERE job_code = 'JOB-2025-001'), 'Ali', 'Hassan', 'ali.hassan@email.com', '+966551234567', '/resumes/ali_hassan.pdf', 'interview', 85, 'Strong technical background'),
+((SELECT id FROM hcms_job_postings WHERE job_code = 'JOB-2025-001'), 'Layla', 'Ahmed', 'layla.ahmed@email.com', '+966552345678', '/resumes/layla_ahmed.pdf', 'interview', 92, 'Excellent React experience'),
+((SELECT id FROM hcms_job_postings WHERE job_code = 'JOB-2025-004'), 'Maryam', 'Khan', 'maryam.khan@email.com', '+966554567890', '/resumes/maryam_khan.pdf', 'offer', 90, 'Outstanding candidate'),
+((SELECT id FROM hcms_job_postings WHERE job_code = 'JOB-2025-002'), 'Tariq', 'Rahman', 'tariq.rahman@email.com', '+966555678901', '/resumes/tariq_rahman.pdf', 'screening', 78, 'CFA Level 2');
 
 -- Performance Cycles
-INSERT INTO hcms_performance_cycles (name, type, start_date, end_date, status) VALUES
-('2024 Annual Review', 'annual', '2024-01-01', '2024-12-31', 'completed'),
-('2025 H1 Mid-Year', 'mid_year', '2025-01-01', '2025-06-30', 'active'),
-('2025 Annual Review', 'annual', '2025-01-01', '2025-12-31', 'active');
+INSERT INTO hcms_performance_cycles (name, year, type, start_date, end_date, status) VALUES
+('2024 Annual Review', 2024, 'annual', '2024-01-01', '2024-12-31', 'completed'),
+('2025 H1 Mid-Year', 2025, 'mid_year', '2025-01-01', '2025-06-30', 'active'),
+('2025 Annual Review', 2025, 'annual', '2025-01-01', '2025-12-31', 'active');
 
 -- Performance Reviews
-INSERT INTO hcms_performance_reviews (employee_id, cycle_id, reviewer_id, overall_score, rating, goals_score, competency_score, status, comments, submitted_at, acknowledged_at) VALUES
-((SELECT id FROM hcms_employees WHERE employee_id = 'BPKH002'), (SELECT id FROM hcms_performance_cycles WHERE name = '2024 Annual Review'), (SELECT id FROM hcms_employees WHERE employee_id = 'BPKH001'), 4.2, 'exceeds', 4.0, 4.4, 'acknowledged', 'Strong HR leadership', NOW() - INTERVAL '15 days', NOW() - INTERVAL '8 days'),
-((SELECT id FROM hcms_employees WHERE employee_id = 'BPKH003'), (SELECT id FROM hcms_performance_cycles WHERE name = '2024 Annual Review'), (SELECT id FROM hcms_employees WHERE employee_id = 'BPKH001'), 4.0, 'meets', 4.2, 3.8, 'submitted', 'Good technical delivery', NOW() - INTERVAL '12 days', NULL),
-((SELECT id FROM hcms_employees WHERE employee_id = 'BPKH005'), (SELECT id FROM hcms_performance_cycles WHERE name = '2024 Annual Review'), (SELECT id FROM hcms_employees WHERE employee_id = 'BPKH001'), 4.3, 'exceeds', 4.5, 4.1, 'draft', 'Exceptional analytical skills', NULL, NULL);
+INSERT INTO hcms_performance_reviews (employee_id, employee_name, period, cycle_id, reviewer_id, reviewer_name, overall_score, rating, status, achievements, submitted_at, acknowledged_at) VALUES
+((SELECT id FROM hcms_employees WHERE employee_id = 'BPKH002'), 'Fatima Hassan', '2024', (SELECT id FROM hcms_performance_cycles WHERE name = '2024 Annual Review'), (SELECT id FROM hcms_employees WHERE employee_id = 'BPKH001'), 'Abdullah Al-Faisal', 4.2, 'exceeds', 'acknowledged', 'Strong HR leadership', NOW() - INTERVAL '15 days', NOW() - INTERVAL '8 days'),
+((SELECT id FROM hcms_employees WHERE employee_id = 'BPKH003'), 'Ahmad Al-Rashid', '2024', (SELECT id FROM hcms_performance_cycles WHERE name = '2024 Annual Review'), (SELECT id FROM hcms_employees WHERE employee_id = 'BPKH001'), 'Abdullah Al-Faisal', 4.0, 'meets', 'submitted', 'Good technical delivery', NOW() - INTERVAL '12 days', NULL),
+((SELECT id FROM hcms_employees WHERE employee_id = 'BPKH005'), 'Sarah Al-Qahtani', '2024', (SELECT id FROM hcms_performance_cycles WHERE name = '2024 Annual Review'), (SELECT id FROM hcms_employees WHERE employee_id = 'BPKH001'), 'Abdullah Al-Faisal', 4.3, 'exceeds', 'draft', 'Exceptional analytical skills', NULL, NULL);
 
--- KPIs
-INSERT INTO hcms_kpis (employee_id, cycle_id, kpi_name, description, target_value, actual_value, weight, unit, category) VALUES
-((SELECT id FROM hcms_employees WHERE employee_id = 'BPKH001'), (SELECT id FROM hcms_performance_cycles WHERE name = '2025 Annual Review'), 'Revenue Growth', 'Achieve annual revenue growth target', 15, 18, 30, 'percentage', 'financial'),
-((SELECT id FROM hcms_employees WHERE employee_id = 'BPKH001'), (SELECT id FROM hcms_performance_cycles WHERE name = '2025 Annual Review'), 'Cost Reduction', 'Reduce operational costs', 10, 8, 20, 'percentage', 'financial'),
-((SELECT id FROM hcms_employees WHERE employee_id = 'BPKH003'), (SELECT id FROM hcms_performance_cycles WHERE name = '2025 Annual Review'), 'System Uptime', 'Maintain 99.9% system availability', 99.9, 99.7, 40, 'percentage', 'operational'),
-((SELECT id FROM hcms_employees WHERE employee_id = 'BPKH005'), (SELECT id FROM hcms_performance_cycles WHERE name = '2025 Annual Review'), 'Report Accuracy', 'Financial report accuracy rate', 99, 99.5, 40, 'percentage', 'quality');
+-- KPIs (references review_id, not cycle_id)
+INSERT INTO hcms_kpis (employee_id, employee_name, period, kpi_name, description, target, actual, weight, unit, category) VALUES
+((SELECT id FROM hcms_employees WHERE employee_id = 'BPKH001'), 'Abdullah Al-Faisal', '2025', 'Revenue Growth', 'Achieve annual revenue growth target', 15, 18, 30, 'percentage', 'quantitative'),
+((SELECT id FROM hcms_employees WHERE employee_id = 'BPKH001'), 'Abdullah Al-Faisal', '2025', 'Cost Reduction', 'Reduce operational costs', 10, 8, 20, 'percentage', 'quantitative'),
+((SELECT id FROM hcms_employees WHERE employee_id = 'BPKH003'), 'Ahmad Al-Rashid', '2025', 'System Uptime', 'Maintain 99.9% system availability', 99.9, 99.7, 40, 'percentage', 'quantitative'),
+((SELECT id FROM hcms_employees WHERE employee_id = 'BPKH005'), 'Sarah Al-Qahtani', '2025', 'Report Accuracy', 'Financial report accuracy rate', 99, 99.5, 40, 'percentage', 'quantitative');
 
 -- Training Courses
-INSERT INTO hcms_training_courses (title, description, type, category, provider, start_date, end_date, duration_hours, location, max_participants, enrolled, status) VALUES
-('Islamic Finance Fundamentals', 'Comprehensive training on Islamic finance principles', 'internal', 'mandatory', 'BPKH Academy', CURRENT_DATE + 5, CURRENT_DATE + 6, 16, 'Training Room A', 30, 25, 'upcoming'),
-('Advanced Excel for Finance', 'Excel advanced functions and financial modeling', 'external', 'technical', 'Microsoft', CURRENT_DATE + 12, CURRENT_DATE + 12, 8, 'Online', 20, 18, 'upcoming'),
-('Leadership Development Program', 'Leadership skills for managers', 'internal', 'leadership', 'BPKH Academy', CURRENT_DATE - 15, CURRENT_DATE + 75, 40, 'Training Room B', 15, 12, 'ongoing'),
-('Cybersecurity Awareness', 'Security best practices', 'online', 'mandatory', 'KnowBe4', CURRENT_DATE - 10, CURRENT_DATE - 10, 4, 'Online', 50, 45, 'completed');
+INSERT INTO hcms_training_courses (code, title, description, type, category, provider, start_date, end_date, duration_hours, location, max_participants, enrolled, status) VALUES
+('TRN-2025-001', 'Islamic Finance Fundamentals', 'Comprehensive training on Islamic finance principles', 'internal', 'mandatory', 'BPKH Academy', CURRENT_DATE + 5, CURRENT_DATE + 6, 16, 'Training Room A', 30, 25, 'upcoming'),
+('TRN-2025-002', 'Advanced Excel for Finance', 'Excel advanced functions and financial modeling', 'external', 'technical', 'Microsoft', CURRENT_DATE + 12, CURRENT_DATE + 12, 8, 'Online', 20, 18, 'upcoming'),
+('TRN-2025-003', 'Leadership Development Program', 'Leadership skills for managers', 'internal', 'leadership', 'BPKH Academy', CURRENT_DATE - 15, CURRENT_DATE + 75, 40, 'Training Room B', 15, 12, 'ongoing'),
+('TRN-2024-010', 'Cybersecurity Awareness', 'Security best practices', 'online', 'mandatory', 'KnowBe4', CURRENT_DATE - 10, CURRENT_DATE - 10, 4, 'Online', 50, 45, 'completed')
+ON CONFLICT (code) DO NOTHING;
 
 -- Training Enrollments
-INSERT INTO hcms_training_enrollments (course_id, employee_id, status, enrolled_at, completed_at, score, certificate_url) VALUES
-((SELECT id FROM hcms_training_courses WHERE title = 'Cybersecurity Awareness'), (SELECT id FROM hcms_employees WHERE employee_id = 'BPKH001'), 'completed', NOW() - INTERVAL '15 days', NOW() - INTERVAL '10 days', 95, '/certificates/cyber_BPKH001.pdf'),
-((SELECT id FROM hcms_training_courses WHERE title = 'Cybersecurity Awareness'), (SELECT id FROM hcms_employees WHERE employee_id = 'BPKH002'), 'completed', NOW() - INTERVAL '15 days', NOW() - INTERVAL '10 days', 92, '/certificates/cyber_BPKH002.pdf'),
-((SELECT id FROM hcms_training_courses WHERE title = 'Leadership Development Program'), (SELECT id FROM hcms_employees WHERE employee_id = 'BPKH002'), 'enrolled', NOW() - INTERVAL '15 days', NULL, NULL, NULL),
-((SELECT id FROM hcms_training_courses WHERE title = 'Islamic Finance Fundamentals'), (SELECT id FROM hcms_employees WHERE employee_id = 'BPKH005'), 'enrolled', NOW() - INTERVAL '3 days', NULL, NULL, NULL);
+INSERT INTO hcms_training_enrollments (course_id, employee_id, employee_name, status, enrolled_at, completed_at, score, certificate_url) VALUES
+((SELECT id FROM hcms_training_courses WHERE title = 'Cybersecurity Awareness'), (SELECT id FROM hcms_employees WHERE employee_id = 'BPKH001'), 'Abdullah Al-Faisal', 'completed', NOW() - INTERVAL '15 days', NOW() - INTERVAL '10 days', 95, '/certificates/cyber_BPKH001.pdf'),
+((SELECT id FROM hcms_training_courses WHERE title = 'Cybersecurity Awareness'), (SELECT id FROM hcms_employees WHERE employee_id = 'BPKH002'), 'Fatima Hassan', 'completed', NOW() - INTERVAL '15 days', NOW() - INTERVAL '10 days', 92, '/certificates/cyber_BPKH002.pdf'),
+((SELECT id FROM hcms_training_courses WHERE title = 'Leadership Development Program'), (SELECT id FROM hcms_employees WHERE employee_id = 'BPKH002'), 'Fatima Hassan', 'enrolled', NOW() - INTERVAL '15 days', NULL, NULL, NULL),
+((SELECT id FROM hcms_training_courses WHERE title = 'Islamic Finance Fundamentals'), (SELECT id FROM hcms_employees WHERE employee_id = 'BPKH005'), 'Sarah Al-Qahtani', 'enrolled', NOW() - INTERVAL '3 days', NULL, NULL, NULL);
 
 -- Compliance Alerts
-INSERT INTO hcms_compliance_alerts (employee_id, alert_type, document_type, expiry_date, days_remaining, status, notes) VALUES
-((SELECT id FROM hcms_employees WHERE employee_id = 'BPKH007'), 'document_expiry', 'iqama', '2025-02-28', 32, 'active', 'Iqama expiring soon'),
-((SELECT id FROM hcms_employees WHERE employee_id = 'BPKH004'), 'document_expiry', 'iqama', '2025-03-10', 42, 'active', 'Iqama expiring'),
-((SELECT id FROM hcms_employees WHERE employee_id = 'BPKH008'), 'document_expiry', 'iqama', '2025-04-15', 78, 'active', 'Iqama renewal needed'),
-((SELECT id FROM hcms_employees WHERE employee_id = 'BPKH003'), 'document_expiry', 'iqama', '2025-06-15', 139, 'active', 'Plan iqama renewal'),
-((SELECT id FROM hcms_employees WHERE employee_id = 'BPKH006'), 'probation_ending', 'contract', '2025-02-01', 5, 'active', 'Probation ending');
+INSERT INTO hcms_compliance_alerts (employee_id, employee_name, alert_type, expiry_date, days_remaining, severity, status, notes) VALUES
+((SELECT id FROM hcms_employees WHERE employee_id = 'BPKH007'), 'Noor Ahmad', 'iqamah_expiry', '2025-02-28', 32, 'warning', 'active', 'Iqama expiring soon'),
+((SELECT id FROM hcms_employees WHERE employee_id = 'BPKH004'), 'Mohammad Khan', 'iqamah_expiry', '2025-03-10', 42, 'warning', 'active', 'Iqama expiring'),
+((SELECT id FROM hcms_employees WHERE employee_id = 'BPKH008'), 'Yusuf Ibrahim', 'iqamah_expiry', '2025-04-15', 78, 'info', 'active', 'Iqama renewal needed'),
+((SELECT id FROM hcms_employees WHERE employee_id = 'BPKH003'), 'Ahmad Al-Rashid', 'iqamah_expiry', '2025-06-15', 139, 'info', 'active', 'Plan iqama renewal'),
+((SELECT id FROM hcms_employees WHERE employee_id = 'BPKH006'), 'Khalid Bin Salman', 'probation_end', '2025-02-01', 5, 'critical', 'active', 'Probation ending');
 
 -- Disciplinary Actions
-INSERT INTO hcms_disciplinary_actions (employee_id, action_type, severity, description, incident_date, reported_by, action_taken, status, resolved_at) VALUES
-((SELECT id FROM hcms_employees WHERE employee_id = 'BPKH008'), 'warning', 'minor', 'Repeated tardiness - 5 late arrivals in December', '2024-12-15', 'Fatima Hassan', 'Verbal warning issued', 'resolved', '2024-12-20');
+INSERT INTO hcms_disciplinary_actions (employee_id, employee_name, case_type, severity, description, incident_date, reported_by, action_taken, action_date, status) VALUES
+((SELECT id FROM hcms_employees WHERE employee_id = 'BPKH008'), 'Yusuf Ibrahim', 'verbal_warning', 'minor', 'Repeated tardiness - 5 late arrivals in December', '2024-12-15', 'Fatima Hassan', 'Verbal warning issued', '2024-12-20', 'closed');
 
 
 -- =====================================================
