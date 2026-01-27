@@ -21,7 +21,7 @@ import {
   hcmsApi,
   type ProcessPayrollInput,
   type AdjustSalaryInput
-} from '../../services/mockData/hcms';
+} from '../../services/supabaseHcms';
 
 // Toast Component
 function Toast({

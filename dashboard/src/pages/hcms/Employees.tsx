@@ -13,7 +13,7 @@ import {
 import type { Employee } from '../../types';
 import { Users, UserCheck, UserMinus, Clock, Mail, Phone, Building, Calendar, Eye, Edit, Plus, X, CheckCircle, XCircle, UserX } from 'lucide-react';
 import { format } from 'date-fns';
-import { hcmsApi, type CreateEmployeeInput, type UpdateEmployeeInput } from '../../services/mockData/hcms';
+import { hcmsApi, type CreateEmployeeInput, type UpdateEmployeeInput } from '../../services/supabaseHcms';
 
 const FILTER_OPTIONS = ['all', 'active', 'probation', 'resigned'] as const;
 type FilterType = typeof FILTER_OPTIONS[number];

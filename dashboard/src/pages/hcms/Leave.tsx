@@ -15,7 +15,7 @@ import {
   FileText,
   TrendingUp
 } from 'lucide-react';
-import { hcmsApi, type CreateLeaveInput } from '../../services/mockData/hcms';
+import { hcmsApi, type CreateLeaveInput } from '../../services/supabaseHcms';
 
 // Toast Component
 function Toast({

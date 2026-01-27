@@ -4,7 +4,7 @@ import { StatusBadge, FilterButtons, CardGridSkeleton, Modal, ModalButton } from
 import type { ComplianceAlert, DisciplinaryCase, Employee } from '../../types';
 import { format } from 'date-fns';
 import { AlertTriangle, FileWarning, CheckCircle as CheckCircleIcon, Clock, Shield, Plus, Edit, Eye, XCircle } from 'lucide-react';
-import { hcmsApi, LogCaseInput, UpdateCaseStatusInput } from '../../services/mockData/hcms';
+import { hcmsApi, LogCaseInput, UpdateCaseStatusInput } from '../../services/supabaseHcms';
 
 const FILTER_OPTIONS = ['all', 'critical', 'warning', 'normal'] as const;
 type FilterOption = typeof FILTER_OPTIONS[number];

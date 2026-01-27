@@ -22,7 +22,7 @@ import {
   hcmsApi,
   type ManualCheckInput,
   type UpdateAttendanceInput
-} from '../../services/mockData/hcms';
+} from '../../services/supabaseHcms';
 
 // Toast Component
 function Toast({

@@ -14,7 +14,7 @@ import {
   LineChart,
   Line,
 } from 'recharts';
-import { hcmsApi } from '../../services/mockData/hcms';
+import { hcmsApi } from '../../services/supabaseHcms';
 
 // Chart tooltip style
 const tooltipStyle = {

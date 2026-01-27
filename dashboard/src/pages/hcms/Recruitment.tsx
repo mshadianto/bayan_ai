@@ -4,7 +4,7 @@ import { StatCard, StatusBadge, CardGridSkeleton, Modal, ModalButton } from '../
 import type { Recruitment as RecruitmentType, Candidate } from '../../types';
 import { format } from 'date-fns';
 import { Plus, Users, UserCheck, Clock, Briefcase, ChevronRight, CheckCircle, XCircle } from 'lucide-react';
-import { hcmsApi, CreateRequisitionInput, MoveCandidateStageInput } from '../../services/mockData/hcms';
+import { hcmsApi, CreateRequisitionInput, MoveCandidateStageInput } from '../../services/supabaseHcms';
 
 // Toast Component
 function Toast({ message, type, onClose }: { message: string; type: 'success' | 'error'; onClose: () => void }) {

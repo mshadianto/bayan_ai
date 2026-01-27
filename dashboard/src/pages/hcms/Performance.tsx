@@ -4,7 +4,7 @@ import { StatCard, StatusBadge, TableSkeleton, Modal, ModalButton } from '../../
 import type { PerformanceReview, KPI, Employee } from '../../types';
 import { format } from 'date-fns';
 import { Star, TrendingUp, Target, Award, Plus, Edit, Eye, CheckCircle, XCircle } from 'lucide-react';
-import { hcmsApi, CreateReviewInput, SubmitReviewInput } from '../../services/mockData/hcms';
+import { hcmsApi, CreateReviewInput, SubmitReviewInput } from '../../services/supabaseHcms';
 
 // Toast Component
 function Toast({ message, type, onClose }: { message: string; type: 'success' | 'error'; onClose: () => void }) {
