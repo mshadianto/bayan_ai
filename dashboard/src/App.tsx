@@ -13,7 +13,16 @@ const Payroll = lazy(() => import('./pages/hcms/Payroll'));
 const Recruitment = lazy(() => import('./pages/hcms/Recruitment'));
 const Performance = lazy(() => import('./pages/hcms/Performance'));
 const Training = lazy(() => import('./pages/hcms/Training'));
-const Compliance = lazy(() => import('./pages/hcms/Compliance'));
+const HCMSCompliance = lazy(() => import('./pages/hcms/Compliance'));
+
+// Lazy load LCRMS pages for code splitting
+const LCRMSDashboard = lazy(() => import('./pages/lcrms/LCRMSDashboard'));
+const Contracts = lazy(() => import('./pages/lcrms/Contracts'));
+const LCRMSCompliance = lazy(() => import('./pages/lcrms/Compliance'));
+const KnowledgeBase = lazy(() => import('./pages/lcrms/KnowledgeBase'));
+const RiskManagement = lazy(() => import('./pages/lcrms/RiskManagement'));
+const Litigation = lazy(() => import('./pages/lcrms/Litigation'));
+const Secretarial = lazy(() => import('./pages/lcrms/Secretarial'));
 
 function App() {
   return (
@@ -95,7 +104,64 @@ function App() {
             path="hcms/compliance"
             element={
               <Suspense fallback={<PageSkeleton />}>
-                <Compliance />
+                <HCMSCompliance />
+              </Suspense>
+            }
+          />
+          {/* LCRMS Routes - Lazy loaded */}
+          <Route
+            path="lcrms"
+            element={
+              <Suspense fallback={<PageSkeleton />}>
+                <LCRMSDashboard />
+              </Suspense>
+            }
+          />
+          <Route
+            path="lcrms/contracts"
+            element={
+              <Suspense fallback={<PageSkeleton />}>
+                <Contracts />
+              </Suspense>
+            }
+          />
+          <Route
+            path="lcrms/compliance"
+            element={
+              <Suspense fallback={<PageSkeleton />}>
+                <LCRMSCompliance />
+              </Suspense>
+            }
+          />
+          <Route
+            path="lcrms/knowledge"
+            element={
+              <Suspense fallback={<PageSkeleton />}>
+                <KnowledgeBase />
+              </Suspense>
+            }
+          />
+          <Route
+            path="lcrms/risks"
+            element={
+              <Suspense fallback={<PageSkeleton />}>
+                <RiskManagement />
+              </Suspense>
+            }
+          />
+          <Route
+            path="lcrms/litigation"
+            element={
+              <Suspense fallback={<PageSkeleton />}>
+                <Litigation />
+              </Suspense>
+            }
+          />
+          <Route
+            path="lcrms/secretarial"
+            element={
+              <Suspense fallback={<PageSkeleton />}>
+                <Secretarial />
               </Suspense>
             }
           />

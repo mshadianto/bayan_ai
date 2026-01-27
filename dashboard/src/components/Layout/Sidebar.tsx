@@ -23,9 +23,20 @@ const hcmsItems = [
   { path: '/hcms/compliance', label: 'Compliance', emoji: '📋' },
 ];
 
+const lcrmsItems = [
+  { path: '/lcrms', label: 'LCRMS Dashboard', emoji: '⚖️' },
+  { path: '/lcrms/contracts', label: 'Contracts', emoji: '📋' },
+  { path: '/lcrms/compliance', label: 'Compliance', emoji: '✅' },
+  { path: '/lcrms/knowledge', label: 'Knowledge Base', emoji: '📚' },
+  { path: '/lcrms/risks', label: 'Risk Management', emoji: '⚠️' },
+  { path: '/lcrms/litigation', label: 'Litigation', emoji: '⚔️' },
+  { path: '/lcrms/secretarial', label: 'Secretarial', emoji: '📜' },
+];
+
 export function Sidebar() {
   const [financeOpen, setFinanceOpen] = useState(true);
   const [hcmsOpen, setHcmsOpen] = useState(true);
+  const [lcrmsOpen, setLcrmsOpen] = useState(true);
 
   return (
     <aside className="w-64 bg-slate-900 text-white min-h-screen fixed left-0 top-0 border-r border-slate-700 overflow-y-auto">
@@ -83,7 +94,7 @@ export function Sidebar() {
           {hcmsOpen ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
         </button>
         {hcmsOpen && (
-          <div className="mt-1">
+          <div className="mt-1 mb-4">
             {hcmsItems.map(({ path, label, emoji }) => (
               <NavLink
                 key={path}
@@ -93,6 +104,36 @@ export function Sidebar() {
                   `flex items-center gap-3 px-4 py-2.5 rounded-xl mb-1 transition-all ${
                     isActive
                       ? 'bg-indigo-600/20 text-indigo-400 border border-indigo-600/50'
+                      : 'text-slate-300 hover:bg-slate-800 hover:text-white'
+                  }`
+                }
+              >
+                <span className="text-base">{emoji}</span>
+                <span className="text-sm font-medium">{label}</span>
+              </NavLink>
+            ))}
+          </div>
+        )}
+
+        {/* LCRMS Section */}
+        <button
+          onClick={() => setLcrmsOpen(!lcrmsOpen)}
+          className="w-full flex items-center justify-between px-4 py-2 text-slate-400 hover:text-white transition-colors"
+        >
+          <span className="text-xs font-semibold uppercase tracking-wider">Legal & Compliance</span>
+          {lcrmsOpen ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
+        </button>
+        {lcrmsOpen && (
+          <div className="mt-1">
+            {lcrmsItems.map(({ path, label, emoji }) => (
+              <NavLink
+                key={path}
+                to={path}
+                end={path === '/lcrms'}
+                className={({ isActive }) =>
+                  `flex items-center gap-3 px-4 py-2.5 rounded-xl mb-1 transition-all ${
+                    isActive
+                      ? 'bg-amber-600/20 text-amber-400 border border-amber-600/50'
                       : 'text-slate-300 hover:bg-slate-800 hover:text-white'
                   }`
                 }

@@ -21,12 +21,20 @@ const MODULE_CONFIG = {
     badgeBg: 'bg-indigo-500/30',
     badgeText: 'text-indigo-100',
   },
+  lcrms: {
+    label: 'Legal & Compliance',
+    emoji: '⚖️',
+    gradient: 'from-amber-600 to-orange-600',
+    badgeBg: 'bg-amber-500/30',
+    badgeText: 'text-amber-100',
+  },
 } as const;
 
 export function Header({ title, subtitle }: HeaderProps) {
   const location = useLocation();
   const isHCMS = location.pathname.startsWith('/hcms');
-  const module = isHCMS ? MODULE_CONFIG.hcms : MODULE_CONFIG.finance;
+  const isLCRMS = location.pathname.startsWith('/lcrms');
+  const module = isLCRMS ? MODULE_CONFIG.lcrms : isHCMS ? MODULE_CONFIG.hcms : MODULE_CONFIG.finance;
 
   return (
     <header className={`bg-gradient-to-r ${module.gradient} px-6 py-4 flex items-center justify-between`}>

@@ -429,3 +429,457 @@ export interface HCMSDashboard {
   headcount_by_department?: { department: string; count: number }[];
   attendance_trend?: { date: string; present: number; absent: number }[];
 }
+
+// ============================================
+// LCRMS Types (Legal, Compliance & Risk Management)
+// ============================================
+
+// --- Contract Lifecycle Management (CLM) ---
+
+export type ContractType = 'pks' | 'vendor' | 'sewa' | 'nda' | 'service' | 'other';
+export type ContractStatus = 'draft' | 'active' | 'expiring' | 'expired' | 'terminated';
+
+export interface Contract {
+  id: string;
+  contract_number: string;
+  name: string;
+  type: ContractType;
+  partner_name: string;
+  partner_contact?: string;
+  description?: string;
+  start_date: string;
+  end_date: string;
+  value?: number;
+  currency?: 'SAR' | 'IDR' | 'USD';
+  status: ContractStatus;
+  auto_renewal: boolean;
+  renewal_notice_days?: number;
+  document_url?: string;
+  obligations: ContractObligation[];
+  versions: ContractVersion[];
+  created_by?: string;
+  created_at: string;
+  updated_at?: string;
+}
+
+export interface ContractObligation {
+  id: string;
+  contract_id: string;
+  description: string;
+  due_date: string;
+  responsible_party: 'company' | 'partner';
+  status: 'pending' | 'completed' | 'overdue';
+  completed_at?: string;
+  notes?: string;
+}
+
+export interface ContractVersion {
+  id: string;
+  version_number: number;
+  changes_summary: string;
+  document_url: string;
+  created_by: string;
+  created_at: string;
+}
+
+export interface ContractAlert {
+  id: string;
+  contract_id: string;
+  contract_name: string;
+  partner_name: string;
+  alert_type: 'expiry_90' | 'expiry_60' | 'expiry_30' | 'obligation_due' | 'auto_renewal';
+  days_remaining: number;
+  message: string;
+  status: 'active' | 'acknowledged' | 'resolved';
+  created_at: string;
+}
+
+// --- Regulatory Compliance & Governance ---
+
+export type LicenseType = 'nib' | 'commercial_registration' | 'operational_permit' | 'tax_registration' | 'other';
+export type LicenseStatus = 'valid' | 'expiring' | 'expired' | 'pending_renewal';
+
+export interface License {
+  id: string;
+  name: string;
+  type: LicenseType;
+  license_number: string;
+  issuer: string;
+  country: 'ID' | 'SA';
+  issue_date: string;
+  expiry_date: string;
+  status: LicenseStatus;
+  document_url?: string;
+  renewal_notes?: string;
+  created_at: string;
+  updated_at?: string;
+}
+
+export interface COIDeclaration {
+  id: string;
+  employee_id: string;
+  employee_name: string;
+  department: string;
+  position: string;
+  year: number;
+  has_conflict: boolean;
+  conflict_details?: string;
+  related_parties?: string[];
+  mitigation_plan?: string;
+  status: 'pending' | 'submitted' | 'reviewed' | 'approved';
+  reviewed_by?: string;
+  reviewed_at?: string;
+  submitted_at: string;
+  created_at: string;
+}
+
+export interface EmployeeViolation {
+  id: string;
+  employee_id: string;
+  employee_name: string;
+  department: string;
+  violation_type: 'code_of_ethics' | 'fraud' | 'discipline' | 'policy_breach' | 'other';
+  severity: 'minor' | 'moderate' | 'major' | 'critical';
+  description: string;
+  incident_date: string;
+  reported_by: string;
+  investigation_status: 'reported' | 'investigating' | 'concluded';
+  action_taken?: string;
+  resolution?: string;
+  resolved_at?: string;
+  created_at: string;
+}
+
+// --- Enterprise Risk Management (ERM) ---
+
+export type RiskCategory = 'strategic' | 'financial' | 'operational' | 'compliance' | 'legal' | 'reputational' | 'shariah';
+export type RiskLevel = 'low' | 'medium' | 'high' | 'critical';
+export type MitigationStatus = 'identified' | 'in_progress' | 'implemented' | 'monitoring';
+
+export interface Risk {
+  id: string;
+  risk_code: string;
+  division: string;
+  category: RiskCategory;
+  name: string;
+  description: string;
+  cause?: string;
+  impact_description?: string;
+  impact_score: number; // 1-5
+  likelihood_score: number; // 1-5
+  risk_score: number; // impact x likelihood
+  level: RiskLevel;
+  mitigation_plan: string;
+  mitigation_status: MitigationStatus;
+  pic_name: string;
+  pic_id?: string;
+  target_date?: string;
+  review_date?: string;
+  status: 'open' | 'mitigated' | 'accepted' | 'closed';
+  created_at: string;
+  updated_at?: string;
+}
+
+export interface RiskHeatmapCell {
+  impact: number;
+  likelihood: number;
+  count: number;
+  risks: { id: string; name: string; division: string }[];
+}
+
+// --- Litigation & Case Management ---
+
+export type CaseType = 'litigation' | 'non_litigation' | 'arbitration' | 'mediation';
+export type CaseStatus = 'open' | 'discovery' | 'trial' | 'appeal' | 'settled' | 'won' | 'lost' | 'closed';
+
+export interface LitigationCase {
+  id: string;
+  case_number: string;
+  title: string;
+  type: CaseType;
+  court_name?: string;
+  jurisdiction?: string;
+  plaintiff: string;
+  defendant: string;
+  subject_matter: string;
+  claim_amount?: number;
+  currency?: 'SAR' | 'IDR' | 'USD';
+  status: CaseStatus;
+  priority: 'low' | 'medium' | 'high' | 'critical';
+  external_counsel_id?: string;
+  external_counsel_name?: string;
+  timeline: CaseTimelineEvent[];
+  documents: CaseDocument[];
+  costs: CaseCost[];
+  outcome?: string;
+  settlement_amount?: number;
+  opened_at: string;
+  closed_at?: string;
+  created_at: string;
+  updated_at?: string;
+}
+
+export interface CaseTimelineEvent {
+  id: string;
+  case_id: string;
+  event_type: 'filing' | 'hearing' | 'submission' | 'decision' | 'appeal' | 'settlement' | 'other';
+  title: string;
+  description?: string;
+  date: string;
+  location?: string;
+  created_at: string;
+}
+
+export interface CaseDocument {
+  id: string;
+  case_id: string;
+  name: string;
+  document_type: 'pleading' | 'evidence' | 'correspondence' | 'court_order' | 'contract' | 'other';
+  document_url: string;
+  uploaded_by: string;
+  uploaded_at: string;
+}
+
+export interface CaseCost {
+  id: string;
+  case_id: string;
+  description: string;
+  category: 'legal_fees' | 'court_fees' | 'expert_witness' | 'travel' | 'other';
+  amount: number;
+  currency: 'SAR' | 'IDR' | 'USD';
+  date: string;
+  invoice_number?: string;
+  paid: boolean;
+}
+
+export interface ExternalCounsel {
+  id: string;
+  firm_name: string;
+  contact_person: string;
+  email: string;
+  phone: string;
+  address?: string;
+  specialization: string[];
+  jurisdiction: string[];
+  hourly_rate?: number;
+  currency?: 'SAR' | 'IDR' | 'USD';
+  cases_handled: number;
+  cases_won: number;
+  performance_rating: number; // 1-5
+  contract_start?: string;
+  contract_end?: string;
+  status: 'active' | 'inactive';
+  notes?: string;
+  created_at: string;
+}
+
+// --- Corporate Secretarial ---
+
+export type MeetingType = 'rups' | 'board_of_directors' | 'board_of_commissioners' | 'committee' | 'management';
+
+export interface MeetingMinutes {
+  id: string;
+  meeting_number: string;
+  meeting_type: MeetingType;
+  title: string;
+  date: string;
+  start_time: string;
+  end_time: string;
+  location: string;
+  attendees: MeetingAttendee[];
+  agenda: string[];
+  decisions: MeetingDecision[];
+  action_items: MeetingActionItem[];
+  document_url?: string;
+  status: 'draft' | 'finalized' | 'signed';
+  prepared_by: string;
+  approved_by?: string;
+  created_at: string;
+  updated_at?: string;
+}
+
+export interface MeetingAttendee {
+  id: string;
+  name: string;
+  position: string;
+  attendance: 'present' | 'absent' | 'proxy';
+  proxy_name?: string;
+}
+
+export interface MeetingDecision {
+  id: string;
+  decision_number: string;
+  description: string;
+  voting_result?: string;
+  effective_date?: string;
+}
+
+export interface MeetingActionItem {
+  id: string;
+  description: string;
+  responsible: string;
+  due_date: string;
+  status: 'pending' | 'in_progress' | 'completed';
+}
+
+export interface Shareholder {
+  id: string;
+  name: string;
+  type: 'individual' | 'corporate' | 'government';
+  nationality?: string;
+  shares: number;
+  percentage: number;
+  share_class: 'common' | 'preferred';
+  acquisition_date: string;
+  acquisition_type: 'founding' | 'purchase' | 'transfer' | 'rights_issue';
+  status: 'active' | 'transferred';
+  contact_email?: string;
+  contact_phone?: string;
+  notes?: string;
+  created_at: string;
+  updated_at?: string;
+}
+
+export interface ShareholderChange {
+  id: string;
+  shareholder_id: string;
+  change_type: 'acquisition' | 'disposal' | 'transfer';
+  shares_before: number;
+  shares_after: number;
+  transaction_date: string;
+  counterparty?: string;
+  price_per_share?: number;
+  total_value?: number;
+  document_url?: string;
+  created_at: string;
+}
+
+export interface CircularResolution {
+  id: string;
+  resolution_number: string;
+  resolution_type: 'board' | 'shareholders';
+  subject: string;
+  description: string;
+  proposed_by: string;
+  proposed_date: string;
+  deadline: string;
+  approvals: CircularApproval[];
+  status: 'pending' | 'approved' | 'rejected' | 'expired';
+  document_url?: string;
+  effective_date?: string;
+  created_at: string;
+}
+
+export interface CircularApproval {
+  id: string;
+  resolution_id: string;
+  approver_name: string;
+  approver_position: string;
+  decision: 'pending' | 'approved' | 'rejected' | 'abstain';
+  comments?: string;
+  decided_at?: string;
+}
+
+// --- Legal Knowledge Management ---
+
+export interface LegalDocument {
+  id: string;
+  title: string;
+  document_type: 'sk_direksi' | 'surat_edaran' | 'peraturan_perusahaan' | 'uu' | 'peraturan_pemerintah' | 'fatwa' | 'other';
+  document_number?: string;
+  category: string;
+  issuer: string;
+  issue_date: string;
+  effective_date?: string;
+  summary?: string;
+  keywords: string[];
+  document_url: string;
+  status: 'active' | 'amended' | 'revoked';
+  superseded_by?: string;
+  created_at: string;
+  updated_at?: string;
+}
+
+export interface KnowledgeQuery {
+  id: string;
+  query: string;
+  response: string;
+  sources: string[];
+  user_id?: string;
+  helpful?: boolean;
+  created_at: string;
+}
+
+// --- LCRMS Dashboard ---
+
+export interface LCRMSDashboardData {
+  compliance_score: number; // 0-100
+  compliance_trend: { month: string; score: number }[];
+
+  contracts_summary: {
+    total: number;
+    active: number;
+    expiring_30: number;
+    expiring_60: number;
+    expiring_90: number;
+    expired: number;
+  };
+
+  risks_summary: {
+    total: number;
+    critical: number;
+    high: number;
+    medium: number;
+    low: number;
+    mitigated: number;
+  };
+
+  cases_summary: {
+    total: number;
+    open: number;
+    settled: number;
+    won: number;
+    lost: number;
+    total_exposure: number;
+  };
+
+  licenses_summary: {
+    total: number;
+    valid: number;
+    expiring: number;
+    expired: number;
+  };
+
+  coi_summary: {
+    total_required: number;
+    submitted: number;
+    pending: number;
+    with_conflicts: number;
+  };
+
+  alerts: LCRMSAlert[];
+
+  recent_activities: LCRMSActivity[];
+}
+
+export interface LCRMSAlert {
+  id: string;
+  type: 'contract_expiry' | 'license_expiry' | 'risk_escalation' | 'case_hearing' | 'coi_deadline' | 'obligation_due';
+  severity: 'info' | 'warning' | 'critical';
+  title: string;
+  message: string;
+  reference_id?: string;
+  reference_type?: string;
+  due_date?: string;
+  created_at: string;
+}
+
+export interface LCRMSActivity {
+  id: string;
+  activity_type: string;
+  description: string;
+  user_name: string;
+  reference_id?: string;
+  reference_type?: string;
+  created_at: string;
+}
