@@ -66,12 +66,12 @@ function CreateReviewModal({
     <Modal isOpen={true} title="Initiate Performance Review" onClose={onClose}>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-1">Employee *</label>
+          <label className="block text-sm font-medium text-content-tertiary mb-1">Employee *</label>
           <select
             required
             value={form.employee_id}
             onChange={e => handleEmployeeChange(e.target.value)}
-            className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+            className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
           >
             <option value="">Select Employee</option>
             {activeEmployees.map(emp => (
@@ -84,24 +84,24 @@ function CreateReviewModal({
 
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-1">Review Period *</label>
+            <label className="block text-sm font-medium text-content-tertiary mb-1">Review Period *</label>
             <input
               type="text"
               required
               value={form.period}
               onChange={e => setForm({ ...form, period: e.target.value })}
-              className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+              className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
               placeholder="e.g., 2024"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-1">Review Type *</label>
+            <label className="block text-sm font-medium text-content-tertiary mb-1">Review Type *</label>
             <select
               required
               value={form.review_type}
               onChange={e => setForm({ ...form, review_type: e.target.value as CreateReviewInput['review_type'] })}
-              className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+              className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
             >
               <option value="annual">Annual</option>
               <option value="mid_year">Mid-Year</option>
@@ -110,12 +110,12 @@ function CreateReviewModal({
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-1">Reviewer</label>
+          <label className="block text-sm font-medium text-content-tertiary mb-1">Reviewer</label>
           <input
             type="text"
             value={form.reviewer_name}
             onChange={e => setForm({ ...form, reviewer_name: e.target.value })}
-            className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+            className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
           />
         </div>
 
@@ -171,13 +171,13 @@ function SubmitReviewModal({
   return (
     <Modal isOpen={true} title={`Submit Review: ${review.employee_name}`} onClose={onClose}>
       <form onSubmit={handleSubmit} className="space-y-4">
-        <div className="p-4 bg-slate-700/50 rounded-xl">
-          <p className="text-white font-semibold">{review.employee_name}</p>
-          <p className="text-sm text-slate-400">{review.period} {review.review_type.replace('_', '-')} Review</p>
+        <div className="p-4 bg-hover rounded-xl">
+          <p className="text-content font-semibold">{review.employee_name}</p>
+          <p className="text-sm text-content-secondary">{review.period} {review.review_type.replace('_', '-')} Review</p>
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-2">Overall Score (1-5) *</label>
+          <label className="block text-sm font-medium text-content-tertiary mb-2">Overall Score (1-5) *</label>
           <div className="flex items-center gap-4">
             <input
               type="range"
@@ -186,24 +186,24 @@ function SubmitReviewModal({
               step={0.1}
               value={form.overall_score}
               onChange={e => setForm({ ...form, overall_score: parseFloat(e.target.value) })}
-              className="flex-1 h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-amber-500"
+              className="flex-1 h-2 bg-hover rounded-lg appearance-none cursor-pointer accent-amber-500"
             />
             <div className="flex items-center gap-1 min-w-[100px]">
               {[1, 2, 3, 4, 5].map(star => (
                 <Star
                   key={star}
                   size={20}
-                  className={`${star <= Math.round(form.overall_score) ? 'text-amber-400 fill-amber-400' : 'text-slate-600'}`}
+                  className={`${star <= Math.round(form.overall_score) ? 'text-amber-400 fill-amber-400' : 'text-content-muted'}`}
                   onClick={() => setForm({ ...form, overall_score: star })}
                 />
               ))}
             </div>
-            <span className="text-white font-bold text-lg w-12">{form.overall_score.toFixed(1)}</span>
+            <span className="text-content font-bold text-lg w-12">{form.overall_score.toFixed(1)}</span>
           </div>
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-2">Rating *</label>
+          <label className="block text-sm font-medium text-content-tertiary mb-2">Rating *</label>
           <div className="space-y-2">
             {ratings.map(rating => (
               <label
@@ -211,7 +211,7 @@ function SubmitReviewModal({
                 className={`flex items-center gap-3 p-3 rounded-lg border cursor-pointer transition-all ${
                   form.rating === rating.value
                     ? 'border-indigo-500 bg-indigo-500/20'
-                    : 'border-slate-600 hover:border-slate-500'
+                    : 'border-border-subtle hover:border-border'
                 }`}
               >
                 <input
@@ -223,19 +223,19 @@ function SubmitReviewModal({
                   className="sr-only"
                 />
                 <span className={`w-3 h-3 rounded-full ${rating.color}`} />
-                <span className="text-white">{rating.label}</span>
+                <span className="text-content">{rating.label}</span>
               </label>
             ))}
           </div>
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-1">Comments</label>
+          <label className="block text-sm font-medium text-content-tertiary mb-1">Comments</label>
           <textarea
             rows={3}
             value={form.comments}
             onChange={e => setForm({ ...form, comments: e.target.value })}
-            className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent resize-none"
+            className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content focus:ring-2 focus:ring-indigo-500 focus:border-transparent resize-none"
             placeholder="Enter feedback and development areas..."
           />
         </div>
@@ -272,10 +272,10 @@ function ReviewDetailModal({
           <Star
             key={star}
             size={24}
-            className={`${star <= Math.round(score) ? 'text-amber-400 fill-amber-400' : 'text-slate-600'}`}
+            className={`${star <= Math.round(score) ? 'text-amber-400 fill-amber-400' : 'text-content-muted'}`}
           />
         ))}
-        <span className="ml-2 text-white font-bold text-xl">{score.toFixed(1)}</span>
+        <span className="ml-2 text-content font-bold text-xl">{score.toFixed(1)}</span>
       </div>
     );
   };
@@ -283,9 +283,9 @@ function ReviewDetailModal({
   return (
     <Modal isOpen={true} title="Performance Review Details" onClose={onClose}>
       <div className="space-y-4">
-        <div className="text-center p-6 bg-slate-700/50 rounded-xl">
-          <p className="text-white font-semibold text-xl">{review.employee_name}</p>
-          <p className="text-slate-400">{review.employee_id}</p>
+        <div className="text-center p-6 bg-hover rounded-xl">
+          <p className="text-content font-semibold text-xl">{review.employee_name}</p>
+          <p className="text-content-secondary">{review.employee_id}</p>
           <div className="mt-4 flex justify-center">
             {renderStars(review.overall_score)}
           </div>
@@ -295,32 +295,32 @@ function ReviewDetailModal({
         </div>
 
         <div className="grid grid-cols-2 gap-4">
-          <div className="p-4 bg-slate-800 rounded-xl">
-            <p className="text-sm text-slate-400">Review Period</p>
-            <p className="text-white font-medium">{review.period}</p>
+          <div className="p-4 bg-input rounded-xl">
+            <p className="text-sm text-content-secondary">Review Period</p>
+            <p className="text-content font-medium">{review.period}</p>
           </div>
-          <div className="p-4 bg-slate-800 rounded-xl">
-            <p className="text-sm text-slate-400">Review Type</p>
-            <p className="text-white font-medium capitalize">{review.review_type.replace('_', ' ')}</p>
+          <div className="p-4 bg-input rounded-xl">
+            <p className="text-sm text-content-secondary">Review Type</p>
+            <p className="text-content font-medium capitalize">{review.review_type.replace('_', ' ')}</p>
           </div>
-          <div className="p-4 bg-slate-800 rounded-xl">
-            <p className="text-sm text-slate-400">Reviewer</p>
-            <p className="text-white font-medium">{review.reviewer_name}</p>
+          <div className="p-4 bg-input rounded-xl">
+            <p className="text-sm text-content-secondary">Reviewer</p>
+            <p className="text-content font-medium">{review.reviewer_name}</p>
           </div>
-          <div className="p-4 bg-slate-800 rounded-xl">
-            <p className="text-sm text-slate-400">Status</p>
+          <div className="p-4 bg-input rounded-xl">
+            <p className="text-sm text-content-secondary">Status</p>
             <StatusBadge status={review.status} />
           </div>
         </div>
 
         {review.comments && (
-          <div className="p-4 bg-slate-800 rounded-xl">
-            <p className="text-sm text-slate-400 mb-2">Comments</p>
-            <p className="text-white">{review.comments}</p>
+          <div className="p-4 bg-input rounded-xl">
+            <p className="text-sm text-content-secondary mb-2">Comments</p>
+            <p className="text-content">{review.comments}</p>
           </div>
         )}
 
-        <div className="text-center text-sm text-slate-400">
+        <div className="text-center text-sm text-content-secondary">
           Created: {format(new Date(review.created_at), 'MMMM d, yyyy')}
         </div>
 
@@ -418,11 +418,11 @@ export function Performance() {
                 ? 'text-amber-400 fill-amber-400'
                 : i === fullStars && hasHalf
                 ? 'text-amber-400 fill-amber-400/50'
-                : 'text-slate-600'
+                : 'text-content-muted'
             }`}
           />
         ))}
-        <span className="ml-2 text-white font-semibold">{score.toFixed(1)}</span>
+        <span className="ml-2 text-content font-semibold">{score.toFixed(1)}</span>
       </div>
     );
   };
@@ -463,18 +463,18 @@ export function Performance() {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
           {/* Rating Distribution */}
-          <div className="bg-slate-800/50 rounded-xl border border-slate-700 p-5">
-            <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+          <div className="bg-card rounded-xl border border-border p-5">
+            <h3 className="text-lg font-semibold text-content mb-4 flex items-center gap-2">
               Rating Distribution
             </h3>
             <div className="space-y-3">
               {ratingDistribution.map((item) => (
                 <div key={item.rating}>
                   <div className="flex justify-between text-sm mb-1">
-                    <span className="text-slate-300">{item.rating}</span>
-                    <span className="text-slate-400">{item.count} ({item.percentage}%)</span>
+                    <span className="text-content-tertiary">{item.rating}</span>
+                    <span className="text-content-secondary">{item.count} ({item.percentage}%)</span>
                   </div>
-                  <div className="h-2 bg-slate-700 rounded-full overflow-hidden">
+                  <div className="h-2 bg-hover rounded-full overflow-hidden">
                     <div
                       className={`h-full rounded-full ${
                         item.rating === 'Exceptional' ? 'bg-purple-500' :
@@ -491,27 +491,27 @@ export function Performance() {
           </div>
 
           {/* KPI Overview */}
-          <div className="bg-slate-800/50 rounded-xl border border-slate-700 p-5 lg:col-span-2">
-            <h3 className="text-lg font-semibold text-white mb-4 flex items-gap-2">
+          <div className="bg-card rounded-xl border border-border p-5 lg:col-span-2">
+            <h3 className="text-lg font-semibold text-content mb-4 flex items-gap-2">
               Sample KPIs - Abdullah Al-Faisal
             </h3>
             <div className="space-y-3">
               {kpis.map((kpi) => (
-                <div key={kpi.id} className="bg-slate-900/50 rounded-xl p-4 border border-slate-700">
+                <div key={kpi.id} className="bg-app rounded-xl p-4 border border-border">
                   <div className="flex justify-between items-start mb-2">
                     <div>
-                      <p className="text-white font-medium">{kpi.kpi_name}</p>
-                      <p className="text-xs text-slate-400">Weight: {kpi.weight}%</p>
+                      <p className="text-content font-medium">{kpi.kpi_name}</p>
+                      <p className="text-xs text-content-secondary">Weight: {kpi.weight}%</p>
                     </div>
                     <span className={`text-lg font-bold ${kpi.score >= 100 ? 'text-emerald-400' : kpi.score >= 80 ? 'text-blue-400' : 'text-amber-400'}`}>
                       {kpi.score}%
                     </span>
                   </div>
                   <div className="flex items-center gap-4 text-sm">
-                    <span className="text-slate-400">Target: {kpi.target}%</span>
-                    <span className="text-slate-400">Actual: {kpi.actual}%</span>
+                    <span className="text-content-secondary">Target: {kpi.target}%</span>
+                    <span className="text-content-secondary">Actual: {kpi.actual}%</span>
                   </div>
-                  <div className="mt-2 h-2 bg-slate-700 rounded-full overflow-hidden">
+                  <div className="mt-2 h-2 bg-hover rounded-full overflow-hidden">
                     <div
                       className={`h-full rounded-full ${kpi.score >= 100 ? 'bg-emerald-500' : kpi.score >= 80 ? 'bg-blue-500' : 'bg-amber-500'}`}
                       style={{ width: `${Math.min(kpi.score, 120)}%` }}
@@ -527,62 +527,62 @@ export function Performance() {
         {loading ? (
           <TableSkeleton rows={5} columns={6} />
         ) : (
-          <div className="bg-slate-800/50 rounded-xl border border-slate-700">
-            <div className="p-4 border-b border-slate-700">
-              <h3 className="font-semibold text-white flex items-center gap-2">
+          <div className="bg-card rounded-xl border border-border">
+            <div className="p-4 border-b border-border">
+              <h3 className="font-semibold text-content flex items-center gap-2">
                 Performance Reviews
               </h3>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full">
-                <thead className="bg-slate-800">
+                <thead className="bg-input">
                   <tr>
-                    <th className="text-left p-4 text-sm font-medium text-slate-400">Employee</th>
-                    <th className="text-left p-4 text-sm font-medium text-slate-400">Score</th>
-                    <th className="text-left p-4 text-sm font-medium text-slate-400">Rating</th>
-                    <th className="text-left p-4 text-sm font-medium text-slate-400">Reviewer</th>
-                    <th className="text-left p-4 text-sm font-medium text-slate-400">Status</th>
-                    <th className="text-left p-4 text-sm font-medium text-slate-400">Date</th>
-                    <th className="text-right p-4 text-sm font-medium text-slate-400">Actions</th>
+                    <th className="text-left p-4 text-sm font-medium text-content-secondary">Employee</th>
+                    <th className="text-left p-4 text-sm font-medium text-content-secondary">Score</th>
+                    <th className="text-left p-4 text-sm font-medium text-content-secondary">Rating</th>
+                    <th className="text-left p-4 text-sm font-medium text-content-secondary">Reviewer</th>
+                    <th className="text-left p-4 text-sm font-medium text-content-secondary">Status</th>
+                    <th className="text-left p-4 text-sm font-medium text-content-secondary">Date</th>
+                    <th className="text-right p-4 text-sm font-medium text-content-secondary">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
                   {reviews.map((review, index) => (
                     <tr
                       key={review.id}
-                      className="border-t border-slate-700 hover:bg-slate-800/50 animate-fade-in"
+                      className="border-t border-border hover:bg-card animate-fade-in"
                       style={{ animationDelay: `${index * 50}ms` }}
                     >
                       <td className="p-4">
                         <div>
-                          <p className="text-white font-medium">{review.employee_name}</p>
-                          <p className="text-sm text-slate-400">{review.employee_id}</p>
+                          <p className="text-content font-medium">{review.employee_name}</p>
+                          <p className="text-sm text-content-secondary">{review.employee_id}</p>
                         </div>
                       </td>
                       <td className="p-4">{renderStars(review.overall_score)}</td>
                       <td className="p-4">
                         <StatusBadge status={review.rating} variant="outline" />
                       </td>
-                      <td className="p-4 text-slate-300">{review.reviewer_name}</td>
+                      <td className="p-4 text-content-tertiary">{review.reviewer_name}</td>
                       <td className="p-4">
                         <StatusBadge status={review.status} />
                       </td>
-                      <td className="p-4 text-sm text-slate-400">
+                      <td className="p-4 text-sm text-content-secondary">
                         {format(new Date(review.created_at), 'MMM d, yyyy')}
                       </td>
                       <td className="p-4">
                         <div className="flex justify-end gap-2">
                           <button
                             onClick={() => setViewingReview(review)}
-                            className="p-2 hover:bg-slate-700 rounded-lg transition-colors"
+                            className="p-2 hover:bg-hover rounded-lg transition-colors"
                             title="View details"
                           >
-                            <Eye size={16} className="text-slate-400" />
+                            <Eye size={16} className="text-content-secondary" />
                           </button>
                           {review.status === 'draft' && (
                             <button
                               onClick={() => setEditingReview(review)}
-                              className="p-2 hover:bg-slate-700 rounded-lg transition-colors"
+                              className="p-2 hover:bg-hover rounded-lg transition-colors"
                               title="Submit review"
                             >
                               <Edit size={16} className="text-indigo-400" />

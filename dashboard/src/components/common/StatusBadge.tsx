@@ -56,15 +56,15 @@ const STATUS_STYLES: Record<string, { bg: string; text: string; dot: string }> =
   mandatory: { bg: 'bg-red-900/50', text: 'text-red-300', dot: 'bg-red-400' },
 
   // Neutral states
-  inactive: { bg: 'bg-slate-700', text: 'text-slate-300', dot: 'bg-slate-400' },
-  draft: { bg: 'bg-slate-700', text: 'text-slate-300', dot: 'bg-slate-400' },
-  closed: { bg: 'bg-slate-700', text: 'text-slate-300', dot: 'bg-slate-400' },
-  resigned: { bg: 'bg-slate-700', text: 'text-slate-300', dot: 'bg-slate-400' },
-  normal: { bg: 'bg-slate-700', text: 'text-slate-300', dot: 'bg-slate-400' },
-  technical: { bg: 'bg-slate-700', text: 'text-slate-300', dot: 'bg-slate-400' },
+  inactive: { bg: 'bg-hover', text: 'text-content-tertiary', dot: 'bg-content-secondary' },
+  draft: { bg: 'bg-hover', text: 'text-content-tertiary', dot: 'bg-content-secondary' },
+  closed: { bg: 'bg-hover', text: 'text-content-tertiary', dot: 'bg-content-secondary' },
+  resigned: { bg: 'bg-hover', text: 'text-content-tertiary', dot: 'bg-content-secondary' },
+  normal: { bg: 'bg-hover', text: 'text-content-tertiary', dot: 'bg-content-secondary' },
+  technical: { bg: 'bg-hover', text: 'text-content-tertiary', dot: 'bg-content-secondary' },
 };
 
-const DEFAULT_STYLE = { bg: 'bg-slate-700', text: 'text-slate-300', dot: 'bg-slate-400' };
+const DEFAULT_STYLE = { bg: 'bg-hover', text: 'text-content-tertiary', dot: 'bg-content-secondary' };
 
 export function StatusBadge({ status, variant = 'default', size = 'sm', children }: StatusBadgeProps) {
   const safeStatus = typeof status === 'string' ? status : String(status ?? '');

@@ -97,17 +97,17 @@ function ApprovalTimeline({ approvals }: { approvals: ExtendedInvoice['approvals
             </div>
             <div className="flex-1 pb-2">
               <div className="flex items-center justify-between">
-                <p className="text-white font-medium">{roleLabels[step.role]}</p>
+                <p className="text-content font-medium">{roleLabels[step.role]}</p>
                 <StatusBadge status={step.status} size="sm" />
               </div>
               {step.approver_name && (
-                <p className="text-sm text-slate-400">{step.approver_name}</p>
+                <p className="text-sm text-content-secondary">{step.approver_name}</p>
               )}
               {step.action_at && (
-                <p className="text-xs text-slate-500">{format(new Date(step.action_at), 'dd MMM yyyy HH:mm')}</p>
+                <p className="text-xs text-content-muted">{format(new Date(step.action_at), 'dd MMM yyyy HH:mm')}</p>
               )}
               {step.comments && (
-                <p className="text-sm text-slate-300 mt-1 bg-slate-800/50 p-2 rounded-lg">"{step.comments}"</p>
+                <p className="text-sm text-content-tertiary mt-1 bg-card p-2 rounded-lg">"{step.comments}"</p>
               )}
             </div>
           </div>
@@ -178,11 +178,11 @@ function CreateInvoiceForm({ onSubmit, onCancel, isSubmitting }: {
     <div className="space-y-4">
       {/* Vendor */}
       <div>
-        <label className="block text-sm text-slate-400 mb-1">Vendor</label>
+        <label className="block text-sm text-content-secondary mb-1">Vendor</label>
         <select
           value={formData.vendor_name}
           onChange={(e) => handleVendorSelect(e.target.value)}
-          className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-teal-500"
+          className="w-full bg-input border border-border-subtle rounded-lg px-4 py-2 text-content focus:outline-none focus:border-teal-500"
         >
           <option value="">-- Select Vendor --</option>
           {VENDORS.map(vendor => (
@@ -194,20 +194,20 @@ function CreateInvoiceForm({ onSubmit, onCancel, isSubmitting }: {
       {/* Amount & Currency */}
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm text-slate-400 mb-1">Amount</label>
+          <label className="block text-sm text-content-secondary mb-1">Amount</label>
           <input
             type="number"
             value={formData.amount}
             onChange={(e) => setFormData(prev => ({ ...prev, amount: Number(e.target.value) }))}
-            className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-teal-500"
+            className="w-full bg-input border border-border-subtle rounded-lg px-4 py-2 text-content focus:outline-none focus:border-teal-500"
           />
         </div>
         <div>
-          <label className="block text-sm text-slate-400 mb-1">Currency</label>
+          <label className="block text-sm text-content-secondary mb-1">Currency</label>
           <select
             value={formData.currency}
             onChange={(e) => setFormData(prev => ({ ...prev, currency: e.target.value as 'SAR' | 'IDR' | 'USD' }))}
-            className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-teal-500"
+            className="w-full bg-input border border-border-subtle rounded-lg px-4 py-2 text-content focus:outline-none focus:border-teal-500"
           >
             <option value="SAR">SAR</option>
             <option value="IDR">IDR</option>
@@ -218,11 +218,11 @@ function CreateInvoiceForm({ onSubmit, onCancel, isSubmitting }: {
 
       {/* GL Code */}
       <div>
-        <label className="block text-sm text-slate-400 mb-1">GL Account</label>
+        <label className="block text-sm text-content-secondary mb-1">GL Account</label>
         <select
           value={formData.gl_code}
           onChange={(e) => handleGLSelect(e.target.value)}
-          className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-teal-500"
+          className="w-full bg-input border border-border-subtle rounded-lg px-4 py-2 text-content focus:outline-none focus:border-teal-500"
         >
           <option value="">-- Select GL Account --</option>
           {GL_ACCOUNTS.map(gl => (
@@ -233,41 +233,41 @@ function CreateInvoiceForm({ onSubmit, onCancel, isSubmitting }: {
 
       {/* Description */}
       <div>
-        <label className="block text-sm text-slate-400 mb-1">Description</label>
+        <label className="block text-sm text-content-secondary mb-1">Description</label>
         <textarea
           value={formData.description}
           onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
-          className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-teal-500 min-h-[80px]"
+          className="w-full bg-input border border-border-subtle rounded-lg px-4 py-2 text-content focus:outline-none focus:border-teal-500 min-h-[80px]"
           placeholder="Invoice description..."
         />
       </div>
 
       {/* Due Date */}
       <div>
-        <label className="block text-sm text-slate-400 mb-1">Due Date</label>
+        <label className="block text-sm text-content-secondary mb-1">Due Date</label>
         <input
           type="date"
           value={formData.due_date}
           onChange={(e) => setFormData(prev => ({ ...prev, due_date: e.target.value }))}
-          className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-teal-500"
+          className="w-full bg-input border border-border-subtle rounded-lg px-4 py-2 text-content focus:outline-none focus:border-teal-500"
         />
       </div>
 
       {/* Documents */}
-      <div className="p-4 bg-slate-800/50 rounded-xl">
-        <p className="text-sm font-medium text-white mb-3">Documents</p>
+      <div className="p-4 bg-card rounded-xl">
+        <p className="text-sm font-medium text-content mb-3">Documents</p>
         <div className="flex gap-2 mb-3">
           <input
             type="text"
             value={docName}
             onChange={(e) => setDocName(e.target.value)}
-            className="flex-1 bg-slate-700 border border-slate-600 rounded-lg px-4 py-2 text-white text-sm focus:outline-none focus:border-teal-500"
+            className="flex-1 bg-input border border-border-subtle rounded-lg px-4 py-2 text-content text-sm focus:outline-none focus:border-teal-500"
             placeholder="Document name (e.g., Invoice_001.pdf)"
           />
           <select
             value={docType}
             onChange={(e) => setDocType(e.target.value)}
-            className="bg-slate-700 border border-slate-600 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-teal-500"
+            className="bg-input border border-border-subtle rounded-lg px-3 py-2 text-content text-sm focus:outline-none focus:border-teal-500"
           >
             <option value="invoice">Invoice</option>
             <option value="receipt">Receipt</option>
@@ -286,8 +286,8 @@ function CreateInvoiceForm({ onSubmit, onCancel, isSubmitting }: {
         {formData.documents.length > 0 && (
           <div className="space-y-2">
             {formData.documents.map((doc, i) => (
-              <div key={i} className="flex items-center justify-between bg-slate-700 rounded-lg px-3 py-2">
-                <span className="text-sm text-white">{doc.name}</span>
+              <div key={i} className="flex items-center justify-between bg-hover rounded-lg px-3 py-2">
+                <span className="text-sm text-content">{doc.name}</span>
                 <div className="flex items-center gap-2">
                   <StatusBadge status={doc.type} size="sm" />
                   <button onClick={() => handleRemoveDoc(i)} className="text-red-400 hover:text-red-300">x</button>
@@ -313,7 +313,7 @@ function CreateInvoiceForm({ onSubmit, onCancel, isSubmitting }: {
         <button
           type="button"
           onClick={onCancel}
-          className="flex-1 px-4 py-3 bg-slate-700 text-white rounded-xl hover:bg-slate-600 transition-colors"
+          className="flex-1 px-4 py-3 bg-hover text-content rounded-xl hover:bg-hover transition-colors"
         >
           Cancel
         </button>
@@ -354,17 +354,17 @@ function ApprovalActions({ invoice, onApprove, onReject, isProcessing }: {
   };
 
   return (
-    <div className="border-t border-slate-700 pt-4 mt-4">
-      <p className="text-sm font-medium text-white mb-3">
+    <div className="border-t border-border pt-4 mt-4">
+      <p className="text-sm font-medium text-content mb-3">
         Approval Actions (as {role.charAt(0).toUpperCase() + role.slice(1)})
       </p>
 
       <div className="mb-4">
-        <label className="block text-sm text-slate-400 mb-1">Comments (optional)</label>
+        <label className="block text-sm text-content-secondary mb-1">Comments (optional)</label>
         <textarea
           value={comments}
           onChange={(e) => setComments(e.target.value)}
-          className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-teal-500 min-h-[60px]"
+          className="w-full bg-input border border-border-subtle rounded-lg px-4 py-2 text-content focus:outline-none focus:border-teal-500 min-h-[60px]"
           placeholder="Add approval comments..."
         />
       </div>
@@ -389,19 +389,19 @@ function ApprovalActions({ invoice, onApprove, onReject, isProcessing }: {
       {/* Reject Modal */}
       {showRejectModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-slate-800 rounded-xl p-6 max-w-md w-full mx-4">
-            <h3 className="text-lg font-semibold text-white mb-4">Reject Invoice</h3>
+          <div className="bg-input rounded-xl p-6 max-w-md w-full mx-4">
+            <h3 className="text-lg font-semibold text-content mb-4">Reject Invoice</h3>
             <textarea
               value={rejectReason}
               onChange={(e) => setRejectReason(e.target.value)}
-              className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-red-500 min-h-[80px] mb-4"
+              className="w-full bg-input border border-border-subtle rounded-lg px-4 py-2 text-content focus:outline-none focus:border-red-500 min-h-[80px] mb-4"
               placeholder="Reason for rejection..."
               required
             />
             <div className="flex gap-3">
               <button
                 onClick={() => setShowRejectModal(false)}
-                className="flex-1 px-4 py-2 bg-slate-700 text-white rounded-lg hover:bg-slate-600"
+                className="flex-1 px-4 py-2 bg-hover text-content rounded-lg hover:bg-hover"
               >
                 Cancel
               </button>
@@ -429,8 +429,8 @@ function PostToGLAction({ invoice, onPost, isProcessing }: {
   if (invoice.status !== 'approved') return null;
 
   return (
-    <div className="border-t border-slate-700 pt-4 mt-4">
-      <p className="text-sm font-medium text-white mb-3">Post to General Ledger</p>
+    <div className="border-t border-border pt-4 mt-4">
+      <p className="text-sm font-medium text-content mb-3">Post to General Ledger</p>
       <button
         onClick={onPost}
         disabled={isProcessing}
@@ -620,18 +620,18 @@ export function Invoices() {
         {loading ? (
           <TableSkeleton rows={5} columns={7} />
         ) : (
-          <div className="bg-slate-800/50 rounded-xl border border-slate-700 overflow-hidden">
+          <div className="bg-card rounded-xl border border-border overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full">
-                <thead className="bg-slate-800">
+                <thead className="bg-input">
                   <tr>
-                    <th className="text-left p-4 text-sm font-semibold text-slate-300">Invoice</th>
-                    <th className="text-left p-4 text-sm font-semibold text-slate-300">Vendor</th>
-                    <th className="text-right p-4 text-sm font-semibold text-slate-300">Amount</th>
-                    <th className="text-left p-4 text-sm font-semibold text-slate-300">GL Code</th>
-                    <th className="text-left p-4 text-sm font-semibold text-slate-300">Due Date</th>
-                    <th className="text-left p-4 text-sm font-semibold text-slate-300">Status</th>
-                    <th className="text-left p-4 text-sm font-semibold text-slate-300"></th>
+                    <th className="text-left p-4 text-sm font-semibold text-content-tertiary">Invoice</th>
+                    <th className="text-left p-4 text-sm font-semibold text-content-tertiary">Vendor</th>
+                    <th className="text-right p-4 text-sm font-semibold text-content-tertiary">Amount</th>
+                    <th className="text-left p-4 text-sm font-semibold text-content-tertiary">GL Code</th>
+                    <th className="text-left p-4 text-sm font-semibold text-content-tertiary">Due Date</th>
+                    <th className="text-left p-4 text-sm font-semibold text-content-tertiary">Status</th>
+                    <th className="text-left p-4 text-sm font-semibold text-content-tertiary"></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -642,17 +642,17 @@ export function Invoices() {
                     return (
                       <tr
                         key={inv.id}
-                        className="border-t border-slate-700 hover:bg-slate-700/30 transition-colors cursor-pointer animate-fade-in"
+                        className="border-t border-border hover:bg-hover/30 transition-colors cursor-pointer animate-fade-in"
                         style={{ animationDelay: `${index * 50}ms` }}
                         onClick={() => setSelectedInvoice(inv)}
                       >
                         <td className="p-4">
-                          <p className="text-white font-medium">{inv.invoice_number}</p>
-                          <p className="text-xs text-slate-400">{inv.description?.substring(0, 30)}...</p>
+                          <p className="text-content font-medium">{inv.invoice_number}</p>
+                          <p className="text-xs text-content-secondary">{inv.description?.substring(0, 30)}...</p>
                         </td>
-                        <td className="p-4 text-slate-300">{inv.vendor_name}</td>
+                        <td className="p-4 text-content-tertiary">{inv.vendor_name}</td>
                         <td className="p-4 text-right">
-                          <p className={`font-semibold ${isHighValue ? 'text-red-400' : 'text-white'}`}>
+                          <p className={`font-semibold ${isHighValue ? 'text-red-400' : 'text-content'}`}>
                             {formatCurrency(inv.amount, inv.currency)}
                           </p>
                           {isHighValue && (
@@ -662,10 +662,10 @@ export function Invoices() {
                           )}
                         </td>
                         <td className="p-4">
-                          <p className="text-white font-mono text-sm">{inv.gl_code}</p>
-                          <p className="text-xs text-slate-400">{inv.gl_name}</p>
+                          <p className="text-content font-mono text-sm">{inv.gl_code}</p>
+                          <p className="text-xs text-content-secondary">{inv.gl_name}</p>
                         </td>
-                        <td className="p-4 text-sm text-slate-300">
+                        <td className="p-4 text-sm text-content-tertiary">
                           {inv.due_date ? format(new Date(inv.due_date), 'dd MMM yyyy') : '-'}
                         </td>
                         <td className="p-4">
@@ -675,7 +675,7 @@ export function Invoices() {
                           </span>
                         </td>
                         <td className="p-4">
-                          <ChevronRight size={16} className="text-slate-400" />
+                          <ChevronRight size={16} className="text-content-secondary" />
                         </td>
                       </tr>
                     );
@@ -685,8 +685,8 @@ export function Invoices() {
             </div>
             {filteredInvoices.length === 0 && (
               <div className="text-center py-12">
-                <FileText size={48} className="mx-auto text-slate-600 mb-3" />
-                <p className="text-slate-400">No invoices found</p>
+                <FileText size={48} className="mx-auto text-content-muted mb-3" />
+                <p className="text-content-secondary">No invoices found</p>
               </div>
             )}
           </div>
@@ -718,25 +718,25 @@ export function Invoices() {
               {/* Invoice Info */}
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <p className="text-xs text-slate-400 mb-1">Vendor</p>
-                  <p className="text-white font-medium">{selectedInvoice.vendor_name}</p>
+                  <p className="text-xs text-content-secondary mb-1">Vendor</p>
+                  <p className="text-content font-medium">{selectedInvoice.vendor_name}</p>
                   {selectedInvoice.vendor_tax_id && (
-                    <p className="text-xs text-slate-400">Tax ID: {selectedInvoice.vendor_tax_id}</p>
+                    <p className="text-xs text-content-secondary">Tax ID: {selectedInvoice.vendor_tax_id}</p>
                   )}
                 </div>
                 <div>
-                  <p className="text-xs text-slate-400 mb-1">Amount</p>
-                  <p className="text-white font-semibold text-lg">
+                  <p className="text-xs text-content-secondary mb-1">Amount</p>
+                  <p className="text-content font-semibold text-lg">
                     {formatCurrency(selectedInvoice.amount, selectedInvoice.currency)}
                   </p>
                 </div>
                 <div>
-                  <p className="text-xs text-slate-400 mb-1">GL Account</p>
-                  <p className="text-white font-mono">{selectedInvoice.gl_code}</p>
-                  <p className="text-xs text-slate-400">{selectedInvoice.gl_name}</p>
+                  <p className="text-xs text-content-secondary mb-1">GL Account</p>
+                  <p className="text-content font-mono">{selectedInvoice.gl_code}</p>
+                  <p className="text-xs text-content-secondary">{selectedInvoice.gl_name}</p>
                 </div>
                 <div>
-                  <p className="text-xs text-slate-400 mb-1">Status</p>
+                  <p className="text-xs text-content-secondary mb-1">Status</p>
                   <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-medium text-white ${STATUS_CONFIG[selectedInvoice.status].color}`}>
                     {STATUS_CONFIG[selectedInvoice.status].icon}
                     {STATUS_CONFIG[selectedInvoice.status].label}
@@ -746,19 +746,19 @@ export function Invoices() {
 
               {/* Description */}
               <div>
-                <p className="text-xs text-slate-400 mb-1">Description</p>
-                <p className="text-slate-300">{selectedInvoice.description}</p>
+                <p className="text-xs text-content-secondary mb-1">Description</p>
+                <p className="text-content-tertiary">{selectedInvoice.description}</p>
               </div>
 
               {/* Dates */}
               <div className="grid grid-cols-2 gap-4">
-                <div className="bg-slate-800/50 rounded-xl p-4">
-                  <p className="text-xs text-slate-400 mb-1">Created</p>
-                  <p className="text-white">{format(new Date(selectedInvoice.created_at), 'dd MMM yyyy')}</p>
+                <div className="bg-card rounded-xl p-4">
+                  <p className="text-xs text-content-secondary mb-1">Created</p>
+                  <p className="text-content">{format(new Date(selectedInvoice.created_at), 'dd MMM yyyy')}</p>
                 </div>
-                <div className="bg-slate-800/50 rounded-xl p-4">
-                  <p className="text-xs text-slate-400 mb-1">Due Date</p>
-                  <p className="text-white">
+                <div className="bg-card rounded-xl p-4">
+                  <p className="text-xs text-content-secondary mb-1">Due Date</p>
+                  <p className="text-content">
                     {selectedInvoice.due_date ? format(new Date(selectedInvoice.due_date), 'dd MMM yyyy') : '-'}
                   </p>
                 </div>
@@ -767,13 +767,13 @@ export function Invoices() {
               {/* Documents */}
               {selectedInvoice.documents.length > 0 && (
                 <div>
-                  <p className="text-xs text-slate-400 mb-2">Documents ({selectedInvoice.documents.length})</p>
+                  <p className="text-xs text-content-secondary mb-2">Documents ({selectedInvoice.documents.length})</p>
                   <div className="space-y-2">
                     {selectedInvoice.documents.map(doc => (
-                      <div key={doc.id} className="flex items-center justify-between bg-slate-800/50 rounded-lg p-3">
+                      <div key={doc.id} className="flex items-center justify-between bg-card rounded-lg p-3">
                         <div className="flex items-center gap-2">
                           <Upload size={16} className="text-blue-400" />
-                          <span className="text-sm text-white">{doc.name}</span>
+                          <span className="text-sm text-content">{doc.name}</span>
                         </div>
                         <StatusBadge status={doc.type} size="sm" />
                       </div>
@@ -785,7 +785,7 @@ export function Invoices() {
               {/* Approval Timeline */}
               {selectedInvoice.approvals.length > 0 && (
                 <div>
-                  <p className="text-xs text-slate-400 mb-3">Approval History</p>
+                  <p className="text-xs text-content-secondary mb-3">Approval History</p>
                   <ApprovalTimeline approvals={selectedInvoice.approvals} />
                 </div>
               )}
@@ -794,7 +794,7 @@ export function Invoices() {
               {selectedInvoice.status === 'posted' && selectedInvoice.journal_entry_id && (
                 <div className="bg-blue-900/30 rounded-xl p-4 border border-blue-600/50">
                   <p className="text-xs text-blue-400 mb-1">Posted to General Ledger</p>
-                  <p className="text-white font-medium">Journal Entry: {selectedInvoice.journal_entry_id}</p>
+                  <p className="text-content font-medium">Journal Entry: {selectedInvoice.journal_entry_id}</p>
                   {selectedInvoice.posted_at && (
                     <p className="text-sm text-blue-300">
                       {format(new Date(selectedInvoice.posted_at), 'dd MMM yyyy HH:mm')}
@@ -807,7 +807,7 @@ export function Invoices() {
               {selectedInvoice.status === 'rejected' && selectedInvoice.rejection_reason && (
                 <div className="bg-red-900/30 rounded-xl p-4 border border-red-600/50">
                   <p className="text-xs text-red-400 mb-1">Rejection Reason</p>
-                  <p className="text-white">{selectedInvoice.rejection_reason}</p>
+                  <p className="text-content">{selectedInvoice.rejection_reason}</p>
                 </div>
               )}
 

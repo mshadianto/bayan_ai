@@ -91,16 +91,16 @@ export function DataTable<T>({
   };
 
   const getSortIcon = (key: string) => {
-    if (sortKey !== key) return <ChevronsUpDown size={14} className="text-slate-600" />;
+    if (sortKey !== key) return <ChevronsUpDown size={14} className="text-content-muted" />;
     if (sortDirection === 'asc') return <ChevronUp size={14} className="text-indigo-400" />;
     return <ChevronDown size={14} className="text-indigo-400" />;
   };
 
   return (
-    <div className={`bg-slate-800/50 rounded-xl border border-slate-700 overflow-hidden ${className}`}>
+    <div className={`bg-card rounded-xl border border-border overflow-hidden ${className}`}>
       {/* Search bar */}
       {searchable && (
-        <div className="p-4 border-b border-slate-700">
+        <div className="p-4 border-b border-border">
           <SearchInput
             value={search}
             onChange={setSearch}
@@ -113,17 +113,17 @@ export function DataTable<T>({
       {/* Table */}
       <div className="overflow-x-auto">
         <table className="w-full">
-          <thead className="bg-slate-800 sticky top-0">
+          <thead className="bg-input sticky top-0">
             <tr>
               {columns.map((col) => (
                 <th
                   key={String(col.key)}
-                  className={`text-left p-4 text-sm font-medium text-slate-400 ${col.headerClassName || ''}`}
+                  className={`text-left p-4 text-sm font-medium text-content-secondary ${col.headerClassName || ''}`}
                 >
                   {col.sortable ? (
                     <button
                       onClick={() => handleSort(String(col.key))}
-                      className="flex items-center gap-1 hover:text-white transition-colors"
+                      className="flex items-center gap-1 hover:text-content transition-colors"
                     >
                       {col.header}
                       {getSortIcon(String(col.key))}
@@ -154,7 +154,7 @@ export function DataTable<T>({
                 <tr
                   key={keyExtractor(row)}
                   onClick={() => onRowClick?.(row)}
-                  className={`border-t border-slate-700 hover:bg-slate-800/50 transition-colors ${
+                  className={`border-t border-border hover:bg-hover transition-colors ${
                     onRowClick ? 'cursor-pointer' : ''
                   } animate-fade-in`}
                   style={{ animationDelay: `${index * 30}ms` }}
@@ -175,7 +175,7 @@ export function DataTable<T>({
 
       {/* Footer with count */}
       {!loading && sortedData.length > 0 && (
-        <div className="px-4 py-3 border-t border-slate-700 text-sm text-slate-500">
+        <div className="px-4 py-3 border-t border-border text-sm text-content-muted">
           Showing {sortedData.length} of {data.length} records
         </div>
       )}

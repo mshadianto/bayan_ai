@@ -8,7 +8,7 @@ export function Skeleton({ className = '' }: SkeletonProps) {
 
 export function CardSkeleton() {
   return (
-    <div className="bg-slate-800/50 rounded-xl p-5 border border-slate-700 animate-fade-in">
+    <div className="bg-card rounded-xl p-5 border border-border animate-fade-in">
       <div className="flex items-center gap-3 mb-3">
         <Skeleton className="w-5 h-5" />
         <Skeleton className="h-4 w-24" />
@@ -20,7 +20,7 @@ export function CardSkeleton() {
 
 export function TableRowSkeleton({ columns = 5 }: { columns?: number }) {
   return (
-    <tr className="border-t border-slate-700">
+    <tr className="border-t border-border">
       {Array.from({ length: columns }).map((_, i) => (
         <td key={i} className="p-4">
           <Skeleton className={`h-4 ${i === 0 ? 'w-32' : 'w-20'}`} />
@@ -32,10 +32,10 @@ export function TableRowSkeleton({ columns = 5 }: { columns?: number }) {
 
 export function TableSkeleton({ rows = 5, columns = 5 }: { rows?: number; columns?: number }) {
   return (
-    <div className="bg-slate-800/50 rounded-xl border border-slate-700 overflow-hidden">
+    <div className="bg-card rounded-xl border border-border overflow-hidden">
       <div className="overflow-x-auto">
         <table className="w-full">
-          <thead className="bg-slate-800">
+          <thead className="bg-input">
             <tr>
               {Array.from({ length: columns }).map((_, i) => (
                 <th key={i} className="text-left p-4">

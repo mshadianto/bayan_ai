@@ -85,7 +85,7 @@ export default function Secretarial() {
         </div>
 
         {/* Tabs */}
-        <div className="flex gap-2 mb-6 border-b border-slate-700 pb-4">
+        <div className="flex gap-2 mb-6 border-b border-border pb-4">
           {[
             { id: 'meetings', label: 'Meeting Minutes', icon: <FileText size={18} /> },
             { id: 'shareholders', label: 'Shareholders', icon: <Users size={18} /> },
@@ -95,7 +95,7 @@ export default function Secretarial() {
               key={tab.id}
               onClick={() => setActiveTab(tab.id as TabType)}
               className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
-                activeTab === tab.id ? 'bg-amber-600 text-white' : 'text-slate-400 hover:bg-slate-700'
+                activeTab === tab.id ? 'bg-amber-600 text-white' : 'text-content-secondary hover:bg-hover'
               }`}
             >
               {tab.icon}
@@ -159,7 +159,7 @@ function MeetingsList({ meetings, onView }: { meetings: MeetingMinutes[]; onView
       {meetings.map((meeting, index) => (
         <div
           key={meeting.id}
-          className="bg-slate-800/50 rounded-xl border border-slate-700 p-4 hover:border-amber-600/50 transition-colors cursor-pointer animate-fade-in"
+          className="bg-card rounded-xl border border-border p-4 hover:border-amber-600/50 transition-colors cursor-pointer animate-fade-in"
           style={{ animationDelay: `${index * 50}ms` }}
           onClick={() => onView(meeting)}
         >
@@ -170,19 +170,19 @@ function MeetingsList({ meetings, onView }: { meetings: MeetingMinutes[]; onView
                 <StatusBadge status={meeting.status} />
                 <StatusBadge status={MEETING_TYPE_LABELS[meeting.meeting_type]} variant="outline" />
               </div>
-              <h3 className="text-white font-medium">{meeting.title}</h3>
-              <p className="text-slate-400 text-sm">{meeting.location}</p>
+              <h3 className="text-content font-medium">{meeting.title}</h3>
+              <p className="text-content-secondary text-sm">{meeting.location}</p>
             </div>
             <div className="flex items-center gap-4">
               <div className="text-right">
-                <p className="text-slate-400 text-xs">Date</p>
-                <p className="text-white">{meeting.date}</p>
+                <p className="text-content-secondary text-xs">Date</p>
+                <p className="text-content">{meeting.date}</p>
               </div>
               <div className="text-right">
-                <p className="text-slate-400 text-xs">Decisions</p>
-                <p className="text-white">{meeting.decisions?.length ?? 0}</p>
+                <p className="text-content-secondary text-xs">Decisions</p>
+                <p className="text-content">{meeting.decisions?.length ?? 0}</p>
               </div>
-              <Eye size={18} className="text-slate-400" />
+              <Eye size={18} className="text-content-secondary" />
             </div>
           </div>
         </div>
@@ -210,8 +210,8 @@ function ShareholdersView({
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
       {/* Pie Chart */}
-      <div className="bg-slate-800/50 rounded-xl border border-slate-700 p-6">
-        <h3 className="text-lg font-semibold text-white mb-4">Ownership Structure</h3>
+      <div className="bg-card rounded-xl border border-border p-6">
+        <h3 className="text-lg font-semibold text-content mb-4">Ownership Structure</h3>
         <div className="h-64">
           <ResponsiveContainer width="100%" height="100%">
             <RechartsPC>
@@ -241,7 +241,7 @@ function ShareholdersView({
         {shareholders.map((shareholder, index) => (
           <div
             key={shareholder.id}
-            className="bg-slate-800/50 rounded-xl border border-slate-700 p-4 hover:border-amber-600/50 transition-colors cursor-pointer animate-fade-in"
+            className="bg-card rounded-xl border border-border p-4 hover:border-amber-600/50 transition-colors cursor-pointer animate-fade-in"
             style={{ animationDelay: `${index * 50}ms` }}
             onClick={() => onView(shareholder)}
           >
@@ -252,13 +252,13 @@ function ShareholdersView({
                   style={{ backgroundColor: SHAREHOLDER_COLORS[index % SHAREHOLDER_COLORS.length] }}
                 />
                 <div>
-                  <h4 className="text-white font-medium">{shareholder.name}</h4>
-                  <p className="text-slate-400 text-sm">{shareholder.type}</p>
+                  <h4 className="text-content font-medium">{shareholder.name}</h4>
+                  <p className="text-content-secondary text-sm">{shareholder.type}</p>
                 </div>
               </div>
               <div className="text-right">
-                <p className="text-white font-bold">{shareholder.percentage}%</p>
-                <p className="text-slate-400 text-sm">{shareholder.shares.toLocaleString()} shares</p>
+                <p className="text-content font-bold">{shareholder.percentage}%</p>
+                <p className="text-content-secondary text-sm">{shareholder.shares.toLocaleString()} shares</p>
               </div>
             </div>
           </div>
@@ -282,7 +282,7 @@ function ResolutionsList({ resolutions, onView }: { resolutions: CircularResolut
         return (
           <div
             key={resolution.id}
-            className="bg-slate-800/50 rounded-xl border border-slate-700 p-4 hover:border-amber-600/50 transition-colors cursor-pointer animate-fade-in"
+            className="bg-card rounded-xl border border-border p-4 hover:border-amber-600/50 transition-colors cursor-pointer animate-fade-in"
             style={{ animationDelay: `${index * 50}ms` }}
             onClick={() => onView(resolution)}
           >
@@ -293,19 +293,19 @@ function ResolutionsList({ resolutions, onView }: { resolutions: CircularResolut
                   <StatusBadge status={resolution.status} />
                   <StatusBadge status={resolution.resolution_type} variant="outline" />
                 </div>
-                <h3 className="text-white font-medium">{resolution.subject}</h3>
-                <p className="text-slate-400 text-sm">Proposed by: {resolution.proposed_by}</p>
+                <h3 className="text-content font-medium">{resolution.subject}</h3>
+                <p className="text-content-secondary text-sm">Proposed by: {resolution.proposed_by}</p>
               </div>
               <div className="flex items-center gap-4">
                 <div className="text-right">
-                  <p className="text-slate-400 text-xs">Approvals</p>
-                  <p className="text-white">{approvedCount}/{totalApprovers}</p>
+                  <p className="text-content-secondary text-xs">Approvals</p>
+                  <p className="text-content">{approvedCount}/{totalApprovers}</p>
                 </div>
                 <div className="text-right">
-                  <p className="text-slate-400 text-xs">Deadline</p>
-                  <p className="text-white">{resolution.deadline}</p>
+                  <p className="text-content-secondary text-xs">Deadline</p>
+                  <p className="text-content">{resolution.deadline}</p>
                 </div>
-                <Eye size={18} className="text-slate-400" />
+                <Eye size={18} className="text-content-secondary" />
               </div>
             </div>
           </div>
@@ -321,7 +321,7 @@ function MeetingDetail({ meeting }: { meeting: MeetingMinutes }) {
       <div className="flex items-center justify-between">
         <div>
           <p className="text-amber-400 font-mono text-sm">{meeting.meeting_number}</p>
-          <h3 className="text-xl font-semibold text-white">{meeting.title}</h3>
+          <h3 className="text-xl font-semibold text-content">{meeting.title}</h3>
         </div>
         <div className="flex gap-2">
           <StatusBadge status={meeting.status} />
@@ -330,33 +330,33 @@ function MeetingDetail({ meeting }: { meeting: MeetingMinutes }) {
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div className="bg-slate-800 rounded-lg p-4">
-          <p className="text-slate-400 text-sm">Date</p>
-          <p className="text-white">{meeting.date}</p>
+        <div className="bg-input rounded-lg p-4">
+          <p className="text-content-secondary text-sm">Date</p>
+          <p className="text-content">{meeting.date}</p>
         </div>
-        <div className="bg-slate-800 rounded-lg p-4">
-          <p className="text-slate-400 text-sm">Time</p>
-          <p className="text-white">{meeting.start_time} - {meeting.end_time}</p>
+        <div className="bg-input rounded-lg p-4">
+          <p className="text-content-secondary text-sm">Time</p>
+          <p className="text-content">{meeting.start_time} - {meeting.end_time}</p>
         </div>
-        <div className="bg-slate-800 rounded-lg p-4">
-          <p className="text-slate-400 text-sm">Location</p>
-          <p className="text-white">{meeting.location}</p>
+        <div className="bg-input rounded-lg p-4">
+          <p className="text-content-secondary text-sm">Location</p>
+          <p className="text-content">{meeting.location}</p>
         </div>
-        <div className="bg-slate-800 rounded-lg p-4">
-          <p className="text-slate-400 text-sm">Prepared By</p>
-          <p className="text-white">{meeting.prepared_by}</p>
+        <div className="bg-input rounded-lg p-4">
+          <p className="text-content-secondary text-sm">Prepared By</p>
+          <p className="text-content">{meeting.prepared_by}</p>
         </div>
       </div>
 
       {/* Attendees */}
       <div>
-        <h4 className="text-white font-medium mb-3">Attendees</h4>
+        <h4 className="text-content font-medium mb-3">Attendees</h4>
         <div className="grid grid-cols-2 gap-3">
           {(meeting.attendees ?? []).map((attendee) => (
-            <div key={attendee.id} className="bg-slate-800 rounded-lg p-3 flex items-center justify-between">
+            <div key={attendee.id} className="bg-input rounded-lg p-3 flex items-center justify-between">
               <div>
-                <p className="text-white">{attendee.name}</p>
-                <p className="text-slate-400 text-sm">{attendee.position}</p>
+                <p className="text-content">{attendee.name}</p>
+                <p className="text-content-secondary text-sm">{attendee.position}</p>
               </div>
               <StatusBadge status={attendee.attendance} size="sm" />
             </div>
@@ -366,10 +366,10 @@ function MeetingDetail({ meeting }: { meeting: MeetingMinutes }) {
 
       {/* Agenda */}
       <div>
-        <h4 className="text-white font-medium mb-3">Agenda</h4>
+        <h4 className="text-content font-medium mb-3">Agenda</h4>
         <ol className="list-decimal list-inside space-y-1">
           {(meeting.agenda ?? []).map((item, i) => (
-            <li key={i} className="text-slate-300">{item}</li>
+            <li key={i} className="text-content-tertiary">{item}</li>
           ))}
         </ol>
       </div>
@@ -377,13 +377,13 @@ function MeetingDetail({ meeting }: { meeting: MeetingMinutes }) {
       {/* Decisions */}
       {(meeting.decisions?.length ?? 0) > 0 && (
         <div>
-          <h4 className="text-white font-medium mb-3">Decisions</h4>
+          <h4 className="text-content font-medium mb-3">Decisions</h4>
           <div className="space-y-3">
             {meeting.decisions.map((decision) => (
               <div key={decision.id} className="bg-amber-900/30 border border-amber-600/50 rounded-lg p-3">
                 <p className="text-amber-300 font-mono text-sm">{decision.decision_number}</p>
-                <p className="text-white">{decision.description}</p>
-                {decision.voting_result && <p className="text-slate-400 text-sm mt-1">Voting: {decision.voting_result}</p>}
+                <p className="text-content">{decision.description}</p>
+                {decision.voting_result && <p className="text-content-secondary text-sm mt-1">Voting: {decision.voting_result}</p>}
               </div>
             ))}
           </div>
@@ -393,13 +393,13 @@ function MeetingDetail({ meeting }: { meeting: MeetingMinutes }) {
       {/* Action Items */}
       {(meeting.action_items?.length ?? 0) > 0 && (
         <div>
-          <h4 className="text-white font-medium mb-3">Action Items</h4>
+          <h4 className="text-content font-medium mb-3">Action Items</h4>
           <div className="space-y-2">
             {meeting.action_items.map((item) => (
-              <div key={item.id} className="flex items-center justify-between bg-slate-800 rounded-lg p-3">
+              <div key={item.id} className="flex items-center justify-between bg-input rounded-lg p-3">
                 <div>
-                  <p className="text-white">{item.description}</p>
-                  <p className="text-slate-400 text-sm">Due: {item.due_date} | {item.responsible}</p>
+                  <p className="text-content">{item.description}</p>
+                  <p className="text-content-secondary text-sm">Due: {item.due_date} | {item.responsible}</p>
                 </div>
                 <StatusBadge status={item.status} size="sm" />
               </div>
@@ -421,43 +421,43 @@ function ShareholderDetail({ shareholder }: { shareholder: Shareholder }) {
       </div>
 
       <div className="grid grid-cols-2 gap-4">
-        <div className="bg-slate-800 rounded-lg p-4">
-          <p className="text-slate-400 text-sm">Shares</p>
-          <p className="text-2xl font-bold text-white">{shareholder.shares.toLocaleString()}</p>
+        <div className="bg-input rounded-lg p-4">
+          <p className="text-content-secondary text-sm">Shares</p>
+          <p className="text-2xl font-bold text-content">{shareholder.shares.toLocaleString()}</p>
         </div>
-        <div className="bg-slate-800 rounded-lg p-4">
-          <p className="text-slate-400 text-sm">Ownership</p>
+        <div className="bg-input rounded-lg p-4">
+          <p className="text-content-secondary text-sm">Ownership</p>
           <p className="text-2xl font-bold text-amber-400">{shareholder.percentage}%</p>
         </div>
-        <div className="bg-slate-800 rounded-lg p-4">
-          <p className="text-slate-400 text-sm">Acquisition Date</p>
-          <p className="text-white">{shareholder.acquisition_date}</p>
+        <div className="bg-input rounded-lg p-4">
+          <p className="text-content-secondary text-sm">Acquisition Date</p>
+          <p className="text-content">{shareholder.acquisition_date}</p>
         </div>
-        <div className="bg-slate-800 rounded-lg p-4">
-          <p className="text-slate-400 text-sm">Acquisition Type</p>
-          <p className="text-white capitalize">{(shareholder.acquisition_type ?? '').replace('_', ' ')}</p>
+        <div className="bg-input rounded-lg p-4">
+          <p className="text-content-secondary text-sm">Acquisition Type</p>
+          <p className="text-content capitalize">{(shareholder.acquisition_type ?? '').replace('_', ' ')}</p>
         </div>
       </div>
 
       {shareholder.nationality && (
-        <div className="bg-slate-800 rounded-lg p-4">
-          <p className="text-slate-400 text-sm">Nationality</p>
-          <p className="text-white">{shareholder.nationality}</p>
+        <div className="bg-input rounded-lg p-4">
+          <p className="text-content-secondary text-sm">Nationality</p>
+          <p className="text-content">{shareholder.nationality}</p>
         </div>
       )}
 
       {(shareholder.contact_email || shareholder.contact_phone) && (
         <div className="grid grid-cols-2 gap-4">
           {shareholder.contact_email && (
-            <div className="bg-slate-800 rounded-lg p-4">
-              <p className="text-slate-400 text-sm">Email</p>
-              <p className="text-white">{shareholder.contact_email}</p>
+            <div className="bg-input rounded-lg p-4">
+              <p className="text-content-secondary text-sm">Email</p>
+              <p className="text-content">{shareholder.contact_email}</p>
             </div>
           )}
           {shareholder.contact_phone && (
-            <div className="bg-slate-800 rounded-lg p-4">
-              <p className="text-slate-400 text-sm">Phone</p>
-              <p className="text-white">{shareholder.contact_phone}</p>
+            <div className="bg-input rounded-lg p-4">
+              <p className="text-content-secondary text-sm">Phone</p>
+              <p className="text-content">{shareholder.contact_phone}</p>
             </div>
           )}
         </div>
@@ -477,33 +477,33 @@ function ResolutionDetail({ resolution }: { resolution: CircularResolution }) {
         </div>
       </div>
 
-      <h3 className="text-xl font-semibold text-white">{resolution.subject}</h3>
-      <p className="text-slate-300">{resolution.description}</p>
+      <h3 className="text-xl font-semibold text-content">{resolution.subject}</h3>
+      <p className="text-content-tertiary">{resolution.description}</p>
 
       <div className="grid grid-cols-2 gap-4">
-        <div className="bg-slate-800 rounded-lg p-4">
-          <p className="text-slate-400 text-sm">Proposed By</p>
-          <p className="text-white">{resolution.proposed_by}</p>
+        <div className="bg-input rounded-lg p-4">
+          <p className="text-content-secondary text-sm">Proposed By</p>
+          <p className="text-content">{resolution.proposed_by}</p>
         </div>
-        <div className="bg-slate-800 rounded-lg p-4">
-          <p className="text-slate-400 text-sm">Deadline</p>
-          <p className="text-white">{resolution.deadline}</p>
+        <div className="bg-input rounded-lg p-4">
+          <p className="text-content-secondary text-sm">Deadline</p>
+          <p className="text-content">{resolution.deadline}</p>
         </div>
       </div>
 
       {/* Approvals */}
       <div>
-        <h4 className="text-white font-medium mb-3">Approvals</h4>
+        <h4 className="text-content font-medium mb-3">Approvals</h4>
         <div className="space-y-2">
           {(resolution.approvals ?? []).map((approval) => (
-            <div key={approval.id} className="flex items-center justify-between bg-slate-800 rounded-lg p-3">
+            <div key={approval.id} className="flex items-center justify-between bg-input rounded-lg p-3">
               <div>
-                <p className="text-white">{approval.approver_name}</p>
-                <p className="text-slate-400 text-sm">{approval.approver_position}</p>
+                <p className="text-content">{approval.approver_name}</p>
+                <p className="text-content-secondary text-sm">{approval.approver_position}</p>
               </div>
               <div className="flex items-center gap-3">
                 <StatusBadge status={approval.decision} />
-                {approval.decided_at && <span className="text-slate-400 text-sm">{approval.decided_at}</span>}
+                {approval.decided_at && <span className="text-content-secondary text-sm">{approval.decided_at}</span>}
               </div>
             </div>
           ))}
@@ -513,7 +513,7 @@ function ResolutionDetail({ resolution }: { resolution: CircularResolution }) {
       {resolution.effective_date && (
         <div className="bg-emerald-900/30 border border-emerald-600/50 rounded-lg p-4">
           <p className="text-emerald-300 font-medium">Effective Date</p>
-          <p className="text-white">{resolution.effective_date}</p>
+          <p className="text-content">{resolution.effective_date}</p>
         </div>
       )}
     </div>

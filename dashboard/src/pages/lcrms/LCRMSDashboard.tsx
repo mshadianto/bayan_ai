@@ -157,8 +157,8 @@ export default function LCRMSDashboard() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
           {/* Compliance Score Trend */}
-          <div className="bg-slate-800/50 rounded-xl border border-slate-700 p-6 card-hover">
-            <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+          <div className="bg-card rounded-xl border border-border p-6 card-hover">
+            <h3 className="text-lg font-semibold text-content mb-4 flex items-center gap-2">
               <TrendingUp size={20} className="text-amber-400" />
               Compliance Score Trend
             </h3>
@@ -184,8 +184,8 @@ export default function LCRMSDashboard() {
           </div>
 
           {/* Risk Distribution */}
-          <div className="bg-slate-800/50 rounded-xl border border-slate-700 p-6 card-hover">
-            <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+          <div className="bg-card rounded-xl border border-border p-6 card-hover">
+            <h3 className="text-lg font-semibold text-content mb-4 flex items-center gap-2">
               <AlertTriangle size={20} className="text-amber-400" />
               Risk Distribution
             </h3>
@@ -219,8 +219,8 @@ export default function LCRMSDashboard() {
                 ].map((item) => (
                   <div key={item.label} className="flex items-center gap-2">
                     <div className={`w-3 h-3 rounded-full ${item.color}`} />
-                    <span className="text-slate-300 text-sm">{item.label}</span>
-                    <span className="text-white font-semibold ml-auto">{item.value}</span>
+                    <span className="text-content-tertiary text-sm">{item.label}</span>
+                    <span className="text-content font-semibold ml-auto">{item.value}</span>
                   </div>
                 ))}
               </div>
@@ -230,38 +230,38 @@ export default function LCRMSDashboard() {
 
         {/* Litigation Summary */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-          <div className="bg-slate-800/50 rounded-xl border border-slate-700 p-4 card-hover">
+          <div className="bg-card rounded-xl border border-border p-4 card-hover">
             <div className="flex items-center gap-3">
               <div className="p-3 bg-blue-900/50 rounded-lg">
                 <Scale size={24} className="text-blue-400" />
               </div>
               <div>
-                <p className="text-slate-400 text-sm">Total Cases</p>
-                <p className="text-xl font-bold text-white">{data?.cases_summary.total || 0}</p>
+                <p className="text-content-secondary text-sm">Total Cases</p>
+                <p className="text-xl font-bold text-content">{data?.cases_summary.total || 0}</p>
               </div>
             </div>
           </div>
-          <div className="bg-slate-800/50 rounded-xl border border-slate-700 p-4 card-hover">
+          <div className="bg-card rounded-xl border border-border p-4 card-hover">
             <div className="flex items-center gap-3">
               <div className="p-3 bg-emerald-900/50 rounded-lg">
                 <CheckCircle size={24} className="text-emerald-400" />
               </div>
               <div>
-                <p className="text-slate-400 text-sm">Settled/Won</p>
-                <p className="text-xl font-bold text-white">
+                <p className="text-content-secondary text-sm">Settled/Won</p>
+                <p className="text-xl font-bold text-content">
                   {(data?.cases_summary.settled || 0) + (data?.cases_summary.won || 0)}
                 </p>
               </div>
             </div>
           </div>
-          <div className="bg-slate-800/50 rounded-xl border border-slate-700 p-4 card-hover">
+          <div className="bg-card rounded-xl border border-border p-4 card-hover">
             <div className="flex items-center gap-3">
               <div className="p-3 bg-amber-900/50 rounded-lg">
                 <AlertTriangle size={24} className="text-amber-400" />
               </div>
               <div>
-                <p className="text-slate-400 text-sm">Total Exposure</p>
-                <p className="text-xl font-bold text-white">
+                <p className="text-content-secondary text-sm">Total Exposure</p>
+                <p className="text-xl font-bold text-content">
                   {new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(data?.cases_summary.total_exposure || 0)}
                 </p>
               </div>
@@ -270,28 +270,28 @@ export default function LCRMSDashboard() {
         </div>
 
         {/* Alerts */}
-        <div className="bg-slate-800/50 rounded-xl border border-slate-700 overflow-hidden">
-          <div className="p-4 border-b border-slate-700">
-            <h3 className="font-semibold text-white flex items-center gap-2">
+        <div className="bg-card rounded-xl border border-border overflow-hidden">
+          <div className="p-4 border-b border-border">
+            <h3 className="font-semibold text-content flex items-center gap-2">
               <span>🔔</span> Active Alerts
             </h3>
           </div>
-          <div className="divide-y divide-slate-700">
+          <div className="divide-y divide-border">
             {data?.alerts.map((alert, index) => (
               <div
                 key={alert.id}
-                className={`p-4 flex items-start gap-4 hover:bg-slate-800/50 animate-fade-in ${getAlertSeverityColor(alert.severity)}`}
+                className={`p-4 flex items-start gap-4 hover:bg-card animate-fade-in ${getAlertSeverityColor(alert.severity)}`}
                 style={{ animationDelay: `${index * 50}ms` }}
               >
                 <span className="text-2xl">{getAlertIcon(alert.type)}</span>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-1">
-                    <span className="font-medium text-white">{alert.title}</span>
+                    <span className="font-medium text-content">{alert.title}</span>
                     <StatusBadge status={alert.severity} size="sm" />
                   </div>
-                  <p className="text-sm text-slate-300">{alert.message}</p>
+                  <p className="text-sm text-content-tertiary">{alert.message}</p>
                   {alert.due_date && (
-                    <p className="text-xs text-slate-400 mt-1">Due: {alert.due_date}</p>
+                    <p className="text-xs text-content-secondary mt-1">Due: {alert.due_date}</p>
                   )}
                 </div>
               </div>
@@ -300,23 +300,23 @@ export default function LCRMSDashboard() {
         </div>
 
         {/* Recent Activities */}
-        <div className="mt-6 bg-slate-800/50 rounded-xl border border-slate-700 overflow-hidden">
-          <div className="p-4 border-b border-slate-700">
-            <h3 className="font-semibold text-white flex items-center gap-2">
+        <div className="mt-6 bg-card rounded-xl border border-border overflow-hidden">
+          <div className="p-4 border-b border-border">
+            <h3 className="font-semibold text-content flex items-center gap-2">
               <span>📊</span> Recent Activities
             </h3>
           </div>
-          <div className="divide-y divide-slate-700">
+          <div className="divide-y divide-border">
             {data?.recent_activities.map((activity, index) => (
               <div
                 key={activity.id}
-                className="p-4 flex items-center gap-4 hover:bg-slate-800/50 animate-fade-in"
+                className="p-4 flex items-center gap-4 hover:bg-card animate-fade-in"
                 style={{ animationDelay: `${index * 50}ms` }}
               >
                 <div className="w-2 h-2 rounded-full bg-amber-400" />
                 <div className="flex-1">
-                  <p className="text-white">{activity.description}</p>
-                  <p className="text-sm text-slate-400">
+                  <p className="text-content">{activity.description}</p>
+                  <p className="text-sm text-content-secondary">
                     by {activity.user_name} - {new Date(activity.created_at).toLocaleDateString()}
                   </p>
                 </div>

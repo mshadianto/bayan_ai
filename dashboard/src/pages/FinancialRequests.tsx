@@ -117,17 +117,17 @@ function ApprovalTimeline({ approvals }: { approvals: ApprovalStep[] }) {
             </div>
             <div className="flex-1 pb-2">
               <div className="flex items-center justify-between">
-                <p className="text-white font-medium">{APPROVAL_ROLE_LABELS[step.role]}</p>
+                <p className="text-content font-medium">{APPROVAL_ROLE_LABELS[step.role]}</p>
                 <StatusBadge status={step.status} size="sm" />
               </div>
               {step.approver_name && (
-                <p className="text-sm text-slate-400">{step.approver_name}</p>
+                <p className="text-sm text-content-secondary">{step.approver_name}</p>
               )}
               {step.action_at && (
-                <p className="text-xs text-slate-500">{format(new Date(step.action_at), 'dd MMM yyyy HH:mm')}</p>
+                <p className="text-xs text-content-muted">{format(new Date(step.action_at), 'dd MMM yyyy HH:mm')}</p>
               )}
               {step.comments && (
-                <p className="text-sm text-slate-300 mt-1 bg-slate-800/50 p-2 rounded-lg">
+                <p className="text-sm text-content-tertiary mt-1 bg-card p-2 rounded-lg">
                   "{step.comments}"
                 </p>
               )}
@@ -150,19 +150,19 @@ function WorkflowDiagram() {
   ];
 
   return (
-    <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700 mb-6">
-      <p className="text-sm text-slate-400 mb-3">Alur Approval:</p>
+    <div className="bg-card rounded-xl p-4 border border-border mb-6">
+      <p className="text-sm text-content-secondary mb-3">Alur Approval:</p>
       <div className="flex items-center justify-between overflow-x-auto pb-2">
         {steps.map((step, index) => (
           <div key={index} className="flex items-center">
             <div className="flex flex-col items-center min-w-[80px]">
-              <div className="w-10 h-10 bg-slate-700 rounded-full flex items-center justify-center text-lg mb-1">
+              <div className="w-10 h-10 bg-hover rounded-full flex items-center justify-center text-lg mb-1">
                 {step.icon}
               </div>
-              <p className="text-xs text-slate-300 text-center">{step.label}</p>
+              <p className="text-xs text-content-tertiary text-center">{step.label}</p>
             </div>
             {index < steps.length - 1 && (
-              <ArrowRight size={16} className="text-slate-500 mx-1 flex-shrink-0" />
+              <ArrowRight size={16} className="text-content-muted mx-1 flex-shrink-0" />
             )}
           </div>
         ))}
@@ -214,7 +214,7 @@ function CreateRequestForm({ onSubmit, onCancel, isSubmitting }: {
     <div className="space-y-4">
       {/* Type */}
       <div>
-        <label className="block text-sm text-slate-400 mb-1">Request Type</label>
+        <label className="block text-sm text-content-secondary mb-1">Request Type</label>
         <div className="flex gap-2 flex-wrap">
           {(['payment', 'transfer', 'reimbursement', 'advance'] as const).map(type => (
             <button
@@ -224,7 +224,7 @@ function CreateRequestForm({ onSubmit, onCancel, isSubmitting }: {
               className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
                 formData.type === type
                   ? 'bg-teal-600 text-white'
-                  : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
+                  : 'bg-hover text-content-tertiary hover:bg-hover'
               }`}
             >
               {TYPE_CONFIG[type].emoji} {TYPE_CONFIG[type].label}
@@ -235,23 +235,23 @@ function CreateRequestForm({ onSubmit, onCancel, isSubmitting }: {
 
       {/* Title */}
       <div>
-        <label className="block text-sm text-slate-400 mb-1">Title</label>
+        <label className="block text-sm text-content-secondary mb-1">Title</label>
         <input
           type="text"
           value={formData.title}
           onChange={(e) => setFormData(prev => ({ ...prev, title: e.target.value }))}
-          className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-teal-500"
+          className="w-full bg-input border border-border-subtle rounded-lg px-4 py-2 text-content focus:outline-none focus:border-teal-500"
           placeholder="e.g., Pembayaran Vendor ABC"
         />
       </div>
 
       {/* Description */}
       <div>
-        <label className="block text-sm text-slate-400 mb-1">Description</label>
+        <label className="block text-sm text-content-secondary mb-1">Description</label>
         <textarea
           value={formData.description}
           onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
-          className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-teal-500 min-h-[80px]"
+          className="w-full bg-input border border-border-subtle rounded-lg px-4 py-2 text-content focus:outline-none focus:border-teal-500 min-h-[80px]"
           placeholder="Detail pengajuan..."
         />
       </div>
@@ -259,20 +259,20 @@ function CreateRequestForm({ onSubmit, onCancel, isSubmitting }: {
       {/* Amount & Currency */}
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm text-slate-400 mb-1">Amount</label>
+          <label className="block text-sm text-content-secondary mb-1">Amount</label>
           <input
             type="number"
             value={formData.amount}
             onChange={(e) => setFormData(prev => ({ ...prev, amount: Number(e.target.value) }))}
-            className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-teal-500"
+            className="w-full bg-input border border-border-subtle rounded-lg px-4 py-2 text-content focus:outline-none focus:border-teal-500"
           />
         </div>
         <div>
-          <label className="block text-sm text-slate-400 mb-1">Currency</label>
+          <label className="block text-sm text-content-secondary mb-1">Currency</label>
           <select
             value={formData.currency}
             onChange={(e) => setFormData(prev => ({ ...prev, currency: e.target.value as 'SAR' | 'IDR' | 'USD' }))}
-            className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-teal-500"
+            className="w-full bg-input border border-border-subtle rounded-lg px-4 py-2 text-content focus:outline-none focus:border-teal-500"
           >
             <option value="SAR">SAR</option>
             <option value="IDR">IDR</option>
@@ -283,11 +283,11 @@ function CreateRequestForm({ onSubmit, onCancel, isSubmitting }: {
 
       {/* Requester Unit */}
       <div>
-        <label className="block text-sm text-slate-400 mb-1">Unit Pengusul</label>
+        <label className="block text-sm text-content-secondary mb-1">Unit Pengusul</label>
         <select
           value={formData.requester_unit}
           onChange={(e) => setFormData(prev => ({ ...prev, requester_unit: e.target.value }))}
-          className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-teal-500"
+          className="w-full bg-input border border-border-subtle rounded-lg px-4 py-2 text-content focus:outline-none focus:border-teal-500"
         >
           {UNITS.map(unit => (
             <option key={unit} value={unit}>{unit}</option>
@@ -297,13 +297,13 @@ function CreateRequestForm({ onSubmit, onCancel, isSubmitting }: {
 
       {/* Beneficiary (for payment/transfer) */}
       {(formData.type === 'payment' || formData.type === 'transfer') && (
-        <div className="space-y-3 p-4 bg-slate-800/50 rounded-xl">
-          <p className="text-sm font-medium text-white">Beneficiary Details</p>
+        <div className="space-y-3 p-4 bg-card rounded-xl">
+          <p className="text-sm font-medium text-content">Beneficiary Details</p>
           <input
             type="text"
             value={formData.beneficiary_name}
             onChange={(e) => setFormData(prev => ({ ...prev, beneficiary_name: e.target.value }))}
-            className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-teal-500"
+            className="w-full bg-input border border-border-subtle rounded-lg px-4 py-2 text-content focus:outline-none focus:border-teal-500"
             placeholder="Beneficiary Name"
           />
           <div className="grid grid-cols-2 gap-3">
@@ -311,14 +311,14 @@ function CreateRequestForm({ onSubmit, onCancel, isSubmitting }: {
               type="text"
               value={formData.beneficiary_bank}
               onChange={(e) => setFormData(prev => ({ ...prev, beneficiary_bank: e.target.value }))}
-              className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-teal-500"
+              className="w-full bg-input border border-border-subtle rounded-lg px-4 py-2 text-content focus:outline-none focus:border-teal-500"
               placeholder="Bank Name"
             />
             <input
               type="text"
               value={formData.beneficiary_account}
               onChange={(e) => setFormData(prev => ({ ...prev, beneficiary_account: e.target.value }))}
-              className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-teal-500"
+              className="w-full bg-input border border-border-subtle rounded-lg px-4 py-2 text-content focus:outline-none focus:border-teal-500"
               placeholder="Account Number"
             />
           </div>
@@ -326,20 +326,20 @@ function CreateRequestForm({ onSubmit, onCancel, isSubmitting }: {
       )}
 
       {/* Documents */}
-      <div className="p-4 bg-slate-800/50 rounded-xl">
-        <p className="text-sm font-medium text-white mb-3">Documents</p>
+      <div className="p-4 bg-card rounded-xl">
+        <p className="text-sm font-medium text-content mb-3">Documents</p>
         <div className="flex gap-2 mb-3">
           <input
             type="text"
             value={docName}
             onChange={(e) => setDocName(e.target.value)}
-            className="flex-1 bg-slate-700 border border-slate-600 rounded-lg px-4 py-2 text-white text-sm focus:outline-none focus:border-teal-500"
+            className="flex-1 bg-input border border-border-subtle rounded-lg px-4 py-2 text-content text-sm focus:outline-none focus:border-teal-500"
             placeholder="Document name (e.g., Invoice_001.pdf)"
           />
           <select
             value={docType}
             onChange={(e) => setDocType(e.target.value)}
-            className="bg-slate-700 border border-slate-600 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-teal-500"
+            className="bg-input border border-border-subtle rounded-lg px-3 py-2 text-content text-sm focus:outline-none focus:border-teal-500"
           >
             <option value="invoice">Invoice</option>
             <option value="receipt">Receipt</option>
@@ -358,8 +358,8 @@ function CreateRequestForm({ onSubmit, onCancel, isSubmitting }: {
         {formData.documents.length > 0 && (
           <div className="space-y-2">
             {formData.documents.map((doc, i) => (
-              <div key={i} className="flex items-center justify-between bg-slate-700 rounded-lg px-3 py-2">
-                <span className="text-sm text-white">{doc.name}</span>
+              <div key={i} className="flex items-center justify-between bg-hover rounded-lg px-3 py-2">
+                <span className="text-sm text-content">{doc.name}</span>
                 <div className="flex items-center gap-2">
                   <StatusBadge status={doc.type} size="sm" />
                   <button onClick={() => handleRemoveDoc(i)} className="text-red-400 hover:text-red-300">×</button>
@@ -375,7 +375,7 @@ function CreateRequestForm({ onSubmit, onCancel, isSubmitting }: {
         <button
           type="button"
           onClick={onCancel}
-          className="flex-1 px-4 py-3 bg-slate-700 text-white rounded-xl hover:bg-slate-600 transition-colors"
+          className="flex-1 px-4 py-3 bg-hover text-content rounded-xl hover:bg-hover transition-colors"
         >
           Cancel
         </button>
@@ -428,17 +428,17 @@ function ApprovalActions({ request, onAction, isProcessing }: {
   };
 
   return (
-    <div className="border-t border-slate-700 pt-4 mt-4">
-      <p className="text-sm font-medium text-white mb-3">Approval Actions</p>
+    <div className="border-t border-border pt-4 mt-4">
+      <p className="text-sm font-medium text-content mb-3">Approval Actions</p>
 
       {/* GL Code selection for Finance Staff */}
       {isFinanceStaff && (
         <div className="mb-4">
-          <label className="block text-sm text-slate-400 mb-1">Select GL Account</label>
+          <label className="block text-sm text-content-secondary mb-1">Select GL Account</label>
           <select
             value={selectedGL}
             onChange={(e) => setSelectedGL(e.target.value)}
-            className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-teal-500"
+            className="w-full bg-input border border-border-subtle rounded-lg px-4 py-2 text-content focus:outline-none focus:border-teal-500"
           >
             <option value="">-- Select GL Account --</option>
             {GL_ACCOUNTS.map(gl => (
@@ -450,11 +450,11 @@ function ApprovalActions({ request, onAction, isProcessing }: {
 
       {/* Comments */}
       <div className="mb-4">
-        <label className="block text-sm text-slate-400 mb-1">Comments (optional)</label>
+        <label className="block text-sm text-content-secondary mb-1">Comments (optional)</label>
         <textarea
           value={comments}
           onChange={(e) => setComments(e.target.value)}
-          className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-teal-500 min-h-[60px]"
+          className="w-full bg-input border border-border-subtle rounded-lg px-4 py-2 text-content focus:outline-none focus:border-teal-500 min-h-[60px]"
           placeholder="Add comments..."
         />
       </div>
@@ -506,11 +506,11 @@ function ApprovalActions({ request, onAction, isProcessing }: {
       {/* Reject/Return Confirmation Modal */}
       {showRejectModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-slate-800 rounded-xl p-6 max-w-md w-full mx-4">
-            <h3 className="text-lg font-semibold text-white mb-4">
+          <div className="bg-input rounded-xl p-6 max-w-md w-full mx-4">
+            <h3 className="text-lg font-semibold text-content mb-4">
               {rejectAction === 'reject' ? 'Reject Request' : 'Return to Requester'}
             </h3>
-            <p className="text-slate-400 mb-4">
+            <p className="text-content-secondary mb-4">
               {rejectAction === 'reject'
                 ? 'This will permanently reject the request.'
                 : 'This will return the request to the requester for revision.'}
@@ -518,14 +518,14 @@ function ApprovalActions({ request, onAction, isProcessing }: {
             <textarea
               value={comments}
               onChange={(e) => setComments(e.target.value)}
-              className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-red-500 min-h-[80px] mb-4"
+              className="w-full bg-input border border-border-subtle rounded-lg px-4 py-2 text-content focus:outline-none focus:border-red-500 min-h-[80px] mb-4"
               placeholder="Reason for rejection/return..."
               required
             />
             <div className="flex gap-3">
               <button
                 onClick={() => setShowRejectModal(false)}
-                className="flex-1 px-4 py-2 bg-slate-700 text-white rounded-lg hover:bg-slate-600"
+                className="flex-1 px-4 py-2 bg-hover text-content rounded-lg hover:bg-hover"
               >
                 Cancel
               </button>
@@ -558,21 +558,21 @@ function CompleteTransactionForm({ request, onComplete, isProcessing }: {
   if (request.status !== 'approved') return null;
 
   return (
-    <div className="border-t border-slate-700 pt-4 mt-4">
-      <p className="text-sm font-medium text-white mb-3">Complete Transaction</p>
+    <div className="border-t border-border pt-4 mt-4">
+      <p className="text-sm font-medium text-content mb-3">Complete Transaction</p>
       <div className="space-y-3">
         <input
           type="text"
           value={reference}
           onChange={(e) => setReference(e.target.value)}
-          className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-teal-500"
+          className="w-full bg-input border border-border-subtle rounded-lg px-4 py-2 text-content focus:outline-none focus:border-teal-500"
           placeholder="Transaction Reference (e.g., TRX-2025-001)"
         />
         <input
           type="text"
           value={proofUrl}
           onChange={(e) => setProofUrl(e.target.value)}
-          className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-teal-500"
+          className="w-full bg-input border border-border-subtle rounded-lg px-4 py-2 text-content focus:outline-none focus:border-teal-500"
           placeholder="Proof Document URL"
         />
         <button
@@ -773,18 +773,18 @@ export function FinancialRequests() {
         {loading ? (
           <TableSkeleton rows={5} columns={6} />
         ) : (
-          <div className="bg-slate-800/50 rounded-xl border border-slate-700 overflow-hidden">
+          <div className="bg-card rounded-xl border border-border overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full">
-                <thead className="bg-slate-800">
+                <thead className="bg-input">
                   <tr>
-                    <th className="text-left p-4 text-sm font-semibold text-slate-300">Request</th>
-                    <th className="text-left p-4 text-sm font-semibold text-slate-300">Type</th>
-                    <th className="text-left p-4 text-sm font-semibold text-slate-300">Requester</th>
-                    <th className="text-right p-4 text-sm font-semibold text-slate-300">Amount</th>
-                    <th className="text-left p-4 text-sm font-semibold text-slate-300">Status</th>
-                    <th className="text-left p-4 text-sm font-semibold text-slate-300">Current Step</th>
-                    <th className="text-left p-4 text-sm font-semibold text-slate-300"></th>
+                    <th className="text-left p-4 text-sm font-semibold text-content-tertiary">Request</th>
+                    <th className="text-left p-4 text-sm font-semibold text-content-tertiary">Type</th>
+                    <th className="text-left p-4 text-sm font-semibold text-content-tertiary">Requester</th>
+                    <th className="text-right p-4 text-sm font-semibold text-content-tertiary">Amount</th>
+                    <th className="text-left p-4 text-sm font-semibold text-content-tertiary">Status</th>
+                    <th className="text-left p-4 text-sm font-semibold text-content-tertiary">Current Step</th>
+                    <th className="text-left p-4 text-sm font-semibold text-content-tertiary"></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -795,26 +795,26 @@ export function FinancialRequests() {
                     return (
                       <tr
                         key={req.id}
-                        className="border-t border-slate-700 hover:bg-slate-700/30 transition-colors cursor-pointer animate-fade-in"
+                        className="border-t border-border hover:bg-hover/30 transition-colors cursor-pointer animate-fade-in"
                         style={{ animationDelay: `${index * 50}ms` }}
                         onClick={() => setSelectedRequest(req)}
                       >
                         <td className="p-4">
-                          <p className="text-white font-medium">{req.title}</p>
-                          <p className="text-xs text-slate-400">{req.request_number}</p>
+                          <p className="text-content font-medium">{req.title}</p>
+                          <p className="text-xs text-content-secondary">{req.request_number}</p>
                         </td>
                         <td className="p-4">
-                          <span className="inline-flex items-center gap-1.5 text-sm text-slate-300">
+                          <span className="inline-flex items-center gap-1.5 text-sm text-content-tertiary">
                             <span>{typeConfig.emoji}</span>
                             {typeConfig.label}
                           </span>
                         </td>
                         <td className="p-4">
-                          <p className="text-sm text-white">{req.requester_name}</p>
-                          <p className="text-xs text-slate-400">{req.requester_unit}</p>
+                          <p className="text-sm text-content">{req.requester_name}</p>
+                          <p className="text-xs text-content-secondary">{req.requester_unit}</p>
                         </td>
                         <td className="p-4 text-right">
-                          <p className="text-white font-semibold">{formatCurrency(req.amount, req.currency)}</p>
+                          <p className="text-content font-semibold">{formatCurrency(req.amount, req.currency)}</p>
                         </td>
                         <td className="p-4">
                           <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-medium text-white ${statusConfig.color}`}>
@@ -823,10 +823,10 @@ export function FinancialRequests() {
                           </span>
                         </td>
                         <td className="p-4">
-                          <p className="text-sm text-slate-300">{req.current_approver || '-'}</p>
+                          <p className="text-sm text-content-tertiary">{req.current_approver || '-'}</p>
                         </td>
                         <td className="p-4">
-                          <ChevronRight size={16} className="text-slate-400" />
+                          <ChevronRight size={16} className="text-content-secondary" />
                         </td>
                       </tr>
                     );
@@ -836,8 +836,8 @@ export function FinancialRequests() {
             </div>
             {filteredRequests.length === 0 && (
               <div className="text-center py-12">
-                <FileText size={48} className="mx-auto text-slate-600 mb-3" />
-                <p className="text-slate-400">No requests found</p>
+                <FileText size={48} className="mx-auto text-content-muted mb-3" />
+                <p className="text-content-secondary">No requests found</p>
               </div>
             )}
           </div>
@@ -869,23 +869,23 @@ export function FinancialRequests() {
               {/* Request Info */}
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <p className="text-xs text-slate-400 mb-1">Request Number</p>
-                  <p className="text-white font-medium">{selectedRequest.request_number}</p>
+                  <p className="text-xs text-content-secondary mb-1">Request Number</p>
+                  <p className="text-content font-medium">{selectedRequest.request_number}</p>
                 </div>
                 <div>
-                  <p className="text-xs text-slate-400 mb-1">Type</p>
-                  <p className="text-white">
+                  <p className="text-xs text-content-secondary mb-1">Type</p>
+                  <p className="text-content">
                     {TYPE_CONFIG[selectedRequest.type].emoji} {TYPE_CONFIG[selectedRequest.type].label}
                   </p>
                 </div>
                 <div>
-                  <p className="text-xs text-slate-400 mb-1">Amount</p>
-                  <p className="text-white font-semibold text-lg">
+                  <p className="text-xs text-content-secondary mb-1">Amount</p>
+                  <p className="text-content font-semibold text-lg">
                     {formatCurrency(selectedRequest.amount, selectedRequest.currency)}
                   </p>
                 </div>
                 <div>
-                  <p className="text-xs text-slate-400 mb-1">Status</p>
+                  <p className="text-xs text-content-secondary mb-1">Status</p>
                   <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-medium text-white ${STATUS_CONFIG[selectedRequest.status].color}`}>
                     {STATUS_CONFIG[selectedRequest.status].icon}
                     {STATUS_CONFIG[selectedRequest.status].label}
@@ -895,23 +895,23 @@ export function FinancialRequests() {
 
               {/* Description */}
               <div>
-                <p className="text-xs text-slate-400 mb-1">Description</p>
-                <p className="text-slate-300">{selectedRequest.description}</p>
+                <p className="text-xs text-content-secondary mb-1">Description</p>
+                <p className="text-content-tertiary">{selectedRequest.description}</p>
               </div>
 
               {/* Requester & Beneficiary */}
               <div className="grid grid-cols-2 gap-4">
-                <div className="bg-slate-800/50 rounded-xl p-4">
-                  <p className="text-xs text-slate-400 mb-2">Requester</p>
-                  <p className="text-white font-medium">{selectedRequest.requester_name}</p>
-                  <p className="text-sm text-slate-400">{selectedRequest.requester_unit}</p>
+                <div className="bg-card rounded-xl p-4">
+                  <p className="text-xs text-content-secondary mb-2">Requester</p>
+                  <p className="text-content font-medium">{selectedRequest.requester_name}</p>
+                  <p className="text-sm text-content-secondary">{selectedRequest.requester_unit}</p>
                 </div>
                 {selectedRequest.beneficiary_name && (
-                  <div className="bg-slate-800/50 rounded-xl p-4">
-                    <p className="text-xs text-slate-400 mb-2">Beneficiary</p>
-                    <p className="text-white font-medium">{selectedRequest.beneficiary_name}</p>
+                  <div className="bg-card rounded-xl p-4">
+                    <p className="text-xs text-content-secondary mb-2">Beneficiary</p>
+                    <p className="text-content font-medium">{selectedRequest.beneficiary_name}</p>
                     {selectedRequest.beneficiary_bank && (
-                      <p className="text-sm text-slate-400">{selectedRequest.beneficiary_bank}</p>
+                      <p className="text-sm text-content-secondary">{selectedRequest.beneficiary_bank}</p>
                     )}
                   </div>
                 )}
@@ -919,24 +919,24 @@ export function FinancialRequests() {
 
               {/* GL Code */}
               {selectedRequest.gl_code && (
-                <div className="bg-slate-800/50 rounded-xl p-4">
-                  <p className="text-xs text-slate-400 mb-2">Ledger Account</p>
-                  <p className="text-white font-medium">{selectedRequest.gl_code} - {selectedRequest.gl_name}</p>
+                <div className="bg-card rounded-xl p-4">
+                  <p className="text-xs text-content-secondary mb-2">Ledger Account</p>
+                  <p className="text-content font-medium">{selectedRequest.gl_code} - {selectedRequest.gl_name}</p>
                   {selectedRequest.cost_center && (
-                    <p className="text-sm text-slate-400">Cost Center: {selectedRequest.cost_center}</p>
+                    <p className="text-sm text-content-secondary">Cost Center: {selectedRequest.cost_center}</p>
                   )}
                 </div>
               )}
 
               {/* Documents */}
               <div>
-                <p className="text-xs text-slate-400 mb-2">Documents ({selectedRequest.documents.length})</p>
+                <p className="text-xs text-content-secondary mb-2">Documents ({selectedRequest.documents.length})</p>
                 <div className="space-y-2">
                   {selectedRequest.documents.map(doc => (
-                    <div key={doc.id} className="flex items-center justify-between bg-slate-800/50 rounded-lg p-3">
+                    <div key={doc.id} className="flex items-center justify-between bg-card rounded-lg p-3">
                       <div className="flex items-center gap-2">
                         <FileText size={16} className="text-blue-400" />
-                        <span className="text-sm text-white">{doc.name}</span>
+                        <span className="text-sm text-content">{doc.name}</span>
                       </div>
                       <StatusBadge status={doc.type} size="sm" />
                     </div>
@@ -958,7 +958,7 @@ export function FinancialRequests() {
               {/* Approval Timeline */}
               {selectedRequest.approvals.length > 0 && (
                 <div>
-                  <p className="text-xs text-slate-400 mb-3">Approval History</p>
+                  <p className="text-xs text-content-secondary mb-3">Approval History</p>
                   <ApprovalTimeline approvals={selectedRequest.approvals} />
                 </div>
               )}
@@ -983,7 +983,7 @@ export function FinancialRequests() {
               {selectedRequest.transaction_reference && (
                 <div className="bg-emerald-900/30 rounded-xl p-4 border border-emerald-600/50">
                   <p className="text-xs text-emerald-400 mb-2">Transaction Completed</p>
-                  <p className="text-white font-medium">Ref: {selectedRequest.transaction_reference}</p>
+                  <p className="text-content font-medium">Ref: {selectedRequest.transaction_reference}</p>
                   {selectedRequest.transaction_date && (
                     <p className="text-sm text-emerald-300">
                       {format(new Date(selectedRequest.transaction_date), 'dd MMM yyyy HH:mm')}

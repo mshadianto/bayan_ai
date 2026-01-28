@@ -117,8 +117,8 @@ export default function Contracts() {
             </h4>
             <div className="space-y-2">
               {alerts.filter(a => a.status === 'active').slice(0, 3).map(alert => (
-                <div key={alert.id} className="text-sm text-slate-300">
-                  <span className="font-medium text-white">{alert.contract_name}</span> - {alert.message}
+                <div key={alert.id} className="text-sm text-content-tertiary">
+                  <span className="font-medium text-content">{alert.contract_name}</span> - {alert.message}
                 </div>
               ))}
             </div>
@@ -161,7 +161,7 @@ export default function Contracts() {
               return (
                 <div
                   key={contract.id}
-                  className="bg-slate-800/50 rounded-xl border border-slate-700 p-4 hover:border-amber-600/50 transition-colors cursor-pointer animate-fade-in"
+                  className="bg-card rounded-xl border border-border p-4 hover:border-amber-600/50 transition-colors cursor-pointer animate-fade-in"
                   style={{ animationDelay: `${index * 50}ms` }}
                   onClick={() => handleViewContract(contract)}
                 >
@@ -174,32 +174,32 @@ export default function Contracts() {
                           {CONTRACT_TYPE_LABELS[contract.type]}
                         </StatusBadge>
                       </div>
-                      <h3 className="text-white font-medium">{contract.name}</h3>
-                      <p className="text-slate-400 text-sm">{contract.partner_name}</p>
+                      <h3 className="text-content font-medium">{contract.name}</h3>
+                      <p className="text-content-secondary text-sm">{contract.partner_name}</p>
                     </div>
                     <div className="flex items-center gap-6">
                       <div className="text-right">
-                        <p className="text-slate-400 text-xs">Period</p>
-                        <p className="text-slate-300 text-sm">
+                        <p className="text-content-secondary text-xs">Period</p>
+                        <p className="text-content-tertiary text-sm">
                           {contract.start_date} - {contract.end_date}
                         </p>
                       </div>
                       {contract.value && (
                         <div className="text-right">
-                          <p className="text-slate-400 text-xs">Value</p>
-                          <p className="text-white font-medium">
+                          <p className="text-content-secondary text-xs">Value</p>
+                          <p className="text-content font-medium">
                             {new Intl.NumberFormat('en-SA', { style: 'currency', currency: contract.currency || 'SAR' }).format(contract.value)}
                           </p>
                         </div>
                       )}
                       <div className="text-right">
-                        <p className="text-slate-400 text-xs">Days Left</p>
+                        <p className="text-content-secondary text-xs">Days Left</p>
                         <p className={`font-medium ${daysUntilExpiry <= 0 ? 'text-red-400' : daysUntilExpiry <= 30 ? 'text-amber-400' : 'text-emerald-400'}`}>
                           {daysUntilExpiry <= 0 ? 'Expired' : `${daysUntilExpiry} days`}
                         </p>
                       </div>
-                      <button className="p-2 hover:bg-slate-700 rounded-lg transition-colors">
-                        <Eye size={18} className="text-slate-400" />
+                      <button className="p-2 hover:bg-hover rounded-lg transition-colors">
+                        <Eye size={18} className="text-content-secondary" />
                       </button>
                     </div>
                   </div>
@@ -230,8 +230,8 @@ export default function Contracts() {
               <div className="flex items-start justify-between">
                 <div>
                   <p className="text-amber-400 font-mono text-sm mb-1">{selectedContract.contract_number}</p>
-                  <h3 className="text-xl font-semibold text-white">{selectedContract.name}</h3>
-                  <p className="text-slate-400">{selectedContract.partner_name}</p>
+                  <h3 className="text-xl font-semibold text-content">{selectedContract.name}</h3>
+                  <p className="text-content-secondary">{selectedContract.partner_name}</p>
                 </div>
                 <div className="flex gap-2">
                   <StatusBadge status={selectedContract.status} />
@@ -243,27 +243,27 @@ export default function Contracts() {
 
               {/* Details Grid */}
               <div className="grid grid-cols-2 gap-4">
-                <div className="bg-slate-800 rounded-lg p-4">
-                  <p className="text-slate-400 text-sm">Contract Period</p>
-                  <p className="text-white flex items-center gap-2">
+                <div className="bg-input rounded-lg p-4">
+                  <p className="text-content-secondary text-sm">Contract Period</p>
+                  <p className="text-content flex items-center gap-2">
                     <Calendar size={16} />
                     {selectedContract.start_date} - {selectedContract.end_date}
                   </p>
                 </div>
                 {selectedContract.value && (
-                  <div className="bg-slate-800 rounded-lg p-4">
-                    <p className="text-slate-400 text-sm">Contract Value</p>
-                    <p className="text-white font-medium">
+                  <div className="bg-input rounded-lg p-4">
+                    <p className="text-content-secondary text-sm">Contract Value</p>
+                    <p className="text-content font-medium">
                       {new Intl.NumberFormat('en-SA', { style: 'currency', currency: selectedContract.currency || 'SAR' }).format(selectedContract.value)}
                     </p>
                   </div>
                 )}
-                <div className="bg-slate-800 rounded-lg p-4">
-                  <p className="text-slate-400 text-sm">Auto Renewal</p>
-                  <p className="text-white">{selectedContract.auto_renewal ? 'Yes' : 'No'}</p>
+                <div className="bg-input rounded-lg p-4">
+                  <p className="text-content-secondary text-sm">Auto Renewal</p>
+                  <p className="text-content">{selectedContract.auto_renewal ? 'Yes' : 'No'}</p>
                 </div>
-                <div className="bg-slate-800 rounded-lg p-4">
-                  <p className="text-slate-400 text-sm">Days Until Expiry</p>
+                <div className="bg-input rounded-lg p-4">
+                  <p className="text-content-secondary text-sm">Days Until Expiry</p>
                   <p className={`font-medium ${getDaysUntilExpiry(selectedContract.end_date) <= 30 ? 'text-amber-400' : 'text-emerald-400'}`}>
                     {getDaysUntilExpiry(selectedContract.end_date)} days
                   </p>
@@ -273,21 +273,21 @@ export default function Contracts() {
               {/* Description */}
               {selectedContract.description && (
                 <div>
-                  <h4 className="text-white font-medium mb-2">Description</h4>
-                  <p className="text-slate-300">{selectedContract.description}</p>
+                  <h4 className="text-content font-medium mb-2">Description</h4>
+                  <p className="text-content-tertiary">{selectedContract.description}</p>
                 </div>
               )}
 
               {/* Obligations */}
               {(selectedContract.obligations?.length ?? 0) > 0 && (
                 <div>
-                  <h4 className="text-white font-medium mb-2">Obligations</h4>
+                  <h4 className="text-content font-medium mb-2">Obligations</h4>
                   <div className="space-y-2">
                     {selectedContract.obligations.map((ob) => (
-                      <div key={ob.id} className="flex items-center justify-between bg-slate-800 rounded-lg p-3">
+                      <div key={ob.id} className="flex items-center justify-between bg-input rounded-lg p-3">
                         <div>
-                          <p className="text-white">{ob.description}</p>
-                          <p className="text-slate-400 text-sm">Due: {ob.due_date}</p>
+                          <p className="text-content">{ob.description}</p>
+                          <p className="text-content-secondary text-sm">Due: {ob.due_date}</p>
                         </div>
                         <StatusBadge status={ob.status} />
                       </div>
@@ -337,21 +337,21 @@ function AddContractForm({ onSubmit, onCancel }: { onSubmit: (data: CreateContra
     <form onSubmit={handleSubmit} className="space-y-4">
       <div className="grid grid-cols-2 gap-4">
         <div className="col-span-2">
-          <label className="block text-sm font-medium text-slate-300 mb-1">Contract Name</label>
+          <label className="block text-sm font-medium text-content-tertiary mb-1">Contract Name</label>
           <input
             type="text"
             required
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-            className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+            className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content focus:ring-2 focus:ring-amber-500 focus:border-transparent"
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-1">Contract Type</label>
+          <label className="block text-sm font-medium text-content-tertiary mb-1">Contract Type</label>
           <select
             value={formData.type}
             onChange={(e) => setFormData({ ...formData, type: e.target.value as Contract['type'] })}
-            className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+            className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content focus:ring-2 focus:ring-amber-500 focus:border-transparent"
           >
             <option value="pks">PKS</option>
             <option value="vendor">Vendor</option>
@@ -362,50 +362,50 @@ function AddContractForm({ onSubmit, onCancel }: { onSubmit: (data: CreateContra
           </select>
         </div>
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-1">Partner Name</label>
+          <label className="block text-sm font-medium text-content-tertiary mb-1">Partner Name</label>
           <input
             type="text"
             required
             value={formData.partner_name}
             onChange={(e) => setFormData({ ...formData, partner_name: e.target.value })}
-            className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+            className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content focus:ring-2 focus:ring-amber-500 focus:border-transparent"
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-1">Start Date</label>
+          <label className="block text-sm font-medium text-content-tertiary mb-1">Start Date</label>
           <input
             type="date"
             required
             value={formData.start_date}
             onChange={(e) => setFormData({ ...formData, start_date: e.target.value })}
-            className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+            className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content focus:ring-2 focus:ring-amber-500 focus:border-transparent"
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-1">End Date</label>
+          <label className="block text-sm font-medium text-content-tertiary mb-1">End Date</label>
           <input
             type="date"
             required
             value={formData.end_date}
             onChange={(e) => setFormData({ ...formData, end_date: e.target.value })}
-            className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+            className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content focus:ring-2 focus:ring-amber-500 focus:border-transparent"
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-1">Contract Value</label>
+          <label className="block text-sm font-medium text-content-tertiary mb-1">Contract Value</label>
           <input
             type="number"
             value={formData.value || ''}
             onChange={(e) => setFormData({ ...formData, value: e.target.value ? Number(e.target.value) : undefined })}
-            className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+            className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content focus:ring-2 focus:ring-amber-500 focus:border-transparent"
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-1">Currency</label>
+          <label className="block text-sm font-medium text-content-tertiary mb-1">Currency</label>
           <select
             value={formData.currency}
             onChange={(e) => setFormData({ ...formData, currency: e.target.value as 'SAR' | 'IDR' | 'USD' })}
-            className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+            className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content focus:ring-2 focus:ring-amber-500 focus:border-transparent"
           >
             <option value="SAR">SAR</option>
             <option value="IDR">IDR</option>
@@ -413,12 +413,12 @@ function AddContractForm({ onSubmit, onCancel }: { onSubmit: (data: CreateContra
           </select>
         </div>
         <div className="col-span-2">
-          <label className="block text-sm font-medium text-slate-300 mb-1">Description</label>
+          <label className="block text-sm font-medium text-content-tertiary mb-1">Description</label>
           <textarea
             value={formData.description}
             onChange={(e) => setFormData({ ...formData, description: e.target.value })}
             rows={3}
-            className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+            className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content focus:ring-2 focus:ring-amber-500 focus:border-transparent"
           />
         </div>
         <div className="col-span-2">
@@ -427,9 +427,9 @@ function AddContractForm({ onSubmit, onCancel }: { onSubmit: (data: CreateContra
               type="checkbox"
               checked={formData.auto_renewal}
               onChange={(e) => setFormData({ ...formData, auto_renewal: e.target.checked })}
-              className="rounded border-slate-600 bg-slate-700 text-amber-500 focus:ring-amber-500"
+              className="rounded border-border-subtle bg-input text-amber-500 focus:ring-amber-500"
             />
-            <span className="text-sm text-slate-300">Auto Renewal</span>
+            <span className="text-sm text-content-tertiary">Auto Renewal</span>
           </label>
         </div>
       </div>
@@ -437,7 +437,7 @@ function AddContractForm({ onSubmit, onCancel }: { onSubmit: (data: CreateContra
         <button
           type="button"
           onClick={onCancel}
-          className="flex-1 px-4 py-2 border border-slate-600 text-slate-300 rounded-xl hover:bg-slate-700 transition-colors"
+          className="flex-1 px-4 py-2 border border-border-subtle text-content-tertiary rounded-xl hover:bg-hover transition-colors"
         >
           Cancel
         </button>

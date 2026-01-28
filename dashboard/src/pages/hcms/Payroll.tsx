@@ -113,26 +113,26 @@ function RunPayrollModal({
       <div className="space-y-4">
         <div className="p-4 bg-indigo-900/30 border border-indigo-700/50 rounded-xl">
           <p className="text-sm text-indigo-300">
-            You are about to initiate payroll processing for <span className="font-medium text-white">{period}</span>
+            You are about to initiate payroll processing for <span className="font-medium text-content">{period}</span>
           </p>
         </div>
 
         {/* Preview Summary */}
         <div className="grid grid-cols-2 gap-4">
-          <div className="bg-slate-700/50 rounded-xl p-4">
-            <p className="text-sm text-slate-400">Employees</p>
-            <p className="text-2xl font-bold text-white">{records.length}</p>
+          <div className="bg-hover rounded-xl p-4">
+            <p className="text-sm text-content-secondary">Employees</p>
+            <p className="text-2xl font-bold text-content">{records.length}</p>
           </div>
-          <div className="bg-slate-700/50 rounded-xl p-4">
-            <p className="text-sm text-slate-400">Total Gross</p>
-            <p className="text-2xl font-bold text-white">SAR {totalGross.toLocaleString()}</p>
+          <div className="bg-hover rounded-xl p-4">
+            <p className="text-sm text-content-secondary">Total Gross</p>
+            <p className="text-2xl font-bold text-content">SAR {totalGross.toLocaleString()}</p>
           </div>
-          <div className="bg-slate-700/50 rounded-xl p-4">
-            <p className="text-sm text-slate-400">Total Deductions</p>
+          <div className="bg-hover rounded-xl p-4">
+            <p className="text-sm text-content-secondary">Total Deductions</p>
             <p className="text-2xl font-bold text-red-400">-SAR {totalDeductions.toLocaleString()}</p>
           </div>
-          <div className="bg-slate-700/50 rounded-xl p-4">
-            <p className="text-sm text-slate-400">Total Net Payable</p>
+          <div className="bg-hover rounded-xl p-4">
+            <p className="text-sm text-content-secondary">Total Net Payable</p>
             <p className="text-2xl font-bold text-emerald-400">SAR {totalNet.toLocaleString()}</p>
           </div>
         </div>
@@ -198,15 +198,15 @@ function ProcessPayrollModal({
       }
     >
       <div className="space-y-4">
-        <div className="p-4 bg-slate-700/50 rounded-xl">
+        <div className="p-4 bg-hover rounded-xl">
           <div className="flex justify-between items-center">
-            <span className="text-slate-400">Net Salary</span>
-            <span className="text-2xl font-bold text-white">SAR {record.net_salary.toLocaleString()}</span>
+            <span className="text-content-secondary">Net Salary</span>
+            <span className="text-2xl font-bold text-content">SAR {record.net_salary.toLocaleString()}</span>
           </div>
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-1">
+          <label className="block text-sm font-medium text-content-tertiary mb-1">
             Bank Reference Number <span className="text-red-400">*</span>
           </label>
           <input
@@ -214,7 +214,7 @@ function ProcessPayrollModal({
             value={bankReference}
             onChange={(e) => setBankReference(e.target.value)}
             placeholder="e.g., TRX-2024-001234"
-            className="w-full bg-slate-700 border border-slate-600 rounded-xl px-4 py-2.5 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="w-full bg-input border border-border-subtle rounded-xl px-4 py-2.5 text-content placeholder-content-secondary focus:outline-none focus:ring-2 focus:ring-indigo-500"
           />
         </div>
       </div>
@@ -278,16 +278,16 @@ function AdjustSalaryModal({
       }
     >
       <div className="space-y-4">
-        <div className="p-4 bg-slate-700/50 rounded-xl">
+        <div className="p-4 bg-hover rounded-xl">
           <div className="flex justify-between items-center">
-            <span className="text-slate-400">Current Net Salary</span>
-            <span className="text-xl font-bold text-white">SAR {record.net_salary.toLocaleString()}</span>
+            <span className="text-content-secondary">Current Net Salary</span>
+            <span className="text-xl font-bold text-content">SAR {record.net_salary.toLocaleString()}</span>
           </div>
         </div>
 
         {/* Adjustment Type */}
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-2">
+          <label className="block text-sm font-medium text-content-tertiary mb-2">
             Adjustment Type <span className="text-red-400">*</span>
           </label>
           <div className="grid grid-cols-3 gap-2">
@@ -302,8 +302,8 @@ function AdjustSalaryModal({
                 onClick={() => setAdjustmentType(type.value as AdjustSalaryInput['adjustment_type'])}
                 className={`p-3 rounded-xl text-sm font-medium border transition-colors ${
                   adjustmentType === type.value
-                    ? `bg-${type.color}-600/50 border-${type.color}-500 text-white`
-                    : 'bg-slate-700 border-slate-600 text-slate-300 hover:bg-slate-600'
+                    ? `bg-${type.color}-600/50 border-${type.color}-500 text-content`
+                    : 'bg-input border-border-subtle text-content-tertiary hover:bg-hover'
                 }`}
               >
                 {type.label}
@@ -314,7 +314,7 @@ function AdjustSalaryModal({
 
         {/* Amount */}
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-1">
+          <label className="block text-sm font-medium text-content-tertiary mb-1">
             Amount (SAR) <span className="text-red-400">*</span>
           </label>
           <input
@@ -324,13 +324,13 @@ function AdjustSalaryModal({
             placeholder="Enter amount"
             min="0"
             step="100"
-            className="w-full bg-slate-700 border border-slate-600 rounded-xl px-4 py-2.5 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="w-full bg-input border border-border-subtle rounded-xl px-4 py-2.5 text-content placeholder-content-secondary focus:outline-none focus:ring-2 focus:ring-indigo-500"
           />
         </div>
 
         {/* Reason */}
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-1">
+          <label className="block text-sm font-medium text-content-tertiary mb-1">
             Reason <span className="text-red-400">*</span>
           </label>
           <textarea
@@ -338,7 +338,7 @@ function AdjustSalaryModal({
             onChange={(e) => setReason(e.target.value)}
             rows={2}
             placeholder="Reason for adjustment..."
-            className="w-full bg-slate-700 border border-slate-600 rounded-xl px-4 py-2.5 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none"
+            className="w-full bg-input border border-border-subtle rounded-xl px-4 py-2.5 text-content placeholder-content-secondary focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none"
           />
         </div>
 
@@ -350,7 +350,7 @@ function AdjustSalaryModal({
               : 'bg-emerald-900/30 border-emerald-700/50'
           }`}>
             <p className="text-sm">
-              <span className="text-slate-300">New Net Salary: </span>
+              <span className="text-content-tertiary">New Net Salary: </span>
               <span className={`font-bold ${adjustmentType === 'deduction' ? 'text-red-300' : 'text-emerald-300'}`}>
                 SAR {(record.net_salary + (adjustmentType === 'deduction' ? -parseFloat(amount || '0') : parseFloat(amount || '0'))).toLocaleString()}
               </span>
@@ -388,13 +388,13 @@ function PayrollDetailModal({
     >
       <div className="space-y-4">
         {/* Header */}
-        <div className="flex items-center gap-4 pb-4 border-b border-slate-700">
+        <div className="flex items-center gap-4 pb-4 border-b border-border">
           <div className="w-14 h-14 bg-indigo-600/30 rounded-full flex items-center justify-center text-indigo-300 font-semibold text-xl">
             {record.employee_name.split(' ').map(n => n[0]).join('')}
           </div>
           <div>
-            <h3 className="text-lg font-semibold text-white">{record.employee_name}</h3>
-            <p className="text-sm text-slate-400">{record.employee_id} | Period: {record.period}</p>
+            <h3 className="text-lg font-semibold text-content">{record.employee_name}</h3>
+            <p className="text-sm text-content-secondary">{record.employee_id} | Period: {record.period}</p>
           </div>
           <div className="ml-auto">
             <StatusBadge status={record.status} variant="outline" />
@@ -403,51 +403,51 @@ function PayrollDetailModal({
 
         {/* Earnings */}
         <div>
-          <h4 className="text-sm font-medium text-slate-400 mb-2">Earnings</h4>
-          <div className="bg-slate-700/50 rounded-xl divide-y divide-slate-600">
+          <h4 className="text-sm font-medium text-content-secondary mb-2">Earnings</h4>
+          <div className="bg-hover rounded-xl divide-y divide-border-subtle">
             <div className="flex justify-between p-3">
-              <span className="text-slate-300">Basic Salary</span>
-              <span className="text-white font-medium">SAR {record.basic_salary.toLocaleString()}</span>
+              <span className="text-content-tertiary">Basic Salary</span>
+              <span className="text-content font-medium">SAR {record.basic_salary.toLocaleString()}</span>
             </div>
             <div className="flex justify-between p-3">
-              <span className="text-slate-300">Housing Allowance</span>
-              <span className="text-white font-medium">SAR {(record.housing_allowance || 0).toLocaleString()}</span>
+              <span className="text-content-tertiary">Housing Allowance</span>
+              <span className="text-content font-medium">SAR {(record.housing_allowance || 0).toLocaleString()}</span>
             </div>
             <div className="flex justify-between p-3">
-              <span className="text-slate-300">Transport Allowance</span>
-              <span className="text-white font-medium">SAR {(record.transport_allowance || 0).toLocaleString()}</span>
+              <span className="text-content-tertiary">Transport Allowance</span>
+              <span className="text-content font-medium">SAR {(record.transport_allowance || 0).toLocaleString()}</span>
             </div>
             <div className="flex justify-between p-3">
-              <span className="text-slate-300">Other Allowances</span>
-              <span className="text-white font-medium">SAR {(record.other_allowances || 0).toLocaleString()}</span>
+              <span className="text-content-tertiary">Other Allowances</span>
+              <span className="text-content font-medium">SAR {(record.other_allowances || 0).toLocaleString()}</span>
             </div>
             {record.overtime_pay && record.overtime_pay > 0 && (
               <div className="flex justify-between p-3">
-                <span className="text-slate-300">Overtime Pay</span>
+                <span className="text-content-tertiary">Overtime Pay</span>
                 <span className="text-emerald-400 font-medium">SAR {record.overtime_pay.toLocaleString()}</span>
               </div>
             )}
-            <div className="flex justify-between p-3 bg-slate-600/50">
-              <span className="text-white font-medium">Total Earnings</span>
-              <span className="text-white font-bold">SAR {(record.basic_salary + (record.allowances || 0) + (record.overtime_pay || 0)).toLocaleString()}</span>
+            <div className="flex justify-between p-3 bg-hover">
+              <span className="text-content font-medium">Total Earnings</span>
+              <span className="text-content font-bold">SAR {(record.basic_salary + (record.allowances || 0) + (record.overtime_pay || 0)).toLocaleString()}</span>
             </div>
           </div>
         </div>
 
         {/* Deductions */}
         <div>
-          <h4 className="text-sm font-medium text-slate-400 mb-2">Deductions</h4>
-          <div className="bg-slate-700/50 rounded-xl divide-y divide-slate-600">
+          <h4 className="text-sm font-medium text-content-secondary mb-2">Deductions</h4>
+          <div className="bg-hover rounded-xl divide-y divide-border-subtle">
             <div className="flex justify-between p-3">
-              <span className="text-slate-300">GOSI (Employee)</span>
+              <span className="text-content-tertiary">GOSI (Employee)</span>
               <span className="text-red-400 font-medium">-SAR {(record.gosi_employee || 0).toLocaleString()}</span>
             </div>
             <div className="flex justify-between p-3">
-              <span className="text-slate-300">Other Deductions</span>
+              <span className="text-content-tertiary">Other Deductions</span>
               <span className="text-red-400 font-medium">-SAR {record.deductions.toLocaleString()}</span>
             </div>
-            <div className="flex justify-between p-3 bg-slate-600/50">
-              <span className="text-white font-medium">Total Deductions</span>
+            <div className="flex justify-between p-3 bg-hover">
+              <span className="text-content font-medium">Total Deductions</span>
               <span className="text-red-400 font-bold">-SAR {(record.deductions + (record.gosi_employee || 0)).toLocaleString()}</span>
             </div>
           </div>
@@ -581,47 +581,47 @@ export function Payroll() {
 
         {/* Summary Cards */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6 stagger-children">
-          <div className="bg-slate-800/50 rounded-xl p-5 border border-slate-700 card-hover">
+          <div className="bg-card rounded-xl p-5 border border-border card-hover">
             <div className="flex items-center gap-3">
               <div className="p-2 bg-emerald-600/20 rounded-lg">
                 <DollarSign size={20} className="text-emerald-400" />
               </div>
               <div>
-                <p className="text-sm text-slate-400">Total Net Payable</p>
-                <p className="text-2xl font-bold text-white">SAR {totalPayroll.toLocaleString()}</p>
+                <p className="text-sm text-content-secondary">Total Net Payable</p>
+                <p className="text-2xl font-bold text-content">SAR {totalPayroll.toLocaleString()}</p>
               </div>
             </div>
           </div>
-          <div className="bg-slate-800/50 rounded-xl p-5 border border-slate-700 card-hover">
+          <div className="bg-card rounded-xl p-5 border border-border card-hover">
             <div className="flex items-center gap-3">
               <div className="p-2 bg-amber-600/20 rounded-lg">
                 <TrendingUp size={20} className="text-amber-400" />
               </div>
               <div>
-                <p className="text-sm text-slate-400">GOSI Total</p>
-                <p className="text-2xl font-bold text-white">SAR {totalGOSI.toLocaleString()}</p>
+                <p className="text-sm text-content-secondary">GOSI Total</p>
+                <p className="text-2xl font-bold text-content">SAR {totalGOSI.toLocaleString()}</p>
               </div>
             </div>
           </div>
-          <div className="bg-slate-800/50 rounded-xl p-5 border border-slate-700 card-hover">
+          <div className="bg-card rounded-xl p-5 border border-border card-hover">
             <div className="flex items-center gap-3">
               <div className="p-2 bg-indigo-600/20 rounded-lg">
                 <Users size={20} className="text-indigo-400" />
               </div>
               <div>
-                <p className="text-sm text-slate-400">Employees</p>
-                <p className="text-2xl font-bold text-white">{filteredRecords.length}</p>
+                <p className="text-sm text-content-secondary">Employees</p>
+                <p className="text-2xl font-bold text-content">{filteredRecords.length}</p>
               </div>
             </div>
           </div>
-          <div className="bg-slate-800/50 rounded-xl p-5 border border-slate-700 card-hover">
+          <div className="bg-card rounded-xl p-5 border border-border card-hover">
             <div className="flex items-center gap-3">
               <div className="p-2 bg-blue-600/20 rounded-lg">
                 <Clock size={20} className="text-blue-400" />
               </div>
               <div>
-                <p className="text-sm text-slate-400">Pending</p>
-                <p className="text-2xl font-bold text-white">{summary?.pending || 0}</p>
+                <p className="text-sm text-content-secondary">Pending</p>
+                <p className="text-2xl font-bold text-content">{summary?.pending || 0}</p>
               </div>
             </div>
           </div>
@@ -639,13 +639,13 @@ export function Payroll() {
           <select
             value={selectedPeriod}
             onChange={(e) => setSelectedPeriod(e.target.value)}
-            className="bg-slate-800 border border-slate-600 rounded-xl px-4 py-3 text-white focus:border-indigo-500"
+            className="bg-input border border-border-subtle rounded-xl px-4 py-3 text-content focus:border-indigo-500"
           >
             <option value="2024-01">January 2024</option>
             <option value="2023-12">December 2023</option>
             <option value="2023-11">November 2023</option>
           </select>
-          <button className="flex items-center gap-2 px-4 py-2 bg-slate-700 text-white rounded-xl hover:bg-slate-600 transition-colors">
+          <button className="flex items-center gap-2 px-4 py-2 bg-hover text-content rounded-xl hover:bg-hover transition-colors">
             <Download size={20} />
             Export
           </button>
@@ -655,40 +655,40 @@ export function Payroll() {
         {loading ? (
           <TableSkeleton rows={7} columns={11} />
         ) : (
-          <div className="bg-slate-800/50 rounded-xl border border-slate-700 overflow-x-auto">
+          <div className="bg-card rounded-xl border border-border overflow-x-auto">
             <table className="w-full min-w-[1100px]">
-              <thead className="bg-slate-800">
+              <thead className="bg-input">
                 <tr>
-                  <th className="text-left p-4 text-sm font-medium text-slate-400">Employee</th>
-                  <th className="text-right p-4 text-sm font-medium text-slate-400">Basic</th>
-                  <th className="text-right p-4 text-sm font-medium text-slate-400">Allowances</th>
-                  <th className="text-right p-4 text-sm font-medium text-slate-400">OT</th>
-                  <th className="text-right p-4 text-sm font-medium text-slate-400">Deductions</th>
-                  <th className="text-right p-4 text-sm font-medium text-slate-400">GOSI</th>
-                  <th className="text-right p-4 text-sm font-medium text-slate-400">Net Salary</th>
-                  <th className="text-center p-4 text-sm font-medium text-slate-400">Status</th>
-                  <th className="text-center p-4 text-sm font-medium text-slate-400">Actions</th>
+                  <th className="text-left p-4 text-sm font-medium text-content-secondary">Employee</th>
+                  <th className="text-right p-4 text-sm font-medium text-content-secondary">Basic</th>
+                  <th className="text-right p-4 text-sm font-medium text-content-secondary">Allowances</th>
+                  <th className="text-right p-4 text-sm font-medium text-content-secondary">OT</th>
+                  <th className="text-right p-4 text-sm font-medium text-content-secondary">Deductions</th>
+                  <th className="text-right p-4 text-sm font-medium text-content-secondary">GOSI</th>
+                  <th className="text-right p-4 text-sm font-medium text-content-secondary">Net Salary</th>
+                  <th className="text-center p-4 text-sm font-medium text-content-secondary">Status</th>
+                  <th className="text-center p-4 text-sm font-medium text-content-secondary">Actions</th>
                 </tr>
               </thead>
               <tbody>
                 {filteredRecords.map((record, index) => (
                   <tr
                     key={record.id}
-                    className="border-t border-slate-700 hover:bg-slate-800/50 animate-fade-in"
+                    className="border-t border-border hover:bg-card animate-fade-in"
                     style={{ animationDelay: `${index * 50}ms` }}
                   >
                     <td className="p-4">
                       <div>
-                        <p className="text-white font-medium">{record.employee_name}</p>
-                        <p className="text-sm text-slate-400">{record.employee_id}</p>
+                        <p className="text-content font-medium">{record.employee_name}</p>
+                        <p className="text-sm text-content-secondary">{record.employee_id}</p>
                       </div>
                     </td>
-                    <td className="p-4 text-right text-slate-300">{record.basic_salary.toLocaleString()}</td>
-                    <td className="p-4 text-right text-slate-300">{(record.allowances || 0).toLocaleString()}</td>
+                    <td className="p-4 text-right text-content-tertiary">{record.basic_salary.toLocaleString()}</td>
+                    <td className="p-4 text-right text-content-tertiary">{(record.allowances || 0).toLocaleString()}</td>
                     <td className="p-4 text-right text-emerald-400">{(record.overtime_pay || 0).toLocaleString()}</td>
                     <td className="p-4 text-right text-red-400">-{record.deductions.toLocaleString()}</td>
                     <td className="p-4 text-right text-amber-400">-{(record.gosi || 0).toLocaleString()}</td>
-                    <td className="p-4 text-right text-white font-bold">{record.net_salary.toLocaleString()}</td>
+                    <td className="p-4 text-right text-content font-bold">{record.net_salary.toLocaleString()}</td>
                     <td className="p-4 text-center">
                       <StatusBadge status={record.status} variant="outline" />
                     </td>
@@ -696,7 +696,7 @@ export function Payroll() {
                       <div className="flex justify-center gap-2">
                         <button
                           onClick={() => setDetailModal({ isOpen: true, record })}
-                          className="p-2 bg-slate-700 text-slate-300 rounded-lg hover:bg-slate-600 transition-colors"
+                          className="p-2 bg-hover text-content-tertiary rounded-lg hover:bg-hover transition-colors"
                           title="View details"
                         >
                           <Eye size={16} />
@@ -734,15 +734,15 @@ export function Payroll() {
                   </tr>
                 ))}
               </tbody>
-              <tfoot className="bg-slate-800 border-t border-slate-600">
+              <tfoot className="bg-input border-t border-border-subtle">
                 <tr>
-                  <td className="p-4 text-white font-bold">Total</td>
-                  <td className="p-4 text-right text-white font-bold">{filteredRecords.reduce((s, r) => s + r.basic_salary, 0).toLocaleString()}</td>
-                  <td className="p-4 text-right text-white font-bold">{filteredRecords.reduce((s, r) => s + (r.allowances || 0), 0).toLocaleString()}</td>
+                  <td className="p-4 text-content font-bold">Total</td>
+                  <td className="p-4 text-right text-content font-bold">{filteredRecords.reduce((s, r) => s + r.basic_salary, 0).toLocaleString()}</td>
+                  <td className="p-4 text-right text-content font-bold">{filteredRecords.reduce((s, r) => s + (r.allowances || 0), 0).toLocaleString()}</td>
                   <td className="p-4 text-right text-emerald-400 font-bold">{filteredRecords.reduce((s, r) => s + (r.overtime_pay || 0), 0).toLocaleString()}</td>
                   <td className="p-4 text-right text-red-400 font-bold">-{filteredRecords.reduce((s, r) => s + r.deductions, 0).toLocaleString()}</td>
                   <td className="p-4 text-right text-amber-400 font-bold">-{filteredRecords.reduce((s, r) => s + (r.gosi || 0), 0).toLocaleString()}</td>
-                  <td className="p-4 text-right text-white font-bold">{totalPayroll.toLocaleString()}</td>
+                  <td className="p-4 text-right text-content font-bold">{totalPayroll.toLocaleString()}</td>
                   <td colSpan={2}></td>
                 </tr>
               </tfoot>

@@ -123,8 +123,8 @@ export default function HCMSDashboard() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
           {/* Department Distribution */}
-          <div className="bg-slate-800/50 rounded-xl border border-slate-700 p-6 card-hover">
-            <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+          <div className="bg-card rounded-xl border border-border p-6 card-hover">
+            <h3 className="text-lg font-semibold text-content mb-4 flex items-center gap-2">
               <span>🏢</span> Department Distribution
             </h3>
             <div className="h-64">
@@ -141,8 +141,8 @@ export default function HCMSDashboard() {
           </div>
 
           {/* Headcount Trend */}
-          <div className="bg-slate-800/50 rounded-xl border border-slate-700 p-6 card-hover">
-            <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+          <div className="bg-card rounded-xl border border-border p-6 card-hover">
+            <h3 className="text-lg font-semibold text-content mb-4 flex items-center gap-2">
               <span>📈</span> Headcount Trend
             </h3>
             <div className="h-64">
@@ -167,34 +167,34 @@ export default function HCMSDashboard() {
         </div>
 
         {/* Compliance Alerts */}
-        <div className="bg-slate-800/50 rounded-xl border border-slate-700 overflow-hidden">
-          <div className="p-4 border-b border-slate-700">
-            <h3 className="font-semibold text-white flex items-center gap-2">
+        <div className="bg-card rounded-xl border border-border overflow-hidden">
+          <div className="p-4 border-b border-border">
+            <h3 className="font-semibold text-content flex items-center gap-2">
               <span>⚠️</span> Compliance Alerts - Document Expiry
             </h3>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="bg-slate-800">
+              <thead className="bg-input">
                 <tr>
-                  <th className="text-left p-4 text-sm font-medium text-slate-400">Employee</th>
-                  <th className="text-left p-4 text-sm font-medium text-slate-400">Alert Type</th>
-                  <th className="text-left p-4 text-sm font-medium text-slate-400">Expiry Date</th>
-                  <th className="text-left p-4 text-sm font-medium text-slate-400">Days Remaining</th>
-                  <th className="text-left p-4 text-sm font-medium text-slate-400">Status</th>
+                  <th className="text-left p-4 text-sm font-medium text-content-secondary">Employee</th>
+                  <th className="text-left p-4 text-sm font-medium text-content-secondary">Alert Type</th>
+                  <th className="text-left p-4 text-sm font-medium text-content-secondary">Expiry Date</th>
+                  <th className="text-left p-4 text-sm font-medium text-content-secondary">Days Remaining</th>
+                  <th className="text-left p-4 text-sm font-medium text-content-secondary">Status</th>
                 </tr>
               </thead>
               <tbody>
                 {alerts.map((alert, index) => (
                   <tr
                     key={alert.id}
-                    className="border-t border-slate-700 hover:bg-slate-800/50 animate-fade-in"
+                    className="border-t border-border hover:bg-card animate-fade-in"
                     style={{ animationDelay: `${index * 50}ms` }}
                   >
                     <td className="p-4">
                       <div>
-                        <p className="text-white font-medium">{alert.employee_name}</p>
-                        <p className="text-sm text-slate-400">{alert.employee_id}</p>
+                        <p className="text-content font-medium">{alert.employee_name}</p>
+                        <p className="text-sm text-content-secondary">{alert.employee_id}</p>
                       </div>
                     </td>
                     <td className="p-4">
@@ -202,7 +202,7 @@ export default function HCMSDashboard() {
                         {alert.alert_type.replace('_', ' ').toUpperCase()}
                       </StatusBadge>
                     </td>
-                    <td className="p-4 text-slate-300">{alert.expiry_date}</td>
+                    <td className="p-4 text-content-tertiary">{alert.expiry_date}</td>
                     <td className="p-4">
                       <span
                         className={`font-semibold ${

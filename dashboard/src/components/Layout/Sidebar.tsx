@@ -45,16 +45,16 @@ export function Sidebar() {
   const hasLcrmsAccess = canAccess('lcrms');
 
   return (
-    <aside className="w-64 bg-slate-900 text-white min-h-screen fixed left-0 top-0 border-r border-slate-700 overflow-y-auto">
+    <aside className="w-64 bg-sidebar text-content min-h-screen fixed left-0 top-0 border-r border-border overflow-y-auto">
       {/* Logo */}
-      <div className="p-6 border-b border-slate-700">
+      <div className="p-6 border-b border-border">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 bg-gradient-to-br from-teal-500 to-emerald-600 rounded-xl flex items-center justify-center text-lg">
             🏛️
           </div>
           <div>
-            <h1 className="text-lg font-bold text-white">BPKH Limited</h1>
-            <p className="text-xs text-slate-400">Enterprise Dashboard</p>
+            <h1 className="text-lg font-bold text-content">BPKH Limited</h1>
+            <p className="text-xs text-content-secondary">Enterprise Dashboard</p>
           </div>
         </div>
       </div>
@@ -65,7 +65,7 @@ export function Sidebar() {
         <button
           onClick={() => setFinanceOpen(!financeOpen)}
           className={`w-full flex items-center justify-between px-4 py-2 transition-colors ${
-            hasFinanceAccess ? 'text-slate-400 hover:text-white' : 'text-slate-600 cursor-not-allowed'
+            hasFinanceAccess ? 'text-content-secondary hover:text-content' : 'text-content-muted cursor-not-allowed'
           }`}
         >
           <span className="text-xs font-semibold uppercase tracking-wider flex items-center gap-2">
@@ -85,7 +85,7 @@ export function Sidebar() {
                   `flex items-center gap-3 px-4 py-2.5 rounded-xl mb-1 transition-all ${
                     isActive
                       ? 'bg-teal-600/20 text-teal-400 border border-teal-600/50'
-                      : 'text-slate-300 hover:bg-slate-800 hover:text-white'
+                      : 'text-content-tertiary hover:bg-hover hover:text-content'
                   }`
                 }
               >
@@ -100,7 +100,7 @@ export function Sidebar() {
         <button
           onClick={() => setHcmsOpen(!hcmsOpen)}
           className={`w-full flex items-center justify-between px-4 py-2 transition-colors ${
-            hasHcmsAccess ? 'text-slate-400 hover:text-white' : 'text-slate-600 cursor-not-allowed'
+            hasHcmsAccess ? 'text-content-secondary hover:text-content' : 'text-content-muted cursor-not-allowed'
           }`}
         >
           <span className="text-xs font-semibold uppercase tracking-wider flex items-center gap-2">
@@ -120,7 +120,7 @@ export function Sidebar() {
                   `flex items-center gap-3 px-4 py-2.5 rounded-xl mb-1 transition-all ${
                     isActive
                       ? 'bg-indigo-600/20 text-indigo-400 border border-indigo-600/50'
-                      : 'text-slate-300 hover:bg-slate-800 hover:text-white'
+                      : 'text-content-tertiary hover:bg-hover hover:text-content'
                   }`
                 }
               >
@@ -135,7 +135,7 @@ export function Sidebar() {
         <button
           onClick={() => setLcrmsOpen(!lcrmsOpen)}
           className={`w-full flex items-center justify-between px-4 py-2 transition-colors ${
-            hasLcrmsAccess ? 'text-slate-400 hover:text-white' : 'text-slate-600 cursor-not-allowed'
+            hasLcrmsAccess ? 'text-content-secondary hover:text-content' : 'text-content-muted cursor-not-allowed'
           }`}
         >
           <span className="text-xs font-semibold uppercase tracking-wider flex items-center gap-2">
@@ -155,7 +155,7 @@ export function Sidebar() {
                   `flex items-center gap-3 px-4 py-2.5 rounded-xl mb-1 transition-all ${
                     isActive
                       ? 'bg-amber-600/20 text-amber-400 border border-amber-600/50'
-                      : 'text-slate-300 hover:bg-slate-800 hover:text-white'
+                      : 'text-content-tertiary hover:bg-hover hover:text-content'
                   }`
                 }
               >
@@ -168,9 +168,9 @@ export function Sidebar() {
       </nav>
 
       {/* Footer */}
-      <div className="fixed bottom-0 left-0 w-64 p-4 border-t border-slate-700 bg-slate-900">
-        <div className="bg-slate-800/50 rounded-xl p-3">
-          <p className="text-xs text-slate-400">Islamic Finance Operations</p>
+      <div className="fixed bottom-0 left-0 w-64 p-4 border-t border-border bg-sidebar">
+        <div className="bg-card rounded-xl p-3">
+          <p className="text-xs text-content-secondary">Islamic Finance Operations</p>
           <p className="text-xs text-teal-400 mt-1">🇸🇦 Saudi Arabia</p>
         </div>
       </div>

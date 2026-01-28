@@ -53,25 +53,25 @@ function CreateProgramModal({
     <Modal isOpen={true} title="Create Training Program" onClose={onClose}>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-1">Program Title *</label>
+          <label className="block text-sm font-medium text-content-tertiary mb-1">Program Title *</label>
           <input
             type="text"
             required
             value={form.title}
             onChange={e => setForm({ ...form, title: e.target.value })}
-            className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+            className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
             placeholder="e.g., Leadership Development Program"
           />
         </div>
 
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-1">Type *</label>
+            <label className="block text-sm font-medium text-content-tertiary mb-1">Type *</label>
             <select
               required
               value={form.type}
               onChange={e => setForm({ ...form, type: e.target.value as CreateTrainingInput['type'] })}
-              className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+              className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
             >
               <option value="internal">Internal</option>
               <option value="external">External</option>
@@ -80,12 +80,12 @@ function CreateProgramModal({
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-1">Category *</label>
+            <label className="block text-sm font-medium text-content-tertiary mb-1">Category *</label>
             <select
               required
               value={form.category}
               onChange={e => setForm({ ...form, category: e.target.value as CreateTrainingInput['category'] })}
-              className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+              className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
             >
               <option value="mandatory">Mandatory</option>
               <option value="technical">Technical</option>
@@ -97,62 +97,62 @@ function CreateProgramModal({
 
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-1">Start Date *</label>
+            <label className="block text-sm font-medium text-content-tertiary mb-1">Start Date *</label>
             <input
               type="date"
               required
               value={form.start_date}
               onChange={e => setForm({ ...form, start_date: e.target.value })}
-              className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+              className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-1">End Date *</label>
+            <label className="block text-sm font-medium text-content-tertiary mb-1">End Date *</label>
             <input
               type="date"
               required
               value={form.end_date}
               onChange={e => setForm({ ...form, end_date: e.target.value })}
-              className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+              className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
             />
           </div>
         </div>
 
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-1">Duration (Hours) *</label>
+            <label className="block text-sm font-medium text-content-tertiary mb-1">Duration (Hours) *</label>
             <input
               type="number"
               required
               min={1}
               value={form.duration_hours}
               onChange={e => setForm({ ...form, duration_hours: parseInt(e.target.value) || 0 })}
-              className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+              className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-1">Max Participants *</label>
+            <label className="block text-sm font-medium text-content-tertiary mb-1">Max Participants *</label>
             <input
               type="number"
               required
               min={1}
               value={form.max_participants}
               onChange={e => setForm({ ...form, max_participants: parseInt(e.target.value) || 0 })}
-              className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+              className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
             />
           </div>
         </div>
 
         {form.type !== 'internal' && (
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-1">Provider</label>
+            <label className="block text-sm font-medium text-content-tertiary mb-1">Provider</label>
             <input
               type="text"
               value={form.provider || ''}
               onChange={e => setForm({ ...form, provider: e.target.value })}
-              className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+              className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
               placeholder="e.g., Coursera, Microsoft"
             />
           </div>
@@ -218,20 +218,20 @@ function EnrollEmployeeModal({
           </div>
         ) : (
           <>
-            <div className="p-4 bg-slate-700/50 rounded-xl">
-              <p className="text-white font-semibold">{training.title}</p>
-              <p className="text-sm text-slate-400">
+            <div className="p-4 bg-hover rounded-xl">
+              <p className="text-content font-semibold">{training.title}</p>
+              <p className="text-sm text-content-secondary">
                 {format(new Date(training.start_date), 'MMM d, yyyy')} - {format(new Date(training.end_date), 'MMM d, yyyy')}
               </p>
-              <p className="text-sm text-slate-400 mt-1">
+              <p className="text-sm text-content-secondary mt-1">
                 Capacity: {training.enrolled}/{training.max_participants}
               </p>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-slate-300 mb-2">Select Employee *</label>
+              <label className="block text-sm font-medium text-content-tertiary mb-2">Select Employee *</label>
               {availableEmployees.length === 0 ? (
-                <p className="text-slate-400 text-sm text-center py-4">All employees are already enrolled</p>
+                <p className="text-content-secondary text-sm text-center py-4">All employees are already enrolled</p>
               ) : (
                 <div className="max-h-60 overflow-y-auto space-y-2">
                   {availableEmployees.map(emp => (
@@ -240,7 +240,7 @@ function EnrollEmployeeModal({
                       className={`flex items-center gap-3 p-3 rounded-lg border cursor-pointer transition-all ${
                         selectedEmployee?.id === emp.id
                           ? 'border-indigo-500 bg-indigo-500/20'
-                          : 'border-slate-600 hover:border-slate-500'
+                          : 'border-border-subtle hover:border-border'
                       }`}
                     >
                       <input
@@ -254,8 +254,8 @@ function EnrollEmployeeModal({
                         {emp.first_name[0]}{emp.last_name[0]}
                       </div>
                       <div className="flex-1">
-                        <p className="text-white font-medium">{emp.first_name} {emp.last_name}</p>
-                        <p className="text-xs text-slate-400">{emp.department} - {emp.position}</p>
+                        <p className="text-content font-medium">{emp.first_name} {emp.last_name}</p>
+                        <p className="text-xs text-content-secondary">{emp.department} - {emp.position}</p>
                       </div>
                     </label>
                   ))}
@@ -410,7 +410,7 @@ export function Training() {
             {trainings.map((training, index) => (
               <div
                 key={training.id}
-                className="bg-slate-800/50 rounded-xl border border-slate-700 p-5 hover:border-slate-600 transition-all cursor-pointer card-hover animate-fade-in"
+                className="bg-card rounded-xl border border-border p-5 hover:border-border-subtle transition-all cursor-pointer card-hover animate-fade-in"
                 style={{ animationDelay: `${index * 50}ms` }}
                 onClick={() => setSelectedTraining(selectedTraining?.id === training.id ? null : training)}
               >
@@ -418,9 +418,9 @@ export function Training() {
                   <div className="flex items-start gap-3">
                     <span className="text-2xl">{typeEmoji[training.type]}</span>
                     <div>
-                      <h4 className="text-white font-semibold">{training.title}</h4>
+                      <h4 className="text-content font-semibold">{training.title}</h4>
                       {training.provider && (
-                        <p className="text-sm text-slate-400">by {training.provider}</p>
+                        <p className="text-sm text-content-secondary">by {training.provider}</p>
                       )}
                     </div>
                   </div>
@@ -431,36 +431,36 @@ export function Training() {
                   <span className={`px-2 py-0.5 rounded text-xs ${categoryStyles[training.category]}`}>
                     {training.category.replace('_', ' ')}
                   </span>
-                  <span className="px-2 py-0.5 rounded text-xs bg-slate-700 text-slate-300">
+                  <span className="px-2 py-0.5 rounded text-xs bg-hover text-content-tertiary">
                     {training.type}
                   </span>
                 </div>
 
                 <div className="grid grid-cols-3 gap-4 mb-4">
-                  <div className="text-center p-2 bg-slate-900/50 rounded-lg">
-                    <Calendar size={16} className="mx-auto text-slate-400 mb-1" />
-                    <p className="text-xs text-slate-400">Date</p>
-                    <p className="text-sm text-white">{format(new Date(training.start_date), 'MMM d')}</p>
+                  <div className="text-center p-2 bg-app rounded-lg">
+                    <Calendar size={16} className="mx-auto text-content-secondary mb-1" />
+                    <p className="text-xs text-content-secondary">Date</p>
+                    <p className="text-sm text-content">{format(new Date(training.start_date), 'MMM d')}</p>
                   </div>
-                  <div className="text-center p-2 bg-slate-900/50 rounded-lg">
-                    <Clock size={16} className="mx-auto text-slate-400 mb-1" />
-                    <p className="text-xs text-slate-400">Duration</p>
-                    <p className="text-sm text-white">{training.duration_hours}h</p>
+                  <div className="text-center p-2 bg-app rounded-lg">
+                    <Clock size={16} className="mx-auto text-content-secondary mb-1" />
+                    <p className="text-xs text-content-secondary">Duration</p>
+                    <p className="text-sm text-content">{training.duration_hours}h</p>
                   </div>
-                  <div className="text-center p-2 bg-slate-900/50 rounded-lg">
-                    <Users size={16} className="mx-auto text-slate-400 mb-1" />
-                    <p className="text-xs text-slate-400">Enrolled</p>
-                    <p className="text-sm text-white">{training.enrolled}/{training.max_participants}</p>
+                  <div className="text-center p-2 bg-app rounded-lg">
+                    <Users size={16} className="mx-auto text-content-secondary mb-1" />
+                    <p className="text-xs text-content-secondary">Enrolled</p>
+                    <p className="text-sm text-content">{training.enrolled}/{training.max_participants}</p>
                   </div>
                 </div>
 
                 {/* Capacity Bar */}
                 <div>
                   <div className="flex justify-between text-xs mb-1">
-                    <span className="text-slate-400">Capacity</span>
-                    <span className="text-slate-400">{Math.round((training.enrolled / training.max_participants) * 100)}%</span>
+                    <span className="text-content-secondary">Capacity</span>
+                    <span className="text-content-secondary">{Math.round((training.enrolled / training.max_participants) * 100)}%</span>
                   </div>
-                  <div className="h-2 bg-slate-700 rounded-full overflow-hidden">
+                  <div className="h-2 bg-hover rounded-full overflow-hidden">
                     <div
                       className={`h-full rounded-full transition-all duration-500 ${
                         training.enrolled >= training.max_participants ? 'bg-red-500' :
@@ -473,9 +473,9 @@ export function Training() {
 
                 {/* Enrollments for selected training */}
                 {selectedTraining?.id === training.id && (
-                  <div className="mt-4 pt-4 border-t border-slate-700 animate-fade-in">
+                  <div className="mt-4 pt-4 border-t border-border animate-fade-in">
                     <div className="flex justify-between items-center mb-3">
-                      <h5 className="text-sm font-semibold text-slate-300">Participants</h5>
+                      <h5 className="text-sm font-semibold text-content-tertiary">Participants</h5>
                       {training.status !== 'completed' && training.enrolled < training.max_participants && (
                         <button
                           onClick={(e) => { e.stopPropagation(); setEnrollingTraining(training); }}
@@ -490,10 +490,10 @@ export function Training() {
                       {enrollments
                         .filter(e => e.training_id === training.id)
                         .map((enrollment) => (
-                          <div key={enrollment.id} className="flex items-center justify-between p-3 bg-slate-900/50 rounded-xl">
+                          <div key={enrollment.id} className="flex items-center justify-between p-3 bg-app rounded-xl">
                             <div>
-                              <p className="text-white font-medium">{enrollment.employee_name}</p>
-                              <p className="text-xs text-slate-400">{enrollment.employee_id}</p>
+                              <p className="text-content font-medium">{enrollment.employee_name}</p>
+                              <p className="text-xs text-content-secondary">{enrollment.employee_id}</p>
                             </div>
                             <div className="flex items-center gap-3">
                               {enrollment.score && (
@@ -504,7 +504,7 @@ export function Training() {
                           </div>
                         ))}
                       {enrollments.filter(e => e.training_id === training.id).length === 0 && (
-                        <p className="text-slate-400 text-sm text-center py-2">No participants yet</p>
+                        <p className="text-content-secondary text-sm text-center py-2">No participants yet</p>
                       )}
                     </div>
                   </div>

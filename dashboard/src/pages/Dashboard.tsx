@@ -85,24 +85,24 @@ export function Dashboard() {
           {stats.map((stat) => (
             <div
               key={stat.label}
-              className="bg-slate-800/50 rounded-xl p-5 border border-slate-700 hover:border-slate-600 transition-all"
+              className="bg-card rounded-xl p-5 border border-border hover:border-border-subtle transition-all"
             >
               <div className="flex items-center gap-3 mb-3">
                 <div className={`w-10 h-10 bg-gradient-to-br ${stat.gradient} rounded-xl flex items-center justify-center text-lg`}>
                   {stat.emoji}
                 </div>
-                <p className="text-sm text-slate-400">{stat.label}</p>
+                <p className="text-sm text-content-secondary">{stat.label}</p>
               </div>
-              <p className="text-2xl font-bold text-white">{stat.value}</p>
+              <p className="text-2xl font-bold text-content">{stat.value}</p>
             </div>
           ))}
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Recent Investments */}
-          <div className="bg-slate-800/50 rounded-xl border border-slate-700">
-            <div className="p-4 border-b border-slate-700">
-              <h3 className="font-semibold text-white flex items-center gap-2">
+          <div className="bg-card rounded-xl border border-border">
+            <div className="p-4 border-b border-border">
+              <h3 className="font-semibold text-content flex items-center gap-2">
                 <span>💰</span> Recent Investments
               </h3>
             </div>
@@ -110,11 +110,11 @@ export function Dashboard() {
               {data?.investments?.slice(0, 5).map((inv) => (
                 <div
                   key={inv.id}
-                  className="flex items-center justify-between py-3 border-b border-slate-700 last:border-0"
+                  className="flex items-center justify-between py-3 border-b border-border last:border-0"
                 >
                   <div>
-                    <p className="font-medium text-white">{inv.company_name}</p>
-                    <p className="text-sm text-slate-400">
+                    <p className="font-medium text-content">{inv.company_name}</p>
+                    <p className="text-sm text-content-secondary">
                       {format(new Date(inv.created_at), 'MMM d, yyyy')}
                     </p>
                   </div>
@@ -122,15 +122,15 @@ export function Dashboard() {
                 </div>
               ))}
               {(!data?.investments || data?.investments?.length === 0) && (
-                <p className="text-slate-400 text-center py-4">No investments yet</p>
+                <p className="text-content-secondary text-center py-4">No investments yet</p>
               )}
             </div>
           </div>
 
           {/* Treasury Alerts */}
-          <div className="bg-slate-800/50 rounded-xl border border-slate-700">
-            <div className="p-4 border-b border-slate-700">
-              <h3 className="font-semibold text-white flex items-center gap-2">
+          <div className="bg-card rounded-xl border border-border">
+            <div className="p-4 border-b border-border">
+              <h3 className="font-semibold text-content flex items-center gap-2">
                 <span>🔔</span> Treasury Alerts
               </h3>
             </div>
@@ -157,59 +157,59 @@ export function Dashboard() {
                     }
                   />
                   <div>
-                    <p className="text-sm text-slate-300">{alert.message}</p>
-                    <p className="text-xs text-slate-500 mt-1">
+                    <p className="text-sm text-content-tertiary">{alert.message}</p>
+                    <p className="text-xs text-content-muted mt-1">
                       {format(new Date(alert.timestamp), 'MMM d, HH:mm')}
                     </p>
                   </div>
                 </div>
               ))}
               {(!data?.treasury?.alerts || data?.treasury?.alerts?.length === 0) && (
-                <p className="text-slate-400 text-center py-4">No alerts</p>
+                <p className="text-content-secondary text-center py-4">No alerts</p>
               )}
             </div>
           </div>
 
           {/* Recent Invoices */}
-          <div className="bg-slate-800/50 rounded-xl border border-slate-700 lg:col-span-2">
-            <div className="p-4 border-b border-slate-700">
-              <h3 className="font-semibold text-white flex items-center gap-2">
+          <div className="bg-card rounded-xl border border-border lg:col-span-2">
+            <div className="p-4 border-b border-border">
+              <h3 className="font-semibold text-content flex items-center gap-2">
                 <span>📋</span> Recent Invoices
               </h3>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full">
-                <thead className="bg-slate-800">
+                <thead className="bg-input">
                   <tr>
-                    <th className="text-left p-4 text-sm font-medium text-slate-400">
+                    <th className="text-left p-4 text-sm font-medium text-content-secondary">
                       Invoice #
                     </th>
-                    <th className="text-left p-4 text-sm font-medium text-slate-400">
+                    <th className="text-left p-4 text-sm font-medium text-content-secondary">
                       Vendor
                     </th>
-                    <th className="text-left p-4 text-sm font-medium text-slate-400">
+                    <th className="text-left p-4 text-sm font-medium text-content-secondary">
                       Amount
                     </th>
-                    <th className="text-left p-4 text-sm font-medium text-slate-400">
+                    <th className="text-left p-4 text-sm font-medium text-content-secondary">
                       Status
                     </th>
-                    <th className="text-left p-4 text-sm font-medium text-slate-400">
+                    <th className="text-left p-4 text-sm font-medium text-content-secondary">
                       Date
                     </th>
                   </tr>
                 </thead>
                 <tbody>
                   {data?.invoices?.slice(0, 5).map((inv) => (
-                    <tr key={inv.id} className="border-t border-slate-700 hover:bg-slate-800/50">
-                      <td className="p-4 font-medium text-white">{inv.invoice_number}</td>
-                      <td className="p-4 text-slate-300">{inv.vendor_name || '-'}</td>
-                      <td className="p-4 text-slate-300">
+                    <tr key={inv.id} className="border-t border-border hover:bg-card">
+                      <td className="p-4 font-medium text-content">{inv.invoice_number}</td>
+                      <td className="p-4 text-content-tertiary">{inv.vendor_name || '-'}</td>
+                      <td className="p-4 text-content-tertiary">
                         {inv.currency} {inv.amount.toLocaleString()}
                       </td>
                       <td className="p-4">
                         <StatusBadge status={inv.status} />
                       </td>
-                      <td className="p-4 text-sm text-slate-400">
+                      <td className="p-4 text-sm text-content-secondary">
                         {format(new Date(inv.created_at), 'MMM d, yyyy')}
                       </td>
                     </tr>
@@ -217,7 +217,7 @@ export function Dashboard() {
                 </tbody>
               </table>
               {(!data?.invoices || data?.invoices?.length === 0) && (
-                <p className="text-slate-400 text-center py-8">No invoices yet</p>
+                <p className="text-content-secondary text-center py-8">No invoices yet</p>
               )}
             </div>
           </div>
@@ -238,7 +238,7 @@ function StatusBadge({ status }: { status: string }) {
   return (
     <span
       className={`px-2.5 py-1 rounded-lg text-xs font-medium border ${
-        styles[status] || 'bg-slate-700 text-slate-300 border-slate-600'
+        styles[status] || 'bg-hover text-content-tertiary border-border-subtle'
       }`}
     >
       {status}

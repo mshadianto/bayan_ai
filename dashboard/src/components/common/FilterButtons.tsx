@@ -27,7 +27,7 @@ export function FilterButtons<T extends string>({
     ? 'px-3 py-1.5 rounded-full text-sm'
     : 'px-4 py-2 rounded-xl text-sm';
 
-  const inactiveClasses = 'bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-700';
+  const inactiveClasses = 'bg-input text-content-tertiary hover:bg-hover border border-border';
 
   return (
     <div className={`flex flex-wrap gap-2 ${className}`} role="group" aria-label="Filter options">

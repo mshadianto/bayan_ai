@@ -158,13 +158,13 @@ function ManualCheckForm({
 
         {/* Employee Selection */}
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-1">
+          <label className="block text-sm font-medium text-content-tertiary mb-1">
             Employee <span className="text-red-400">*</span>
           </label>
           <select
             value={formData.employee_id}
             onChange={(e) => handleEmployeeChange(e.target.value)}
-            className="w-full bg-slate-700 border border-slate-600 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="w-full bg-input border border-border-subtle rounded-xl px-4 py-2.5 text-content focus:outline-none focus:ring-2 focus:ring-indigo-500"
           >
             <option value="">Select employee</option>
             {employees.map((emp) => (
@@ -177,46 +177,46 @@ function ManualCheckForm({
 
         {/* Date */}
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-1">
+          <label className="block text-sm font-medium text-content-tertiary mb-1">
             Date <span className="text-red-400">*</span>
           </label>
           <input
             type="date"
             value={formData.date}
             onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-            className="w-full bg-slate-700 border border-slate-600 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="w-full bg-input border border-border-subtle rounded-xl px-4 py-2.5 text-content focus:outline-none focus:ring-2 focus:ring-indigo-500"
           />
         </div>
 
         {/* Time Range */}
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-1">
+            <label className="block text-sm font-medium text-content-tertiary mb-1">
               Check In
             </label>
             <input
               type="time"
               value={formData.check_in}
               onChange={(e) => setFormData({ ...formData, check_in: e.target.value })}
-              className="w-full bg-slate-700 border border-slate-600 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full bg-input border border-border-subtle rounded-xl px-4 py-2.5 text-content focus:outline-none focus:ring-2 focus:ring-indigo-500"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-1">
+            <label className="block text-sm font-medium text-content-tertiary mb-1">
               Check Out
             </label>
             <input
               type="time"
               value={formData.check_out}
               onChange={(e) => setFormData({ ...formData, check_out: e.target.value })}
-              className="w-full bg-slate-700 border border-slate-600 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full bg-input border border-border-subtle rounded-xl px-4 py-2.5 text-content focus:outline-none focus:ring-2 focus:ring-indigo-500"
             />
           </div>
         </div>
 
         {/* Status */}
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-2">
+          <label className="block text-sm font-medium text-content-tertiary mb-2">
             Status <span className="text-red-400">*</span>
           </label>
           <div className="grid grid-cols-4 gap-2">
@@ -228,7 +228,7 @@ function ManualCheckForm({
                 className={`p-3 rounded-xl text-sm font-medium border transition-colors ${
                   formData.status === option.value
                     ? 'bg-indigo-600/50 border-indigo-500 text-white'
-                    : 'bg-slate-700 border-slate-600 text-slate-300 hover:bg-slate-600'
+                    : 'bg-input border-border-subtle text-content-tertiary hover:bg-hover'
                 }`}
               >
                 <span className={option.color}>{option.label}</span>
@@ -239,13 +239,13 @@ function ManualCheckForm({
 
         {/* Location */}
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-1">
+          <label className="block text-sm font-medium text-content-tertiary mb-1">
             Location
           </label>
           <select
             value={formData.location}
             onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-            className="w-full bg-slate-700 border border-slate-600 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="w-full bg-input border border-border-subtle rounded-xl px-4 py-2.5 text-content focus:outline-none focus:ring-2 focus:ring-indigo-500"
           >
             <option value="Office">Office</option>
             <option value="Remote">Remote / WFH</option>
@@ -256,7 +256,7 @@ function ManualCheckForm({
 
         {/* Notes */}
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-1">
+          <label className="block text-sm font-medium text-content-tertiary mb-1">
             Notes
           </label>
           <textarea
@@ -264,7 +264,7 @@ function ManualCheckForm({
             onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
             rows={2}
             placeholder="Optional notes..."
-            className="w-full bg-slate-700 border border-slate-600 rounded-xl px-4 py-2.5 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none"
+            className="w-full bg-input border border-border-subtle rounded-xl px-4 py-2.5 text-content placeholder-content-secondary focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none"
           />
         </div>
       </div>
@@ -356,38 +356,38 @@ function EditAttendanceModal({
         {/* Time Range */}
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-1">
+            <label className="block text-sm font-medium text-content-tertiary mb-1">
               Check In
             </label>
             <input
               type="time"
               value={formData.check_in}
               onChange={(e) => setFormData({ ...formData, check_in: e.target.value })}
-              className="w-full bg-slate-700 border border-slate-600 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full bg-input border border-border-subtle rounded-xl px-4 py-2.5 text-content focus:outline-none focus:ring-2 focus:ring-indigo-500"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-1">
+            <label className="block text-sm font-medium text-content-tertiary mb-1">
               Check Out
             </label>
             <input
               type="time"
               value={formData.check_out}
               onChange={(e) => setFormData({ ...formData, check_out: e.target.value })}
-              className="w-full bg-slate-700 border border-slate-600 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full bg-input border border-border-subtle rounded-xl px-4 py-2.5 text-content focus:outline-none focus:ring-2 focus:ring-indigo-500"
             />
           </div>
         </div>
 
         {/* Status */}
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-1">
+          <label className="block text-sm font-medium text-content-tertiary mb-1">
             Status
           </label>
           <select
             value={formData.status}
             onChange={(e) => setFormData({ ...formData, status: e.target.value as UpdateAttendanceInput['status'] })}
-            className="w-full bg-slate-700 border border-slate-600 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="w-full bg-input border border-border-subtle rounded-xl px-4 py-2.5 text-content focus:outline-none focus:ring-2 focus:ring-indigo-500"
           >
             {STATUS_OPTIONS.map((option) => (
               <option key={option.value} value={option.value}>
@@ -399,20 +399,20 @@ function EditAttendanceModal({
 
         {/* Notes */}
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-1">
+          <label className="block text-sm font-medium text-content-tertiary mb-1">
             Notes
           </label>
           <input
             type="text"
             value={formData.notes}
             onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-            className="w-full bg-slate-700 border border-slate-600 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="w-full bg-input border border-border-subtle rounded-xl px-4 py-2.5 text-content focus:outline-none focus:ring-2 focus:ring-indigo-500"
           />
         </div>
 
         {/* Reason for Change */}
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-1">
+          <label className="block text-sm font-medium text-content-tertiary mb-1">
             Reason for Change <span className="text-red-400">*</span>
           </label>
           <textarea
@@ -420,7 +420,7 @@ function EditAttendanceModal({
             onChange={(e) => setFormData({ ...formData, reason: e.target.value })}
             rows={2}
             placeholder="Please provide a reason for this change..."
-            className="w-full bg-slate-700 border border-slate-600 rounded-xl px-4 py-2.5 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none"
+            className="w-full bg-input border border-border-subtle rounded-xl px-4 py-2.5 text-content placeholder-content-secondary focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none"
           />
         </div>
       </div>
@@ -575,14 +575,14 @@ export function Attendance() {
         </div>
 
         {/* Week Summary */}
-        <div className="bg-slate-800/50 rounded-xl border border-slate-700 p-6 mb-6">
-          <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+        <div className="bg-card rounded-xl border border-border p-6 mb-6">
+          <h3 className="text-lg font-semibold text-content mb-4 flex items-center gap-2">
             <span>This Week Summary</span>
           </h3>
           <div className="grid grid-cols-5 gap-4">
             {weekSummary.map((day) => (
               <div key={day.day} className="text-center">
-                <p className="text-slate-400 text-sm mb-2">{day.day}</p>
+                <p className="text-content-secondary text-sm mb-2">{day.day}</p>
                 <div className="space-y-1">
                   <div className="bg-emerald-900/30 rounded px-2 py-1">
                     <span className="text-emerald-300 text-xs">{day.present} present</span>
@@ -601,13 +601,13 @@ export function Attendance() {
 
         {/* Date Picker & Quick Actions */}
         <div className="flex items-center gap-4 mb-6">
-          <div className="flex items-center gap-2 bg-slate-800 rounded-xl px-4 py-2 border border-slate-700">
-            <Calendar size={20} className="text-slate-400" />
+          <div className="flex items-center gap-2 bg-input rounded-xl px-4 py-2 border border-border">
+            <Calendar size={20} className="text-content-secondary" />
             <input
               type="date"
               value={selectedDate}
               onChange={(e) => setSelectedDate(e.target.value)}
-              className="bg-transparent text-white border-none focus:outline-none"
+              className="bg-transparent text-content border-none focus:outline-none"
             />
           </div>
 
@@ -617,7 +617,7 @@ export function Attendance() {
               <UserCheck size={18} />
               Quick Check-in
             </button>
-            <div className="hidden group-hover:block absolute top-full left-0 mt-2 w-64 bg-slate-800 rounded-xl border border-slate-700 shadow-xl z-20 max-h-64 overflow-y-auto">
+            <div className="hidden group-hover:block absolute top-full left-0 mt-2 w-64 bg-input rounded-xl border border-border shadow-xl z-20 max-h-64 overflow-y-auto">
               {employees.filter(e => e.employment_status === 'active').map((emp) => {
                 const hasRecord = records.some(r => r.employee_id === emp.employee_id && r.date === selectedDate);
                 return (
@@ -627,12 +627,12 @@ export function Attendance() {
                     disabled={hasRecord}
                     className={`w-full text-left px-4 py-2 text-sm transition-colors ${
                       hasRecord
-                        ? 'text-slate-500 cursor-not-allowed'
-                        : 'text-white hover:bg-slate-700'
+                        ? 'text-content-muted cursor-not-allowed'
+                        : 'text-content hover:bg-hover'
                     }`}
                   >
                     {emp.first_name} {emp.last_name}
-                    {hasRecord && <span className="text-xs text-slate-400 ml-2">(recorded)</span>}
+                    {hasRecord && <span className="text-xs text-content-secondary ml-2">(recorded)</span>}
                   </button>
                 );
               })}
@@ -644,49 +644,49 @@ export function Attendance() {
         {loading ? (
           <TableSkeleton rows={7} columns={7} />
         ) : (
-          <div className="bg-slate-800/50 rounded-xl border border-slate-700 overflow-hidden">
+          <div className="bg-card rounded-xl border border-border overflow-hidden">
             <table className="w-full">
-              <thead className="bg-slate-800">
+              <thead className="bg-input">
                 <tr>
-                  <th className="text-left p-4 text-sm font-medium text-slate-400">Employee</th>
-                  <th className="text-left p-4 text-sm font-medium text-slate-400">Check In</th>
-                  <th className="text-left p-4 text-sm font-medium text-slate-400">Check Out</th>
-                  <th className="text-left p-4 text-sm font-medium text-slate-400">Work Hours</th>
-                  <th className="text-left p-4 text-sm font-medium text-slate-400">Status</th>
-                  <th className="text-left p-4 text-sm font-medium text-slate-400">Location</th>
-                  <th className="text-left p-4 text-sm font-medium text-slate-400">Actions</th>
+                  <th className="text-left p-4 text-sm font-medium text-content-secondary">Employee</th>
+                  <th className="text-left p-4 text-sm font-medium text-content-secondary">Check In</th>
+                  <th className="text-left p-4 text-sm font-medium text-content-secondary">Check Out</th>
+                  <th className="text-left p-4 text-sm font-medium text-content-secondary">Work Hours</th>
+                  <th className="text-left p-4 text-sm font-medium text-content-secondary">Status</th>
+                  <th className="text-left p-4 text-sm font-medium text-content-secondary">Location</th>
+                  <th className="text-left p-4 text-sm font-medium text-content-secondary">Actions</th>
                 </tr>
               </thead>
               <tbody>
                 {filteredRecords.map((record, index) => (
                   <tr
                     key={record.id}
-                    className="border-t border-slate-700 hover:bg-slate-800/50 animate-fade-in"
+                    className="border-t border-border hover:bg-card animate-fade-in"
                     style={{ animationDelay: `${index * 50}ms` }}
                   >
                     <td className="p-4">
                       <div>
-                        <p className="text-white font-medium">{record.employee_name}</p>
-                        <p className="text-sm text-slate-400">{record.employee_id}</p>
+                        <p className="text-content font-medium">{record.employee_name}</p>
+                        <p className="text-sm text-content-secondary">{record.employee_id}</p>
                       </div>
                     </td>
                     <td className="p-4">
                       {record.check_in ? (
-                        <div className="flex items-center gap-2 text-slate-300">
-                          <Clock size={16} className="text-slate-400" />
+                        <div className="flex items-center gap-2 text-content-tertiary">
+                          <Clock size={16} className="text-content-secondary" />
                           {record.check_in}
                           {record.late_minutes && record.late_minutes > 0 && (
                             <span className="text-xs text-amber-400">+{record.late_minutes}min</span>
                           )}
                         </div>
                       ) : (
-                        <span className="text-slate-500">-</span>
+                        <span className="text-content-muted">-</span>
                       )}
                     </td>
                     <td className="p-4">
                       {record.check_out ? (
-                        <div className="flex items-center gap-2 text-slate-300">
-                          <Clock size={16} className="text-slate-400" />
+                        <div className="flex items-center gap-2 text-content-tertiary">
+                          <Clock size={16} className="text-content-secondary" />
                           {record.check_out}
                         </div>
                       ) : record.check_in ? (
@@ -697,14 +697,14 @@ export function Attendance() {
                           Check Out
                         </button>
                       ) : (
-                        <span className="text-slate-500">-</span>
+                        <span className="text-content-muted">-</span>
                       )}
                     </td>
                     <td className="p-4">
                       {record.work_hours ? (
-                        <span className="text-slate-300">{record.work_hours.toFixed(2)} hrs</span>
+                        <span className="text-content-tertiary">{record.work_hours.toFixed(2)} hrs</span>
                       ) : (
-                        <span className="text-slate-500">-</span>
+                        <span className="text-content-muted">-</span>
                       )}
                     </td>
                     <td className="p-4">
@@ -712,18 +712,18 @@ export function Attendance() {
                     </td>
                     <td className="p-4">
                       {record.location ? (
-                        <div className="flex items-center gap-2 text-slate-300 text-sm">
-                          <MapPin size={14} className="text-slate-400" />
+                        <div className="flex items-center gap-2 text-content-tertiary text-sm">
+                          <MapPin size={14} className="text-content-secondary" />
                           {record.location}
                         </div>
                       ) : (
-                        <span className="text-slate-500">-</span>
+                        <span className="text-content-muted">-</span>
                       )}
                     </td>
                     <td className="p-4">
                       <button
                         onClick={() => setEditModal({ isOpen: true, record })}
-                        className="p-2 text-slate-400 hover:text-white hover:bg-slate-700 rounded-lg transition-colors"
+                        className="p-2 text-content-secondary hover:text-content hover:bg-hover rounded-lg transition-colors"
                         title="Edit attendance"
                       >
                         <Edit2 size={16} />
@@ -733,7 +733,7 @@ export function Attendance() {
                 ))}
                 {filteredRecords.length === 0 && (
                   <tr>
-                    <td colSpan={7} className="p-8 text-center text-slate-400">
+                    <td colSpan={7} className="p-8 text-center text-content-secondary">
                       <Calendar size={48} className="mx-auto mb-3 opacity-50" />
                       <p>No attendance records found</p>
                       <button

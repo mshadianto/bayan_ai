@@ -107,7 +107,7 @@ function AccountCard({ account, onClick }: { account: BankAccount; onClick?: () 
 
   return (
     <div
-      className={`bg-slate-800/50 rounded-xl p-4 border border-slate-700 ${onClick ? 'cursor-pointer hover:bg-slate-800/70 transition-colors' : ''}`}
+      className={`bg-card rounded-xl p-4 border border-border ${onClick ? 'cursor-pointer hover:bg-card/70 transition-colors' : ''}`}
       onClick={onClick}
     >
       <div className="flex items-center gap-3 mb-3">
@@ -115,11 +115,11 @@ function AccountCard({ account, onClick }: { account: BankAccount; onClick?: () 
           <Icon size={20} className="text-white" />
         </div>
         <div>
-          <p className="text-sm font-medium text-white">{account.bank_name}</p>
-          <p className="text-xs text-slate-400">{account.account_number} - {account.account_type}</p>
+          <p className="text-sm font-medium text-content">{account.bank_name}</p>
+          <p className="text-xs text-content-secondary">{account.account_number} - {account.account_type}</p>
         </div>
       </div>
-      <p className="text-xl font-bold text-white">
+      <p className="text-xl font-bold text-content">
         {account.currency} {account.current_balance.toLocaleString()}
       </p>
     </div>
@@ -156,7 +156,7 @@ function RecordTransactionForm({
   return (
     <div className="space-y-4">
       <div>
-        <label className="block text-sm font-medium text-slate-300 mb-2">Transaction Type</label>
+        <label className="block text-sm font-medium text-content-tertiary mb-2">Transaction Type</label>
         <div className="flex gap-2">
           <button
             type="button"
@@ -164,7 +164,7 @@ function RecordTransactionForm({
             className={`flex-1 py-2 px-4 rounded-lg text-sm font-medium transition-colors ${
               type === 'deposit'
                 ? 'bg-emerald-600 text-white'
-                : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
+                : 'bg-hover text-content-tertiary hover:bg-hover'
             }`}
           >
             Deposit
@@ -175,7 +175,7 @@ function RecordTransactionForm({
             className={`flex-1 py-2 px-4 rounded-lg text-sm font-medium transition-colors ${
               type === 'withdrawal'
                 ? 'bg-red-600 text-white'
-                : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
+                : 'bg-hover text-content-tertiary hover:bg-hover'
             }`}
           >
             Withdrawal
@@ -184,11 +184,11 @@ function RecordTransactionForm({
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-slate-300 mb-2">Account</label>
+        <label className="block text-sm font-medium text-content-tertiary mb-2">Account</label>
         <select
           value={accountId}
           onChange={(e) => setAccountId(e.target.value)}
-          className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+          className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content focus:ring-2 focus:ring-teal-500 focus:border-transparent"
         >
           <option value="">Select Account</option>
           {accounts.map(acc => (
@@ -200,42 +200,42 @@ function RecordTransactionForm({
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-slate-300 mb-2">Amount</label>
+        <label className="block text-sm font-medium text-content-tertiary mb-2">Amount</label>
         <input
           type="number"
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
           placeholder="Enter amount"
-          className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+          className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content placeholder-content-secondary focus:ring-2 focus:ring-teal-500 focus:border-transparent"
         />
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-slate-300 mb-2">Description</label>
+        <label className="block text-sm font-medium text-content-tertiary mb-2">Description</label>
         <input
           type="text"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           placeholder="Enter description"
-          className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+          className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content placeholder-content-secondary focus:ring-2 focus:ring-teal-500 focus:border-transparent"
         />
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-slate-300 mb-2">Reference (Optional)</label>
+        <label className="block text-sm font-medium text-content-tertiary mb-2">Reference (Optional)</label>
         <input
           type="text"
           value={reference}
           onChange={(e) => setReference(e.target.value)}
           placeholder="e.g., INV-2024-001"
-          className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+          className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content placeholder-content-secondary focus:ring-2 focus:ring-teal-500 focus:border-transparent"
         />
       </div>
 
       <div className="flex gap-3 pt-4">
         <button
           onClick={onCancel}
-          className="flex-1 px-4 py-2 bg-slate-700 text-slate-300 rounded-xl text-sm font-medium hover:bg-slate-600 transition-colors"
+          className="flex-1 px-4 py-2 bg-hover text-content-tertiary rounded-xl text-sm font-medium hover:bg-hover transition-colors"
         >
           Cancel
         </button>
@@ -286,14 +286,14 @@ function TransferFundsForm({
   return (
     <div className="space-y-4">
       <div>
-        <label className="block text-sm font-medium text-slate-300 mb-2">From Account</label>
+        <label className="block text-sm font-medium text-content-tertiary mb-2">From Account</label>
         <select
           value={fromAccountId}
           onChange={(e) => {
             setFromAccountId(e.target.value);
             if (toAccountId === e.target.value) setToAccountId('');
           }}
-          className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+          className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content focus:ring-2 focus:ring-teal-500 focus:border-transparent"
         >
           <option value="">Select Source Account</option>
           {accounts.map(acc => (
@@ -305,12 +305,12 @@ function TransferFundsForm({
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-slate-300 mb-2">To Account</label>
+        <label className="block text-sm font-medium text-content-tertiary mb-2">To Account</label>
         <select
           value={toAccountId}
           onChange={(e) => setToAccountId(e.target.value)}
           disabled={!fromAccountId}
-          className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-teal-500 focus:border-transparent disabled:opacity-50"
+          className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content focus:ring-2 focus:ring-teal-500 focus:border-transparent disabled:opacity-50"
         >
           <option value="">Select Destination Account</option>
           {availableToAccounts.map(acc => (
@@ -322,37 +322,37 @@ function TransferFundsForm({
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-slate-300 mb-2">Amount</label>
+        <label className="block text-sm font-medium text-content-tertiary mb-2">Amount</label>
         <input
           type="number"
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
           placeholder="Enter transfer amount"
           max={fromAccount?.current_balance}
-          className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+          className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content placeholder-content-secondary focus:ring-2 focus:ring-teal-500 focus:border-transparent"
         />
         {fromAccount && (
-          <p className="text-xs text-slate-400 mt-1">
+          <p className="text-xs text-content-secondary mt-1">
             Available: {fromAccount.currency} {fromAccount.current_balance.toLocaleString()}
           </p>
         )}
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-slate-300 mb-2">Description</label>
+        <label className="block text-sm font-medium text-content-tertiary mb-2">Description</label>
         <input
           type="text"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           placeholder="e.g., Monthly investment allocation"
-          className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+          className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content placeholder-content-secondary focus:ring-2 focus:ring-teal-500 focus:border-transparent"
         />
       </div>
 
       <div className="flex gap-3 pt-4">
         <button
           onClick={onCancel}
-          className="flex-1 px-4 py-2 bg-slate-700 text-slate-300 rounded-xl text-sm font-medium hover:bg-slate-600 transition-colors"
+          className="flex-1 px-4 py-2 bg-hover text-content-tertiary rounded-xl text-sm font-medium hover:bg-hover transition-colors"
         >
           Cancel
         </button>
@@ -387,7 +387,7 @@ function TransactionDetail({
 
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <p className="text-sm text-slate-400">Amount</p>
+          <p className="text-sm text-content-secondary">Amount</p>
           <p className={`text-xl font-bold ${
             transaction.type === 'deposit' ? 'text-emerald-400' :
             transaction.type === 'withdrawal' ? 'text-red-400' : 'text-blue-400'
@@ -396,27 +396,27 @@ function TransactionDetail({
           </p>
         </div>
         <div>
-          <p className="text-sm text-slate-400">Reference</p>
-          <p className="text-white font-medium">{transaction.reference}</p>
+          <p className="text-sm text-content-secondary">Reference</p>
+          <p className="text-content font-medium">{transaction.reference}</p>
         </div>
       </div>
 
       <div>
-        <p className="text-sm text-slate-400">Description</p>
-        <p className="text-white">{transaction.description}</p>
+        <p className="text-sm text-content-secondary">Description</p>
+        <p className="text-content">{transaction.description}</p>
       </div>
 
       {transaction.type === 'transfer' && (
-        <div className="bg-slate-700/50 rounded-lg p-4">
+        <div className="bg-hover/50 rounded-lg p-4">
           <div className="flex items-center gap-4">
             <div className="flex-1">
-              <p className="text-xs text-slate-400">From</p>
-              <p className="text-white text-sm">{transaction.from_account_name}</p>
+              <p className="text-xs text-content-secondary">From</p>
+              <p className="text-content text-sm">{transaction.from_account_name}</p>
             </div>
-            <ArrowRightLeft size={20} className="text-slate-400" />
+            <ArrowRightLeft size={20} className="text-content-secondary" />
             <div className="flex-1 text-right">
-              <p className="text-xs text-slate-400">To</p>
-              <p className="text-white text-sm">{transaction.to_account_name}</p>
+              <p className="text-xs text-content-secondary">To</p>
+              <p className="text-content text-sm">{transaction.to_account_name}</p>
             </div>
           </div>
         </div>
@@ -424,8 +424,8 @@ function TransactionDetail({
 
       {(transaction.type === 'deposit' || transaction.type === 'withdrawal') && (
         <div>
-          <p className="text-sm text-slate-400">Account</p>
-          <p className="text-white">
+          <p className="text-sm text-content-secondary">Account</p>
+          <p className="text-content">
             {transaction.type === 'deposit' ? transaction.to_account_name : transaction.from_account_name}
           </p>
         </div>
@@ -433,33 +433,33 @@ function TransactionDetail({
 
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <p className="text-sm text-slate-400">Created By</p>
-          <p className="text-white">{transaction.created_by}</p>
+          <p className="text-sm text-content-secondary">Created By</p>
+          <p className="text-content">{transaction.created_by}</p>
         </div>
         <div>
-          <p className="text-sm text-slate-400">Created At</p>
-          <p className="text-white">{format(new Date(transaction.created_at), 'MMM d, yyyy HH:mm')}</p>
+          <p className="text-sm text-content-secondary">Created At</p>
+          <p className="text-content">{format(new Date(transaction.created_at), 'MMM d, yyyy HH:mm')}</p>
         </div>
       </div>
 
       {transaction.approved_by && (
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <p className="text-sm text-slate-400">Approved By</p>
-            <p className="text-white">{transaction.approved_by}</p>
+            <p className="text-sm text-content-secondary">Approved By</p>
+            <p className="text-content">{transaction.approved_by}</p>
           </div>
           <div>
-            <p className="text-sm text-slate-400">Approved At</p>
-            <p className="text-white">{transaction.approved_at ? format(new Date(transaction.approved_at), 'MMM d, yyyy HH:mm') : '-'}</p>
+            <p className="text-sm text-content-secondary">Approved At</p>
+            <p className="text-content">{transaction.approved_at ? format(new Date(transaction.approved_at), 'MMM d, yyyy HH:mm') : '-'}</p>
           </div>
         </div>
       )}
 
       {transaction.status === 'pending' && (
-        <div className="flex gap-3 pt-4 border-t border-slate-700">
+        <div className="flex gap-3 pt-4 border-t border-border">
           <button
             onClick={onCancel}
-            className="flex-1 px-4 py-2 bg-slate-700 text-slate-300 rounded-xl text-sm font-medium hover:bg-slate-600 transition-colors"
+            className="flex-1 px-4 py-2 bg-hover text-content-tertiary rounded-xl text-sm font-medium hover:bg-hover transition-colors"
           >
             Cancel Transaction
           </button>
@@ -624,7 +624,7 @@ export function Treasury() {
 
             {/* Summary Stats */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-              <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+              <div className="bg-card rounded-xl p-6 border border-border">
                 <div className="flex items-center justify-between mb-4">
                   <div className="w-12 h-12 bg-gradient-to-br from-teal-500 to-emerald-600 rounded-xl flex items-center justify-center">
                     <Wallet size={24} className="text-white" />
@@ -635,37 +635,37 @@ export function Treasury() {
                     </span>
                   )}
                 </div>
-                <p className="text-sm text-slate-400">Total Balance</p>
-                <p className="text-2xl font-bold text-white mt-1">
+                <p className="text-sm text-content-secondary">Total Balance</p>
+                <p className="text-2xl font-bold text-content mt-1">
                   SAR {totalBalance.toLocaleString()}
                 </p>
               </div>
 
-              <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+              <div className="bg-card rounded-xl p-6 border border-border">
                 <div className="w-12 h-12 bg-gradient-to-br from-emerald-500 to-green-600 rounded-xl flex items-center justify-center mb-4">
                   <TrendingUp size={24} className="text-white" />
                 </div>
-                <p className="text-sm text-slate-400">Today's Deposits</p>
+                <p className="text-sm text-content-secondary">Today's Deposits</p>
                 <p className="text-2xl font-bold text-emerald-400 mt-1">
                   +SAR {(summary?.today_deposits || 0).toLocaleString()}
                 </p>
               </div>
 
-              <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+              <div className="bg-card rounded-xl p-6 border border-border">
                 <div className="w-12 h-12 bg-gradient-to-br from-red-500 to-pink-600 rounded-xl flex items-center justify-center mb-4">
                   <TrendingDown size={24} className="text-white" />
                 </div>
-                <p className="text-sm text-slate-400">Today's Withdrawals</p>
+                <p className="text-sm text-content-secondary">Today's Withdrawals</p>
                 <p className="text-2xl font-bold text-red-400 mt-1">
                   -SAR {(summary?.today_withdrawals || 0).toLocaleString()}
                 </p>
               </div>
 
-              <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+              <div className="bg-card rounded-xl p-6 border border-border">
                 <div className="w-12 h-12 bg-gradient-to-br from-amber-500 to-orange-600 rounded-xl flex items-center justify-center mb-4">
                   <Clock size={24} className="text-white" />
                 </div>
-                <p className="text-sm text-slate-400">Pending Transactions</p>
+                <p className="text-sm text-content-secondary">Pending Transactions</p>
                 <p className="text-2xl font-bold text-amber-400 mt-1">
                   {summary?.pending_transactions || 0}
                 </p>
@@ -697,7 +697,7 @@ export function Treasury() {
 
             {/* Bank Accounts */}
             <div className="mb-6">
-              <h3 className="text-lg font-semibold text-white mb-4">Bank Accounts</h3>
+              <h3 className="text-lg font-semibold text-content mb-4">Bank Accounts</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 {accounts.map(account => (
                   <AccountCard key={account.id} account={account} />
@@ -706,8 +706,8 @@ export function Treasury() {
             </div>
 
             {/* Balance Chart */}
-            <div className="bg-slate-800/50 rounded-xl border border-slate-700 p-6 mb-6">
-              <h3 className="text-lg font-semibold text-white mb-4">Balance Trend</h3>
+            <div className="bg-card rounded-xl border border-border p-6 mb-6">
+              <h3 className="text-lg font-semibold text-content mb-4">Balance Trend</h3>
               <div className="h-64">
                 <ResponsiveContainer width="100%" height="100%">
                   <AreaChart data={chartData}>
@@ -747,14 +747,14 @@ export function Treasury() {
             </div>
 
             {/* Transactions List */}
-            <div className="bg-slate-800/50 rounded-xl border border-slate-700">
-              <div className="p-4 border-b border-slate-700 flex flex-col md:flex-row md:items-center justify-between gap-4">
-                <h3 className="font-semibold text-white">Recent Transactions</h3>
+            <div className="bg-card rounded-xl border border-border">
+              <div className="p-4 border-b border-border flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <h3 className="font-semibold text-content">Recent Transactions</h3>
                 <div className="flex gap-2">
                   <select
                     value={typeFilter}
                     onChange={(e) => setTypeFilter(e.target.value as 'all' | TreasuryTransaction['type'])}
-                    className="px-3 py-1.5 bg-slate-700 border border-slate-600 rounded-lg text-sm text-white"
+                    className="px-3 py-1.5 bg-input border border-border-subtle rounded-lg text-sm text-content"
                   >
                     <option value="all">All Types</option>
                     <option value="deposit">Deposits</option>
@@ -764,7 +764,7 @@ export function Treasury() {
                   <select
                     value={statusFilter}
                     onChange={(e) => setStatusFilter(e.target.value as 'all' | TreasuryTransaction['status'])}
-                    className="px-3 py-1.5 bg-slate-700 border border-slate-600 rounded-lg text-sm text-white"
+                    className="px-3 py-1.5 bg-input border border-border-subtle rounded-lg text-sm text-content"
                   >
                     <option value="all">All Status</option>
                     <option value="pending">Pending</option>
@@ -775,30 +775,30 @@ export function Treasury() {
               </div>
               <div className="overflow-x-auto">
                 <table className="w-full">
-                  <thead className="bg-slate-800">
+                  <thead className="bg-input">
                     <tr>
-                      <th className="text-left p-4 text-sm font-medium text-slate-400">Date</th>
-                      <th className="text-left p-4 text-sm font-medium text-slate-400">Type</th>
-                      <th className="text-left p-4 text-sm font-medium text-slate-400">Description</th>
-                      <th className="text-left p-4 text-sm font-medium text-slate-400">Reference</th>
-                      <th className="text-right p-4 text-sm font-medium text-slate-400">Amount</th>
-                      <th className="text-left p-4 text-sm font-medium text-slate-400">Status</th>
-                      <th className="text-left p-4 text-sm font-medium text-slate-400">Actions</th>
+                      <th className="text-left p-4 text-sm font-medium text-content-secondary">Date</th>
+                      <th className="text-left p-4 text-sm font-medium text-content-secondary">Type</th>
+                      <th className="text-left p-4 text-sm font-medium text-content-secondary">Description</th>
+                      <th className="text-left p-4 text-sm font-medium text-content-secondary">Reference</th>
+                      <th className="text-right p-4 text-sm font-medium text-content-secondary">Amount</th>
+                      <th className="text-left p-4 text-sm font-medium text-content-secondary">Status</th>
+                      <th className="text-left p-4 text-sm font-medium text-content-secondary">Actions</th>
                     </tr>
                   </thead>
                   <tbody>
                     {filteredTransactions.map((trx) => (
-                      <tr key={trx.id} className="border-t border-slate-700 hover:bg-slate-800/50">
-                        <td className="p-4 text-slate-300">
+                      <tr key={trx.id} className="border-t border-border hover:bg-card">
+                        <td className="p-4 text-content-tertiary">
                           {format(new Date(trx.created_at), 'MMM d, yyyy')}
                         </td>
                         <td className="p-4">
                           <TypeBadge type={trx.type} />
                         </td>
-                        <td className="p-4 text-white max-w-xs truncate">
+                        <td className="p-4 text-content max-w-xs truncate">
                           {trx.description}
                         </td>
-                        <td className="p-4 text-slate-400 text-sm">
+                        <td className="p-4 text-content-secondary text-sm">
                           {trx.reference}
                         </td>
                         <td className={`p-4 text-right font-medium ${

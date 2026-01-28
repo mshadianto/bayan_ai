@@ -1,7 +1,8 @@
 import { useState, useRef, useEffect } from 'react';
-import { Bell, ChevronDown, Check } from 'lucide-react';
+import { Bell, ChevronDown, Check, Sun, Moon } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
 import { useUser, ROLE_CONFIG, UserRole } from '../../contexts/UserContext';
+import { useTheme } from '../../contexts/ThemeContext';
 
 interface HeaderProps {
   title: string;
@@ -43,6 +44,7 @@ const ROLE_EMOJI: Record<UserRole, string> = {
 export function Header({ title, subtitle }: HeaderProps) {
   const location = useLocation();
   const { user, setRole } = useUser();
+  const { theme, toggleTheme } = useTheme();
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -80,6 +82,18 @@ export function Header({ title, subtitle }: HeaderProps) {
       </div>
 
       <div className="flex items-center gap-4">
+        <button
+          onClick={toggleTheme}
+          className="p-2 hover:bg-white/10 rounded-xl transition-colors"
+          aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+        >
+          {theme === 'dark' ? (
+            <Sun size={20} className="text-white" />
+          ) : (
+            <Moon size={20} className="text-white" />
+          )}
+        </button>
+
         <button className="p-2 hover:bg-white/10 rounded-xl relative transition-colors">
           <Bell size={20} className="text-white" />
           <span className="absolute top-1 right-1 w-2 h-2 bg-red-400 rounded-full animate-pulse"></span>
@@ -103,27 +117,27 @@ export function Header({ title, subtitle }: HeaderProps) {
 
           {/* Dropdown Menu */}
           {showDropdown && (
-            <div className="absolute right-0 top-full mt-2 w-64 bg-white rounded-xl shadow-xl border border-gray-100 py-2 z-50">
-              <div className="px-3 py-2 border-b border-gray-100">
-                <p className="text-xs font-medium text-gray-400 uppercase tracking-wider">Switch Role (Demo)</p>
+            <div className="absolute right-0 top-full mt-2 w-64 bg-white dark:bg-slate-800 rounded-xl shadow-xl border border-gray-100 dark:border-slate-700 py-2 z-50">
+              <div className="px-3 py-2 border-b border-gray-100 dark:border-slate-700">
+                <p className="text-xs font-medium text-gray-400 dark:text-slate-400 uppercase tracking-wider">Switch Role (Demo)</p>
               </div>
               {(Object.keys(ROLE_CONFIG) as UserRole[]).map((role) => (
                 <button
                   key={role}
                   onClick={() => handleRoleChange(role)}
-                  className={`w-full px-3 py-2 flex items-center gap-3 hover:bg-gray-50 transition-colors ${
-                    user.role === role ? 'bg-green-50' : ''
+                  className={`w-full px-3 py-2 flex items-center gap-3 hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors ${
+                    user.role === role ? 'bg-green-50 dark:bg-green-900/30' : ''
                   }`}
                 >
-                  <span className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center text-sm">
+                  <span className="w-8 h-8 bg-gray-100 dark:bg-slate-700 rounded-lg flex items-center justify-center text-sm">
                     {ROLE_EMOJI[role]}
                   </span>
                   <div className="flex-1 text-left">
-                    <div className="text-sm font-medium text-gray-800">{ROLE_CONFIG[role].name}</div>
-                    <div className="text-xs text-gray-500">{ROLE_CONFIG[role].label}</div>
+                    <div className="text-sm font-medium text-gray-800 dark:text-slate-100">{ROLE_CONFIG[role].name}</div>
+                    <div className="text-xs text-gray-500 dark:text-slate-400">{ROLE_CONFIG[role].label}</div>
                   </div>
                   {user.role === role && (
-                    <Check size={16} className="text-green-600" />
+                    <Check size={16} className="text-green-600 dark:text-green-400" />
                   )}
                 </button>
               ))}

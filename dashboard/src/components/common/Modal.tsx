@@ -114,23 +114,23 @@ export function Modal({
         <div
           ref={modalRef}
           style={transformStyle}
-          className={`relative bg-slate-800 rounded-2xl border border-slate-700 w-full ${SIZE_CLASSES[size]} max-h-[85vh] flex flex-col shadow-2xl animate-modal-slide-up`}
+          className={`relative bg-input rounded-2xl border border-border w-full ${SIZE_CLASSES[size]} max-h-[85vh] flex flex-col shadow-2xl animate-modal-slide-up`}
         >
           {/* Header - draggable */}
           <div
-            className="flex-shrink-0 flex items-center justify-between p-4 border-b border-slate-700 bg-slate-800 rounded-t-2xl cursor-grab active:cursor-grabbing select-none"
+            className="flex-shrink-0 flex items-center justify-between p-4 border-b border-border bg-input rounded-t-2xl cursor-grab active:cursor-grabbing select-none"
             onMouseDown={handleMouseDown}
           >
             <div className="flex items-center gap-2">
-              <GripHorizontal size={16} className="text-slate-500" />
-              <h2 id="modal-title" className="text-lg font-semibold text-white pr-8 truncate">
+              <GripHorizontal size={16} className="text-content-muted" />
+              <h2 id="modal-title" className="text-lg font-semibold text-content pr-8 truncate">
                 {title}
               </h2>
             </div>
             <button
               onClick={(e) => { e.stopPropagation(); onClose(); }}
               onMouseDown={(e) => e.stopPropagation()}
-              className="absolute right-4 top-4 p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-700 transition-colors"
+              className="absolute right-4 top-4 p-1.5 rounded-lg text-content-secondary hover:text-content hover:bg-hover transition-colors"
               aria-label="Close modal"
             >
               <X size={20} />
@@ -144,7 +144,7 @@ export function Modal({
 
           {/* Footer - sticky */}
           {footer && (
-            <div className="flex-shrink-0 p-4 border-t border-slate-700 flex justify-end gap-3 bg-slate-800 rounded-b-2xl">
+            <div className="flex-shrink-0 p-4 border-t border-border flex justify-end gap-3 bg-input rounded-b-2xl">
               {footer}
             </div>
           )}
@@ -168,7 +168,7 @@ export function ModalButton({
 }) {
   const variants = {
     primary: 'bg-indigo-600 text-white hover:bg-indigo-500',
-    secondary: 'bg-slate-700 text-slate-300 hover:bg-slate-600',
+    secondary: 'bg-hover text-content-tertiary hover:bg-border-subtle',
     danger: 'bg-red-600 text-white hover:bg-red-500',
   };
 

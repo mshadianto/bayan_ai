@@ -4,10 +4,10 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
-        // Keep legacy colors for compatibility
         primary: {
           50: '#f0fdf4',
           100: '#dcfce7',
@@ -24,7 +24,28 @@ export default {
           green: '#0d6e3d',
           gold: '#c5a54e',
         },
-      }
+      },
+      backgroundColor: {
+        app: 'var(--color-bg-app)',
+        card: 'var(--color-bg-card)',
+        input: 'var(--color-bg-input)',
+        hover: 'var(--color-bg-hover)',
+        sidebar: 'var(--color-bg-sidebar)',
+      },
+      textColor: {
+        content: {
+          DEFAULT: 'var(--color-content)',
+          secondary: 'var(--color-content-secondary)',
+          tertiary: 'var(--color-content-tertiary)',
+          muted: 'var(--color-content-muted)',
+        },
+      },
+      borderColor: {
+        border: {
+          DEFAULT: 'var(--color-border)',
+          subtle: 'var(--color-border-subtle)',
+        },
+      },
     },
   },
   plugins: [],

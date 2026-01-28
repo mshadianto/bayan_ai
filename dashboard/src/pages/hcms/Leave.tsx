@@ -177,13 +177,13 @@ function SubmitLeaveForm({
 
         {/* Employee Selection */}
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-1">
+          <label className="block text-sm font-medium text-content-tertiary mb-1">
             Employee <span className="text-red-400">*</span>
           </label>
           <select
             value={formData.employee_id}
             onChange={(e) => handleEmployeeChange(e.target.value)}
-            className="w-full bg-slate-700 border border-slate-600 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="w-full bg-input border border-border-subtle rounded-xl px-4 py-2.5 text-content focus:outline-none focus:ring-2 focus:ring-indigo-500"
           >
             <option value="">Select employee</option>
             {employees.map((emp) => (
@@ -196,13 +196,13 @@ function SubmitLeaveForm({
 
         {/* Leave Type */}
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-1">
+          <label className="block text-sm font-medium text-content-tertiary mb-1">
             Leave Type <span className="text-red-400">*</span>
           </label>
           <select
             value={formData.leave_type}
             onChange={(e) => setFormData({ ...formData, leave_type: e.target.value as CreateLeaveInput['leave_type'] })}
-            className="w-full bg-slate-700 border border-slate-600 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="w-full bg-input border border-border-subtle rounded-xl px-4 py-2.5 text-content focus:outline-none focus:ring-2 focus:ring-indigo-500"
           >
             {LEAVE_TYPES.map((type) => (
               <option key={type.value} value={type.value}>
@@ -215,18 +215,18 @@ function SubmitLeaveForm({
         {/* Date Range */}
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-1">
+            <label className="block text-sm font-medium text-content-tertiary mb-1">
               Start Date <span className="text-red-400">*</span>
             </label>
             <input
               type="date"
               value={formData.start_date}
               onChange={(e) => setFormData({ ...formData, start_date: e.target.value })}
-              className="w-full bg-slate-700 border border-slate-600 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full bg-input border border-border-subtle rounded-xl px-4 py-2.5 text-content focus:outline-none focus:ring-2 focus:ring-indigo-500"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-1">
+            <label className="block text-sm font-medium text-content-tertiary mb-1">
               End Date <span className="text-red-400">*</span>
             </label>
             <input
@@ -234,7 +234,7 @@ function SubmitLeaveForm({
               value={formData.end_date}
               min={formData.start_date}
               onChange={(e) => setFormData({ ...formData, end_date: e.target.value })}
-              className="w-full bg-slate-700 border border-slate-600 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full bg-input border border-border-subtle rounded-xl px-4 py-2.5 text-content focus:outline-none focus:ring-2 focus:ring-indigo-500"
             />
           </div>
         </div>
@@ -250,7 +250,7 @@ function SubmitLeaveForm({
 
         {/* Reason */}
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-1">
+          <label className="block text-sm font-medium text-content-tertiary mb-1">
             Reason <span className="text-red-400">*</span>
           </label>
           <textarea
@@ -258,7 +258,7 @@ function SubmitLeaveForm({
             onChange={(e) => setFormData({ ...formData, reason: e.target.value })}
             rows={3}
             placeholder="Please provide the reason for your leave request..."
-            className="w-full bg-slate-700 border border-slate-600 rounded-xl px-4 py-2.5 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none"
+            className="w-full bg-input border border-border-subtle rounded-xl px-4 py-2.5 text-content placeholder-content-secondary focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none"
           />
         </div>
       </div>
@@ -311,11 +311,11 @@ function RejectLeaveModal({
       }
     >
       <div className="space-y-4">
-        <p className="text-slate-300">
-          You are about to reject the leave request from <span className="font-medium text-white">{leaveName}</span>.
+        <p className="text-content-tertiary">
+          You are about to reject the leave request from <span className="font-medium text-content">{leaveName}</span>.
         </p>
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-1">
+          <label className="block text-sm font-medium text-content-tertiary mb-1">
             Rejection Reason <span className="text-red-400">*</span>
           </label>
           <textarea
@@ -323,7 +323,7 @@ function RejectLeaveModal({
             onChange={(e) => setReason(e.target.value)}
             rows={3}
             placeholder="Please provide a reason for rejection..."
-            className="w-full bg-slate-700 border border-slate-600 rounded-xl px-4 py-2.5 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-red-500 resize-none"
+            className="w-full bg-input border border-border-subtle rounded-xl px-4 py-2.5 text-content placeholder-content-secondary focus:outline-none focus:ring-2 focus:ring-red-500 resize-none"
           />
         </div>
       </div>
@@ -444,7 +444,7 @@ export function Leave() {
     annual: 'bg-blue-900/50 text-blue-300',
     sick: 'bg-red-900/50 text-red-300',
     emergency: 'bg-orange-900/50 text-orange-300',
-    unpaid: 'bg-slate-700 text-slate-300',
+    unpaid: 'bg-hover text-content-tertiary',
     maternity: 'bg-pink-900/50 text-pink-300',
     paternity: 'bg-cyan-900/50 text-cyan-300',
   };
@@ -468,47 +468,47 @@ export function Leave() {
         {/* Summary Stats */}
         {summary && (
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-            <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+            <div className="bg-card rounded-xl p-4 border border-border">
               <div className="flex items-center gap-3">
                 <div className="p-2 bg-indigo-600/20 rounded-lg">
                   <FileText size={20} className="text-indigo-400" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-white">{summary.total}</p>
-                  <p className="text-xs text-slate-400">Total Requests</p>
+                  <p className="text-2xl font-bold text-content">{summary.total}</p>
+                  <p className="text-xs text-content-secondary">Total Requests</p>
                 </div>
               </div>
             </div>
-            <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+            <div className="bg-card rounded-xl p-4 border border-border">
               <div className="flex items-center gap-3">
                 <div className="p-2 bg-amber-600/20 rounded-lg">
                   <Clock size={20} className="text-amber-400" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-white">{summary.pending}</p>
-                  <p className="text-xs text-slate-400">Pending</p>
+                  <p className="text-2xl font-bold text-content">{summary.pending}</p>
+                  <p className="text-xs text-content-secondary">Pending</p>
                 </div>
               </div>
             </div>
-            <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+            <div className="bg-card rounded-xl p-4 border border-border">
               <div className="flex items-center gap-3">
                 <div className="p-2 bg-emerald-600/20 rounded-lg">
                   <TrendingUp size={20} className="text-emerald-400" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-white">{summary.approved}</p>
-                  <p className="text-xs text-slate-400">Approved</p>
+                  <p className="text-2xl font-bold text-content">{summary.approved}</p>
+                  <p className="text-xs text-content-secondary">Approved</p>
                 </div>
               </div>
             </div>
-            <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+            <div className="bg-card rounded-xl p-4 border border-border">
               <div className="flex items-center gap-3">
                 <div className="p-2 bg-red-600/20 rounded-lg">
                   <Users size={20} className="text-red-400" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-white">{summary.rejected}</p>
-                  <p className="text-xs text-slate-400">Rejected</p>
+                  <p className="text-2xl font-bold text-content">{summary.rejected}</p>
+                  <p className="text-xs text-content-secondary">Rejected</p>
                 </div>
               </div>
             </div>
@@ -518,22 +518,22 @@ export function Leave() {
         {/* Leave Balance Summary */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6 stagger-children">
           {defaultLeaveBalances.map((balance) => (
-            <div key={balance.type} className="bg-slate-800/50 rounded-xl p-5 border border-slate-700 card-hover">
+            <div key={balance.type} className="bg-card rounded-xl p-5 border border-border card-hover">
               <div className="flex items-center justify-between mb-3">
                 <span className="text-2xl">{balance.emoji}</span>
-                <span className="text-xs text-slate-400">{balance.type}</span>
+                <span className="text-xs text-content-secondary">{balance.type}</span>
               </div>
               <div className="flex items-end justify-between">
                 <div>
-                  <p className="text-3xl font-bold text-white">{balance.remaining}</p>
-                  <p className="text-xs text-slate-400">days remaining</p>
+                  <p className="text-3xl font-bold text-content">{balance.remaining}</p>
+                  <p className="text-xs text-content-secondary">days remaining</p>
                 </div>
                 <div className="text-right text-sm">
-                  <p className="text-slate-400">Used: {balance.used}</p>
-                  <p className="text-slate-400">Total: {balance.total}</p>
+                  <p className="text-content-secondary">Used: {balance.used}</p>
+                  <p className="text-content-secondary">Total: {balance.total}</p>
                 </div>
               </div>
-              <div className="mt-3 h-2 bg-slate-700 rounded-full overflow-hidden">
+              <div className="mt-3 h-2 bg-hover rounded-full overflow-hidden">
                 <div
                   className="h-full bg-indigo-500 rounded-full transition-all duration-500"
                   style={{ width: `${(balance.remaining / balance.total) * 100}%` }}
@@ -572,7 +572,7 @@ export function Leave() {
             {filteredLeaves.map((leave, index) => (
               <div
                 key={leave.id}
-                className="bg-slate-800/50 rounded-xl border border-slate-700 p-5 card-hover animate-fade-in"
+                className="bg-card rounded-xl border border-border p-5 card-hover animate-fade-in"
                 style={{ animationDelay: `${index * 50}ms` }}
               >
                 <div className="flex items-start justify-between">
@@ -581,21 +581,21 @@ export function Leave() {
                       {leave.employee_name.split(' ').map(n => n[0]).join('')}
                     </div>
                     <div>
-                      <h3 className="text-white font-semibold">{leave.employee_name}</h3>
-                      <p className="text-sm text-slate-400">{leave.employee_id}</p>
+                      <h3 className="text-content font-semibold">{leave.employee_name}</h3>
+                      <p className="text-sm text-content-secondary">{leave.employee_id}</p>
                       <div className="flex items-center gap-3 mt-2 flex-wrap">
                         <span className={`px-2.5 py-1 rounded-lg text-xs font-medium ${leaveTypeStyles[leave.leave_type]}`}>
                           {leave.leave_type.replace('_', ' ')}
                         </span>
-                        <div className="flex items-center gap-1 text-sm text-slate-300">
+                        <div className="flex items-center gap-1 text-sm text-content-tertiary">
                           <Calendar size={14} />
                           {leave.start_date && leave.end_date ? (
                             <>{format(new Date(leave.start_date), 'MMM d')} - {format(new Date(leave.end_date), 'MMM d, yyyy')}</>
                           ) : 'Date not specified'}
                         </div>
-                        <span className="text-sm text-slate-400">({leave.days} day{leave.days !== 1 ? 's' : ''})</span>
+                        <span className="text-sm text-content-secondary">({leave.days} day{leave.days !== 1 ? 's' : ''})</span>
                       </div>
-                      <p className="text-sm text-slate-400 mt-2">{leave.reason}</p>
+                      <p className="text-sm text-content-secondary mt-2">{leave.reason}</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
@@ -623,7 +623,7 @@ export function Leave() {
                         <button
                           onClick={() => handleCancelLeave(leave)}
                           disabled={processingId === leave.id}
-                          className="p-2 bg-slate-700 text-slate-400 rounded-xl hover:bg-slate-600 border border-slate-600 transition-colors disabled:opacity-50"
+                          className="p-2 bg-hover text-content-secondary rounded-xl hover:bg-hover border border-border-subtle transition-colors disabled:opacity-50"
                           title="Cancel Request"
                           aria-label="Cancel leave request"
                         >
@@ -634,8 +634,8 @@ export function Leave() {
                   </div>
                 </div>
                 {leave.approved_by && leave.approved_at && (
-                  <div className="mt-3 pt-3 border-t border-slate-700">
-                    <p className="text-xs text-slate-400">
+                  <div className="mt-3 pt-3 border-t border-border">
+                    <p className="text-xs text-content-secondary">
                       Approved by {leave.approved_by} on {format(new Date(leave.approved_at), 'MMM d, yyyy')}
                     </p>
                   </div>
@@ -643,7 +643,7 @@ export function Leave() {
               </div>
             ))}
             {filteredLeaves.length === 0 && (
-              <div className="bg-slate-800/50 rounded-xl border border-slate-700 p-8 text-center text-slate-400">
+              <div className="bg-card rounded-xl border border-border p-8 text-center text-content-secondary">
                 <Calendar size={48} className="mx-auto mb-3 opacity-50" />
                 <p>No leave requests found</p>
                 <button

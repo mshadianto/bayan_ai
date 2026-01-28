@@ -53,7 +53,7 @@ function Toast({ message, type, onClose }: { message: string; type: 'success' | 
 // Status Badge Component
 function StatusBadge({ status }: { status: ExtendedInvestment['status'] }) {
   const config = {
-    pending_analysis: { bg: 'bg-slate-900/50', text: 'text-slate-300', border: 'border-slate-600', label: 'Pending Analysis', icon: Clock },
+    pending_analysis: { bg: 'bg-app', text: 'text-content-tertiary', border: 'border-border-subtle', label: 'Pending Analysis', icon: Clock },
     pending_review: { bg: 'bg-blue-900/50', text: 'text-blue-300', border: 'border-blue-600', label: 'Pending Review', icon: Eye },
     pending_approval: { bg: 'bg-amber-900/50', text: 'text-amber-300', border: 'border-amber-600', label: 'Pending Approval', icon: AlertTriangle },
     approved: { bg: 'bg-emerald-900/50', text: 'text-emerald-300', border: 'border-emerald-600', label: 'Approved', icon: CheckCircle },
@@ -93,11 +93,11 @@ function DocumentList({ documents }: { documents: InvestmentDocument[] }) {
   return (
     <div className="space-y-2">
       {documents.map(doc => (
-        <div key={doc.id} className="flex items-center gap-3 p-3 bg-slate-700/50 rounded-lg">
+        <div key={doc.id} className="flex items-center gap-3 p-3 bg-hover/50 rounded-lg">
           <FileText size={20} className="text-teal-400" />
           <div className="flex-1 min-w-0">
-            <p className="text-sm text-white truncate">{doc.name}</p>
-            <p className="text-xs text-slate-400">
+            <p className="text-sm text-content truncate">{doc.name}</p>
+            <p className="text-xs text-content-secondary">
               {(doc.size / 1024 / 1024).toFixed(2)} MB - {format(new Date(doc.uploaded_at), 'MMM d, yyyy')}
             </p>
           </div>
@@ -159,23 +159,23 @@ function UploadDocumentForm({
   return (
     <div className="space-y-4">
       <div>
-        <label className="block text-sm font-medium text-slate-300 mb-2">Company Name</label>
+        <label className="block text-sm font-medium text-content-tertiary mb-2">Company Name</label>
         <input
           type="text"
           value={companyName}
           onChange={(e) => setCompanyName(e.target.value)}
           placeholder="Enter company name"
-          className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+          className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content placeholder-content-secondary focus:ring-2 focus:ring-teal-500 focus:border-transparent"
         />
       </div>
 
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-2">Sector</label>
+          <label className="block text-sm font-medium text-content-tertiary mb-2">Sector</label>
           <select
             value={sector}
             onChange={(e) => setSector(e.target.value)}
-            className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+            className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content focus:ring-2 focus:ring-teal-500 focus:border-transparent"
           >
             <option value="">Select Sector</option>
             {sectors.map(s => (
@@ -184,19 +184,19 @@ function UploadDocumentForm({
           </select>
         </div>
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-2">Country</label>
+          <label className="block text-sm font-medium text-content-tertiary mb-2">Country</label>
           <input
             type="text"
             value={country}
             onChange={(e) => setCountry(e.target.value)}
-            className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+            className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content focus:ring-2 focus:ring-teal-500 focus:border-transparent"
           />
         </div>
       </div>
 
       <div>
         <div className="flex items-center justify-between mb-2">
-          <label className="text-sm font-medium text-slate-300">Documents</label>
+          <label className="text-sm font-medium text-content-tertiary">Documents</label>
           <button
             type="button"
             onClick={handleAddFile}
@@ -214,12 +214,12 @@ function UploadDocumentForm({
                 value={file.name}
                 onChange={(e) => handleFileChange(index, 'name', e.target.value)}
                 placeholder="Document name (e.g., Financial Statement 2024.pdf)"
-                className="flex-1 px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 text-sm focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                className="flex-1 px-3 py-2 bg-input border border-border-subtle rounded-lg text-content placeholder-content-secondary text-sm focus:ring-2 focus:ring-teal-500 focus:border-transparent"
               />
               <select
                 value={file.type}
                 onChange={(e) => handleFileChange(index, 'type', e.target.value)}
-                className="w-40 px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white text-sm focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                className="w-40 px-3 py-2 bg-input border border-border-subtle rounded-lg text-content text-sm focus:ring-2 focus:ring-teal-500 focus:border-transparent"
               >
                 <option value="financial_statement">Financial Statement</option>
                 <option value="company_profile">Company Profile</option>
@@ -229,16 +229,16 @@ function UploadDocumentForm({
               <button
                 type="button"
                 onClick={() => handleRemoveFile(index)}
-                className="p-2 text-slate-400 hover:text-red-400"
+                className="p-2 text-content-secondary hover:text-red-400"
               >
                 <X size={18} />
               </button>
             </div>
           ))}
           {files.length === 0 && (
-            <div className="text-center py-6 border-2 border-dashed border-slate-600 rounded-lg">
-              <Upload size={32} className="mx-auto text-slate-500 mb-2" />
-              <p className="text-sm text-slate-400">Click "Add Document" to upload files</p>
+            <div className="text-center py-6 border-2 border-dashed border-border-subtle rounded-lg">
+              <Upload size={32} className="mx-auto text-content-muted mb-2" />
+              <p className="text-sm text-content-secondary">Click "Add Document" to upload files</p>
             </div>
           )}
         </div>
@@ -247,7 +247,7 @@ function UploadDocumentForm({
       <div className="flex gap-3 pt-4">
         <button
           onClick={onCancel}
-          className="flex-1 px-4 py-2 bg-slate-700 text-slate-300 rounded-xl text-sm font-medium hover:bg-slate-600 transition-colors"
+          className="flex-1 px-4 py-2 bg-hover text-content-tertiary rounded-xl text-sm font-medium hover:bg-hover transition-colors"
         >
           Cancel
         </button>
@@ -283,13 +283,13 @@ function ShareMemoForm({
 
   return (
     <div className="space-y-4">
-      <div className="bg-slate-700/50 rounded-lg p-4">
-        <p className="text-sm text-slate-400 mb-1">Sharing memo for</p>
-        <p className="text-white font-medium">{investment.company_name}</p>
+      <div className="bg-hover/50 rounded-lg p-4">
+        <p className="text-sm text-content-secondary mb-1">Sharing memo for</p>
+        <p className="text-content font-medium">{investment.company_name}</p>
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-slate-300 mb-2">Channel</label>
+        <label className="block text-sm font-medium text-content-tertiary mb-2">Channel</label>
         <div className="flex gap-2">
           {[
             { value: 'whatsapp', label: 'WhatsApp', icon: MessageCircle },
@@ -303,7 +303,7 @@ function ShareMemoForm({
               className={`flex-1 flex items-center justify-center gap-2 py-2 px-4 rounded-lg text-sm font-medium transition-colors ${
                 channel === value
                   ? 'bg-teal-600 text-white'
-                  : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
+                  : 'bg-hover text-content-tertiary hover:bg-hover'
               }`}
             >
               <Icon size={16} />
@@ -314,7 +314,7 @@ function ShareMemoForm({
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-slate-300 mb-2">
+        <label className="block text-sm font-medium text-content-tertiary mb-2">
           {channel === 'email' ? 'Email Address' : 'Phone Number'}
         </label>
         <input
@@ -322,21 +322,21 @@ function ShareMemoForm({
           value={recipient}
           onChange={(e) => setRecipient(e.target.value)}
           placeholder={channel === 'email' ? 'example@company.com' : '+966501234567'}
-          className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+          className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content placeholder-content-secondary focus:ring-2 focus:ring-teal-500 focus:border-transparent"
         />
       </div>
 
       {investment.shared_to && investment.shared_to.length > 0 && (
         <div>
-          <p className="text-sm text-slate-400 mb-2">Previously shared to:</p>
+          <p className="text-sm text-content-secondary mb-2">Previously shared to:</p>
           <div className="space-y-1">
             {investment.shared_to.map(share => (
-              <div key={share.id} className="flex items-center gap-2 text-sm text-slate-300">
+              <div key={share.id} className="flex items-center gap-2 text-sm text-content-tertiary">
                 {share.channel === 'whatsapp' && <MessageCircle size={14} />}
                 {share.channel === 'email' && <Mail size={14} />}
                 {share.channel === 'telegram' && <Send size={14} />}
                 <span>{share.recipient}</span>
-                <span className="text-slate-500">- {format(new Date(share.shared_at), 'MMM d, HH:mm')}</span>
+                <span className="text-content-muted">- {format(new Date(share.shared_at), 'MMM d, HH:mm')}</span>
               </div>
             ))}
           </div>
@@ -346,7 +346,7 @@ function ShareMemoForm({
       <div className="flex gap-3 pt-4">
         <button
           onClick={onCancel}
-          className="flex-1 px-4 py-2 bg-slate-700 text-slate-300 rounded-xl text-sm font-medium hover:bg-slate-600 transition-colors"
+          className="flex-1 px-4 py-2 bg-hover text-content-tertiary rounded-xl text-sm font-medium hover:bg-hover transition-colors"
         >
           Cancel
         </button>
@@ -385,7 +385,7 @@ function InvestmentDetailModal({
             <StatusBadge status={investment.status} />
             <RecommendationBadge recommendation={investment.recommendation} />
           </div>
-          <div className="flex items-center gap-4 text-sm text-slate-400">
+          <div className="flex items-center gap-4 text-sm text-content-secondary">
             <span className="flex items-center gap-1">
               <Building2 size={14} />
               {investment.sector}
@@ -398,8 +398,8 @@ function InvestmentDetailModal({
         </div>
         {investment.investment_amount && (
           <div className="text-right">
-            <p className="text-sm text-slate-400">Investment Amount</p>
-            <p className="text-xl font-bold text-white">
+            <p className="text-sm text-content-secondary">Investment Amount</p>
+            <p className="text-xl font-bold text-content">
               {investment.currency} {investment.investment_amount.toLocaleString()}
             </p>
           </div>
@@ -408,7 +408,7 @@ function InvestmentDetailModal({
 
       {/* Documents */}
       <section>
-        <h4 className="text-sm font-medium text-slate-300 mb-3 flex items-center gap-2">
+        <h4 className="text-sm font-medium text-content-tertiary mb-3 flex items-center gap-2">
           <FileText size={16} className="text-teal-400" />
           Documents ({investment.documents.length})
         </h4>
@@ -418,30 +418,30 @@ function InvestmentDetailModal({
       {/* Financial Analysis */}
       {investment.financial_analysis && (
         <section>
-          <h4 className="text-sm font-medium text-slate-300 mb-3 flex items-center gap-2">
+          <h4 className="text-sm font-medium text-content-tertiary mb-3 flex items-center gap-2">
             <TrendingUp size={16} className="text-teal-400" />
             Financial Analysis
           </h4>
-          <div className="bg-slate-700/50 rounded-lg p-4">
+          <div className="bg-hover/50 rounded-lg p-4">
             <div className="grid grid-cols-4 gap-4 mb-4">
               <div>
-                <p className="text-xs text-slate-400">Revenue</p>
-                <p className="text-white font-medium">SAR {investment.financial_analysis.revenue.toLocaleString()}</p>
+                <p className="text-xs text-content-secondary">Revenue</p>
+                <p className="text-content font-medium">SAR {investment.financial_analysis.revenue.toLocaleString()}</p>
               </div>
               <div>
-                <p className="text-xs text-slate-400">ROE</p>
-                <p className="text-white font-medium">{investment.financial_analysis.roe.toFixed(2)}%</p>
+                <p className="text-xs text-content-secondary">ROE</p>
+                <p className="text-content font-medium">{investment.financial_analysis.roe.toFixed(2)}%</p>
               </div>
               <div>
-                <p className="text-xs text-slate-400">ROA</p>
-                <p className="text-white font-medium">{investment.financial_analysis.roa.toFixed(2)}%</p>
+                <p className="text-xs text-content-secondary">ROA</p>
+                <p className="text-content font-medium">{investment.financial_analysis.roa.toFixed(2)}%</p>
               </div>
               <div>
-                <p className="text-xs text-slate-400">Debt/Equity</p>
-                <p className="text-white font-medium">{investment.financial_analysis.debt_equity_ratio.toFixed(2)}</p>
+                <p className="text-xs text-content-secondary">Debt/Equity</p>
+                <p className="text-content font-medium">{investment.financial_analysis.debt_equity_ratio.toFixed(2)}</p>
               </div>
             </div>
-            <p className="text-sm text-slate-300">{investment.financial_analysis.summary}</p>
+            <p className="text-sm text-content-tertiary">{investment.financial_analysis.summary}</p>
           </div>
         </section>
       )}
@@ -449,11 +449,11 @@ function InvestmentDetailModal({
       {/* Risk Assessment */}
       {investment.risk_assessment && (
         <section>
-          <h4 className="text-sm font-medium text-slate-300 mb-3 flex items-center gap-2">
+          <h4 className="text-sm font-medium text-content-tertiary mb-3 flex items-center gap-2">
             <AlertTriangle size={16} className="text-teal-400" />
             Risk Assessment (Overall: {investment.risk_assessment.overall_rating}/10)
           </h4>
-          <div className="bg-slate-700/50 rounded-lg p-4">
+          <div className="bg-hover/50 rounded-lg p-4">
             <div className="grid grid-cols-3 gap-4 mb-4">
               {[
                 { label: 'Strategic', value: investment.risk_assessment.strategic_risk },
@@ -465,10 +465,10 @@ function InvestmentDetailModal({
               ].map((risk) => (
                 <div key={risk.label}>
                   <div className="flex justify-between text-xs mb-1">
-                    <span className="text-slate-400">{risk.label}</span>
-                    <span className="text-white">{risk.value}/10</span>
+                    <span className="text-content-secondary">{risk.label}</span>
+                    <span className="text-content">{risk.value}/10</span>
                   </div>
-                  <div className="h-2 bg-slate-600 rounded-full">
+                  <div className="h-2 bg-border-subtle rounded-full">
                     <div
                       className={`h-2 rounded-full ${
                         risk.value <= 3 ? 'bg-emerald-500' :
@@ -480,7 +480,7 @@ function InvestmentDetailModal({
                 </div>
               ))}
             </div>
-            <p className="text-sm text-slate-300">{investment.risk_assessment.summary}</p>
+            <p className="text-sm text-content-tertiary">{investment.risk_assessment.summary}</p>
           </div>
         </section>
       )}
@@ -488,11 +488,11 @@ function InvestmentDetailModal({
       {/* Shariah Compliance */}
       {investment.shariah_compliance && (
         <section>
-          <h4 className="text-sm font-medium text-slate-300 mb-3">Shariah Compliance</h4>
-          <div className="bg-slate-700/50 rounded-lg p-4">
+          <h4 className="text-sm font-medium text-content-tertiary mb-3">Shariah Compliance</h4>
+          <div className="bg-hover/50 rounded-lg p-4">
             <div className="grid grid-cols-4 gap-4 mb-4">
               <div>
-                <p className="text-xs text-slate-400">Halal Screening</p>
+                <p className="text-xs text-content-secondary">Halal Screening</p>
                 <p className={`font-medium ${
                   investment.shariah_compliance.halal_screening === 'pass' ? 'text-emerald-400' :
                   investment.shariah_compliance.halal_screening === 'fail' ? 'text-red-400' : 'text-amber-400'
@@ -501,7 +501,7 @@ function InvestmentDetailModal({
                 </p>
               </div>
               <div>
-                <p className="text-xs text-slate-400">Riba Compliance</p>
+                <p className="text-xs text-content-secondary">Riba Compliance</p>
                 <p className={`font-medium ${
                   investment.shariah_compliance.riba_compliance === 'compliant' ? 'text-emerald-400' :
                   investment.shariah_compliance.riba_compliance === 'non_compliant' ? 'text-red-400' : 'text-amber-400'
@@ -510,7 +510,7 @@ function InvestmentDetailModal({
                 </p>
               </div>
               <div>
-                <p className="text-xs text-slate-400">Gharar Status</p>
+                <p className="text-xs text-content-secondary">Gharar Status</p>
                 <p className={`font-medium ${
                   investment.shariah_compliance.gharar_status === 'minimal' ? 'text-emerald-400' :
                   investment.shariah_compliance.gharar_status === 'acceptable' ? 'text-amber-400' : 'text-red-400'
@@ -519,7 +519,7 @@ function InvestmentDetailModal({
                 </p>
               </div>
               <div>
-                <p className="text-xs text-slate-400">Overall Status</p>
+                <p className="text-xs text-content-secondary">Overall Status</p>
                 <p className={`font-medium ${
                   investment.shariah_compliance.overall_status === 'compliant' ? 'text-emerald-400' :
                   investment.shariah_compliance.overall_status === 'non_compliant' ? 'text-red-400' : 'text-amber-400'
@@ -528,7 +528,7 @@ function InvestmentDetailModal({
                 </p>
               </div>
             </div>
-            <p className="text-sm text-slate-300">{investment.shariah_compliance.notes}</p>
+            <p className="text-sm text-content-tertiary">{investment.shariah_compliance.notes}</p>
           </div>
         </section>
       )}
@@ -537,11 +537,11 @@ function InvestmentDetailModal({
       {investment.final_memo && (
         <section>
           <div className="flex items-center justify-between mb-3">
-            <h4 className="text-sm font-medium text-slate-300">Investment Memo</h4>
+            <h4 className="text-sm font-medium text-content-tertiary">Investment Memo</h4>
             <div className="flex gap-2">
               <button
                 onClick={onExport}
-                className="flex items-center gap-1 px-3 py-1.5 text-xs bg-slate-700 text-slate-300 rounded-lg hover:bg-slate-600"
+                className="flex items-center gap-1 px-3 py-1.5 text-xs bg-hover text-content-tertiary rounded-lg hover:bg-hover"
               >
                 <Download size={14} />
                 Export PDF
@@ -555,15 +555,15 @@ function InvestmentDetailModal({
               </button>
             </div>
           </div>
-          <div className="bg-slate-700/50 rounded-lg p-4 max-h-64 overflow-y-auto">
-            <pre className="text-sm text-slate-300 whitespace-pre-wrap font-sans">{investment.final_memo}</pre>
+          <div className="bg-hover/50 rounded-lg p-4 max-h-64 overflow-y-auto">
+            <pre className="text-sm text-content-tertiary whitespace-pre-wrap font-sans">{investment.final_memo}</pre>
           </div>
         </section>
       )}
 
       {/* Actions */}
       {investment.status === 'pending_approval' && (
-        <div className="flex gap-3 pt-4 border-t border-slate-700">
+        <div className="flex gap-3 pt-4 border-t border-border">
           <button
             onClick={onReject}
             className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-red-600 text-white rounded-xl text-sm font-medium hover:bg-red-500 transition-colors"
@@ -616,12 +616,12 @@ function InvestmentCard({
   return (
     <div
       onClick={onClick}
-      className="bg-slate-800/50 rounded-xl border border-slate-700 p-5 cursor-pointer hover:bg-slate-800/70 transition-colors"
+      className="bg-card rounded-xl border border-border p-5 cursor-pointer hover:bg-card/70 transition-colors"
     >
       <div className="flex justify-between items-start mb-4">
         <div>
-          <h3 className="text-lg font-semibold text-white">{investment.company_name}</h3>
-          <p className="text-sm text-slate-400">
+          <h3 className="text-lg font-semibold text-content">{investment.company_name}</h3>
+          <p className="text-sm text-content-secondary">
             {investment.sector} - {investment.country}
           </p>
         </div>
@@ -629,37 +629,37 @@ function InvestmentCard({
       </div>
 
       <div className="grid grid-cols-3 gap-3 mb-4">
-        <div className="text-center p-3 bg-slate-900/50 rounded-xl">
+        <div className="text-center p-3 bg-app rounded-xl">
           <TrendingUp size={20} className="mx-auto text-teal-400 mb-1" />
-          <p className="text-xs text-slate-400">ROE</p>
-          <p className="font-medium text-white">
+          <p className="text-xs text-content-secondary">ROE</p>
+          <p className="font-medium text-content">
             {investment.financial_analysis?.roe?.toFixed(1) || '-'}%
           </p>
         </div>
-        <div className="text-center p-3 bg-slate-900/50 rounded-xl">
+        <div className="text-center p-3 bg-app rounded-xl">
           <AlertTriangle size={20} className="mx-auto text-amber-400 mb-1" />
-          <p className="text-xs text-slate-400">Risk</p>
-          <p className="font-medium text-white">
+          <p className="text-xs text-content-secondary">Risk</p>
+          <p className="font-medium text-content">
             {investment.risk_assessment?.overall_rating || '-'}/10
           </p>
         </div>
-        <div className="text-center p-3 bg-slate-900/50 rounded-xl">
+        <div className="text-center p-3 bg-app rounded-xl">
           <CheckCircle size={20} className={`mx-auto mb-1 ${
             investment.shariah_compliance?.overall_status === 'compliant' ? 'text-emerald-400' :
             investment.shariah_compliance?.overall_status === 'conditional' ? 'text-amber-400' : 'text-red-400'
           }`} />
-          <p className="text-xs text-slate-400">Shariah</p>
-          <p className="font-medium text-white">
+          <p className="text-xs text-content-secondary">Shariah</p>
+          <p className="font-medium text-content">
             {investment.shariah_compliance?.overall_status || '-'}
           </p>
         </div>
       </div>
 
       <div className="flex items-center justify-between text-sm">
-        <span className="text-slate-400">
+        <span className="text-content-secondary">
           {investment.documents.length} document{investment.documents.length !== 1 ? 's' : ''}
         </span>
-        <span className="text-slate-400">
+        <span className="text-content-secondary">
           {format(new Date(investment.created_at), 'MMM d, yyyy')}
         </span>
       </div>
@@ -803,28 +803,28 @@ export function Investments() {
         {/* Summary Stats */}
         {summary && (
           <div className="grid grid-cols-2 md:grid-cols-6 gap-4 mb-6">
-            <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
-              <p className="text-sm text-slate-400">Total</p>
-              <p className="text-2xl font-bold text-white">{summary.total}</p>
+            <div className="bg-card rounded-xl p-4 border border-border">
+              <p className="text-sm text-content-secondary">Total</p>
+              <p className="text-2xl font-bold text-content">{summary.total}</p>
             </div>
-            <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
-              <p className="text-sm text-slate-400">Pending Analysis</p>
-              <p className="text-2xl font-bold text-slate-300">{summary.pending_analysis}</p>
+            <div className="bg-card rounded-xl p-4 border border-border">
+              <p className="text-sm text-content-secondary">Pending Analysis</p>
+              <p className="text-2xl font-bold text-content-tertiary">{summary.pending_analysis}</p>
             </div>
-            <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
-              <p className="text-sm text-slate-400">Pending Review</p>
+            <div className="bg-card rounded-xl p-4 border border-border">
+              <p className="text-sm text-content-secondary">Pending Review</p>
               <p className="text-2xl font-bold text-blue-400">{summary.pending_review}</p>
             </div>
-            <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
-              <p className="text-sm text-slate-400">Pending Approval</p>
+            <div className="bg-card rounded-xl p-4 border border-border">
+              <p className="text-sm text-content-secondary">Pending Approval</p>
               <p className="text-2xl font-bold text-amber-400">{summary.pending_approval}</p>
             </div>
-            <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
-              <p className="text-sm text-slate-400">Approved</p>
+            <div className="bg-card rounded-xl p-4 border border-border">
+              <p className="text-sm text-content-secondary">Approved</p>
               <p className="text-2xl font-bold text-emerald-400">{summary.approved}</p>
             </div>
-            <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
-              <p className="text-sm text-slate-400">Rejected</p>
+            <div className="bg-card rounded-xl p-4 border border-border">
+              <p className="text-sm text-content-secondary">Rejected</p>
               <p className="text-2xl font-bold text-red-400">{summary.rejected}</p>
             </div>
           </div>
@@ -839,7 +839,7 @@ export function Investments() {
               className={`px-4 py-2 rounded-xl text-sm font-medium transition-colors ${
                 filter === f
                   ? 'bg-teal-600 text-white'
-                  : 'bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-700'
+                  : 'bg-input text-content-tertiary hover:bg-hover border border-border'
               }`}
             >
               {f === 'all' ? 'All' : f.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
@@ -861,7 +861,7 @@ export function Investments() {
               />
             ))}
             {filteredInvestments.length === 0 && (
-              <div className="col-span-2 bg-slate-800/50 rounded-xl border border-slate-700 p-8 text-center text-slate-400">
+              <div className="col-span-2 bg-card rounded-xl border border-border p-8 text-center text-content-secondary">
                 No investments found
               </div>
             )}
@@ -934,14 +934,14 @@ export function Investments() {
         size="md"
       >
         <div className="space-y-4">
-          <p className="text-slate-300">
+          <p className="text-content-tertiary">
             Please provide a reason for rejecting{' '}
-            <strong className="text-white">{selectedInvestment?.company_name}</strong>
+            <strong className="text-content">{selectedInvestment?.company_name}</strong>
           </p>
           <textarea
             value={rejectReason}
             onChange={(e) => setRejectReason(e.target.value)}
-            className="w-full bg-slate-700 border border-slate-600 rounded-xl p-3 h-32 text-white placeholder:text-slate-500 focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20"
+            className="w-full bg-input border border-border-subtle rounded-xl p-3 h-32 text-content placeholder:text-content-muted focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20"
             placeholder="Enter rejection reason..."
           />
           <div className="flex gap-3">
@@ -950,7 +950,7 @@ export function Investments() {
                 setShowRejectModal(false);
                 setRejectReason('');
               }}
-              className="flex-1 px-4 py-2 bg-slate-700 text-slate-300 rounded-xl text-sm font-medium hover:bg-slate-600 transition-colors"
+              className="flex-1 px-4 py-2 bg-hover text-content-tertiary rounded-xl text-sm font-medium hover:bg-hover transition-colors"
             >
               Cancel
             </button>

@@ -106,7 +106,7 @@ export default function Compliance() {
         </div>
 
         {/* Tabs */}
-        <div className="flex gap-2 mb-6 border-b border-slate-700 pb-4">
+        <div className="flex gap-2 mb-6 border-b border-border pb-4">
           {[
             { id: 'licenses', label: 'Licenses', icon: <Shield size={18} /> },
             { id: 'coi', label: 'COI Declarations', icon: <FileCheck size={18} /> },
@@ -118,7 +118,7 @@ export default function Compliance() {
               className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
                 activeTab === tab.id
                   ? 'bg-amber-600 text-white'
-                  : 'text-slate-400 hover:bg-slate-700'
+                  : 'text-content-secondary hover:bg-hover'
               }`}
             >
               {tab.icon}
@@ -197,25 +197,25 @@ function LicensesList({ licenses, onView }: { licenses: License[]; onView: (l: L
       {licenses.map((license, index) => (
         <div
           key={license.id}
-          className="bg-slate-800/50 rounded-xl border border-slate-700 p-4 hover:border-amber-600/50 transition-colors cursor-pointer animate-fade-in"
+          className="bg-card rounded-xl border border-border p-4 hover:border-amber-600/50 transition-colors cursor-pointer animate-fade-in"
           style={{ animationDelay: `${index * 50}ms` }}
           onClick={() => onView(license)}
         >
           <div className="flex items-center justify-between">
             <div>
               <div className="flex items-center gap-3 mb-1">
-                <h3 className="text-white font-medium">{license.name}</h3>
+                <h3 className="text-content font-medium">{license.name}</h3>
                 <StatusBadge status={license.status} />
               </div>
-              <p className="text-slate-400 text-sm">{license.license_number} - {license.issuer}</p>
+              <p className="text-content-secondary text-sm">{license.license_number} - {license.issuer}</p>
             </div>
             <div className="flex items-center gap-4">
               <div className="text-right">
-                <p className="text-slate-400 text-xs">Expiry Date</p>
-                <p className="text-white">{license.expiry_date}</p>
+                <p className="text-content-secondary text-xs">Expiry Date</p>
+                <p className="text-content">{license.expiry_date}</p>
               </div>
               <StatusBadge status={license.country} variant="outline" />
-              <Eye size={18} className="text-slate-400" />
+              <Eye size={18} className="text-content-secondary" />
             </div>
           </div>
         </div>
@@ -234,25 +234,25 @@ function COIList({ declarations, onView }: { declarations: COIDeclaration[]; onV
       {declarations.map((coi, index) => (
         <div
           key={coi.id}
-          className="bg-slate-800/50 rounded-xl border border-slate-700 p-4 hover:border-amber-600/50 transition-colors cursor-pointer animate-fade-in"
+          className="bg-card rounded-xl border border-border p-4 hover:border-amber-600/50 transition-colors cursor-pointer animate-fade-in"
           style={{ animationDelay: `${index * 50}ms` }}
           onClick={() => onView(coi)}
         >
           <div className="flex items-center justify-between">
             <div>
               <div className="flex items-center gap-3 mb-1">
-                <h3 className="text-white font-medium">{coi.employee_name}</h3>
+                <h3 className="text-content font-medium">{coi.employee_name}</h3>
                 <StatusBadge status={coi.status} />
                 {coi.has_conflict && <StatusBadge status="conflict" variant="dot" />}
               </div>
-              <p className="text-slate-400 text-sm">{coi.position} - {coi.department}</p>
+              <p className="text-content-secondary text-sm">{coi.position} - {coi.department}</p>
             </div>
             <div className="flex items-center gap-4">
               <div className="text-right">
-                <p className="text-slate-400 text-xs">Year</p>
-                <p className="text-white">{coi.year}</p>
+                <p className="text-content-secondary text-xs">Year</p>
+                <p className="text-content">{coi.year}</p>
               </div>
-              <Eye size={18} className="text-slate-400" />
+              <Eye size={18} className="text-content-secondary" />
             </div>
           </div>
         </div>
@@ -271,25 +271,25 @@ function ViolationsList({ violations, onView }: { violations: EmployeeViolation[
       {violations.map((violation, index) => (
         <div
           key={violation.id}
-          className="bg-slate-800/50 rounded-xl border border-slate-700 p-4 hover:border-amber-600/50 transition-colors cursor-pointer animate-fade-in"
+          className="bg-card rounded-xl border border-border p-4 hover:border-amber-600/50 transition-colors cursor-pointer animate-fade-in"
           style={{ animationDelay: `${index * 50}ms` }}
           onClick={() => onView(violation)}
         >
           <div className="flex items-center justify-between">
             <div>
               <div className="flex items-center gap-3 mb-1">
-                <h3 className="text-white font-medium">{violation.employee_name}</h3>
+                <h3 className="text-content font-medium">{violation.employee_name}</h3>
                 <StatusBadge status={violation.severity} />
                 <StatusBadge status={violation.investigation_status} variant="outline" />
               </div>
-              <p className="text-slate-400 text-sm">{(violation.description ?? '').substring(0, 60)}...</p>
+              <p className="text-content-secondary text-sm">{(violation.description ?? '').substring(0, 60)}...</p>
             </div>
             <div className="flex items-center gap-4">
               <div className="text-right">
-                <p className="text-slate-400 text-xs">Incident Date</p>
-                <p className="text-white">{violation.incident_date}</p>
+                <p className="text-content-secondary text-xs">Incident Date</p>
+                <p className="text-content">{violation.incident_date}</p>
               </div>
-              <Eye size={18} className="text-slate-400" />
+              <Eye size={18} className="text-content-secondary" />
             </div>
           </div>
         </div>
@@ -306,27 +306,27 @@ function LicenseDetail({ license }: { license: License }) {
         <StatusBadge status={license.country} variant="outline" />
       </div>
       <div className="grid grid-cols-2 gap-4">
-        <div className="bg-slate-800 rounded-lg p-4">
-          <p className="text-slate-400 text-sm">License Number</p>
-          <p className="text-white font-mono">{license.license_number}</p>
+        <div className="bg-input rounded-lg p-4">
+          <p className="text-content-secondary text-sm">License Number</p>
+          <p className="text-content font-mono">{license.license_number}</p>
         </div>
-        <div className="bg-slate-800 rounded-lg p-4">
-          <p className="text-slate-400 text-sm">Issuer</p>
-          <p className="text-white">{license.issuer}</p>
+        <div className="bg-input rounded-lg p-4">
+          <p className="text-content-secondary text-sm">Issuer</p>
+          <p className="text-content">{license.issuer}</p>
         </div>
-        <div className="bg-slate-800 rounded-lg p-4">
-          <p className="text-slate-400 text-sm">Issue Date</p>
-          <p className="text-white">{license.issue_date}</p>
+        <div className="bg-input rounded-lg p-4">
+          <p className="text-content-secondary text-sm">Issue Date</p>
+          <p className="text-content">{license.issue_date}</p>
         </div>
-        <div className="bg-slate-800 rounded-lg p-4">
-          <p className="text-slate-400 text-sm">Expiry Date</p>
-          <p className="text-white">{license.expiry_date}</p>
+        <div className="bg-input rounded-lg p-4">
+          <p className="text-content-secondary text-sm">Expiry Date</p>
+          <p className="text-content">{license.expiry_date}</p>
         </div>
       </div>
       {license.renewal_notes && (
         <div className="bg-amber-900/30 border border-amber-600/50 rounded-lg p-4">
           <p className="text-amber-300 text-sm font-medium">Renewal Notes</p>
-          <p className="text-slate-300">{license.renewal_notes}</p>
+          <p className="text-content-tertiary">{license.renewal_notes}</p>
         </div>
       )}
     </div>
@@ -351,35 +351,35 @@ function COIDetail({ coi, onApprove }: { coi: COIDeclaration; onApprove: () => v
         )}
       </div>
       <div className="grid grid-cols-2 gap-4">
-        <div className="bg-slate-800 rounded-lg p-4">
-          <p className="text-slate-400 text-sm">Employee</p>
-          <p className="text-white font-medium">{coi.employee_name}</p>
-          <p className="text-slate-400 text-sm">{coi.position}</p>
+        <div className="bg-input rounded-lg p-4">
+          <p className="text-content-secondary text-sm">Employee</p>
+          <p className="text-content font-medium">{coi.employee_name}</p>
+          <p className="text-content-secondary text-sm">{coi.position}</p>
         </div>
-        <div className="bg-slate-800 rounded-lg p-4">
-          <p className="text-slate-400 text-sm">Department</p>
-          <p className="text-white">{coi.department}</p>
+        <div className="bg-input rounded-lg p-4">
+          <p className="text-content-secondary text-sm">Department</p>
+          <p className="text-content">{coi.department}</p>
         </div>
-        <div className="bg-slate-800 rounded-lg p-4">
-          <p className="text-slate-400 text-sm">Year</p>
-          <p className="text-white">{coi.year}</p>
+        <div className="bg-input rounded-lg p-4">
+          <p className="text-content-secondary text-sm">Year</p>
+          <p className="text-content">{coi.year}</p>
         </div>
-        <div className="bg-slate-800 rounded-lg p-4">
-          <p className="text-slate-400 text-sm">Submitted At</p>
-          <p className="text-white">{coi.submitted_at}</p>
+        <div className="bg-input rounded-lg p-4">
+          <p className="text-content-secondary text-sm">Submitted At</p>
+          <p className="text-content">{coi.submitted_at}</p>
         </div>
       </div>
       {coi.has_conflict && (
         <div className="bg-red-900/30 border border-red-600/50 rounded-lg p-4">
           <p className="text-red-300 font-medium mb-2">Conflict of Interest Declared</p>
-          <p className="text-slate-300 mb-2">{coi.conflict_details}</p>
+          <p className="text-content-tertiary mb-2">{coi.conflict_details}</p>
           {coi.related_parties && (
-            <p className="text-slate-400 text-sm">Related Parties: {coi.related_parties.join(', ')}</p>
+            <p className="text-content-secondary text-sm">Related Parties: {coi.related_parties.join(', ')}</p>
           )}
           {coi.mitigation_plan && (
             <div className="mt-3 pt-3 border-t border-red-600/30">
-              <p className="text-slate-400 text-sm">Mitigation Plan:</p>
-              <p className="text-slate-300">{coi.mitigation_plan}</p>
+              <p className="text-content-secondary text-sm">Mitigation Plan:</p>
+              <p className="text-content-tertiary">{coi.mitigation_plan}</p>
             </div>
           )}
         </div>
@@ -397,38 +397,38 @@ function ViolationDetail({ violation }: { violation: EmployeeViolation }) {
         <StatusBadge status={(violation.violation_type ?? '').replace('_', ' ')} variant="outline" />
       </div>
       <div className="grid grid-cols-2 gap-4">
-        <div className="bg-slate-800 rounded-lg p-4">
-          <p className="text-slate-400 text-sm">Employee</p>
-          <p className="text-white font-medium">{violation.employee_name}</p>
-          <p className="text-slate-400 text-sm">{violation.department}</p>
+        <div className="bg-input rounded-lg p-4">
+          <p className="text-content-secondary text-sm">Employee</p>
+          <p className="text-content font-medium">{violation.employee_name}</p>
+          <p className="text-content-secondary text-sm">{violation.department}</p>
         </div>
-        <div className="bg-slate-800 rounded-lg p-4">
-          <p className="text-slate-400 text-sm">Incident Date</p>
-          <p className="text-white">{violation.incident_date}</p>
+        <div className="bg-input rounded-lg p-4">
+          <p className="text-content-secondary text-sm">Incident Date</p>
+          <p className="text-content">{violation.incident_date}</p>
         </div>
-        <div className="bg-slate-800 rounded-lg p-4">
-          <p className="text-slate-400 text-sm">Reported By</p>
-          <p className="text-white">{violation.reported_by}</p>
+        <div className="bg-input rounded-lg p-4">
+          <p className="text-content-secondary text-sm">Reported By</p>
+          <p className="text-content">{violation.reported_by}</p>
         </div>
-        <div className="bg-slate-800 rounded-lg p-4">
-          <p className="text-slate-400 text-sm">Status</p>
-          <p className="text-white capitalize">{violation.investigation_status}</p>
+        <div className="bg-input rounded-lg p-4">
+          <p className="text-content-secondary text-sm">Status</p>
+          <p className="text-content capitalize">{violation.investigation_status}</p>
         </div>
       </div>
-      <div className="bg-slate-800 rounded-lg p-4">
-        <p className="text-slate-400 text-sm mb-2">Description</p>
-        <p className="text-white">{violation.description}</p>
+      <div className="bg-input rounded-lg p-4">
+        <p className="text-content-secondary text-sm mb-2">Description</p>
+        <p className="text-content">{violation.description}</p>
       </div>
       {violation.action_taken && (
         <div className="bg-amber-900/30 border border-amber-600/50 rounded-lg p-4">
           <p className="text-amber-300 text-sm font-medium">Action Taken</p>
-          <p className="text-slate-300">{violation.action_taken}</p>
+          <p className="text-content-tertiary">{violation.action_taken}</p>
         </div>
       )}
       {violation.resolution && (
         <div className="bg-emerald-900/30 border border-emerald-600/50 rounded-lg p-4">
           <p className="text-emerald-300 text-sm font-medium">Resolution</p>
-          <p className="text-slate-300">{violation.resolution}</p>
+          <p className="text-content-tertiary">{violation.resolution}</p>
         </div>
       )}
     </div>

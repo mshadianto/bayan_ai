@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Layout } from './components/Layout';
 import { PageSkeleton } from './components/common';
 import { UserProvider } from './contexts/UserContext';
+import { ThemeProvider } from './contexts/ThemeContext';
 
 // Retry dynamic import on failure (handles stale chunks after deploy)
 function lazyWithRetry(importFn: () => Promise<{ default: ComponentType }>) {
@@ -53,6 +54,7 @@ const Secretarial = lazyWithRetry(() => import('./pages/lcrms/Secretarial'));
 function App() {
   return (
     <UserProvider>
+      <ThemeProvider>
       <BrowserRouter>
         <Routes>
         <Route path="/" element={<Layout />}>
@@ -196,6 +198,7 @@ function App() {
         </Route>
         </Routes>
       </BrowserRouter>
+      </ThemeProvider>
     </UserProvider>
   );
 }

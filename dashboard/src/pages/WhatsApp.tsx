@@ -57,7 +57,7 @@ export function WhatsApp() {
       <Header title="WhatsApp Integration" subtitle="Send messages and commands" />
       <div className="p-6">
         {/* Session Status */}
-        <div className="bg-slate-800/50 rounded-xl border border-slate-700 p-6 mb-6">
+        <div className="bg-card rounded-xl border border-border p-6 mb-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
               <div
@@ -71,7 +71,7 @@ export function WhatsApp() {
                 />
               </div>
               <div>
-                <h3 className="font-semibold text-white">WhatsApp Session</h3>
+                <h3 className="font-semibold text-content">WhatsApp Session</h3>
                 <div className="flex items-center gap-2">
                   {isConnected ? (
                     <>
@@ -92,7 +92,7 @@ export function WhatsApp() {
             <button
               onClick={checkSession}
               disabled={loading}
-              className="flex items-center gap-2 px-4 py-2 bg-slate-700 rounded-xl hover:bg-slate-600 text-slate-300 hover:text-white transition-colors"
+              className="flex items-center gap-2 px-4 py-2 bg-hover rounded-xl hover:bg-hover text-content-tertiary hover:text-content transition-colors"
             >
               <RefreshCw size={16} className={loading ? 'animate-spin' : ''} />
               Refresh
@@ -102,15 +102,15 @@ export function WhatsApp() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Send Message */}
-          <div className="bg-slate-800/50 rounded-xl border border-slate-700">
-            <div className="p-4 border-b border-slate-700">
-              <h3 className="font-semibold text-white flex items-center gap-2">
+          <div className="bg-card rounded-xl border border-border">
+            <div className="p-4 border-b border-border">
+              <h3 className="font-semibold text-content flex items-center gap-2">
                 <span>📤</span> Send Message
               </h3>
             </div>
             <div className="p-4">
               <div className="mb-4">
-                <label className="block text-sm font-medium text-slate-300 mb-2">
+                <label className="block text-sm font-medium text-content-tertiary mb-2">
                   Chat ID / Phone Number
                 </label>
                 <input
@@ -118,34 +118,34 @@ export function WhatsApp() {
                   value={chatId}
                   onChange={(e) => setChatId(e.target.value)}
                   placeholder="e.g., 966501234567@c.us"
-                  className="w-full bg-slate-900 border border-slate-600 rounded-xl p-3 text-white placeholder:text-slate-500 focus:border-teal-500"
+                  className="w-full bg-app border border-border-subtle rounded-xl p-3 text-content placeholder:text-content-muted focus:border-teal-500"
                 />
-                <p className="text-xs text-slate-500 mt-1">
+                <p className="text-xs text-content-muted mt-1">
                   Format: country code + number + @c.us
                 </p>
               </div>
 
               <div className="mb-4">
-                <label className="block text-sm font-medium text-slate-300 mb-2">
+                <label className="block text-sm font-medium text-content-tertiary mb-2">
                   Message
                 </label>
                 <textarea
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   placeholder="Enter your message..."
-                  className="w-full bg-slate-900 border border-slate-600 rounded-xl p-3 h-32 text-white placeholder:text-slate-500 focus:border-teal-500 resize-none"
+                  className="w-full bg-app border border-border-subtle rounded-xl p-3 h-32 text-content placeholder:text-content-muted focus:border-teal-500 resize-none"
                 />
               </div>
 
               {/* Quick Commands */}
               <div className="mb-4">
-                <p className="text-sm text-slate-400 mb-2">Quick Commands:</p>
+                <p className="text-sm text-content-secondary mb-2">Quick Commands:</p>
                 <div className="flex flex-wrap gap-2">
                   {QUICK_COMMANDS.map((cmd) => (
                     <button
                       key={cmd.command}
                       onClick={() => handleQuickCommand(cmd.command)}
-                      className="px-3 py-1.5 bg-slate-700 text-sm rounded-xl hover:bg-slate-600 text-slate-300 hover:text-white transition-colors"
+                      className="px-3 py-1.5 bg-hover text-sm rounded-xl hover:bg-hover text-content-tertiary hover:text-content transition-colors"
                     >
                       {cmd.label}
                     </button>
@@ -156,7 +156,7 @@ export function WhatsApp() {
               <button
                 onClick={handleSend}
                 disabled={!chatId || !message || sending || !isConnected}
-                className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-teal-600 text-white rounded-xl hover:bg-teal-500 disabled:bg-slate-700 disabled:text-slate-500 disabled:cursor-not-allowed transition-colors"
+                className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-teal-600 text-white rounded-xl hover:bg-teal-500 disabled:bg-hover disabled:text-content-muted disabled:cursor-not-allowed transition-colors"
               >
                 <Send size={18} />
                 {sending ? 'Sending...' : 'Send Message'}
@@ -165,15 +165,15 @@ export function WhatsApp() {
           </div>
 
           {/* Message History */}
-          <div className="bg-slate-800/50 rounded-xl border border-slate-700">
-            <div className="p-4 border-b border-slate-700">
-              <h3 className="font-semibold text-white flex items-center gap-2">
+          <div className="bg-card rounded-xl border border-border">
+            <div className="p-4 border-b border-border">
+              <h3 className="font-semibold text-content flex items-center gap-2">
                 <span>📨</span> Sent Messages
               </h3>
             </div>
             <div className="p-4 max-h-96 overflow-y-auto">
               {sentMessages.length === 0 ? (
-                <p className="text-center text-slate-400 py-8">
+                <p className="text-center text-content-secondary py-8">
                   No messages sent yet
                 </p>
               ) : (
@@ -188,15 +188,15 @@ export function WhatsApp() {
                       }`}
                     >
                       <div className="flex items-center justify-between mb-1">
-                        <span className="text-sm font-medium text-white">{msg.chatId}</span>
+                        <span className="text-sm font-medium text-content">{msg.chatId}</span>
                         {msg.success ? (
                           <CheckCircle size={16} className="text-emerald-400" />
                         ) : (
                           <XCircle size={16} className="text-red-400" />
                         )}
                       </div>
-                      <p className="text-sm text-slate-300">{msg.message}</p>
-                      <p className="text-xs text-slate-500 mt-1">
+                      <p className="text-sm text-content-tertiary">{msg.message}</p>
+                      <p className="text-xs text-content-muted mt-1">
                         {msg.timestamp.toLocaleTimeString()}
                       </p>
                     </div>
@@ -208,9 +208,9 @@ export function WhatsApp() {
         </div>
 
         {/* Command Reference */}
-        <div className="bg-slate-800/50 rounded-xl border border-slate-700 mt-6">
-          <div className="p-4 border-b border-slate-700">
-            <h3 className="font-semibold text-white flex items-center gap-2">
+        <div className="bg-card rounded-xl border border-border mt-6">
+          <div className="p-4 border-b border-border">
+            <h3 className="font-semibold text-content flex items-center gap-2">
               <span>📖</span> Available WhatsApp Commands
             </h3>
           </div>
@@ -227,11 +227,11 @@ export function WhatsApp() {
                 { command: '/invoices', description: 'List pending invoices' },
                 { command: '/help', description: 'Show available commands' },
               ].map((cmd) => (
-                <div key={cmd.command} className="p-3 bg-slate-900/50 rounded-xl border border-slate-700">
+                <div key={cmd.command} className="p-3 bg-app rounded-xl border border-border">
                   <code className="text-sm font-mono text-teal-400">
                     {cmd.command}
                   </code>
-                  <p className="text-sm text-slate-400 mt-1">{cmd.description}</p>
+                  <p className="text-sm text-content-secondary mt-1">{cmd.description}</p>
                 </div>
               ))}
             </div>

@@ -68,12 +68,12 @@ function LogCaseModal({
     <Modal isOpen={true} title="Log Disciplinary Case" onClose={onClose}>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-1">Employee *</label>
+          <label className="block text-sm font-medium text-content-tertiary mb-1">Employee *</label>
           <select
             required
             value={form.employee_id}
             onChange={e => handleEmployeeChange(e.target.value)}
-            className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+            className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
           >
             <option value="">Select Employee</option>
             {activeEmployees.map(emp => (
@@ -86,12 +86,12 @@ function LogCaseModal({
 
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-1">Case Type *</label>
+            <label className="block text-sm font-medium text-content-tertiary mb-1">Case Type *</label>
             <select
               required
               value={form.case_type}
               onChange={e => setForm({ ...form, case_type: e.target.value as LogCaseInput['case_type'] })}
-              className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+              className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
             >
               <option value="warning">Warning</option>
               <option value="suspension">Suspension</option>
@@ -100,12 +100,12 @@ function LogCaseModal({
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-1">Severity *</label>
+            <label className="block text-sm font-medium text-content-tertiary mb-1">Severity *</label>
             <select
               required
               value={form.severity}
               onChange={e => setForm({ ...form, severity: e.target.value as LogCaseInput['severity'] })}
-              className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+              className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
             >
               <option value="minor">Minor</option>
               <option value="major">Major</option>
@@ -115,13 +115,13 @@ function LogCaseModal({
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-1">Description *</label>
+          <label className="block text-sm font-medium text-content-tertiary mb-1">Description *</label>
           <textarea
             required
             rows={3}
             value={form.description}
             onChange={e => setForm({ ...form, description: e.target.value })}
-            className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent resize-none"
+            className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content focus:ring-2 focus:ring-indigo-500 focus:border-transparent resize-none"
             placeholder="Describe the incident or violation..."
           />
         </div>
@@ -175,18 +175,18 @@ function UpdateCaseStatusModal({
   return (
     <Modal isOpen={true} title={`Update Case: ${caseItem.employee_name}`} onClose={onClose}>
       <form onSubmit={handleSubmit} className="space-y-4">
-        <div className="p-4 bg-slate-700/50 rounded-xl">
-          <p className="text-white font-semibold">{caseItem.employee_name}</p>
-          <p className="text-sm text-slate-400">{caseItem.employee_id}</p>
+        <div className="p-4 bg-hover rounded-xl">
+          <p className="text-content font-semibold">{caseItem.employee_name}</p>
+          <p className="text-sm text-content-secondary">{caseItem.employee_id}</p>
           <div className="flex items-center gap-2 mt-2">
             <StatusBadge status={caseItem.case_type} size="sm" />
             <StatusBadge status={caseItem.severity} size="sm" />
           </div>
-          <p className="text-sm text-slate-300 mt-2">{caseItem.description}</p>
+          <p className="text-sm text-content-tertiary mt-2">{caseItem.description}</p>
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-2">Status *</label>
+          <label className="block text-sm font-medium text-content-tertiary mb-2">Status *</label>
           <div className="space-y-2">
             {statuses.map(status => (
               <label
@@ -194,7 +194,7 @@ function UpdateCaseStatusModal({
                 className={`flex items-center gap-3 p-3 rounded-lg border cursor-pointer transition-all ${
                   form.status === status.value
                     ? 'border-indigo-500 bg-indigo-500/20'
-                    : 'border-slate-600 hover:border-slate-500'
+                    : 'border-border-subtle hover:border-border'
                 }`}
               >
                 <input
@@ -206,19 +206,19 @@ function UpdateCaseStatusModal({
                   className="sr-only"
                 />
                 <span className={`w-3 h-3 rounded-full ${status.color}`} />
-                <span className="text-white">{status.label}</span>
+                <span className="text-content">{status.label}</span>
               </label>
             ))}
           </div>
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-1">Action Taken</label>
+          <label className="block text-sm font-medium text-content-tertiary mb-1">Action Taken</label>
           <textarea
             rows={2}
             value={form.action_taken || ''}
             onChange={e => setForm({ ...form, action_taken: e.target.value })}
-            className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent resize-none"
+            className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content focus:ring-2 focus:ring-indigo-500 focus:border-transparent resize-none"
             placeholder="Describe the action taken or resolution..."
           />
         </div>
@@ -253,9 +253,9 @@ function CaseDetailModal({
   return (
     <Modal isOpen={true} title="Case Details" onClose={onClose}>
       <div className="space-y-4">
-        <div className="text-center p-6 bg-slate-700/50 rounded-xl">
-          <p className="text-white font-semibold text-xl">{caseItem.employee_name}</p>
-          <p className="text-slate-400">{caseItem.employee_id}</p>
+        <div className="text-center p-6 bg-hover rounded-xl">
+          <p className="text-content font-semibold text-xl">{caseItem.employee_name}</p>
+          <p className="text-content-secondary">{caseItem.employee_id}</p>
           <div className="flex justify-center gap-2 mt-3">
             <StatusBadge status={caseItem.case_type} />
             <StatusBadge status={caseItem.severity} />
@@ -263,24 +263,24 @@ function CaseDetailModal({
           </div>
         </div>
 
-        <div className="p-4 bg-slate-800 rounded-xl">
-          <p className="text-sm text-slate-400 mb-2">Description</p>
-          <p className="text-white">{caseItem.description}</p>
+        <div className="p-4 bg-input rounded-xl">
+          <p className="text-sm text-content-secondary mb-2">Description</p>
+          <p className="text-content">{caseItem.description}</p>
         </div>
 
-        <div className="p-4 bg-slate-800 rounded-xl">
-          <p className="text-sm text-slate-400 mb-2">Action Taken</p>
-          <p className="text-white">{caseItem.action_taken || 'No action recorded yet'}</p>
+        <div className="p-4 bg-input rounded-xl">
+          <p className="text-sm text-content-secondary mb-2">Action Taken</p>
+          <p className="text-content">{caseItem.action_taken || 'No action recorded yet'}</p>
         </div>
 
         <div className="grid grid-cols-2 gap-4">
-          <div className="p-4 bg-slate-800 rounded-xl">
-            <p className="text-sm text-slate-400">Created</p>
-            <p className="text-white">{format(new Date(caseItem.created_at), 'MMM d, yyyy')}</p>
+          <div className="p-4 bg-input rounded-xl">
+            <p className="text-sm text-content-secondary">Created</p>
+            <p className="text-content">{format(new Date(caseItem.created_at), 'MMM d, yyyy')}</p>
           </div>
-          <div className="p-4 bg-slate-800 rounded-xl">
-            <p className="text-sm text-slate-400">Resolved</p>
-            <p className="text-white">{caseItem.resolved_at ? format(new Date(caseItem.resolved_at), 'MMM d, yyyy') : '-'}</p>
+          <div className="p-4 bg-input rounded-xl">
+            <p className="text-sm text-content-secondary">Resolved</p>
+            <p className="text-content">{caseItem.resolved_at ? format(new Date(caseItem.resolved_at), 'MMM d, yyyy') : '-'}</p>
           </div>
         </div>
 
@@ -400,19 +400,19 @@ export function Compliance() {
             <p className="text-3xl font-bold text-white">{warningCount}</p>
             <p className="text-xs text-amber-400">Expiring within 30 days</p>
           </div>
-          <div className="bg-slate-800/50 rounded-xl p-5 border border-slate-700 card-hover">
+          <div className="bg-card rounded-xl p-5 border border-border card-hover">
             <div className="flex items-center gap-3 mb-2">
               <Shield size={20} className="text-blue-400" />
-              <span className="text-sm text-slate-400">Total Alerts</span>
+              <span className="text-sm text-content-secondary">Total Alerts</span>
             </div>
-            <p className="text-3xl font-bold text-white">{alerts.length}</p>
+            <p className="text-3xl font-bold text-content">{alerts.length}</p>
           </div>
-          <div className="bg-slate-800/50 rounded-xl p-5 border border-slate-700 card-hover">
+          <div className="bg-card rounded-xl p-5 border border-border card-hover">
             <div className="flex items-center gap-3 mb-2">
               <FileWarning size={20} className="text-purple-400" />
-              <span className="text-sm text-slate-400">Open Cases</span>
+              <span className="text-sm text-content-secondary">Open Cases</span>
             </div>
-            <p className="text-3xl font-bold text-white">{cases.filter(c => c.status !== 'resolved').length}</p>
+            <p className="text-3xl font-bold text-content">{cases.filter(c => c.status !== 'resolved').length}</p>
           </div>
         </div>
 
@@ -441,9 +441,9 @@ export function Compliance() {
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Document Expiry Alerts */}
-            <div className="bg-slate-800/50 rounded-xl border border-slate-700 card-hover">
-              <div className="p-4 border-b border-slate-700">
-                <h3 className="font-semibold text-white flex items-center gap-2">
+            <div className="bg-card rounded-xl border border-border card-hover">
+              <div className="p-4 border-b border-border">
+                <h3 className="font-semibold text-content flex items-center gap-2">
                   Document Expiry Alerts
                 </h3>
               </div>
@@ -456,7 +456,7 @@ export function Compliance() {
                       className={`p-4 rounded-xl border animate-fade-in ${
                         level === 'critical' ? 'bg-red-900/30 border-red-600/50' :
                         level === 'warning' ? 'bg-amber-900/30 border-amber-600/50' :
-                        'bg-slate-900/50 border-slate-700'
+                        'bg-app border-border'
                       }`}
                       style={{ animationDelay: `${index * 50}ms` }}
                     >
@@ -464,9 +464,9 @@ export function Compliance() {
                         <div className="flex items-start gap-3">
                           <span className="text-2xl">{alertTypeLabels[alert.alert_type].emoji}</span>
                           <div>
-                            <p className="text-white font-semibold">{alert.employee_name}</p>
-                            <p className="text-sm text-slate-400">{alert.employee_id}</p>
-                            <p className="text-sm text-slate-300 mt-1">
+                            <p className="text-content font-semibold">{alert.employee_name}</p>
+                            <p className="text-sm text-content-secondary">{alert.employee_id}</p>
+                            <p className="text-sm text-content-tertiary mt-1">
                               {alertTypeLabels[alert.alert_type].label}
                             </p>
                           </div>
@@ -478,7 +478,7 @@ export function Compliance() {
                           }`}>
                             {alert.days_remaining} days
                           </p>
-                          <p className="text-xs text-slate-400">
+                          <p className="text-xs text-content-secondary">
                             {format(new Date(alert.expiry_date), 'MMM d, yyyy')}
                           </p>
                         </div>
@@ -487,15 +487,15 @@ export function Compliance() {
                   );
                 })}
                 {filteredAlerts.length === 0 && (
-                  <p className="text-slate-400 text-center py-8">No alerts in this category</p>
+                  <p className="text-content-secondary text-center py-8">No alerts in this category</p>
                 )}
               </div>
             </div>
 
             {/* Disciplinary Cases */}
-            <div className="bg-slate-800/50 rounded-xl border border-slate-700 card-hover">
-              <div className="p-4 border-b border-slate-700">
-                <h3 className="font-semibold text-white flex items-center gap-2">
+            <div className="bg-card rounded-xl border border-border card-hover">
+              <div className="p-4 border-b border-border">
+                <h3 className="font-semibold text-content flex items-center gap-2">
                   Disciplinary Cases
                 </h3>
               </div>
@@ -506,38 +506,38 @@ export function Compliance() {
                     className={`p-4 rounded-xl border animate-fade-in ${
                       caseItem.status === 'open' ? 'bg-red-900/30 border-red-600/50' :
                       caseItem.status === 'investigation' ? 'bg-amber-900/30 border-amber-600/50' :
-                      'bg-slate-900/50 border-slate-700'
+                      'bg-app border-border'
                     }`}
                     style={{ animationDelay: `${index * 50}ms` }}
                   >
                     <div className="flex justify-between items-start mb-3">
                       <div>
-                        <p className="text-white font-semibold">{caseItem.employee_name}</p>
-                        <p className="text-sm text-slate-400">{caseItem.employee_id}</p>
+                        <p className="text-content font-semibold">{caseItem.employee_name}</p>
+                        <p className="text-sm text-content-secondary">{caseItem.employee_id}</p>
                       </div>
                       <div className="flex items-center gap-2">
                         <StatusBadge status={caseItem.severity} size="sm" />
                         <StatusBadge status={caseItem.status} size="sm" />
                       </div>
                     </div>
-                    <p className="text-sm text-slate-300 mb-2 line-clamp-2">{caseItem.description}</p>
+                    <p className="text-sm text-content-tertiary mb-2 line-clamp-2">{caseItem.description}</p>
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2 text-xs text-slate-400">
+                      <div className="flex items-center gap-2 text-xs text-content-secondary">
                         <StatusBadge status={caseItem.case_type} size="sm" />
                         <span>{format(new Date(caseItem.created_at), 'MMM d, yyyy')}</span>
                       </div>
                       <div className="flex items-center gap-1">
                         <button
                           onClick={() => setViewingCase(caseItem)}
-                          className="p-1.5 hover:bg-slate-700 rounded-lg transition-colors"
+                          className="p-1.5 hover:bg-hover rounded-lg transition-colors"
                           title="View details"
                         >
-                          <Eye size={14} className="text-slate-400" />
+                          <Eye size={14} className="text-content-secondary" />
                         </button>
                         {caseItem.status !== 'resolved' && (
                           <button
                             onClick={() => setEditingCase(caseItem)}
-                            className="p-1.5 hover:bg-slate-700 rounded-lg transition-colors"
+                            className="p-1.5 hover:bg-hover rounded-lg transition-colors"
                             title="Update case"
                           >
                             <Edit size={14} className="text-indigo-400" />
@@ -550,7 +550,7 @@ export function Compliance() {
                 {cases.length === 0 && (
                   <div className="text-center py-8">
                     <CheckCircleIcon size={48} className="mx-auto text-emerald-400 mb-3" />
-                    <p className="text-slate-400">No disciplinary cases</p>
+                    <p className="text-content-secondary">No disciplinary cases</p>
                   </div>
                 )}
               </div>

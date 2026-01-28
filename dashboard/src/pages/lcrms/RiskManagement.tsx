@@ -111,13 +111,13 @@ export default function RiskManagement() {
         <div className="flex gap-2 mb-6">
           <button
             onClick={() => setShowHeatmap(true)}
-            className={`px-4 py-2 rounded-lg transition-colors ${showHeatmap ? 'bg-amber-600 text-white' : 'text-slate-400 hover:bg-slate-700'}`}
+            className={`px-4 py-2 rounded-lg transition-colors ${showHeatmap ? 'bg-amber-600 text-white' : 'text-content-secondary hover:bg-hover'}`}
           >
             Risk Heatmap
           </button>
           <button
             onClick={() => setShowHeatmap(false)}
-            className={`px-4 py-2 rounded-lg transition-colors ${!showHeatmap ? 'bg-amber-600 text-white' : 'text-slate-400 hover:bg-slate-700'}`}
+            className={`px-4 py-2 rounded-lg transition-colors ${!showHeatmap ? 'bg-amber-600 text-white' : 'text-content-secondary hover:bg-hover'}`}
           >
             Risk Register
           </button>
@@ -125,12 +125,12 @@ export default function RiskManagement() {
 
         {showHeatmap ? (
           /* Risk Heatmap */
-          <div className="bg-slate-800/50 rounded-xl border border-slate-700 p-6 mb-6">
-            <h3 className="text-lg font-semibold text-white mb-4">Risk Heatmap (Impact x Likelihood)</h3>
+          <div className="bg-card rounded-xl border border-border p-6 mb-6">
+            <h3 className="text-lg font-semibold text-content mb-4">Risk Heatmap (Impact x Likelihood)</h3>
             <div className="flex">
               {/* Y-axis label */}
               <div className="flex flex-col justify-between pr-4 py-2">
-                <span className="text-slate-400 text-xs writing-mode-vertical transform -rotate-180" style={{ writingMode: 'vertical-rl' }}>
+                <span className="text-content-secondary text-xs writing-mode-vertical transform -rotate-180" style={{ writingMode: 'vertical-rl' }}>
                   Impact
                 </span>
               </div>
@@ -153,13 +153,13 @@ export default function RiskManagement() {
                   )}
                 </div>
                 {/* X-axis label */}
-                <div className="text-center mt-2 text-slate-400 text-xs">Likelihood</div>
+                <div className="text-center mt-2 text-content-secondary text-xs">Likelihood</div>
                 {/* Legend */}
                 <div className="flex justify-center gap-4 mt-4">
-                  <div className="flex items-center gap-1"><div className="w-4 h-4 rounded bg-red-600" /><span className="text-xs text-slate-400">Critical</span></div>
-                  <div className="flex items-center gap-1"><div className="w-4 h-4 rounded bg-orange-600" /><span className="text-xs text-slate-400">High</span></div>
-                  <div className="flex items-center gap-1"><div className="w-4 h-4 rounded bg-yellow-600" /><span className="text-xs text-slate-400">Medium</span></div>
-                  <div className="flex items-center gap-1"><div className="w-4 h-4 rounded bg-emerald-600" /><span className="text-xs text-slate-400">Low</span></div>
+                  <div className="flex items-center gap-1"><div className="w-4 h-4 rounded bg-red-600" /><span className="text-xs text-content-secondary">Critical</span></div>
+                  <div className="flex items-center gap-1"><div className="w-4 h-4 rounded bg-orange-600" /><span className="text-xs text-content-secondary">High</span></div>
+                  <div className="flex items-center gap-1"><div className="w-4 h-4 rounded bg-yellow-600" /><span className="text-xs text-content-secondary">Medium</span></div>
+                  <div className="flex items-center gap-1"><div className="w-4 h-4 rounded bg-emerald-600" /><span className="text-xs text-content-secondary">Low</span></div>
                 </div>
               </div>
             </div>
@@ -192,7 +192,7 @@ export default function RiskManagement() {
                 {filteredRisks.map((risk, index) => (
                   <div
                     key={risk.id}
-                    className="bg-slate-800/50 rounded-xl border border-slate-700 p-4 hover:border-amber-600/50 transition-colors cursor-pointer animate-fade-in"
+                    className="bg-card rounded-xl border border-border p-4 hover:border-amber-600/50 transition-colors cursor-pointer animate-fade-in"
                     style={{ animationDelay: `${index * 50}ms` }}
                     onClick={() => { setSelectedRisk(risk); setShowDetailModal(true); }}
                   >
@@ -204,26 +204,26 @@ export default function RiskManagement() {
                           <StatusBadge status={risk.level} />
                           <StatusBadge status={risk.category} variant="outline" />
                         </div>
-                        <h3 className="text-white font-medium">{risk.name}</h3>
-                        <p className="text-slate-400 text-sm">{risk.division}</p>
+                        <h3 className="text-content font-medium">{risk.name}</h3>
+                        <p className="text-content-secondary text-sm">{risk.division}</p>
                       </div>
                       <div className="flex items-center gap-6">
                         <div className="text-center">
-                          <p className="text-slate-400 text-xs">Score</p>
+                          <p className="text-content-secondary text-xs">Score</p>
                           <p className={`text-xl font-bold ${risk.level === 'critical' ? 'text-red-400' : risk.level === 'high' ? 'text-orange-400' : risk.level === 'medium' ? 'text-yellow-400' : 'text-emerald-400'}`}>
                             {risk.risk_score}
                           </p>
                         </div>
                         <div className="text-center">
-                          <p className="text-slate-400 text-xs">Impact</p>
-                          <p className="text-white font-medium">{risk.impact_score}</p>
+                          <p className="text-content-secondary text-xs">Impact</p>
+                          <p className="text-content font-medium">{risk.impact_score}</p>
                         </div>
                         <div className="text-center">
-                          <p className="text-slate-400 text-xs">Likelihood</p>
-                          <p className="text-white font-medium">{risk.likelihood_score}</p>
+                          <p className="text-content-secondary text-xs">Likelihood</p>
+                          <p className="text-content font-medium">{risk.likelihood_score}</p>
                         </div>
                         <StatusBadge status={risk.mitigation_status} variant="outline" />
-                        <Eye size={18} className="text-slate-400" />
+                        <Eye size={18} className="text-content-secondary" />
                       </div>
                     </div>
                   </div>
@@ -234,36 +234,36 @@ export default function RiskManagement() {
         )}
 
         {/* Top 10 Risks */}
-        <div className="mt-6 bg-slate-800/50 rounded-xl border border-slate-700 overflow-hidden">
-          <div className="p-4 border-b border-slate-700">
-            <h3 className="font-semibold text-white flex items-center gap-2">
+        <div className="mt-6 bg-card rounded-xl border border-border overflow-hidden">
+          <div className="p-4 border-b border-border">
+            <h3 className="font-semibold text-content flex items-center gap-2">
               <TrendingDown size={18} className="text-red-400" /> Top 10 Risks by Score
             </h3>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="bg-slate-800">
+              <thead className="bg-input">
                 <tr>
-                  <th className="text-left p-4 text-sm font-medium text-slate-400">#</th>
-                  <th className="text-left p-4 text-sm font-medium text-slate-400">Risk</th>
-                  <th className="text-left p-4 text-sm font-medium text-slate-400">Division</th>
-                  <th className="text-left p-4 text-sm font-medium text-slate-400">Category</th>
-                  <th className="text-left p-4 text-sm font-medium text-slate-400">Score</th>
-                  <th className="text-left p-4 text-sm font-medium text-slate-400">Level</th>
-                  <th className="text-left p-4 text-sm font-medium text-slate-400">Mitigation</th>
+                  <th className="text-left p-4 text-sm font-medium text-content-secondary">#</th>
+                  <th className="text-left p-4 text-sm font-medium text-content-secondary">Risk</th>
+                  <th className="text-left p-4 text-sm font-medium text-content-secondary">Division</th>
+                  <th className="text-left p-4 text-sm font-medium text-content-secondary">Category</th>
+                  <th className="text-left p-4 text-sm font-medium text-content-secondary">Score</th>
+                  <th className="text-left p-4 text-sm font-medium text-content-secondary">Level</th>
+                  <th className="text-left p-4 text-sm font-medium text-content-secondary">Mitigation</th>
                 </tr>
               </thead>
               <tbody>
                 {[...risks].sort((a, b) => b.risk_score - a.risk_score).slice(0, 10).map((risk, index) => (
-                  <tr key={risk.id} className="border-t border-slate-700 hover:bg-slate-800/50">
-                    <td className="p-4 text-slate-400">{index + 1}</td>
+                  <tr key={risk.id} className="border-t border-border hover:bg-card">
+                    <td className="p-4 text-content-secondary">{index + 1}</td>
                     <td className="p-4">
-                      <p className="text-white font-medium">{risk.name}</p>
-                      <p className="text-slate-400 text-xs">{risk.risk_code}</p>
+                      <p className="text-content font-medium">{risk.name}</p>
+                      <p className="text-content-secondary text-xs">{risk.risk_code}</p>
                     </td>
-                    <td className="p-4 text-slate-300">{risk.division}</td>
+                    <td className="p-4 text-content-tertiary">{risk.division}</td>
                     <td className="p-4"><StatusBadge status={risk.category} variant="outline" size="sm" /></td>
-                    <td className="p-4 font-bold text-white">{risk.risk_score}</td>
+                    <td className="p-4 font-bold text-content">{risk.risk_score}</td>
                     <td className="p-4"><StatusBadge status={risk.level} size="sm" /></td>
                     <td className="p-4"><StatusBadge status={risk.mitigation_status} variant="outline" size="sm" /></td>
                   </tr>
@@ -306,40 +306,40 @@ function RiskDetail({ risk }: { risk: Risk }) {
       </div>
 
       <div className="grid grid-cols-3 gap-4">
-        <div className="bg-slate-800 rounded-lg p-4 text-center">
-          <p className="text-slate-400 text-sm">Impact</p>
-          <p className="text-2xl font-bold text-white">{risk.impact_score}</p>
+        <div className="bg-input rounded-lg p-4 text-center">
+          <p className="text-content-secondary text-sm">Impact</p>
+          <p className="text-2xl font-bold text-content">{risk.impact_score}</p>
         </div>
-        <div className="bg-slate-800 rounded-lg p-4 text-center">
-          <p className="text-slate-400 text-sm">Likelihood</p>
-          <p className="text-2xl font-bold text-white">{risk.likelihood_score}</p>
+        <div className="bg-input rounded-lg p-4 text-center">
+          <p className="text-content-secondary text-sm">Likelihood</p>
+          <p className="text-2xl font-bold text-content">{risk.likelihood_score}</p>
         </div>
         <div className={`rounded-lg p-4 text-center ${risk.level === 'critical' ? 'bg-red-900/50' : risk.level === 'high' ? 'bg-orange-900/50' : risk.level === 'medium' ? 'bg-yellow-900/50' : 'bg-emerald-900/50'}`}>
-          <p className="text-slate-400 text-sm">Risk Score</p>
-          <p className="text-2xl font-bold text-white">{risk.risk_score}</p>
+          <p className="text-content-secondary text-sm">Risk Score</p>
+          <p className="text-2xl font-bold text-content">{risk.risk_score}</p>
         </div>
       </div>
 
       <div className="grid grid-cols-2 gap-4">
-        <div className="bg-slate-800 rounded-lg p-4">
-          <p className="text-slate-400 text-sm">Division</p>
-          <p className="text-white">{risk.division}</p>
+        <div className="bg-input rounded-lg p-4">
+          <p className="text-content-secondary text-sm">Division</p>
+          <p className="text-content">{risk.division}</p>
         </div>
-        <div className="bg-slate-800 rounded-lg p-4">
-          <p className="text-slate-400 text-sm">PIC</p>
-          <p className="text-white">{risk.pic_name}</p>
+        <div className="bg-input rounded-lg p-4">
+          <p className="text-content-secondary text-sm">PIC</p>
+          <p className="text-content">{risk.pic_name}</p>
         </div>
       </div>
 
-      <div className="bg-slate-800 rounded-lg p-4">
-        <p className="text-slate-400 text-sm mb-2">Description</p>
-        <p className="text-white">{risk.description}</p>
+      <div className="bg-input rounded-lg p-4">
+        <p className="text-content-secondary text-sm mb-2">Description</p>
+        <p className="text-content">{risk.description}</p>
       </div>
 
       {risk.cause && (
-        <div className="bg-slate-800 rounded-lg p-4">
-          <p className="text-slate-400 text-sm mb-2">Root Cause</p>
-          <p className="text-white">{risk.cause}</p>
+        <div className="bg-input rounded-lg p-4">
+          <p className="text-content-secondary text-sm mb-2">Root Cause</p>
+          <p className="text-content">{risk.cause}</p>
         </div>
       )}
 
@@ -348,7 +348,7 @@ function RiskDetail({ risk }: { risk: Risk }) {
           <p className="text-amber-300 font-medium">Mitigation Plan</p>
           <StatusBadge status={risk.mitigation_status} />
         </div>
-        <p className="text-slate-300">{risk.mitigation_plan}</p>
+        <p className="text-content-tertiary">{risk.mitigation_plan}</p>
       </div>
     </div>
   );
@@ -376,31 +376,31 @@ function AddRiskForm({ onSubmit, onCancel }: { onSubmit: (data: CreateRiskInput)
     <form onSubmit={handleSubmit} className="space-y-4">
       <div className="grid grid-cols-2 gap-4">
         <div className="col-span-2">
-          <label className="block text-sm font-medium text-slate-300 mb-1">Risk Name</label>
+          <label className="block text-sm font-medium text-content-tertiary mb-1">Risk Name</label>
           <input
             type="text"
             required
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-            className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-amber-500"
+            className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content focus:ring-2 focus:ring-amber-500"
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-1">Division</label>
+          <label className="block text-sm font-medium text-content-tertiary mb-1">Division</label>
           <input
             type="text"
             required
             value={formData.division}
             onChange={(e) => setFormData({ ...formData, division: e.target.value })}
-            className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-amber-500"
+            className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content focus:ring-2 focus:ring-amber-500"
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-1">Category</label>
+          <label className="block text-sm font-medium text-content-tertiary mb-1">Category</label>
           <select
             value={formData.category}
             onChange={(e) => setFormData({ ...formData, category: e.target.value as Risk['category'] })}
-            className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-amber-500"
+            className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content focus:ring-2 focus:ring-amber-500"
           >
             <option value="strategic">Strategic</option>
             <option value="financial">Financial</option>
@@ -412,7 +412,7 @@ function AddRiskForm({ onSubmit, onCancel }: { onSubmit: (data: CreateRiskInput)
           </select>
         </div>
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-1">Impact Score (1-5)</label>
+          <label className="block text-sm font-medium text-content-tertiary mb-1">Impact Score (1-5)</label>
           <input
             type="number"
             min={1}
@@ -420,11 +420,11 @@ function AddRiskForm({ onSubmit, onCancel }: { onSubmit: (data: CreateRiskInput)
             required
             value={formData.impact_score}
             onChange={(e) => setFormData({ ...formData, impact_score: Number(e.target.value) })}
-            className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-amber-500"
+            className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content focus:ring-2 focus:ring-amber-500"
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-1">Likelihood Score (1-5)</label>
+          <label className="block text-sm font-medium text-content-tertiary mb-1">Likelihood Score (1-5)</label>
           <input
             type="number"
             min={1}
@@ -432,42 +432,42 @@ function AddRiskForm({ onSubmit, onCancel }: { onSubmit: (data: CreateRiskInput)
             required
             value={formData.likelihood_score}
             onChange={(e) => setFormData({ ...formData, likelihood_score: Number(e.target.value) })}
-            className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-amber-500"
+            className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content focus:ring-2 focus:ring-amber-500"
           />
         </div>
         <div className="col-span-2">
-          <label className="block text-sm font-medium text-slate-300 mb-1">Description</label>
+          <label className="block text-sm font-medium text-content-tertiary mb-1">Description</label>
           <textarea
             required
             value={formData.description}
             onChange={(e) => setFormData({ ...formData, description: e.target.value })}
             rows={3}
-            className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-amber-500"
+            className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content focus:ring-2 focus:ring-amber-500"
           />
         </div>
         <div className="col-span-2">
-          <label className="block text-sm font-medium text-slate-300 mb-1">Mitigation Plan</label>
+          <label className="block text-sm font-medium text-content-tertiary mb-1">Mitigation Plan</label>
           <textarea
             required
             value={formData.mitigation_plan}
             onChange={(e) => setFormData({ ...formData, mitigation_plan: e.target.value })}
             rows={2}
-            className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-amber-500"
+            className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content focus:ring-2 focus:ring-amber-500"
           />
         </div>
         <div className="col-span-2">
-          <label className="block text-sm font-medium text-slate-300 mb-1">PIC Name</label>
+          <label className="block text-sm font-medium text-content-tertiary mb-1">PIC Name</label>
           <input
             type="text"
             required
             value={formData.pic_name}
             onChange={(e) => setFormData({ ...formData, pic_name: e.target.value })}
-            className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-amber-500"
+            className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content focus:ring-2 focus:ring-amber-500"
           />
         </div>
       </div>
       <div className="flex gap-3 pt-4">
-        <button type="button" onClick={onCancel} className="flex-1 px-4 py-2 border border-slate-600 text-slate-300 rounded-xl hover:bg-slate-700 transition-colors">Cancel</button>
+        <button type="button" onClick={onCancel} className="flex-1 px-4 py-2 border border-border-subtle text-content-tertiary rounded-xl hover:bg-hover transition-colors">Cancel</button>
         <button type="submit" className="flex-1 px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white rounded-xl transition-colors">Add Risk</button>
       </div>
     </form>

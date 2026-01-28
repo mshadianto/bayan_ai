@@ -16,9 +16,9 @@ interface StatCardProps {
 
 const VARIANT_STYLES = {
   default: {
-    bg: 'bg-slate-800/50',
-    border: 'border-slate-700',
-    icon: 'text-slate-400',
+    bg: 'bg-card',
+    border: 'border-border',
+    icon: 'text-content-secondary',
   },
   success: {
     bg: 'bg-emerald-900/30',
@@ -59,12 +59,12 @@ export function StatCard({
     >
       <div className="flex items-center gap-3 mb-2">
         <div className={styles.icon}>{icon}</div>
-        <span className="text-sm text-slate-400">{label}</span>
+        <span className="text-sm text-content-secondary">{label}</span>
       </div>
       <div className="flex items-end justify-between">
         <div>
-          <p className="text-2xl font-bold text-white">{value}</p>
-          {subtext && <p className="text-xs text-slate-500 mt-1">{subtext}</p>}
+          <p className="text-2xl font-bold text-content">{value}</p>
+          {subtext && <p className="text-xs text-content-muted mt-1">{subtext}</p>}
         </div>
         {trend && (
           <div
@@ -88,7 +88,7 @@ export function StatCard({
 // Skeleton variant
 export function StatCardSkeleton() {
   return (
-    <div className="bg-slate-800/50 rounded-xl p-5 border border-slate-700">
+    <div className="bg-card rounded-xl p-5 border border-border">
       <div className="flex items-center gap-3 mb-2">
         <div className="w-5 h-5 rounded skeleton" />
         <div className="h-4 w-24 rounded skeleton" />

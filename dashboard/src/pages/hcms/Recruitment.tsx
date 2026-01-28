@@ -52,24 +52,24 @@ function CreateRequisitionModal({
     <Modal isOpen={true} title="Create New Requisition" onClose={onClose}>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-1">Position Title *</label>
+          <label className="block text-sm font-medium text-content-tertiary mb-1">Position Title *</label>
           <input
             type="text"
             required
             value={form.position}
             onChange={e => setForm({ ...form, position: e.target.value })}
-            className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+            className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
             placeholder="e.g., Senior Software Engineer"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-1">Department *</label>
+          <label className="block text-sm font-medium text-content-tertiary mb-1">Department *</label>
           <select
             required
             value={form.department}
             onChange={e => setForm({ ...form, department: e.target.value })}
-            className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+            className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
           >
             <option value="">Select Department</option>
             {departments.map(dept => (
@@ -79,35 +79,35 @@ function CreateRequisitionModal({
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-1">Hiring Manager *</label>
+          <label className="block text-sm font-medium text-content-tertiary mb-1">Hiring Manager *</label>
           <input
             type="text"
             required
             value={form.hiring_manager}
             onChange={e => setForm({ ...form, hiring_manager: e.target.value })}
-            className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+            className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
             placeholder="e.g., Ahmed Al-Rashid"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-1">Closing Date *</label>
+          <label className="block text-sm font-medium text-content-tertiary mb-1">Closing Date *</label>
           <input
             type="date"
             required
             value={form.closing_date}
             onChange={e => setForm({ ...form, closing_date: e.target.value })}
-            className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+            className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-1">Job Description</label>
+          <label className="block text-sm font-medium text-content-tertiary mb-1">Job Description</label>
           <textarea
             rows={3}
             value={form.description || ''}
             onChange={e => setForm({ ...form, description: e.target.value })}
-            className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent resize-none"
+            className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content focus:ring-2 focus:ring-indigo-500 focus:border-transparent resize-none"
             placeholder="Enter job description and requirements..."
           />
         </div>
@@ -162,16 +162,16 @@ function MoveCandidateModal({
   return (
     <Modal isOpen={true} title={`Move Candidate: ${candidate.name}`} onClose={onClose}>
       <form onSubmit={handleSubmit} className="space-y-4">
-        <div className="text-center p-4 bg-slate-700/50 rounded-xl">
-          <p className="text-white font-semibold text-lg">{candidate.name}</p>
-          <p className="text-slate-400 text-sm">{candidate.email}</p>
+        <div className="text-center p-4 bg-hover rounded-xl">
+          <p className="text-content font-semibold text-lg">{candidate.name}</p>
+          <p className="text-content-secondary text-sm">{candidate.email}</p>
           {candidate.score && (
             <p className="text-indigo-400 font-bold mt-2">Score: {candidate.score}%</p>
           )}
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-3">Move to Stage</label>
+          <label className="block text-sm font-medium text-content-tertiary mb-3">Move to Stage</label>
           <div className="space-y-2">
             {CANDIDATE_STAGES.map((stage, idx) => (
               <label
@@ -179,7 +179,7 @@ function MoveCandidateModal({
                 className={`flex items-center gap-3 p-3 rounded-lg border cursor-pointer transition-all ${
                   newStatus === stage.value
                     ? 'border-indigo-500 bg-indigo-500/20'
-                    : 'border-slate-600 hover:border-slate-500'
+                    : 'border-border-subtle hover:border-border'
                 }`}
               >
                 <input
@@ -191,9 +191,9 @@ function MoveCandidateModal({
                   className="sr-only"
                 />
                 <span className={`w-3 h-3 rounded-full ${stage.color}`} />
-                <span className="text-white flex-1">{stage.label}</span>
+                <span className="text-content flex-1">{stage.label}</span>
                 {idx === currentIndex && (
-                  <span className="text-xs bg-slate-600 px-2 py-0.5 rounded text-slate-300">Current</span>
+                  <span className="text-xs bg-hover px-2 py-0.5 rounded text-content-tertiary">Current</span>
                 )}
               </label>
             ))}
@@ -201,7 +201,7 @@ function MoveCandidateModal({
               className={`flex items-center gap-3 p-3 rounded-lg border cursor-pointer transition-all ${
                 newStatus === 'rejected'
                   ? 'border-red-500 bg-red-500/20'
-                  : 'border-slate-600 hover:border-slate-500'
+                  : 'border-border-subtle hover:border-border'
               }`}
             >
               <input
@@ -213,7 +213,7 @@ function MoveCandidateModal({
                 className="sr-only"
               />
               <span className="w-3 h-3 rounded-full bg-red-500" />
-              <span className="text-white flex-1">Rejected</span>
+              <span className="text-content flex-1">Rejected</span>
             </label>
           </div>
         </div>
@@ -320,7 +320,7 @@ export function Recruitment() {
         </div>
 
         <div className="flex justify-between items-center mb-6">
-          <h3 className="text-lg font-semibold text-white">Open Requisitions</h3>
+          <h3 className="text-lg font-semibold text-content">Open Requisitions</h3>
           <button
             onClick={() => setShowCreateModal(true)}
             className="flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-xl hover:bg-indigo-500 transition-colors"
@@ -337,7 +337,7 @@ export function Recruitment() {
             {recruitments.map((req, index) => (
               <div
                 key={req.id}
-                className={`bg-slate-800/50 rounded-xl border border-slate-700 p-5 cursor-pointer hover:border-slate-600 transition-all card-hover animate-fade-in ${
+                className={`bg-card rounded-xl border border-border p-5 cursor-pointer hover:border-border-subtle transition-all card-hover animate-fade-in ${
                   selectedRecruitment === req.id ? 'ring-2 ring-indigo-500' : ''
                 }`}
                 style={{ animationDelay: `${index * 50}ms` }}
@@ -345,48 +345,48 @@ export function Recruitment() {
               >
                 <div className="flex justify-between items-start mb-4">
                   <div>
-                    <h4 className="text-white font-semibold text-lg">{req.position}</h4>
-                    <p className="text-sm text-slate-400">{req.department}</p>
+                    <h4 className="text-content font-semibold text-lg">{req.position}</h4>
+                    <p className="text-sm text-content-secondary">{req.department}</p>
                   </div>
                   <StatusBadge status={req.status} variant="outline" />
                 </div>
 
                 <div className="grid grid-cols-3 gap-4 mb-4">
-                  <div className="text-center p-3 bg-slate-900/50 rounded-xl">
-                    <p className="text-2xl font-bold text-white">{req.applicants}</p>
-                    <p className="text-xs text-slate-400">Applicants</p>
+                  <div className="text-center p-3 bg-app rounded-xl">
+                    <p className="text-2xl font-bold text-content">{req.applicants}</p>
+                    <p className="text-xs text-content-secondary">Applicants</p>
                   </div>
-                  <div className="text-center p-3 bg-slate-900/50 rounded-xl">
+                  <div className="text-center p-3 bg-app rounded-xl">
                     <p className="text-2xl font-bold text-emerald-400">{req.shortlisted}</p>
-                    <p className="text-xs text-slate-400">Shortlisted</p>
+                    <p className="text-xs text-content-secondary">Shortlisted</p>
                   </div>
-                  <div className="text-center p-3 bg-slate-900/50 rounded-xl">
-                    <p className="text-lg font-bold text-white">{req.closing_date ? format(new Date(req.closing_date), 'MMM d') : '-'}</p>
-                    <p className="text-xs text-slate-400">Closing</p>
+                  <div className="text-center p-3 bg-app rounded-xl">
+                    <p className="text-lg font-bold text-content">{req.closing_date ? format(new Date(req.closing_date), 'MMM d') : '-'}</p>
+                    <p className="text-xs text-content-secondary">Closing</p>
                   </div>
                 </div>
 
                 <div className="flex items-center justify-between text-sm">
-                  <span className="text-slate-400">Hiring Manager: <span className="text-white">{req.hiring_manager}</span></span>
-                  <span className="text-slate-500">Posted {format(new Date(req.posted_date), 'MMM d, yyyy')}</span>
+                  <span className="text-content-secondary">Hiring Manager: <span className="text-content">{req.hiring_manager}</span></span>
+                  <span className="text-content-muted">Posted {format(new Date(req.posted_date), 'MMM d, yyyy')}</span>
                 </div>
 
                 {/* Candidates for selected recruitment */}
                 {selectedRecruitment === req.id && (
-                  <div className="mt-4 pt-4 border-t border-slate-700 animate-fade-in">
-                    <h5 className="text-sm font-semibold text-slate-300 mb-3">Candidates Pipeline</h5>
+                  <div className="mt-4 pt-4 border-t border-border animate-fade-in">
+                    <h5 className="text-sm font-semibold text-content-tertiary mb-3">Candidates Pipeline</h5>
                     <div className="space-y-2">
                       {candidates
                         .filter(c => c.recruitment_id === req.id)
                         .map((candidate) => (
                           <div
                             key={candidate.id}
-                            className="flex items-center justify-between p-3 bg-slate-900/50 rounded-xl hover:bg-slate-900/80 transition-colors"
+                            className="flex items-center justify-between p-3 bg-app rounded-xl hover:bg-app transition-colors"
                             onClick={e => e.stopPropagation()}
                           >
                             <div>
-                              <p className="text-white font-medium">{candidate.name}</p>
-                              <p className="text-xs text-slate-400">{candidate.email}</p>
+                              <p className="text-content font-medium">{candidate.name}</p>
+                              <p className="text-xs text-content-secondary">{candidate.email}</p>
                             </div>
                             <div className="flex items-center gap-3">
                               {candidate.score && (
@@ -395,16 +395,16 @@ export function Recruitment() {
                               <StatusBadge status={candidate.status} size="sm" />
                               <button
                                 onClick={() => setSelectedCandidate(candidate)}
-                                className="p-1 hover:bg-slate-700 rounded-lg transition-colors"
+                                className="p-1 hover:bg-hover rounded-lg transition-colors"
                                 title="Move candidate"
                               >
-                                <ChevronRight size={16} className="text-slate-400" />
+                                <ChevronRight size={16} className="text-content-secondary" />
                               </button>
                             </div>
                           </div>
                         ))}
                       {candidates.filter(c => c.recruitment_id === req.id).length === 0 && (
-                        <p className="text-slate-500 text-sm text-center py-4">No candidates yet</p>
+                        <p className="text-content-muted text-sm text-center py-4">No candidates yet</p>
                       )}
                     </div>
                   </div>

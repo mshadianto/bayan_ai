@@ -76,54 +76,54 @@ function AddEmployeeForm({
     <div className="space-y-4">
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-2">First Name *</label>
+          <label className="block text-sm font-medium text-content-tertiary mb-2">First Name *</label>
           <input
             type="text"
             value={formData.first_name}
             onChange={(e) => setFormData({ ...formData, first_name: e.target.value })}
-            className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+            className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content placeholder-content-secondary focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-2">Last Name *</label>
+          <label className="block text-sm font-medium text-content-tertiary mb-2">Last Name *</label>
           <input
             type="text"
             value={formData.last_name}
             onChange={(e) => setFormData({ ...formData, last_name: e.target.value })}
-            className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+            className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content placeholder-content-secondary focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
           />
         </div>
       </div>
 
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-2">Email *</label>
+          <label className="block text-sm font-medium text-content-tertiary mb-2">Email *</label>
           <input
             type="email"
             value={formData.email}
             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-            className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+            className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content placeholder-content-secondary focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-2">Phone</label>
+          <label className="block text-sm font-medium text-content-tertiary mb-2">Phone</label>
           <input
             type="tel"
             value={formData.phone}
             onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
             placeholder="+966..."
-            className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+            className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content placeholder-content-secondary focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
           />
         </div>
       </div>
 
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-2">Department *</label>
+          <label className="block text-sm font-medium text-content-tertiary mb-2">Department *</label>
           <select
             value={formData.department}
             onChange={(e) => setFormData({ ...formData, department: e.target.value })}
-            className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+            className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
           >
             <option value="">Select Department</option>
             {DEPARTMENTS.map(dept => (
@@ -132,65 +132,65 @@ function AddEmployeeForm({
           </select>
         </div>
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-2">Position *</label>
+          <label className="block text-sm font-medium text-content-tertiary mb-2">Position *</label>
           <input
             type="text"
             value={formData.position}
             onChange={(e) => setFormData({ ...formData, position: e.target.value })}
-            className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+            className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content placeholder-content-secondary focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
           />
         </div>
       </div>
 
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-2">Monthly Salary (SAR)</label>
+          <label className="block text-sm font-medium text-content-tertiary mb-2">Monthly Salary (SAR)</label>
           <input
             type="number"
             value={formData.salary}
             onChange={(e) => setFormData({ ...formData, salary: e.target.value })}
-            className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+            className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content placeholder-content-secondary focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-2">Hire Date</label>
+          <label className="block text-sm font-medium text-content-tertiary mb-2">Hire Date</label>
           <input
             type="date"
             value={formData.hire_date}
             onChange={(e) => setFormData({ ...formData, hire_date: e.target.value })}
-            className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+            className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
           />
         </div>
       </div>
 
-      <div className="border-t border-slate-700 pt-4">
-        <h4 className="text-sm font-medium text-slate-300 mb-3">Document Expiry Dates (Optional)</h4>
+      <div className="border-t border-border pt-4">
+        <h4 className="text-sm font-medium text-content-tertiary mb-3">Document Expiry Dates (Optional)</h4>
         <div className="grid grid-cols-3 gap-4">
           <div>
-            <label className="block text-xs text-slate-400 mb-1">Iqamah</label>
+            <label className="block text-xs text-content-secondary mb-1">Iqamah</label>
             <input
               type="date"
               value={formData.iqamah_expiry}
               onChange={(e) => setFormData({ ...formData, iqamah_expiry: e.target.value })}
-              className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white text-sm focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+              className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content text-sm focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
             />
           </div>
           <div>
-            <label className="block text-xs text-slate-400 mb-1">Visa</label>
+            <label className="block text-xs text-content-secondary mb-1">Visa</label>
             <input
               type="date"
               value={formData.visa_expiry}
               onChange={(e) => setFormData({ ...formData, visa_expiry: e.target.value })}
-              className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white text-sm focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+              className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content text-sm focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
             />
           </div>
           <div>
-            <label className="block text-xs text-slate-400 mb-1">Passport</label>
+            <label className="block text-xs text-content-secondary mb-1">Passport</label>
             <input
               type="date"
               value={formData.passport_expiry}
               onChange={(e) => setFormData({ ...formData, passport_expiry: e.target.value })}
-              className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white text-sm focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+              className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content text-sm focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
             />
           </div>
         </div>
@@ -199,7 +199,7 @@ function AddEmployeeForm({
       <div className="flex gap-3 pt-4">
         <button
           onClick={onCancel}
-          className="flex-1 px-4 py-2 bg-slate-700 text-slate-300 rounded-xl text-sm font-medium hover:bg-slate-600 transition-colors"
+          className="flex-1 px-4 py-2 bg-hover text-content-tertiary rounded-xl text-sm font-medium hover:bg-hover transition-colors"
         >
           Cancel
         </button>
@@ -250,53 +250,53 @@ function EditEmployeeForm({
     <div className="space-y-4">
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-2">First Name</label>
+          <label className="block text-sm font-medium text-content-tertiary mb-2">First Name</label>
           <input
             type="text"
             value={formData.first_name}
             onChange={(e) => setFormData({ ...formData, first_name: e.target.value })}
-            className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+            className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-2">Last Name</label>
+          <label className="block text-sm font-medium text-content-tertiary mb-2">Last Name</label>
           <input
             type="text"
             value={formData.last_name}
             onChange={(e) => setFormData({ ...formData, last_name: e.target.value })}
-            className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+            className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
           />
         </div>
       </div>
 
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-2">Email</label>
+          <label className="block text-sm font-medium text-content-tertiary mb-2">Email</label>
           <input
             type="email"
             value={formData.email}
             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-            className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+            className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-2">Phone</label>
+          <label className="block text-sm font-medium text-content-tertiary mb-2">Phone</label>
           <input
             type="tel"
             value={formData.phone}
             onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-            className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+            className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
           />
         </div>
       </div>
 
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-2">Department</label>
+          <label className="block text-sm font-medium text-content-tertiary mb-2">Department</label>
           <select
             value={formData.department}
             onChange={(e) => setFormData({ ...formData, department: e.target.value })}
-            className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+            className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
           >
             {DEPARTMENTS.map(dept => (
               <option key={dept} value={dept}>{dept}</option>
@@ -304,54 +304,54 @@ function EditEmployeeForm({
           </select>
         </div>
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-2">Position</label>
+          <label className="block text-sm font-medium text-content-tertiary mb-2">Position</label>
           <input
             type="text"
             value={formData.position}
             onChange={(e) => setFormData({ ...formData, position: e.target.value })}
-            className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+            className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
           />
         </div>
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-slate-300 mb-2">Monthly Salary (SAR)</label>
+        <label className="block text-sm font-medium text-content-tertiary mb-2">Monthly Salary (SAR)</label>
         <input
           type="number"
           value={formData.salary}
           onChange={(e) => setFormData({ ...formData, salary: e.target.value })}
-          className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+          className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
         />
       </div>
 
-      <div className="border-t border-slate-700 pt-4">
-        <h4 className="text-sm font-medium text-slate-300 mb-3">Document Expiry Dates</h4>
+      <div className="border-t border-border pt-4">
+        <h4 className="text-sm font-medium text-content-tertiary mb-3">Document Expiry Dates</h4>
         <div className="grid grid-cols-3 gap-4">
           <div>
-            <label className="block text-xs text-slate-400 mb-1">Iqamah</label>
+            <label className="block text-xs text-content-secondary mb-1">Iqamah</label>
             <input
               type="date"
               value={formData.iqamah_expiry}
               onChange={(e) => setFormData({ ...formData, iqamah_expiry: e.target.value })}
-              className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white text-sm focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+              className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content text-sm focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
             />
           </div>
           <div>
-            <label className="block text-xs text-slate-400 mb-1">Visa</label>
+            <label className="block text-xs text-content-secondary mb-1">Visa</label>
             <input
               type="date"
               value={formData.visa_expiry}
               onChange={(e) => setFormData({ ...formData, visa_expiry: e.target.value })}
-              className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white text-sm focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+              className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content text-sm focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
             />
           </div>
           <div>
-            <label className="block text-xs text-slate-400 mb-1">Passport</label>
+            <label className="block text-xs text-content-secondary mb-1">Passport</label>
             <input
               type="date"
               value={formData.passport_expiry}
               onChange={(e) => setFormData({ ...formData, passport_expiry: e.target.value })}
-              className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white text-sm focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+              className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content text-sm focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
             />
           </div>
         </div>
@@ -360,7 +360,7 @@ function EditEmployeeForm({
       <div className="flex gap-3 pt-4">
         <button
           onClick={onCancel}
-          className="flex-1 px-4 py-2 bg-slate-700 text-slate-300 rounded-xl text-sm font-medium hover:bg-slate-600 transition-colors"
+          className="flex-1 px-4 py-2 bg-hover text-content-tertiary rounded-xl text-sm font-medium hover:bg-hover transition-colors"
         >
           Cancel
         </button>
@@ -398,30 +398,30 @@ function TerminateEmployeeForm({
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-slate-300 mb-2">Effective Date</label>
+        <label className="block text-sm font-medium text-content-tertiary mb-2">Effective Date</label>
         <input
           type="date"
           value={effectiveDate}
           onChange={(e) => setEffectiveDate(e.target.value)}
-          className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-red-500 focus:border-transparent"
+          className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content focus:ring-2 focus:ring-red-500 focus:border-transparent"
         />
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-slate-300 mb-2">Reason for Termination</label>
+        <label className="block text-sm font-medium text-content-tertiary mb-2">Reason for Termination</label>
         <textarea
           value={reason}
           onChange={(e) => setReason(e.target.value)}
           rows={3}
           placeholder="Enter reason for termination..."
-          className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:ring-2 focus:ring-red-500 focus:border-transparent"
+          className="w-full px-3 py-2 bg-input border border-border-subtle rounded-lg text-content placeholder-content-secondary focus:ring-2 focus:ring-red-500 focus:border-transparent"
         />
       </div>
 
       <div className="flex gap-3 pt-4">
         <button
           onClick={onCancel}
-          className="flex-1 px-4 py-2 bg-slate-700 text-slate-300 rounded-xl text-sm font-medium hover:bg-slate-600 transition-colors"
+          className="flex-1 px-4 py-2 bg-hover text-content-tertiary rounded-xl text-sm font-medium hover:bg-hover transition-colors"
         >
           Cancel
         </button>
@@ -581,25 +581,25 @@ export default function Employees() {
             description="Try adjusting your search or filter criteria"
           />
         ) : (
-          <div className="bg-slate-800/50 rounded-xl border border-slate-700 overflow-hidden">
+          <div className="bg-card rounded-xl border border-border overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full">
-                <thead className="bg-slate-800">
+                <thead className="bg-input">
                   <tr>
-                    <th className="text-left p-4 text-sm font-medium text-slate-400">Employee</th>
-                    <th className="text-left p-4 text-sm font-medium text-slate-400">ID</th>
-                    <th className="text-left p-4 text-sm font-medium text-slate-400">Department</th>
-                    <th className="text-left p-4 text-sm font-medium text-slate-400">Position</th>
-                    <th className="text-left p-4 text-sm font-medium text-slate-400">Status</th>
-                    <th className="text-left p-4 text-sm font-medium text-slate-400">Hire Date</th>
-                    <th className="text-left p-4 text-sm font-medium text-slate-400">Actions</th>
+                    <th className="text-left p-4 text-sm font-medium text-content-secondary">Employee</th>
+                    <th className="text-left p-4 text-sm font-medium text-content-secondary">ID</th>
+                    <th className="text-left p-4 text-sm font-medium text-content-secondary">Department</th>
+                    <th className="text-left p-4 text-sm font-medium text-content-secondary">Position</th>
+                    <th className="text-left p-4 text-sm font-medium text-content-secondary">Status</th>
+                    <th className="text-left p-4 text-sm font-medium text-content-secondary">Hire Date</th>
+                    <th className="text-left p-4 text-sm font-medium text-content-secondary">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
                   {filteredEmployees.map((emp, index) => (
                     <tr
                       key={emp.id}
-                      className="border-t border-slate-700 hover:bg-slate-800/50 transition-colors animate-fade-in"
+                      className="border-t border-border hover:bg-card transition-colors animate-fade-in"
                       style={{ animationDelay: `${index * 30}ms` }}
                     >
                       <td className="p-4">
@@ -608,25 +608,25 @@ export default function Employees() {
                             {emp.first_name[0]}{emp.last_name[0]}
                           </div>
                           <div>
-                            <p className="text-white font-medium">{emp.first_name} {emp.last_name}</p>
-                            <p className="text-sm text-slate-400">{emp.email}</p>
+                            <p className="text-content font-medium">{emp.first_name} {emp.last_name}</p>
+                            <p className="text-sm text-content-secondary">{emp.email}</p>
                           </div>
                         </div>
                       </td>
-                      <td className="p-4 font-mono text-sm text-slate-300">{emp.employee_id}</td>
-                      <td className="p-4 text-slate-300">{emp.department}</td>
-                      <td className="p-4 text-slate-300">{emp.position}</td>
+                      <td className="p-4 font-mono text-sm text-content-tertiary">{emp.employee_id}</td>
+                      <td className="p-4 text-content-tertiary">{emp.department}</td>
+                      <td className="p-4 text-content-tertiary">{emp.position}</td>
                       <td className="p-4">
                         <StatusBadge status={emp.employment_status} variant="dot" />
                       </td>
-                      <td className="p-4 text-sm text-slate-400">
+                      <td className="p-4 text-sm text-content-secondary">
                         {format(new Date(emp.hire_date), 'MMM d, yyyy')}
                       </td>
                       <td className="p-4">
                         <div className="flex gap-2">
                           <button
                             onClick={() => setSelectedEmployee(emp)}
-                            className="p-2 bg-slate-700 text-slate-300 rounded-lg hover:bg-slate-600 transition-colors"
+                            className="p-2 bg-hover text-content-tertiary rounded-lg hover:bg-hover transition-colors"
                             aria-label="View details"
                           >
                             <Eye size={16} />
@@ -660,7 +660,7 @@ export default function Employees() {
                 </tbody>
               </table>
             </div>
-            <div className="px-4 py-3 border-t border-slate-700 text-sm text-slate-500">
+            <div className="px-4 py-3 border-t border-border text-sm text-content-muted">
               Showing {filteredEmployees.length} of {employees.length} employees
             </div>
           </div>
@@ -686,10 +686,10 @@ export default function Employees() {
                   {selectedEmployee.first_name[0]}{selectedEmployee.last_name[0]}
                 </div>
                 <div>
-                  <h3 className="text-xl font-semibold text-white">
+                  <h3 className="text-xl font-semibold text-content">
                     {selectedEmployee.first_name} {selectedEmployee.last_name}
                   </h3>
-                  <p className="text-slate-400">{selectedEmployee.position}</p>
+                  <p className="text-content-secondary">{selectedEmployee.position}</p>
                   <StatusBadge status={selectedEmployee.employment_status} variant="dot" size="md" />
                 </div>
               </div>
@@ -705,7 +705,7 @@ export default function Employees() {
               {/* Document Expiry */}
               {(selectedEmployee.iqamah_expiry || selectedEmployee.visa_expiry || selectedEmployee.passport_expiry) && (
                 <div>
-                  <h4 className="text-sm font-semibold text-slate-400 mb-3">Document Expiry</h4>
+                  <h4 className="text-sm font-semibold text-content-secondary mb-3">Document Expiry</h4>
                   <div className="grid grid-cols-3 gap-3">
                     {selectedEmployee.iqamah_expiry && (
                       <ExpiryCard label="Iqamah" date={selectedEmployee.iqamah_expiry} />
@@ -722,8 +722,8 @@ export default function Employees() {
 
               {/* Salary */}
               {selectedEmployee.salary && (
-                <div className="bg-slate-900/50 rounded-xl p-4">
-                  <p className="text-sm text-slate-400 mb-1">Monthly Salary</p>
+                <div className="bg-app rounded-xl p-4">
+                  <p className="text-sm text-content-secondary mb-1">Monthly Salary</p>
                   <p className="text-2xl font-bold text-emerald-400">
                     SAR {selectedEmployee.salary.toLocaleString()}
                   </p>
@@ -802,12 +802,12 @@ export default function Employees() {
 // Helper components
 function InfoItem({ icon, label, value }: { icon: React.ReactNode; label: string; value: string }) {
   return (
-    <div className="bg-slate-900/50 rounded-xl p-3">
-      <div className="flex items-center gap-2 text-slate-400 mb-1">
+    <div className="bg-app rounded-xl p-3">
+      <div className="flex items-center gap-2 text-content-secondary mb-1">
         {icon}
         <span className="text-xs">{label}</span>
       </div>
-      <p className="text-white text-sm font-medium truncate">{value}</p>
+      <p className="text-content text-sm font-medium truncate">{value}</p>
     </div>
   );
 }
@@ -822,10 +822,10 @@ function ExpiryCard({ label, date }: { label: string; date: string }) {
     <div className={`rounded-xl p-3 border ${
       isExpired ? 'bg-red-900/30 border-red-600/50' :
       isExpiringSoon ? 'bg-amber-900/30 border-amber-600/50' :
-      'bg-slate-900/50 border-slate-700'
+      'bg-app border-border'
     }`}>
-      <p className="text-xs text-slate-400 mb-1">{label}</p>
-      <p className="text-sm text-white font-medium">{format(expiryDate, 'MMM d, yyyy')}</p>
+      <p className="text-xs text-content-secondary mb-1">{label}</p>
+      <p className="text-sm text-content font-medium">{format(expiryDate, 'MMM d, yyyy')}</p>
       <p className={`text-xs mt-1 ${
         isExpired ? 'text-red-400' :
         isExpiringSoon ? 'text-amber-400' :

@@ -2,35 +2,92 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Dark theme base */
-body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-  background-color: #0f172a;
-  color: #ffffff;
+/* ============================= */
+/* Theme CSS Custom Properties   */
+/* ============================= */
+
+/* Light theme (default when no .dark class) */
+:root {
+  --color-bg-app: #f8fafc;
+  --color-bg-sidebar: #ffffff;
+  --color-bg-card: #ffffff;
+  --color-bg-input: #f1f5f9;
+  --color-bg-hover: #e2e8f0;
+
+  --color-content: #0f172a;
+  --color-content-secondary: #475569;
+  --color-content-tertiary: #334155;
+  --color-content-muted: #94a3b8;
+
+  --color-border: #e2e8f0;
+  --color-border-subtle: #cbd5e1;
+
+  --color-scrollbar-track: #f1f5f9;
+  --color-scrollbar-thumb: #cbd5e1;
+  --color-scrollbar-thumb-hover: #94a3b8;
+
+  --color-table-row-hover: rgba(241, 245, 249, 0.5);
+  --color-skeleton-from: #e2e8f0;
+  --color-skeleton-via: #f1f5f9;
+  --color-card-shadow: rgba(0, 0, 0, 0.08);
 }
 
-/* Custom scrollbar - dark theme */
+/* Dark theme */
+.dark {
+  --color-bg-app: #0f172a;
+  --color-bg-sidebar: #0f172a;
+  --color-bg-card: rgba(30, 41, 59, 0.5);
+  --color-bg-input: #1e293b;
+  --color-bg-hover: #334155;
+
+  --color-content: #ffffff;
+  --color-content-secondary: #94a3b8;
+  --color-content-tertiary: #cbd5e1;
+  --color-content-muted: #64748b;
+
+  --color-border: #334155;
+  --color-border-subtle: #475569;
+
+  --color-scrollbar-track: #1e293b;
+  --color-scrollbar-thumb: #475569;
+  --color-scrollbar-thumb-hover: #64748b;
+
+  --color-table-row-hover: rgba(30, 41, 59, 0.5);
+  --color-skeleton-from: #1e293b;
+  --color-skeleton-via: #334155;
+  --color-card-shadow: rgba(0, 0, 0, 0.3);
+}
+
+/* Theme-aware base */
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  background-color: var(--color-bg-app);
+  color: var(--color-content);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #1e293b;
+  background: var(--color-scrollbar-track);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #475569;
+  background: var(--color-scrollbar-thumb);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #64748b;
+  background: var(--color-scrollbar-thumb-hover);
 }
 
-/* Table row hover - dark theme */
+/* Table row hover */
 tbody tr:hover {
-  background-color: rgba(30, 41, 59, 0.5);
+  background-color: var(--color-table-row-hover);
 }
 
 /* Button focus styles - teal accent */
@@ -118,7 +175,7 @@ select:focus {
 
 .card-hover:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 30px var(--color-card-shadow);
 }
 
 /* Skeleton loading pulse */
@@ -133,7 +190,7 @@ select:focus {
 
 .skeleton {
   animation: skeleton-pulse 1.5s ease-in-out infinite;
-  background: linear-gradient(90deg, #1e293b 0%, #334155 50%, #1e293b 100%);
+  background: linear-gradient(90deg, var(--color-skeleton-from) 0%, var(--color-skeleton-via) 50%, var(--color-skeleton-from) 100%);
   background-size: 200% 100%;
 }
 
@@ -196,7 +253,7 @@ select:focus {
 }
 
 .animate-shimmer {
-  background: linear-gradient(90deg, #1e293b 25%, #334155 50%, #1e293b 75%);
+  background: linear-gradient(90deg, var(--color-skeleton-from) 25%, var(--color-skeleton-via) 50%, var(--color-skeleton-from) 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
 }
