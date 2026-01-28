@@ -113,13 +113,15 @@ export default function KnowledgeBase() {
   };
 
   const suggestedQuestions = [
-    'Bagaimana prosedur pengadaan barang?',
-    'Berapa lama cuti tahunan karyawan?',
-    'Apa saja regulasi haji yang berlaku?',
+    'Bagaimana hierarki peraturan perusahaan?',
+    'Apa ketentuan perjalanan dinas?',
+    'Bagaimana pedoman investasi dan bisnis?',
   ];
 
   const getDocTypeColor = (type: string) => {
     const colors: Record<string, string> = {
+      peraturan_syarikah: 'bg-amber-100 text-amber-700',
+      peraturan_mudir: 'bg-orange-100 text-orange-700',
       sk_direksi: 'bg-purple-100 text-purple-700',
       surat_edaran: 'bg-blue-100 text-blue-700',
       peraturan_perusahaan: 'bg-green-100 text-green-700',
@@ -131,6 +133,8 @@ export default function KnowledgeBase() {
 
   const getDocTypeLabel = (type: string) => {
     const labels: Record<string, string> = {
+      peraturan_syarikah: 'Peraturan Syarikah',
+      peraturan_mudir: 'Peraturan Mudir',
       sk_direksi: 'SK Direksi',
       surat_edaran: 'Surat Edaran',
       peraturan_perusahaan: 'Peraturan Perusahaan',
@@ -303,16 +307,16 @@ export default function KnowledgeBase() {
                   <span className="font-medium">{documents.length}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-600">SK Direksi</span>
-                  <span className="font-medium">{documents.filter(d => d.document_type === 'sk_direksi').length}</span>
+                  <span className="text-gray-600">Peraturan Syarikah</span>
+                  <span className="font-medium">{documents.filter(d => d.document_type === 'peraturan_syarikah').length}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-600">Surat Edaran</span>
-                  <span className="font-medium">{documents.filter(d => d.document_type === 'surat_edaran').length}</span>
+                  <span className="text-gray-600">Peraturan Mudir</span>
+                  <span className="font-medium">{documents.filter(d => d.document_type === 'peraturan_mudir').length}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-600">UU/Regulasi</span>
-                  <span className="font-medium">{documents.filter(d => d.document_type === 'uu').length}</span>
+                  <span className="text-gray-600">Berlaku (Active)</span>
+                  <span className="font-medium">{documents.filter(d => d.status === 'active').length}</span>
                 </div>
               </div>
             </div>

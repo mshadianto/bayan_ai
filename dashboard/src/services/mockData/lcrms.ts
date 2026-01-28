@@ -351,13 +351,159 @@ export const mockResolutions: CircularResolution[] = [
   },
 ];
 
-// ==================== LEGAL DOCUMENTS ====================
+// ==================== LEGAL DOCUMENTS (Peraturan Syarikah BPKH Limited) ====================
 export const mockLegalDocuments: LegalDocument[] = [
-  { id: '1', title: 'SK Direksi tentang Kebijakan Pengadaan', document_type: 'sk_direksi', document_number: 'SK-001/DIR/2024', category: 'Procurement', issuer: 'Direksi', issue_date: '2024-01-10', effective_date: '2024-01-15', summary: 'Kebijakan pengadaan barang dan jasa di lingkungan perusahaan', keywords: ['pengadaan', 'procurement', 'tender', 'vendor'], document_url: '/docs/sk-001-2024.pdf', status: 'active', created_at: '2024-01-10' },
-  { id: '2', title: 'Surat Edaran tentang Cuti Tahunan', document_type: 'surat_edaran', document_number: 'SE-005/HR/2024', category: 'HR', issuer: 'HR Department', issue_date: '2024-01-05', effective_date: '2024-01-05', summary: 'Ketentuan pengajuan dan persetujuan cuti tahunan', keywords: ['cuti', 'leave', 'annual leave', 'HR'], document_url: '/docs/se-005-2024.pdf', status: 'active', created_at: '2024-01-05' },
-  { id: '3', title: 'Peraturan Perusahaan BPKH Limited', document_type: 'peraturan_perusahaan', document_number: 'PP-001/2023', category: 'General', issuer: 'Direksi', issue_date: '2023-01-01', effective_date: '2023-01-15', summary: 'Peraturan perusahaan yang mengatur hak dan kewajiban karyawan', keywords: ['peraturan', 'karyawan', 'employee', 'rules'], document_url: '/docs/pp-001-2023.pdf', status: 'active', created_at: '2023-01-01' },
-  { id: '4', title: 'UU No. 8 Tahun 2019 tentang Penyelenggaraan Ibadah Haji', document_type: 'uu', document_number: 'UU 8/2019', category: 'Hajj Regulation', issuer: 'DPR RI', issue_date: '2019-10-14', effective_date: '2019-10-14', summary: 'Undang-undang yang mengatur penyelenggaraan ibadah haji', keywords: ['haji', 'hajj', 'penyelenggaraan', 'regulasi'], document_url: '/docs/uu-8-2019.pdf', status: 'active', created_at: '2020-01-01' },
-  { id: '5', title: 'Saudi Hajj Regulations 2023', document_type: 'other', document_number: 'Royal Decree A/123', category: 'Hajj Regulation', issuer: 'Ministry of Hajj KSA', issue_date: '2023-03-01', summary: 'Regulations governing Hajj operations in Saudi Arabia', keywords: ['hajj', 'saudi', 'regulation', 'permit'], document_url: '/docs/saudi-hajj-reg-2023.pdf', status: 'active', created_at: '2023-03-01' },
+  {
+    id: '1',
+    title: 'Peraturan Syarikah tentang Hierarki Peraturan Perusahaan',
+    document_type: 'peraturan_syarikah',
+    document_number: 'PS-001/2025',
+    category: 'Governance',
+    issuer: 'Mudir BPKH Limited',
+    issue_date: '2025-02-02',
+    effective_date: '2025-02-02',
+    summary: 'Menetapkan hierarki peraturan perusahaan, sistem penomoran dokumen legal, dan tata kelola administrasi dokumen untuk menciptakan kepastian hukum dan ketertiban dalam pengelolaan perusahaan sesuai prinsip Good Corporate Governance.',
+    keywords: ['hierarki', 'peraturan perusahaan', 'penomoran dokumen', 'tata kelola', 'governance', 'GCG'],
+    document_url: '/docs/ps-001-2025.pdf',
+    status: 'active',
+    created_at: '2025-02-02',
+  },
+  {
+    id: '2',
+    title: 'Peraturan Syarikah tentang Tata Kelola SDM (Versi Awal)',
+    document_type: 'peraturan_syarikah',
+    document_number: 'PS-002/2025',
+    category: 'HR',
+    issuer: 'Mudir BPKH Limited',
+    issue_date: '2025-02-02',
+    effective_date: '2025-02-02',
+    summary: 'Peraturan awal tentang tata kelola sumber daya manusia BPKH Limited mencakup sistem manajemen SDM yang profesional, efektif, dan efisien untuk mendukung pencapaian tujuan strategis perusahaan.',
+    keywords: ['SDM', 'sumber daya manusia', 'kepegawaian', 'HR', 'manajemen SDM'],
+    document_url: '/docs/ps-002-2025.pdf',
+    status: 'amended',
+    superseded_by: '6',
+    created_at: '2025-02-02',
+  },
+  {
+    id: '3',
+    title: 'Peraturan Syarikah tentang Tata Kelola BPKH Limited dengan Induk Usaha',
+    document_type: 'peraturan_syarikah',
+    document_number: 'PS-003/2025',
+    category: 'Governance',
+    issuer: 'Mudir BPKH Limited',
+    issue_date: '2025-02-02',
+    effective_date: '2025-02-02',
+    summary: 'Pedoman tata kelola hubungan antara BPKH Limited dengan induk usaha BPKH, mencakup prinsip Good Corporate Governance, praktik manajemen korporasi, dan kepatuhan terhadap norma hukum yang berlaku di Kerajaan Arab Saudi.',
+    keywords: ['tata kelola', 'induk usaha', 'BPKH', 'governance', 'korporasi', 'GCG', 'hubungan induk anak'],
+    document_url: '/docs/ps-003-2025.pdf',
+    status: 'active',
+    created_at: '2025-02-02',
+  },
+  {
+    id: '4',
+    title: 'Peraturan Syarikah tentang Board Manual (Pedoman Kerja Dewan Mudir)',
+    document_type: 'peraturan_syarikah',
+    document_number: 'PS-004/2025',
+    category: 'Governance',
+    issuer: 'Mudir BPKH Limited',
+    issue_date: '2025-02-02',
+    effective_date: '2025-02-02',
+    summary: 'Pedoman kerja Dewan Mudir (Board Manual) BPKH Limited yang mengatur fungsi, tugas, wewenang, tanggung jawab, dan mekanisme kerja Dewan Mudir dalam menjalankan pengelolaan perusahaan sesuai prinsip Good Corporate Governance.',
+    keywords: ['board manual', 'dewan mudir', 'direksi', 'pedoman kerja', 'governance', 'tugas wewenang'],
+    document_url: '/docs/ps-004-2025.pdf',
+    status: 'active',
+    created_at: '2025-02-02',
+  },
+  {
+    id: '5',
+    title: 'Peraturan Syarikah tentang Tata Kelola Kepatuhan (Compliance)',
+    document_type: 'peraturan_syarikah',
+    document_number: 'PS-005/2025',
+    category: 'Compliance',
+    issuer: 'Mudir BPKH Limited',
+    issue_date: '2025-03-21',
+    effective_date: '2025-03-21',
+    summary: 'Kerangka kerja tata kelola kepatuhan (compliance) BPKH Limited untuk memastikan seluruh aktivitas bisnis berjalan sesuai dengan peraturan perundang-undangan, kebijakan internal, dan standar etika perusahaan dalam mewujudkan Good Corporate Governance.',
+    keywords: ['compliance', 'kepatuhan', 'tata kelola', 'etika', 'peraturan', 'GCG', 'hukum'],
+    document_url: '/docs/ps-005-2025.pdf',
+    status: 'active',
+    created_at: '2025-03-21',
+  },
+  {
+    id: '6',
+    title: 'Peraturan Syarikah tentang Tata Kelola Sumber Daya Manusia',
+    document_type: 'peraturan_syarikah',
+    document_number: 'PS-006/2025',
+    category: 'HR',
+    issuer: 'Mudir BPKH Limited',
+    issue_date: '2025-07-21',
+    effective_date: '2025-07-21',
+    summary: 'Peraturan komprehensif tata kelola kepegawaian BPKH Limited mencakup perencanaan tenaga kerja, rekrutmen, pengembangan karir, penilaian kinerja, remunerasi, hubungan industrial, dan pemberhentian pegawai. Menggantikan PS-002/2025.',
+    keywords: ['SDM', 'kepegawaian', 'rekrutmen', 'karir', 'kinerja', 'remunerasi', 'HR', 'tenaga kerja'],
+    document_url: '/docs/ps-006-2025.pdf',
+    status: 'active',
+    created_at: '2025-07-21',
+  },
+  {
+    id: '7',
+    title: 'Peraturan Mudir tentang RPBP 2024-2028 dan RBTP Tahun 2024',
+    document_type: 'peraturan_mudir',
+    document_number: 'PM-007/2024',
+    category: 'Business Planning',
+    issuer: 'Mudir BPKH Limited',
+    issue_date: '2024-01-01',
+    effective_date: '2024-01-01',
+    summary: 'Rencana Pengembangan Bisnis Perusahaan (RPBP) periode 2024-2028 dan Rencana Bisnis Tahunan Perusahaan (RBTP) tahun 2024 BPKH Limited, mencakup tujuan investasi, strategi bisnis, dan perlakuan investasi BPKH di BPKH Limited.',
+    keywords: ['RPBP', 'RBTP', 'rencana bisnis', 'business plan', 'investasi', 'strategi', '2024-2028'],
+    document_url: '/docs/pm-007-2024.pdf',
+    status: 'active',
+    created_at: '2024-01-01',
+  },
+  {
+    id: '8',
+    title: 'Peraturan Syarikah tentang Pedoman Investasi dan Bisnis',
+    document_type: 'peraturan_syarikah',
+    document_number: 'PS-007/2025',
+    category: 'Investment',
+    issuer: 'Mudir BPKH Limited',
+    issue_date: '2025-07-21',
+    effective_date: '2025-07-21',
+    summary: 'Pedoman investasi dan bisnis BPKH Limited yang mengatur kebijakan investasi, manajemen portofolio, due diligence, pengelolaan risiko investasi, serta kepatuhan syariah dalam seluruh kegiatan bisnis dan investasi perusahaan.',
+    keywords: ['investasi', 'bisnis', 'portofolio', 'due diligence', 'risiko', 'syariah', 'investment'],
+    document_url: '/docs/ps-007-2025.pdf',
+    status: 'active',
+    created_at: '2025-07-21',
+  },
+  {
+    id: '9',
+    title: 'Peraturan Mudir tentang Rencana Bisnis Tahunan Perusahaan (RBTP) Tahun 2025',
+    document_type: 'peraturan_mudir',
+    document_number: 'PM-008/2024',
+    category: 'Business Planning',
+    issuer: 'Mudir BPKH Limited',
+    issue_date: '2024-12-30',
+    effective_date: '2025-01-01',
+    summary: 'Rencana Bisnis Tahunan Perusahaan (RBTP) tahun 2025 BPKH Limited mencakup target bisnis, anggaran operasional, rencana investasi, pengembangan SDM, dan strategi pencapaian KPI perusahaan untuk tahun buku 2025.',
+    keywords: ['RBTP', 'rencana bisnis', 'business plan', 'anggaran', 'KPI', 'target', '2025'],
+    document_url: '/docs/pm-008-2024.pdf',
+    status: 'active',
+    created_at: '2024-12-30',
+  },
+  {
+    id: '10',
+    title: 'Peraturan Syarikah tentang Tata Cara Perjalanan Dinas',
+    document_type: 'peraturan_syarikah',
+    document_number: 'PS-008/2025',
+    category: 'Travel',
+    issuer: 'Mudir BPKH Limited',
+    issue_date: '2025-09-16',
+    effective_date: '2025-09-16',
+    summary: 'Pedoman komprehensif tata cara perjalanan dinas BPKH Limited yang mengatur jenis perjalanan dinas, prosedur pengajuan, uang harian, transportasi, akomodasi, pertanggungjawaban biaya, dan ketentuan khusus perjalanan dinas luar negeri.',
+    keywords: ['perjalanan dinas', 'travel', 'uang harian', 'transportasi', 'akomodasi', 'biaya perjalanan'],
+    document_url: '/docs/ps-008-2025.pdf',
+    status: 'active',
+    created_at: '2025-09-16',
+  },
 ];
 
 // ==================== DASHBOARD ====================
@@ -706,28 +852,64 @@ export const lcrmsApi = {
     },
     askQuestion: async (question: string): Promise<{ answer: string; sources: string[] }> => {
       await delay(800);
-      // Simulate AI response based on keywords
       const lowerQ = question.toLowerCase();
-      if (lowerQ.includes('pengadaan') || lowerQ.includes('procurement')) {
+
+      if (lowerQ.includes('hierarki') || lowerQ.includes('penomoran') || lowerQ.includes('jenis peraturan')) {
         return {
-          answer: 'Berdasarkan SK Direksi No. SK-001/DIR/2024, pengadaan barang dan jasa di lingkungan perusahaan harus melalui proses tender untuk nilai di atas SAR 100,000. Untuk nilai di bawah itu, dapat menggunakan penunjukan langsung dengan minimal 3 pembanding harga.',
-          sources: ['SK-001/DIR/2024 - Kebijakan Pengadaan'],
+          answer: 'Berdasarkan PS-001/2025, hierarki peraturan perusahaan BPKH Limited terdiri dari: (1) Peraturan Syarikah - peraturan tertinggi yang ditetapkan oleh Mudir, (2) Peraturan Mudir - peraturan pelaksanaan yang ditetapkan oleh Mudir, (3) Surat Keputusan (SK) Mudir, (4) Surat Edaran, dan (5) Nota Dinas. Setiap dokumen memiliki sistem penomoran baku sesuai ketentuan BAB III peraturan ini.',
+          sources: ['PS-001/2025 - Hierarki Peraturan Perusahaan'],
+        };
+      }
+      if (lowerQ.includes('sdm') || lowerQ.includes('karyawan') || lowerQ.includes('kepegawaian') || lowerQ.includes('rekrutmen') || lowerQ.includes('pegawai')) {
+        return {
+          answer: 'Berdasarkan PS-006/2025 (menggantikan PS-002/2025), tata kelola SDM BPKH Limited mencakup: perencanaan tenaga kerja, akuisisi talenta (rekrutmen), pengembangan karir dan kompetensi, penilaian kinerja, sistem remunerasi dan tunjangan, hubungan industrial, serta mekanisme pemberhentian pegawai. Rekrutmen dilakukan berdasarkan prinsip transparansi, akuntabilitas, dan merit system.',
+          sources: ['PS-006/2025 - Tata Kelola Sumber Daya Manusia', 'PS-002/2025 - Tata Kelola SDM (Versi Awal)'],
         };
       }
       if (lowerQ.includes('cuti') || lowerQ.includes('leave')) {
         return {
-          answer: 'Sesuai SE-005/HR/2024, karyawan berhak atas cuti tahunan 21 hari kerja. Pengajuan cuti minimal 3 hari sebelumnya untuk cuti biasa, dan dapat diajukan mendadak untuk cuti sakit dengan melampirkan surat dokter.',
-          sources: ['SE-005/HR/2024 - Cuti Tahunan', 'PP-001/2023 - Peraturan Perusahaan'],
+          answer: 'Sesuai PS-006/2025 tentang Tata Kelola SDM, ketentuan cuti pegawai BPKH Limited diatur dalam bab mengenai hubungan industrial dan kesejahteraan pegawai. Pengajuan cuti mengikuti prosedur yang ditetapkan dengan persetujuan atasan langsung.',
+          sources: ['PS-006/2025 - Tata Kelola Sumber Daya Manusia'],
         };
       }
-      if (lowerQ.includes('haji') || lowerQ.includes('hajj')) {
+      if (lowerQ.includes('induk usaha') || lowerQ.includes('bpkh') || lowerQ.includes('tata kelola perusahaan') || lowerQ.includes('gcg') || lowerQ.includes('governance')) {
         return {
-          answer: 'Penyelenggaraan ibadah haji diatur dalam UU No. 8 Tahun 2019. BPKH Limited sebagai PPIU wajib memenuhi ketentuan izin operasional dari Kemenag RI dan regulasi Ministry of Hajj KSA.',
-          sources: ['UU 8/2019 - Penyelenggaraan Ibadah Haji', 'Saudi Hajj Regulations 2023'],
+          answer: 'Berdasarkan PS-003/2025, hubungan tata kelola antara BPKH Limited dan induk usaha BPKH diatur berdasarkan prinsip Good Corporate Governance. Perusahaan tunduk kepada norma hukum yang berlaku di Kerajaan Arab Saudi serta peraturan internal BPKH. Pedoman ini mencakup mekanisme pelaporan, pengawasan, dan koordinasi antara anak perusahaan dengan induk usaha.',
+          sources: ['PS-003/2025 - Tata Kelola BPKH Limited dengan Induk Usaha'],
+        };
+      }
+      if (lowerQ.includes('board') || lowerQ.includes('mudir') || lowerQ.includes('direksi') || lowerQ.includes('dewan')) {
+        return {
+          answer: 'Berdasarkan PS-004/2025 (Board Manual), Dewan Mudir BPKH Limited memiliki tugas dan wewenang menjalankan pengelolaan perusahaan sesuai prinsip GCG. Pedoman ini mengatur fungsi, tanggung jawab, mekanisme pengambilan keputusan, rapat Dewan Mudir, serta hubungan kerja dengan organ perusahaan lainnya.',
+          sources: ['PS-004/2025 - Board Manual (Pedoman Kerja Dewan Mudir)'],
+        };
+      }
+      if (lowerQ.includes('compliance') || lowerQ.includes('kepatuhan')) {
+        return {
+          answer: 'Berdasarkan PS-005/2025, kerangka kerja kepatuhan (compliance) BPKH Limited bertujuan memastikan seluruh aktivitas bisnis berjalan sesuai peraturan perundang-undangan, kebijakan internal, dan standar etika. Tata kelola compliance mencakup identifikasi risiko kepatuhan, monitoring, pelaporan pelanggaran, dan mekanisme whistleblowing.',
+          sources: ['PS-005/2025 - Tata Kelola Kepatuhan (Compliance)'],
+        };
+      }
+      if (lowerQ.includes('investasi') || lowerQ.includes('investment') || lowerQ.includes('bisnis') || lowerQ.includes('portofolio')) {
+        return {
+          answer: 'Berdasarkan PS-007/2025, pedoman investasi dan bisnis BPKH Limited mengatur kebijakan investasi, manajemen portofolio, proses due diligence, pengelolaan risiko investasi, serta kepatuhan syariah. Seluruh kegiatan investasi wajib memenuhi prinsip kehati-hatian dan screening syariah untuk memastikan kehalalan instrumen investasi.',
+          sources: ['PS-007/2025 - Pedoman Investasi dan Bisnis', 'PM-007/2024 - RPBP 2024-2028'],
+        };
+      }
+      if (lowerQ.includes('rpbp') || lowerQ.includes('rbtp') || lowerQ.includes('rencana bisnis') || lowerQ.includes('business plan') || lowerQ.includes('anggaran')) {
+        return {
+          answer: 'RPBP 2024-2028 (PM-007/2024) menetapkan arah pengembangan bisnis jangka menengah BPKH Limited, sedangkan RBTP 2025 (PM-008/2024) merinci target bisnis tahunan mencakup anggaran operasional, rencana investasi, pengembangan SDM, dan KPI perusahaan untuk tahun buku 2025.',
+          sources: ['PM-007/2024 - RPBP 2024-2028 dan RBTP 2024', 'PM-008/2024 - RBTP 2025'],
+        };
+      }
+      if (lowerQ.includes('perjalanan dinas') || lowerQ.includes('travel') || lowerQ.includes('uang harian') || lowerQ.includes('transportasi') || lowerQ.includes('akomodasi')) {
+        return {
+          answer: 'Berdasarkan PS-008/2025, perjalanan dinas BPKH Limited diatur dengan ketentuan: jenis perjalanan dinas (dalam/luar kota/luar negeri), prosedur pengajuan dan persetujuan, komponen biaya (uang harian, transportasi, akomodasi), serta mekanisme pertanggungjawaban. Perjalanan dinas luar negeri memiliki ketentuan khusus terkait passport, visa, dan uang representasi.',
+          sources: ['PS-008/2025 - Tata Cara Perjalanan Dinas'],
         };
       }
       return {
-        answer: 'Maaf, saya tidak menemukan informasi spesifik terkait pertanyaan Anda. Silakan hubungi tim Legal untuk konsultasi lebih lanjut.',
+        answer: 'Maaf, saya tidak menemukan informasi spesifik terkait pertanyaan Anda dalam database Peraturan Syarikah BPKH Limited. Silakan coba kata kunci lain seperti: hierarki peraturan, SDM/kepegawaian, tata kelola, compliance, investasi, perjalanan dinas, atau rencana bisnis.',
         sources: [],
       };
     },

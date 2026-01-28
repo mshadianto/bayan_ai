@@ -1,0 +1,1844 @@
+{
+  "schema_name": "DoclingDocument",
+  "version": "1.7.0",
+  "name": "005 2025 - 21.03.2025 - PERATURAN SYARIKAH BPKH LIMITED - TENTANG TATA KELOLA KEPATUHAN (COMPLIANCE)",
+  "origin": {
+    "mimetype": "application/pdf",
+    "binary_hash": 13392583294178522820,
+    "filename": "005 2025 - 21.03.2025 - PERATURAN SYARIKAH BPKH LIMITED - TENTANG TATA KELOLA KEPATUHAN (COMPLIANCE).pdf"
+  },
+  "furniture": {
+    "self_ref": "#/furniture",
+    "children": [],
+    "content_layer": "furniture",
+    "name": "_root_",
+    "label": "unspecified"
+  },
+  "body": {
+    "self_ref": "#/body",
+    "children": [
+      {
+        "$ref": "#/texts/0"
+      },
+      {
+        "$ref": "#/texts/1"
+      },
+      {
+        "$ref": "#/texts/2"
+      },
+      {
+        "$ref": "#/texts/3"
+      },
+      {
+        "$ref": "#/texts/4"
+      },
+      {
+        "$ref": "#/texts/5"
+      },
+      {
+        "$ref": "#/groups/0"
+      },
+      {
+        "$ref": "#/groups/1"
+      },
+      {
+        "$ref": "#/texts/12"
+      },
+      {
+        "$ref": "#/groups/5"
+      },
+      {
+        "$ref": "#/groups/6"
+      },
+      {
+        "$ref": "#/pictures/0"
+      },
+      {
+        "$ref": "#/groups/7"
+      },
+      {
+        "$ref": "#/pictures/1"
+      },
+      {
+        "$ref": "#/pictures/2"
+      },
+      {
+        "$ref": "#/texts/23"
+      },
+      {
+        "$ref": "#/texts/24"
+      },
+      {
+        "$ref": "#/texts/25"
+      },
+      {
+        "$ref": "#/texts/26"
+      },
+      {
+        "$ref": "#/texts/27"
+      },
+      {
+        "$ref": "#/texts/28"
+      },
+      {
+        "$ref": "#/groups/8"
+      },
+      {
+        "$ref": "#/texts/32"
+      },
+      {
+        "$ref": "#/texts/33"
+      },
+      {
+        "$ref": "#/texts/34"
+      },
+      {
+        "$ref": "#/texts/35"
+      },
+      {
+        "$ref": "#/groups/9"
+      },
+      {
+        "$ref": "#/texts/39"
+      },
+      {
+        "$ref": "#/texts/40"
+      },
+      {
+        "$ref": "#/texts/41"
+      },
+      {
+        "$ref": "#/texts/42"
+      },
+      {
+        "$ref": "#/texts/43"
+      },
+      {
+        "$ref": "#/texts/44"
+      },
+      {
+        "$ref": "#/texts/45"
+      },
+      {
+        "$ref": "#/groups/10"
+      },
+      {
+        "$ref": "#/pictures/3"
+      },
+      {
+        "$ref": "#/texts/48"
+      }
+    ],
+    "content_layer": "body",
+    "name": "_root_",
+    "label": "unspecified"
+  },
+  "groups": [
+    {
+      "self_ref": "#/groups/0",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [
+        {
+          "$ref": "#/texts/6"
+        },
+        {
+          "$ref": "#/texts/7"
+        }
+      ],
+      "content_layer": "body",
+      "name": "list",
+      "label": "list"
+    },
+    {
+      "self_ref": "#/groups/1",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [
+        {
+          "$ref": "#/texts/8"
+        },
+        {
+          "$ref": "#/groups/2"
+        },
+        {
+          "$ref": "#/groups/3"
+        },
+        {
+          "$ref": "#/groups/4"
+        }
+      ],
+      "content_layer": "body",
+      "name": "group",
+      "label": "key_value_area"
+    },
+    {
+      "self_ref": "#/groups/2",
+      "parent": {
+        "$ref": "#/groups/1"
+      },
+      "children": [
+        {
+          "$ref": "#/texts/9"
+        }
+      ],
+      "content_layer": "body",
+      "name": "group",
+      "label": "list"
+    },
+    {
+      "self_ref": "#/groups/3",
+      "parent": {
+        "$ref": "#/groups/1"
+      },
+      "children": [
+        {
+          "$ref": "#/texts/10"
+        }
+      ],
+      "content_layer": "body",
+      "name": "group",
+      "label": "list"
+    },
+    {
+      "self_ref": "#/groups/4",
+      "parent": {
+        "$ref": "#/groups/1"
+      },
+      "children": [
+        {
+          "$ref": "#/texts/11"
+        }
+      ],
+      "content_layer": "body",
+      "name": "group",
+      "label": "list"
+    },
+    {
+      "self_ref": "#/groups/5",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [
+        {
+          "$ref": "#/texts/13"
+        },
+        {
+          "$ref": "#/texts/14"
+        }
+      ],
+      "content_layer": "body",
+      "name": "group",
+      "label": "key_value_area"
+    },
+    {
+      "self_ref": "#/groups/6",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [
+        {
+          "$ref": "#/texts/15"
+        },
+        {
+          "$ref": "#/texts/16"
+        },
+        {
+          "$ref": "#/texts/17"
+        },
+        {
+          "$ref": "#/texts/18"
+        }
+      ],
+      "content_layer": "body",
+      "name": "group",
+      "label": "key_value_area"
+    },
+    {
+      "self_ref": "#/groups/7",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [
+        {
+          "$ref": "#/texts/19"
+        },
+        {
+          "$ref": "#/texts/20"
+        },
+        {
+          "$ref": "#/texts/21"
+        },
+        {
+          "$ref": "#/texts/22"
+        }
+      ],
+      "content_layer": "body",
+      "name": "group",
+      "label": "key_value_area"
+    },
+    {
+      "self_ref": "#/groups/8",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [
+        {
+          "$ref": "#/texts/29"
+        },
+        {
+          "$ref": "#/texts/30"
+        },
+        {
+          "$ref": "#/texts/31"
+        }
+      ],
+      "content_layer": "body",
+      "name": "list",
+      "label": "list"
+    },
+    {
+      "self_ref": "#/groups/9",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [
+        {
+          "$ref": "#/texts/36"
+        },
+        {
+          "$ref": "#/texts/37"
+        },
+        {
+          "$ref": "#/texts/38"
+        }
+      ],
+      "content_layer": "body",
+      "name": "list",
+      "label": "list"
+    },
+    {
+      "self_ref": "#/groups/10",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [
+        {
+          "$ref": "#/texts/46"
+        },
+        {
+          "$ref": "#/texts/47"
+        }
+      ],
+      "content_layer": "body",
+      "name": "list",
+      "label": "list"
+    }
+  ],
+  "texts": [
+    {
+      "self_ref": "#/texts/0",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 77.304,
+            "t": 641.5700219726563,
+            "r": 165.214,
+            "b": 630.5300219726562,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            11
+          ]
+        }
+      ],
+      "orig": "Menimbang :",
+      "text": "Menimbang :"
+    },
+    {
+      "self_ref": "#/texts/1",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 215.35,
+            "t": 763.5400219726562,
+            "r": 379.581,
+            "b": 739.0600219726562,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            53
+          ]
+        }
+      ],
+      "orig": "PERATURAN SYARIKAH BPKH LIMITED NOMOR: 005 TAHUN 2025",
+      "text": "PERATURAN SYARIKAH BPKH LIMITED NOMOR: 005 TAHUN 2025",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/2",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 276.34,
+            "t": 736.6600219726562,
+            "r": 318.745,
+            "b": 725.6200219726562,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            7
+          ]
+        }
+      ],
+      "orig": "TENTANG",
+      "text": "TENTANG",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/3",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 184.63,
+            "t": 723.1900219726563,
+            "r": 410.232,
+            "b": 685.2700219726562,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            89
+          ]
+        }
+      ],
+      "orig": "TENTANG TATA KELOLA KEPATUHAN (COMPLIANCE) BPKH LIMITED DENGAN RAHMAT TUHAN YANG MAHA ESA",
+      "text": "TENTANG TATA KELOLA KEPATUHAN (COMPLIANCE) BPKH LIMITED DENGAN RAHMAT TUHAN YANG MAHA ESA",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/4",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 247.78,
+            "t": 682.8700219726562,
+            "r": 347.372,
+            "b": 671.8300219726563,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            19
+          ]
+        }
+      ],
+      "orig": "MUDIR BPKH LIMITED,",
+      "text": "MUDIR BPKH LIMITED,",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/5",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 174.55,
+            "t": 641.5700219726563,
+            "r": 522.509,
+            "b": 590.2100219726562,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            276
+          ]
+        }
+      ],
+      "orig": "a. bahwa  untuk  mewujudkan  tata  kelola  perusahaan  yang  baik  ( Good Corporate Governance ), diperlukan suatu kerangka kerja yang memastikan seluruh  aktivitas  bisnis  berjalan  sesuai  dengan  peraturan  perundangundangan, anggaran dasar, dan etika bisnis yang berlaku;",
+      "text": "a. bahwa  untuk  mewujudkan  tata  kelola  perusahaan  yang  baik  ( Good Corporate Governance ), diperlukan suatu kerangka kerja yang memastikan seluruh  aktivitas  bisnis  berjalan  sesuai  dengan  peraturan  perundangundangan, anggaran dasar, dan etika bisnis yang berlaku;"
+    },
+    {
+      "self_ref": "#/texts/6",
+      "parent": {
+        "$ref": "#/groups/0"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 174.55,
+            "t": 587.8100219726562,
+            "r": 522.105,
+            "b": 549.8600219726562,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            182
+          ]
+        }
+      ],
+      "orig": "b. bahwa dalam rangka melindungi Perusahaan dari risiko hukum, operasional,  dan  reputasi,  perlu  untuk  membangun  dan  menumbuhkan budaya kepatuhan di seluruh jenjang organisasi;",
+      "text": "bahwa dalam rangka melindungi Perusahaan dari risiko hukum, operasional,  dan  reputasi,  perlu  untuk  membangun  dan  menumbuhkan budaya kepatuhan di seluruh jenjang organisasi;",
+      "enumerated": true,
+      "marker": "b."
+    },
+    {
+      "self_ref": "#/texts/7",
+      "parent": {
+        "$ref": "#/groups/0"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 174.55,
+            "t": 547.4600219726562,
+            "r": 522.138,
+            "b": 509.54002197265623,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            157
+          ]
+        }
+      ],
+      "orig": "c. bahwa berdasarkan pertimbangan sebagaimana dimaksud dalam huruf a dan  huruf  b,  perlu  menetapkan  Peraturan  Syarikah  tentang  Tata  Kelola Kepatuhan.",
+      "text": "bahwa berdasarkan pertimbangan sebagaimana dimaksud dalam huruf a dan  huruf  b,  perlu  menetapkan  Peraturan  Syarikah  tentang  Tata  Kelola Kepatuhan.",
+      "enumerated": true,
+      "marker": "c."
+    },
+    {
+      "self_ref": "#/texts/8",
+      "parent": {
+        "$ref": "#/groups/1"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 77.304,
+            "t": 493.7000219726562,
+            "r": 165.214,
+            "b": 482.66002197265624,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            11
+          ]
+        }
+      ],
+      "orig": "Mengingat :",
+      "text": "Mengingat :"
+    },
+    {
+      "self_ref": "#/texts/9",
+      "parent": {
+        "$ref": "#/groups/2"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 174.55,
+            "t": 493.9400219726562,
+            "r": 389.084,
+            "b": 482.9000219726562,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            47
+          ]
+        }
+      ],
+      "orig": "1. Article of Association tanggal 23/08/1444 H;",
+      "text": "Article of Association tanggal 23/08/1444 H;",
+      "enumerated": true,
+      "marker": "1."
+    },
+    {
+      "self_ref": "#/texts/10",
+      "parent": {
+        "$ref": "#/groups/3"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 174.55,
+            "t": 480.48002197265623,
+            "r": 487.174,
+            "b": 469.4400219726562,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            63
+          ]
+        }
+      ],
+      "orig": "2. Anggaran Dasar Perusahaan Nomor 487734 tanggal 12/05/1446 H;",
+      "text": "Anggaran Dasar Perusahaan Nomor 487734 tanggal 12/05/1446 H;",
+      "enumerated": true,
+      "marker": "2."
+    },
+    {
+      "self_ref": "#/texts/11",
+      "parent": {
+        "$ref": "#/groups/4"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 174.55,
+            "t": 467.04002197265623,
+            "r": 522.171,
+            "b": 442.5600219726562,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            88
+          ]
+        }
+      ],
+      "orig": "3. Peraturan  Syarikah  Nomor  001  Tahun  2025  tentang  Hierarki  Peraturan Perusahaan",
+      "text": "Peraturan  Syarikah  Nomor  001  Tahun  2025  tentang  Hierarki  Peraturan Perusahaan",
+      "enumerated": true,
+      "marker": "3."
+    },
+    {
+      "self_ref": "#/texts/12",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 265.06,
+            "t": 426.72002197265624,
+            "r": 332.305,
+            "b": 415.6800219726562,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            10
+          ]
+        }
+      ],
+      "orig": "MEMUTUSKAN",
+      "text": "MEMUTUSKAN",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/13",
+      "parent": {
+        "$ref": "#/groups/5"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 77.304,
+            "t": 399.8400219726562,
+            "r": 165.214,
+            "b": 388.8000219726562,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            12
+          ]
+        }
+      ],
+      "orig": "Menetapkan :",
+      "text": "Menetapkan :"
+    },
+    {
+      "self_ref": "#/texts/14",
+      "parent": {
+        "$ref": "#/groups/5"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 176.47,
+            "t": 399.8400219726562,
+            "r": 505.639,
+            "b": 388.8000219726562,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            62
+          ]
+        }
+      ],
+      "orig": "PERATURAN SYARIKAH TENTANG TATA KELOLA KEPATUHAN (COMPLIANCE).",
+      "text": "PERATURAN SYARIKAH TENTANG TATA KELOLA KEPATUHAN (COMPLIANCE)."
+    },
+    {
+      "self_ref": "#/texts/15",
+      "parent": {
+        "$ref": "#/groups/6"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 72.024,
+            "t": 353.5000219726562,
+            "r": 152.954,
+            "b": 342.4600219726562,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            15
+          ]
+        }
+      ],
+      "orig": "Ditetapkan di :",
+      "text": "Ditetapkan di :"
+    },
+    {
+      "self_ref": "#/texts/16",
+      "parent": {
+        "$ref": "#/groups/6"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 164.23,
+            "t": 353.5000219726562,
+            "r": 199.227,
+            "b": 342.4600219726562,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            6
+          ]
+        }
+      ],
+      "orig": "Makkah",
+      "text": "Makkah"
+    },
+    {
+      "self_ref": "#/texts/17",
+      "parent": {
+        "$ref": "#/groups/6"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 72.024,
+            "t": 339.10002197265624,
+            "r": 152.954,
+            "b": 328.06002197265616,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            14
+          ]
+        }
+      ],
+      "orig": "Pada tanggal :",
+      "text": "Pada tanggal :"
+    },
+    {
+      "self_ref": "#/texts/18",
+      "parent": {
+        "$ref": "#/groups/6"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 164.23,
+            "t": 339.10002197265624,
+            "r": 229.617,
+            "b": 328.06002197265616,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            13
+          ]
+        }
+      ],
+      "orig": "21 Maret 2025",
+      "text": "21 Maret 2025"
+    },
+    {
+      "self_ref": "#/texts/19",
+      "parent": {
+        "$ref": "#/groups/7"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 167.11,
+            "t": 302.1100219726562,
+            "r": 202.217,
+            "b": 291.07002197265615,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            7
+          ]
+        }
+      ],
+      "orig": "Mudir 1",
+      "text": "Mudir 1"
+    },
+    {
+      "self_ref": "#/texts/20",
+      "parent": {
+        "$ref": "#/groups/7"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 392.78,
+            "t": 302.1100219726562,
+            "r": 427.887,
+            "b": 291.07002197265615,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            7
+          ]
+        }
+      ],
+      "orig": "Mudir 2",
+      "text": "Mudir 2"
+    },
+    {
+      "self_ref": "#/texts/21",
+      "parent": {
+        "$ref": "#/groups/7"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "caption",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 153.89,
+            "t": 221.45002197265626,
+            "r": 215.493,
+            "b": 210.41002197265618,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            13
+          ]
+        }
+      ],
+      "orig": "Sidiq Haryono",
+      "text": "Sidiq Haryono"
+    },
+    {
+      "self_ref": "#/texts/22",
+      "parent": {
+        "$ref": "#/groups/7"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "caption",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 372.38,
+            "t": 221.69002197265627,
+            "r": 448.148,
+            "b": 210.6500219726562,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            16
+          ]
+        }
+      ],
+      "orig": "Iman Ni'matullah",
+      "text": "Iman Ni'matullah"
+    },
+    {
+      "self_ref": "#/texts/23",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "furniture",
+      "label": "page_footer",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 72.024,
+            "t": 75.26402197265622,
+            "r": 189.525,
+            "b": 26.280021972656186,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            81
+          ]
+        }
+      ],
+      "orig": "BPKH Limited 6606 Third Ring Road King Fahd, Makkah 24341 Kingdom of Saudi Arabia",
+      "text": "BPKH Limited 6606 Third Ring Road King Fahd, Makkah 24341 Kingdom of Saudi Arabia"
+    },
+    {
+      "self_ref": "#/texts/24",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "furniture",
+      "label": "page_footer",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 72.024,
+            "t": 64.92002197265617,
+            "r": 202.485,
+            "b": 14.040021972656177,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            45
+          ]
+        }
+      ],
+      "orig": "Mawasim Tower, Office 208 www.bpkhlimited.com",
+      "text": "Mawasim Tower, Office 208 www.bpkhlimited.com"
+    },
+    {
+      "self_ref": "#/texts/25",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 285.48,
+            "t": 763.5400219726562,
+            "r": 309.768,
+            "b": 752.5000219726562,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            5
+          ]
+        }
+      ],
+      "orig": "BAB I",
+      "text": "BAB I",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/26",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 251.62,
+            "t": 740.9800219726562,
+            "r": 343.318,
+            "b": 729.9400219726563,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            14
+          ]
+        }
+      ],
+      "orig": "KETENTUAN UMUM",
+      "text": "KETENTUAN UMUM",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/27",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 263.38,
+            "t": 718.3900219726562,
+            "r": 331.616,
+            "b": 707.3500219726562,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            16
+          ]
+        }
+      ],
+      "orig": "Pasal 1 Definisi",
+      "text": "Pasal 1 Definisi",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/28",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 72.024,
+            "t": 696.0700219726563,
+            "r": 310.311,
+            "b": 685.0300219726562,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            51
+          ]
+        }
+      ],
+      "orig": "Dalam Peraturan Syarikah ini, yang dimaksud dengan:",
+      "text": "Dalam Peraturan Syarikah ini, yang dimaksud dengan:"
+    },
+    {
+      "self_ref": "#/texts/29",
+      "parent": {
+        "$ref": "#/groups/8"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 90.024,
+            "t": 673.5100219726562,
+            "r": 525.649,
+            "b": 648.0700219726563,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            147
+          ]
+        }
+      ],
+      "orig": "1. Kepatuhan adalah  ketaatan Perusahaan terhadap seluruh peraturan perundang-undangan, peraturan internal, standar, dan etika bisnis yang berlaku.",
+      "text": "Kepatuhan adalah  ketaatan Perusahaan terhadap seluruh peraturan perundang-undangan, peraturan internal, standar, dan etika bisnis yang berlaku.",
+      "enumerated": true,
+      "marker": "1."
+    },
+    {
+      "self_ref": "#/texts/30",
+      "parent": {
+        "$ref": "#/groups/8"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 90.024,
+            "t": 636.5300219726562,
+            "r": 525.448,
+            "b": 611.0900219726562,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            172
+          ]
+        }
+      ],
+      "orig": "2. Tata  Kelola  Kepatuhan adalah  serangkaian  proses,  kebijakan,  dan  struktur  yang  dirancang untuk mengelola dan memastikan Kepatuhan di dalam lingkungan Perusahaan.",
+      "text": "Tata  Kelola  Kepatuhan adalah  serangkaian  proses,  kebijakan,  dan  struktur  yang  dirancang untuk mengelola dan memastikan Kepatuhan di dalam lingkungan Perusahaan.",
+      "enumerated": true,
+      "marker": "2."
+    },
+    {
+      "self_ref": "#/texts/31",
+      "parent": {
+        "$ref": "#/groups/8"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 90.024,
+            "t": 599.5700219726563,
+            "r": 244.462,
+            "b": 588.5300219726562,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            32
+          ]
+        }
+      ],
+      "orig": "3. Syarikah adalah BPKH Limited.",
+      "text": "Syarikah adalah BPKH Limited.",
+      "enumerated": true,
+      "marker": "3."
+    },
+    {
+      "self_ref": "#/texts/32",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 284.04,
+            "t": 577.0100219726562,
+            "r": 311.209,
+            "b": 565.9700219726562,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            6
+          ]
+        }
+      ],
+      "orig": "BAB II",
+      "text": "BAB II",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/33",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 227.62,
+            "t": 554.4200219726562,
+            "r": 367.144,
+            "b": 543.3800219726562,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            24
+          ]
+        }
+      ],
+      "orig": "TUJUAN DAN RUANG LINGKUP",
+      "text": "TUJUAN DAN RUANG LINGKUP",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/34",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 265.06,
+            "t": 532.1000219726562,
+            "r": 330.238,
+            "b": 521.0600219726562,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            14
+          ]
+        }
+      ],
+      "orig": "Pasal 2 Tujuan",
+      "text": "Pasal 2 Tujuan",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/35",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 72.024,
+            "t": 509.54002197265623,
+            "r": 335.118,
+            "b": 498.5000219726562,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            56
+          ]
+        }
+      ],
+      "orig": "Tujuan ditetapkannya Tata Kelola Kepatuhan adalah untuk:",
+      "text": "Tujuan ditetapkannya Tata Kelola Kepatuhan adalah untuk:"
+    },
+    {
+      "self_ref": "#/texts/36",
+      "parent": {
+        "$ref": "#/groups/9"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 90.024,
+            "t": 486.98002197265623,
+            "r": 514.366,
+            "b": 475.9400219726562,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            86
+          ]
+        }
+      ],
+      "orig": "a. Menjadi pedoman utama dalam penerapan budaya sadar risiko dan patuh pada peraturan.",
+      "text": "Menjadi pedoman utama dalam penerapan budaya sadar risiko dan patuh pada peraturan.",
+      "enumerated": true,
+      "marker": "a."
+    },
+    {
+      "self_ref": "#/texts/37",
+      "parent": {
+        "$ref": "#/groups/9"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 90.024,
+            "t": 472.5600219726562,
+            "r": 525.307,
+            "b": 447.1200219726562,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            104
+          ]
+        }
+      ],
+      "orig": "b. Memastikan seluruh kegiatan operasional dan strategis Syarikah selaras dengan ketentuan yang berlaku.",
+      "text": "Memastikan seluruh kegiatan operasional dan strategis Syarikah selaras dengan ketentuan yang berlaku.",
+      "enumerated": true,
+      "marker": "b."
+    },
+    {
+      "self_ref": "#/texts/38",
+      "parent": {
+        "$ref": "#/groups/9"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 90.024,
+            "t": 443.5200219726562,
+            "r": 525.351,
+            "b": 418.0800219726562,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            116
+          ]
+        }
+      ],
+      "orig": "c. Melindungi  Syarikah  dan  seluruh  Insan  Syarikah  dari  potensi  sanksi  dan  kerugian  akibat ketidakpatuhan.",
+      "text": "Melindungi  Syarikah  dan  seluruh  Insan  Syarikah  dari  potensi  sanksi  dan  kerugian  akibat ketidakpatuhan.",
+      "enumerated": true,
+      "marker": "c."
+    },
+    {
+      "self_ref": "#/texts/39",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 247.3,
+            "t": 406.5600219726562,
+            "r": 347.982,
+            "b": 395.5200219726562,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            21
+          ]
+        }
+      ],
+      "orig": "Pasal 3 Ruang Lingkup",
+      "text": "Pasal 3 Ruang Lingkup",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/40",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 72.024,
+            "t": 383.98002197265623,
+            "r": 525.271,
+            "b": 358.54002197265623,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            197
+          ]
+        }
+      ],
+      "orig": "Peraturan  ini  berlaku  bagi  seluruh  Insan  Syarikah  tanpa  terkecuali,  mencakup  Dewan  Mudir, manajemen, dan karyawan, serta mengikat seluruh proses bisnis dan kegiatan operasional Syarikah.",
+      "text": "Peraturan  ini  berlaku  bagi  seluruh  Insan  Syarikah  tanpa  terkecuali,  mencakup  Dewan  Mudir, manajemen, dan karyawan, serta mengikat seluruh proses bisnis dan kegiatan operasional Syarikah."
+    },
+    {
+      "self_ref": "#/texts/41",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 282.36,
+            "t": 347.0200219726562,
+            "r": 312.411,
+            "b": 335.98002197265623,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            7
+          ]
+        }
+      ],
+      "orig": "BAB III",
+      "text": "BAB III",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/42",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 217.3,
+            "t": 324.70002197265626,
+            "r": 377.623,
+            "b": 313.6600219726563,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            26
+          ]
+        }
+      ],
+      "orig": "PELAKSANAAN DAN PENGAWASAN",
+      "text": "PELAKSANAAN DAN PENGAWASAN",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/43",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 238.66,
+            "t": 302.1100219726562,
+            "r": 356.324,
+            "b": 291.07002197265615,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            25
+          ]
+        }
+      ],
+      "orig": "Pasal 4 Prinsip Kepatuhan",
+      "text": "Pasal 4 Prinsip Kepatuhan",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/44",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 72.024,
+            "t": 279.55002197265617,
+            "r": 525.56,
+            "b": 254.11002197265623,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            159
+          ]
+        }
+      ],
+      "orig": "Penyelenggaraan  Tata  Kelola  Kepatuhan  wajib  berlandaskan  pada  prinsip-prinsip  utama,  yaitu Integritas, Akuntabilitas, Transparansi, dan Keberlanjutan.",
+      "text": "Penyelenggaraan  Tata  Kelola  Kepatuhan  wajib  berlandaskan  pada  prinsip-prinsip  utama,  yaitu Integritas, Akuntabilitas, Transparansi, dan Keberlanjutan."
+    },
+    {
+      "self_ref": "#/texts/45",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 243.22,
+            "t": 242.59002197265625,
+            "r": 351.765,
+            "b": 231.55002197265617,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            22
+          ]
+        }
+      ],
+      "orig": "Pasal 5 Tanggung Jawab",
+      "text": "Pasal 5 Tanggung Jawab",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/46",
+      "parent": {
+        "$ref": "#/groups/10"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 90.024,
+            "t": 220.0100219726562,
+            "r": 525.362,
+            "b": 194.57002197265615,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            92
+          ]
+        }
+      ],
+      "orig": "1. Dewan  Mudir  bertanggung jawab penuh atas pengawasan  pelaksanaan Tata Kelola Kepatuhan.",
+      "text": "Dewan  Mudir  bertanggung jawab penuh atas pengawasan  pelaksanaan Tata Kelola Kepatuhan.",
+      "enumerated": true,
+      "marker": "1."
+    },
+    {
+      "self_ref": "#/texts/47",
+      "parent": {
+        "$ref": "#/groups/10"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 90.024,
+            "t": 183.05002197265617,
+            "r": 523.066,
+            "b": 172.0100219726562,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            91
+          ]
+        }
+      ],
+      "orig": "2. Setiap Insan Syarikah wajib memahami dan mematuhi seluruh ketentuan dalam peraturan ini.",
+      "text": "Setiap Insan Syarikah wajib memahami dan mematuhi seluruh ketentuan dalam peraturan ini.",
+      "enumerated": true,
+      "marker": "2."
+    },
+    {
+      "self_ref": "#/texts/48",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "furniture",
+      "label": "page_footer",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 72.024,
+            "t": 75.26402197265622,
+            "r": 202.485,
+            "b": 14.040021972656177,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            127
+          ]
+        }
+      ],
+      "orig": "BPKH Limited Mawasim Tower, Office 208 6606 Third Ring Road King Fahd, Makkah 24341 Kingdom of Saudi Arabia www.bpkhlimited.com",
+      "text": "BPKH Limited Mawasim Tower, Office 208 6606 Third Ring Road King Fahd, Makkah 24341 Kingdom of Saudi Arabia www.bpkhlimited.com"
+    }
+  ],
+  "pictures": [
+    {
+      "self_ref": "#/pictures/0",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "picture",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 110.17427062988281,
+            "t": 276.6456298828125,
+            "r": 256.5951232910156,
+            "b": 238.6142578125,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            0
+          ]
+        }
+      ],
+      "captions": [],
+      "references": [],
+      "footnotes": [],
+      "annotations": []
+    },
+    {
+      "self_ref": "#/pictures/1",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "picture",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 441.9450378417969,
+            "t": 813.8713054656982,
+            "r": 523.7015380859375,
+            "b": 779.780345916748,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            0
+          ]
+        }
+      ],
+      "captions": [],
+      "references": [],
+      "footnotes": [],
+      "annotations": []
+    },
+    {
+      "self_ref": "#/pictures/2",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "picture",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 377.2481994628906,
+            "t": 277.36480712890625,
+            "r": 442.647216796875,
+            "b": 224.8726806640625,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            0
+          ]
+        }
+      ],
+      "captions": [],
+      "references": [],
+      "footnotes": [],
+      "annotations": []
+    },
+    {
+      "self_ref": "#/pictures/3",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "picture",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 441.970703125,
+            "t": 813.8987197875977,
+            "r": 523.7478637695312,
+            "b": 779.7761497497559,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            0
+          ]
+        }
+      ],
+      "captions": [],
+      "references": [],
+      "footnotes": [],
+      "annotations": []
+    }
+  ],
+  "tables": [],
+  "key_value_items": [],
+  "form_items": [],
+  "pages": {
+    "1": {
+      "size": {
+        "width": 594.9600219726562,
+        "height": 840.9600219726562
+      },
+      "page_no": 1
+    },
+    "2": {
+      "size": {
+        "width": 594.9600219726562,
+        "height": 840.9600219726562
+      },
+      "page_no": 2
+    }
+  }
+}

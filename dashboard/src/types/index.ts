@@ -785,7 +785,7 @@ export interface CircularApproval {
 export interface LegalDocument {
   id: string;
   title: string;
-  document_type: 'sk_direksi' | 'surat_edaran' | 'peraturan_perusahaan' | 'uu' | 'peraturan_pemerintah' | 'fatwa' | 'other';
+  document_type: 'sk_direksi' | 'surat_edaran' | 'peraturan_perusahaan' | 'peraturan_syarikah' | 'peraturan_mudir' | 'uu' | 'peraturan_pemerintah' | 'fatwa' | 'other';
   document_number?: string;
   category: string;
   issuer: string;

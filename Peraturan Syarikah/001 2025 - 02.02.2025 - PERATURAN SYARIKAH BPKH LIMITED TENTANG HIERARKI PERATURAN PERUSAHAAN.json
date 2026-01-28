@@ -1,0 +1,2670 @@
+{
+  "schema_name": "DoclingDocument",
+  "version": "1.7.0",
+  "name": "001 2025 - 02.02.2025 - PERATURAN SYARIKAH BPKH LIMITED TENTANG HIERARKI PERATURAN PERUSAHAAN",
+  "origin": {
+    "mimetype": "application/pdf",
+    "binary_hash": 3672460342245682955,
+    "filename": "001 2025 - 02.02.2025 - PERATURAN SYARIKAH BPKH LIMITED TENTANG HIERARKI PERATURAN PERUSAHAAN.pdf"
+  },
+  "furniture": {
+    "self_ref": "#/furniture",
+    "children": [],
+    "content_layer": "furniture",
+    "name": "_root_",
+    "label": "unspecified"
+  },
+  "body": {
+    "self_ref": "#/body",
+    "children": [
+      {
+        "$ref": "#/texts/0"
+      },
+      {
+        "$ref": "#/groups/0"
+      },
+      {
+        "$ref": "#/texts/5"
+      },
+      {
+        "$ref": "#/groups/1"
+      },
+      {
+        "$ref": "#/texts/9"
+      },
+      {
+        "$ref": "#/texts/10"
+      },
+      {
+        "$ref": "#/texts/11"
+      },
+      {
+        "$ref": "#/texts/12"
+      },
+      {
+        "$ref": "#/texts/13"
+      },
+      {
+        "$ref": "#/texts/14"
+      },
+      {
+        "$ref": "#/groups/2"
+      },
+      {
+        "$ref": "#/texts/18"
+      },
+      {
+        "$ref": "#/texts/19"
+      },
+      {
+        "$ref": "#/pictures/0"
+      },
+      {
+        "$ref": "#/texts/20"
+      },
+      {
+        "$ref": "#/pictures/1"
+      },
+      {
+        "$ref": "#/groups/3"
+      },
+      {
+        "$ref": "#/texts/25"
+      },
+      {
+        "$ref": "#/groups/4"
+      },
+      {
+        "$ref": "#/texts/35"
+      },
+      {
+        "$ref": "#/texts/36"
+      },
+      {
+        "$ref": "#/groups/5"
+      },
+      {
+        "$ref": "#/texts/39"
+      },
+      {
+        "$ref": "#/texts/40"
+      },
+      {
+        "$ref": "#/groups/6"
+      },
+      {
+        "$ref": "#/texts/53"
+      },
+      {
+        "$ref": "#/groups/7"
+      },
+      {
+        "$ref": "#/pictures/2"
+      },
+      {
+        "$ref": "#/texts/58"
+      },
+      {
+        "$ref": "#/texts/59"
+      },
+      {
+        "$ref": "#/pictures/3"
+      },
+      {
+        "$ref": "#/groups/8"
+      },
+      {
+        "$ref": "#/pictures/4"
+      },
+      {
+        "$ref": "#/pictures/5"
+      },
+      {
+        "$ref": "#/groups/9"
+      },
+      {
+        "$ref": "#/texts/67"
+      },
+      {
+        "$ref": "#/texts/68"
+      },
+      {
+        "$ref": "#/groups/10"
+      },
+      {
+        "$ref": "#/texts/71"
+      }
+    ],
+    "content_layer": "body",
+    "name": "_root_",
+    "label": "unspecified"
+  },
+  "groups": [
+    {
+      "self_ref": "#/groups/0",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [
+        {
+          "$ref": "#/texts/1"
+        },
+        {
+          "$ref": "#/texts/2"
+        },
+        {
+          "$ref": "#/texts/3"
+        },
+        {
+          "$ref": "#/texts/4"
+        }
+      ],
+      "content_layer": "body",
+      "name": "list",
+      "label": "list"
+    },
+    {
+      "self_ref": "#/groups/1",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [
+        {
+          "$ref": "#/texts/6"
+        },
+        {
+          "$ref": "#/texts/7"
+        },
+        {
+          "$ref": "#/texts/8"
+        }
+      ],
+      "content_layer": "body",
+      "name": "list",
+      "label": "list"
+    },
+    {
+      "self_ref": "#/groups/2",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [
+        {
+          "$ref": "#/texts/15"
+        },
+        {
+          "$ref": "#/texts/16"
+        },
+        {
+          "$ref": "#/texts/17"
+        }
+      ],
+      "content_layer": "body",
+      "name": "list",
+      "label": "list"
+    },
+    {
+      "self_ref": "#/groups/3",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [
+        {
+          "$ref": "#/texts/21"
+        },
+        {
+          "$ref": "#/texts/22"
+        },
+        {
+          "$ref": "#/texts/23"
+        },
+        {
+          "$ref": "#/texts/24"
+        }
+      ],
+      "content_layer": "body",
+      "name": "list",
+      "label": "list"
+    },
+    {
+      "self_ref": "#/groups/4",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [
+        {
+          "$ref": "#/texts/26"
+        },
+        {
+          "$ref": "#/texts/27"
+        },
+        {
+          "$ref": "#/texts/28"
+        },
+        {
+          "$ref": "#/texts/29"
+        },
+        {
+          "$ref": "#/texts/30"
+        },
+        {
+          "$ref": "#/texts/31"
+        },
+        {
+          "$ref": "#/texts/32"
+        },
+        {
+          "$ref": "#/texts/33"
+        },
+        {
+          "$ref": "#/texts/34"
+        }
+      ],
+      "content_layer": "body",
+      "name": "list",
+      "label": "list"
+    },
+    {
+      "self_ref": "#/groups/5",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [
+        {
+          "$ref": "#/texts/37"
+        },
+        {
+          "$ref": "#/texts/38"
+        }
+      ],
+      "content_layer": "body",
+      "name": "list",
+      "label": "list"
+    },
+    {
+      "self_ref": "#/groups/6",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [
+        {
+          "$ref": "#/texts/41"
+        },
+        {
+          "$ref": "#/texts/42"
+        },
+        {
+          "$ref": "#/texts/43"
+        },
+        {
+          "$ref": "#/texts/44"
+        },
+        {
+          "$ref": "#/texts/45"
+        },
+        {
+          "$ref": "#/texts/46"
+        },
+        {
+          "$ref": "#/texts/47"
+        },
+        {
+          "$ref": "#/texts/48"
+        },
+        {
+          "$ref": "#/texts/49"
+        },
+        {
+          "$ref": "#/texts/50"
+        },
+        {
+          "$ref": "#/texts/51"
+        },
+        {
+          "$ref": "#/texts/52"
+        }
+      ],
+      "content_layer": "body",
+      "name": "list",
+      "label": "list"
+    },
+    {
+      "self_ref": "#/groups/7",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [
+        {
+          "$ref": "#/texts/54"
+        },
+        {
+          "$ref": "#/texts/55"
+        },
+        {
+          "$ref": "#/texts/56"
+        },
+        {
+          "$ref": "#/texts/57"
+        }
+      ],
+      "content_layer": "body",
+      "name": "list",
+      "label": "list"
+    },
+    {
+      "self_ref": "#/groups/8",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [
+        {
+          "$ref": "#/texts/60"
+        },
+        {
+          "$ref": "#/texts/61"
+        },
+        {
+          "$ref": "#/texts/62"
+        },
+        {
+          "$ref": "#/texts/63"
+        }
+      ],
+      "content_layer": "body",
+      "name": "group",
+      "label": "key_value_area"
+    },
+    {
+      "self_ref": "#/groups/9",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [
+        {
+          "$ref": "#/texts/66"
+        }
+      ],
+      "content_layer": "body",
+      "name": "list",
+      "label": "list"
+    },
+    {
+      "self_ref": "#/groups/10",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [
+        {
+          "$ref": "#/texts/69"
+        },
+        {
+          "$ref": "#/texts/70"
+        }
+      ],
+      "content_layer": "body",
+      "name": "group",
+      "label": "key_value_area"
+    }
+  ],
+  "texts": [
+    {
+      "self_ref": "#/texts/0",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 72.024,
+            "t": 651.8200439453126,
+            "r": 128.416,
+            "b": 640.7800439453125,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            10
+          ]
+        }
+      ],
+      "orig": "Menimbang:",
+      "text": "Menimbang:",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/1",
+      "parent": {
+        "$ref": "#/groups/0"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 90.024,
+            "t": 622.7800439453125,
+            "r": 525.898,
+            "b": 582.8200439453126,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            261
+          ]
+        }
+      ],
+      "orig": "a. Bahwa untuk menciptakan praktik manajemen korporasi yang baik dan mendukung prinsipprinsip  Tata  Kelola  Perusahaan  yang  Baik (Good  Corporate  Governance), diperlukan  adanya kepastian hukum dan ketertiban dalam pengelolaan peraturan internal Perusahaan.",
+      "text": "Bahwa untuk menciptakan praktik manajemen korporasi yang baik dan mendukung prinsipprinsip  Tata  Kelola  Perusahaan  yang  Baik (Good  Corporate  Governance), diperlukan  adanya kepastian hukum dan ketertiban dalam pengelolaan peraturan internal Perusahaan.",
+      "enumerated": true,
+      "marker": "a."
+    },
+    {
+      "self_ref": "#/texts/2",
+      "parent": {
+        "$ref": "#/groups/0"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 90.024,
+            "t": 579.3400439453126,
+            "r": 525.63,
+            "b": 539.3500439453126,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            203
+          ]
+        }
+      ],
+      "orig": "b. Bahwa untuk memastikan seluruh kegiatan Perusahaan berjalan efektif, efisien, dan selaras, perlu ditetapkan suatu tata urutan (hierarki) peraturan yang jelas dan sistematis di lingkungan BPKH Limited.",
+      "text": "Bahwa untuk memastikan seluruh kegiatan Perusahaan berjalan efektif, efisien, dan selaras, perlu ditetapkan suatu tata urutan (hierarki) peraturan yang jelas dan sistematis di lingkungan BPKH Limited.",
+      "enumerated": true,
+      "marker": "b."
+    },
+    {
+      "self_ref": "#/texts/3",
+      "parent": {
+        "$ref": "#/groups/0"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 90.024,
+            "t": 535.8700439453125,
+            "r": 525.781,
+            "b": 495.79004394531256,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            202
+          ]
+        }
+      ],
+      "orig": "c. Bahwa untuk menyeragamkan administrasi dan tata kelola dokumen legal Perusahaan, perlu ditetapkan  sistem  penomoran  baru  untuk  seluruh  dokumen  peraturan  Perusahaan  di lingkungan BPKH Limited.",
+      "text": "Bahwa untuk menyeragamkan administrasi dan tata kelola dokumen legal Perusahaan, perlu ditetapkan  sistem  penomoran  baru  untuk  seluruh  dokumen  peraturan  Perusahaan  di lingkungan BPKH Limited.",
+      "enumerated": true,
+      "marker": "c."
+    },
+    {
+      "self_ref": "#/texts/4",
+      "parent": {
+        "$ref": "#/groups/0"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 90.024,
+            "t": 492.43004394531255,
+            "r": 525.641,
+            "b": 466.87004394531255,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            178
+          ]
+        }
+      ],
+      "orig": "d. Bahwa  berdasarkan  pertimbangan  sebagaimana  dimaksud  dalam  huruf  a,  b,  dan  c,  perlu menetapkan Peraturan Syarikah BPKH Limited tentang Hierarki Peraturan Perusahaan.",
+      "text": "Bahwa  berdasarkan  pertimbangan  sebagaimana  dimaksud  dalam  huruf  a,  b,  dan  c,  perlu menetapkan Peraturan Syarikah BPKH Limited tentang Hierarki Peraturan Perusahaan.",
+      "enumerated": true,
+      "marker": "d."
+    },
+    {
+      "self_ref": "#/texts/5",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 72.024,
+            "t": 448.87004394531255,
+            "r": 122.355,
+            "b": 437.8300439453125,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            10
+          ]
+        }
+      ],
+      "orig": "Mengingat:",
+      "text": "Mengingat:",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/6",
+      "parent": {
+        "$ref": "#/groups/1"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 90.024,
+            "t": 419.95004394531253,
+            "r": 304.918,
+            "b": 408.91004394531257,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            47
+          ]
+        }
+      ],
+      "orig": "1. Article of Association tanggal 23/08/1444 H;",
+      "text": "Article of Association tanggal 23/08/1444 H;",
+      "enumerated": true,
+      "marker": "1."
+    },
+    {
+      "self_ref": "#/texts/7",
+      "parent": {
+        "$ref": "#/groups/1"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 90.024,
+            "t": 405.43004394531255,
+            "r": 393.338,
+            "b": 394.3900439453125,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            61
+          ]
+        }
+      ],
+      "orig": "2. Anggaran Dasar Perusahaan Nomor 487734 tanggal 12/05/1446;",
+      "text": "Anggaran Dasar Perusahaan Nomor 487734 tanggal 12/05/1446;",
+      "enumerated": true,
+      "marker": "2."
+    },
+    {
+      "self_ref": "#/texts/8",
+      "parent": {
+        "$ref": "#/groups/1"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 90.024,
+            "t": 390.91004394531257,
+            "r": 525.905,
+            "b": 365.45004394531253,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            165
+          ]
+        }
+      ],
+      "orig": "3. Keputusan  Kepala  Badan  Pelaksana  BPKH  Nomor  163/BPKH.00/09/2024  tentang  Piagam Hubungan Antara Badan Pengelola Keuangan Haji dengan Syarikah BPKH Limited.",
+      "text": "Keputusan  Kepala  Badan  Pelaksana  BPKH  Nomor  163/BPKH.00/09/2024  tentang  Piagam Hubungan Antara Badan Pengelola Keuangan Haji dengan Syarikah BPKH Limited.",
+      "enumerated": true,
+      "marker": "3."
+    },
+    {
+      "self_ref": "#/texts/9",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 262.73,
+            "t": 347.45004394531253,
+            "r": 332.801,
+            "b": 336.41004394531257,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            11
+          ]
+        }
+      ],
+      "orig": "MEMUTUSKAN:",
+      "text": "MEMUTUSKAN:",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/10",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 72.024,
+            "t": 318.5300439453125,
+            "r": 133.307,
+            "b": 307.49004394531255,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            11
+          ]
+        }
+      ],
+      "orig": "Menetapkan:",
+      "text": "Menetapkan:",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/11",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 77.424,
+            "t": 289.49004394531255,
+            "r": 517.633,
+            "b": 278.4500439453125,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            83
+          ]
+        }
+      ],
+      "orig": "PERATURAN SYARIKAH BPKH LIMITED TENTANG HIERARKI PERATURAN PERUSAHAAN BPKH LIMITED.",
+      "text": "PERATURAN SYARIKAH BPKH LIMITED TENTANG HIERARKI PERATURAN PERUSAHAAN BPKH LIMITED."
+    },
+    {
+      "self_ref": "#/texts/12",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 253.13,
+            "t": 260.5700439453126,
+            "r": 342.212,
+            "b": 235.01004394531253,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            20
+          ]
+        }
+      ],
+      "orig": "BAB I KETENTUAN UMUM",
+      "text": "BAB I KETENTUAN UMUM",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/13",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 282.41,
+            "t": 231.5300439453125,
+            "r": 312.914,
+            "b": 220.49004394531255,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            7
+          ]
+        }
+      ],
+      "orig": "Pasal 1",
+      "text": "Pasal 1",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/14",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 72.024,
+            "t": 202.61004394531255,
+            "r": 306.911,
+            "b": 191.5700439453126,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            51
+          ]
+        }
+      ],
+      "orig": "Dalam Peraturan Syarikah ini, yang dimaksud dengan:",
+      "text": "Dalam Peraturan Syarikah ini, yang dimaksud dengan:"
+    },
+    {
+      "self_ref": "#/texts/15",
+      "parent": {
+        "$ref": "#/groups/2"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 90.024,
+            "t": 188.0600439453126,
+            "r": 525.608,
+            "b": 162.50004394531254,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            154
+          ]
+        }
+      ],
+      "orig": "1) Perusahaan adalah BPKH Limited, suatu badan hukum yang didirikan sesuai dengan ketentuan hukum dan peraturan perundang-undangan di Kerajaan Arab Saudi.",
+      "text": "Perusahaan adalah BPKH Limited, suatu badan hukum yang didirikan sesuai dengan ketentuan hukum dan peraturan perundang-undangan di Kerajaan Arab Saudi.",
+      "enumerated": true,
+      "marker": "1)"
+    },
+    {
+      "self_ref": "#/texts/16",
+      "parent": {
+        "$ref": "#/groups/2"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 90.024,
+            "t": 159.02004394531252,
+            "r": 525.897,
+            "b": 133.46004394531258,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            169
+          ]
+        }
+      ],
+      "orig": "2) Anggaran  Dasar  adalah Article  of  Association (AOA)  atau Nizham  Asas Perusahaan  yang merupakan landasan hukum utama dalam menjalankan kegiatan usaha Perusahaan.",
+      "text": "Anggaran  Dasar  adalah Article  of  Association (AOA)  atau Nizham  Asas Perusahaan  yang merupakan landasan hukum utama dalam menjalankan kegiatan usaha Perusahaan.",
+      "enumerated": true,
+      "marker": "2)"
+    },
+    {
+      "self_ref": "#/texts/17",
+      "parent": {
+        "$ref": "#/groups/2"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 90.024,
+            "t": 130.10004394531256,
+            "r": 525.723,
+            "b": 90.02404394531254,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            258
+          ]
+        }
+      ],
+      "orig": "3) Keputusan  Pemegang  Saham  ( Shareholder  Resolution )  adalah  keputusan  yang  diambil  oleh Pemegang  Saham,  baik  dalam  Rapat  Umum  Pemegang  Saham  (RUPS)  maupun  melalui mekanisme sirkuler, yang memiliki kekuatan hukum mengikat bagi Perusahaan.",
+      "text": "Keputusan  Pemegang  Saham  ( Shareholder  Resolution )  adalah  keputusan  yang  diambil  oleh Pemegang  Saham,  baik  dalam  Rapat  Umum  Pemegang  Saham  (RUPS)  maupun  melalui mekanisme sirkuler, yang memiliki kekuatan hukum mengikat bagi Perusahaan.",
+      "enumerated": true,
+      "marker": "3)"
+    },
+    {
+      "self_ref": "#/texts/18",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 215.57,
+            "t": 767.7600439453125,
+            "r": 379.856,
+            "b": 698.7400439453126,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            104
+          ]
+        }
+      ],
+      "orig": "PERATURAN SYARIKAH BPKH LIMITED NOMOR: 001 TAHUN 2025 TENTANG HIERARKI PERATURAN PERUSAHAAN BPKH LIMITED",
+      "text": "PERATURAN SYARIKAH BPKH LIMITED NOMOR: 001 TAHUN 2025 TENTANG HIERARKI PERATURAN PERUSAHAAN BPKH LIMITED",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/19",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 201.53,
+            "t": 695.2600439453125,
+            "r": 393.891,
+            "b": 669.7000439453126,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            53
+          ]
+        }
+      ],
+      "orig": "DENGAN RAHMAT TUHAN YANG MAHA ESA MUDIR BPKH LIMITED,",
+      "text": "DENGAN RAHMAT TUHAN YANG MAHA ESA MUDIR BPKH LIMITED,",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/20",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "furniture",
+      "label": "page_footer",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 294.77,
+            "t": 55.151043945312495,
+            "r": 300.665,
+            "b": 41.67104394531259,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            1
+          ]
+        }
+      ],
+      "orig": "1",
+      "text": "1"
+    },
+    {
+      "self_ref": "#/texts/21",
+      "parent": {
+        "$ref": "#/groups/3"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 90.024,
+            "t": 767.7600439453125,
+            "r": 525.681,
+            "b": 727.6600439453125,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            201
+          ]
+        }
+      ],
+      "orig": "4) Peraturan Syarikah adalah peraturan internal Perusahaan yang ditetapkan oleh Board of Mudir untuk  mengatur  kebijakan-kebijakan  umum  dan  fundamental  yang  berlaku  di  seluruh  lini organisasi.",
+      "text": "Peraturan Syarikah adalah peraturan internal Perusahaan yang ditetapkan oleh Board of Mudir untuk  mengatur  kebijakan-kebijakan  umum  dan  fundamental  yang  berlaku  di  seluruh  lini organisasi.",
+      "enumerated": true,
+      "marker": "4)"
+    },
+    {
+      "self_ref": "#/texts/22",
+      "parent": {
+        "$ref": "#/groups/3"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 90.024,
+            "t": 724.3000439453125,
+            "r": 523.49,
+            "b": 698.7400439453126,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            166
+          ]
+        }
+      ],
+      "orig": "5) Peraturan Mudir adalah peraturan Internal perusahaan yang ditetapkan oleh Board of Mudir untuk mengatur penjabaran teknis atas kebijakan-kebijakan yang ditetapkan.",
+      "text": "Peraturan Mudir adalah peraturan Internal perusahaan yang ditetapkan oleh Board of Mudir untuk mengatur penjabaran teknis atas kebijakan-kebijakan yang ditetapkan.",
+      "enumerated": true,
+      "marker": "5)"
+    },
+    {
+      "self_ref": "#/texts/23",
+      "parent": {
+        "$ref": "#/groups/3"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 90.024,
+            "t": 695.2600439453125,
+            "r": 525.901,
+            "b": 655.3000439453125,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            212
+          ]
+        }
+      ],
+      "orig": "6) Keputusan Mudir adalah penetapan tertulis yang dibuat oleh Board of Mudir atau Mudir secara individual  sesuai  kewenangannya,  yang  bersifat  mengatur  atau  penetapan  untuk  suatu keperluan dinas tertentu.",
+      "text": "Keputusan Mudir adalah penetapan tertulis yang dibuat oleh Board of Mudir atau Mudir secara individual  sesuai  kewenangannya,  yang  bersifat  mengatur  atau  penetapan  untuk  suatu keperluan dinas tertentu.",
+      "enumerated": true,
+      "marker": "6)"
+    },
+    {
+      "self_ref": "#/texts/24",
+      "parent": {
+        "$ref": "#/groups/3"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 90.024,
+            "t": 651.8200439453126,
+            "r": 525.915,
+            "b": 611.7400439453126,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            260
+          ]
+        }
+      ],
+      "orig": "7) Instruksi/Edaran Mudir adalah pemberitahuan atau perintah tertulis dari Board of Mudir atau Mudir secara individual sesuai kewenangannya yang ditujukan kepada seluruh atau sebagian pegawai untuk memberikan arahan, informasi, atau petunjuk pelaksanaan tugas.",
+      "text": "Instruksi/Edaran Mudir adalah pemberitahuan atau perintah tertulis dari Board of Mudir atau Mudir secara individual sesuai kewenangannya yang ditujukan kepada seluruh atau sebagian pegawai untuk memberikan arahan, informasi, atau petunjuk pelaksanaan tugas.",
+      "enumerated": true,
+      "marker": "7)"
+    },
+    {
+      "self_ref": "#/texts/25",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 217.25,
+            "t": 593.8600439453126,
+            "r": 378.169,
+            "b": 553.7500439453125,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            44
+          ]
+        }
+      ],
+      "orig": "BAB II HIERARKI PERATURAN PERUSAHAAN Pasal 2",
+      "text": "BAB II HIERARKI PERATURAN PERUSAHAAN Pasal 2",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/26",
+      "parent": {
+        "$ref": "#/groups/4"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 89.424,
+            "t": 535.8700439453125,
+            "r": 525.766,
+            "b": 510.31004394531254,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            102
+          ]
+        }
+      ],
+      "orig": "1) Tata urutan dan hierarki peraturan perundang-undangan internal BPKH Limited adalah sebagai berikut:",
+      "text": "Tata urutan dan hierarki peraturan perundang-undangan internal BPKH Limited adalah sebagai berikut:",
+      "enumerated": true,
+      "marker": "1)"
+    },
+    {
+      "self_ref": "#/texts/27",
+      "parent": {
+        "$ref": "#/groups/4"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 110.66,
+            "t": 492.43004394531255,
+            "r": 525.882,
+            "b": 437.8300439453125,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            269
+          ]
+        }
+      ],
+      "orig": "a. Articles  of  Association  (AoA)/Anggaran  Dasar  (Nizham  Asasi),  yaitu  Anggaran  Dasar Perusahaan  yang  menjadi  landasan  utama  dalam  menjalankan  kegiatan  usaha.    Isi pokoknya mencakup nama, tujuan, modal, organ perusahaan, dan kewenangan pemegang saham.",
+      "text": "Articles  of  Association  (AoA)/Anggaran  Dasar  (Nizham  Asasi),  yaitu  Anggaran  Dasar Perusahaan  yang  menjadi  landasan  utama  dalam  menjalankan  kegiatan  usaha.    Isi pokoknya mencakup nama, tujuan, modal, organ perusahaan, dan kewenangan pemegang saham.",
+      "enumerated": true,
+      "marker": "a."
+    },
+    {
+      "self_ref": "#/texts/28",
+      "parent": {
+        "$ref": "#/groups/4"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 110.66,
+            "t": 434.47004394531257,
+            "r": 525.834,
+            "b": 379.87004394531255,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            328
+          ]
+        }
+      ],
+      "orig": "b. Shareholder  Resolution/Keputusan  Pemegang  Saham:  Merupakan  keputusan  strategis yang ditetapkan oleh pemegang saham, baik melalui RUPS maupun mekanisme lain, yang mengikat perusahaan. Contohnya meliputi dokumen  penetapan  laporan tahunan, penunjukan/pemberhentian Mudir/Direksi, pembagian dividen, dan penambahan modal.",
+      "text": "Shareholder  Resolution/Keputusan  Pemegang  Saham:  Merupakan  keputusan  strategis yang ditetapkan oleh pemegang saham, baik melalui RUPS maupun mekanisme lain, yang mengikat perusahaan. Contohnya meliputi dokumen  penetapan  laporan tahunan, penunjukan/pemberhentian Mudir/Direksi, pembagian dividen, dan penambahan modal.",
+      "enumerated": true,
+      "marker": "b."
+    },
+    {
+      "self_ref": "#/texts/29",
+      "parent": {
+        "$ref": "#/groups/4"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 110.66,
+            "t": 376.49004394531255,
+            "r": 525.915,
+            "b": 321.8900439453125,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            317
+          ]
+        }
+      ],
+      "orig": "c. Peraturan  Syarikah,  yaitu  instrumen  pengesahan  peraturan  Perusahaan  yang  mengatur kebijakan perusahaan yang ditetapkan oleh Board of Mudir untuk mengatur bidang-bidang penting  dan  fundamental.    Kebijakan  ini  mencakup  bidang  keuangan,  investasi,  SDM, syariah compliance, GCG, dan manajemen risiko.",
+      "text": "Peraturan  Syarikah,  yaitu  instrumen  pengesahan  peraturan  Perusahaan  yang  mengatur kebijakan perusahaan yang ditetapkan oleh Board of Mudir untuk mengatur bidang-bidang penting  dan  fundamental.    Kebijakan  ini  mencakup  bidang  keuangan,  investasi,  SDM, syariah compliance, GCG, dan manajemen risiko.",
+      "enumerated": true,
+      "marker": "c."
+    },
+    {
+      "self_ref": "#/texts/30",
+      "parent": {
+        "$ref": "#/groups/4"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 110.66,
+            "t": 318.5300439453125,
+            "r": 528.134,
+            "b": 263.9300439453125,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            300
+          ]
+        }
+      ],
+      "orig": "d. Peraturan Mudir, yaitu instrumen pengesahan peraturan perusahaan yang menjabarkan secara  teknis  kebijakan  perusahaan  untuk  memastikan  konsistensi  pelaksanaan  tugas. Contohnya  meliputi  pedoman  teknis  dan  Prosedur  Operasional  Standar  keuangan, investasi, administrasi, dan lain-lain.",
+      "text": "Peraturan Mudir, yaitu instrumen pengesahan peraturan perusahaan yang menjabarkan secara  teknis  kebijakan  perusahaan  untuk  memastikan  konsistensi  pelaksanaan  tugas. Contohnya  meliputi  pedoman  teknis  dan  Prosedur  Operasional  Standar  keuangan, investasi, administrasi, dan lain-lain.",
+      "enumerated": true,
+      "marker": "d."
+    },
+    {
+      "self_ref": "#/texts/31",
+      "parent": {
+        "$ref": "#/groups/4"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 110.66,
+            "t": 260.5700439453126,
+            "r": 525.85,
+            "b": 205.97004394531257,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            284
+          ]
+        }
+      ],
+      "orig": "e. Keputusan  Mudir,  yaitu  instrumen  pengesahan  Peraturan  yang  menetapkan  suatu kebijakan, struktur, penunjukan, atau aturan yang bersifat formal, mengikat, dan berlaku umum  di  lingkungan  perusahaan.  Contohnya  Keputusan  Mutasi/Rotasi  Karyawan  dan pengangkatan karyawan.",
+      "text": "Keputusan  Mudir,  yaitu  instrumen  pengesahan  Peraturan  yang  menetapkan  suatu kebijakan, struktur, penunjukan, atau aturan yang bersifat formal, mengikat, dan berlaku umum  di  lingkungan  perusahaan.  Contohnya  Keputusan  Mutasi/Rotasi  Karyawan  dan pengangkatan karyawan.",
+      "enumerated": true,
+      "marker": "e."
+    },
+    {
+      "self_ref": "#/texts/32",
+      "parent": {
+        "$ref": "#/groups/4"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 110.66,
+            "t": 202.61004394531255,
+            "r": 525.79,
+            "b": 162.50004394531254,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            228
+          ]
+        }
+      ],
+      "orig": "f. Instruksi/Edaran Mudir, yaitu peraturan yang berisi arahan dari Mudir yang bersifat cepat, teknis, dan sementara untuk memberikan petunjuk pelaksanaan tugas.  Contohnya adalah Surat Edaran (SE) mengenai WFH atau cuti bersama.",
+      "text": "Instruksi/Edaran Mudir, yaitu peraturan yang berisi arahan dari Mudir yang bersifat cepat, teknis, dan sementara untuk memberikan petunjuk pelaksanaan tugas.  Contohnya adalah Surat Edaran (SE) mengenai WFH atau cuti bersama.",
+      "enumerated": true,
+      "marker": "f."
+    },
+    {
+      "self_ref": "#/texts/33",
+      "parent": {
+        "$ref": "#/groups/4"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 89.424,
+            "t": 144.50004394531254,
+            "r": 525.626,
+            "b": 119.0600439453126,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            106
+          ]
+        }
+      ],
+      "orig": "2) Peraturan yang lebih rendah dalam hierarki tidak boleh bertentangan dengan peraturan yang lebih tinggi.",
+      "text": "Peraturan yang lebih rendah dalam hierarki tidak boleh bertentangan dengan peraturan yang lebih tinggi.",
+      "enumerated": true,
+      "marker": "2)"
+    },
+    {
+      "self_ref": "#/texts/34",
+      "parent": {
+        "$ref": "#/groups/4"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 89.424,
+            "t": 115.58004394531258,
+            "r": 525.645,
+            "b": 90.02404394531254,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            129
+          ]
+        }
+      ],
+      "orig": "3) Dalam  hal  terjadi  pertentangan  antara  peraturan,  maka  peraturan  yang  lebih  tinggi  dalam hierarki yang akan berlaku.",
+      "text": "Dalam  hal  terjadi  pertentangan  antara  peraturan,  maka  peraturan  yang  lebih  tinggi  dalam hierarki yang akan berlaku.",
+      "enumerated": true,
+      "marker": "3)"
+    },
+    {
+      "self_ref": "#/texts/35",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "furniture",
+      "label": "page_footer",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 294.77,
+            "t": 55.151043945312495,
+            "r": 300.665,
+            "b": 41.67104394531259,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            1
+          ]
+        }
+      ],
+      "orig": "2",
+      "text": "2"
+    },
+    {
+      "self_ref": "#/texts/36",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 196.49,
+            "t": 767.7600439453125,
+            "r": 398.765,
+            "b": 727.6600439453125,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            49
+          ]
+        }
+      ],
+      "orig": "BAB III PENOMORAN BARU DOKUMEN PERUSAHAAN Pasal 3",
+      "text": "BAB III PENOMORAN BARU DOKUMEN PERUSAHAAN Pasal 3",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/37",
+      "parent": {
+        "$ref": "#/groups/5"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 90.024,
+            "t": 709.7800439453125,
+            "r": 525.63,
+            "b": 669.7000439453126,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            203
+          ]
+        }
+      ],
+      "orig": "1) Terhitung  sejak  tanggal  berlakunya  Peraturan  Syarikah  ini,  penomoran  untuk  dokumendokumen  Perusahaan  yang  ditetapkan  oleh  Board  of  Mudir  mengikuti  format  baru  yang terstandarisasi.",
+      "text": "Terhitung  sejak  tanggal  berlakunya  Peraturan  Syarikah  ini,  penomoran  untuk  dokumendokumen  Perusahaan  yang  ditetapkan  oleh  Board  of  Mudir  mengikuti  format  baru  yang terstandarisasi.",
+      "enumerated": true,
+      "marker": "1)"
+    },
+    {
+      "self_ref": "#/texts/38",
+      "parent": {
+        "$ref": "#/groups/5"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 90.024,
+            "t": 666.3400439453126,
+            "r": 525.915,
+            "b": 640.7800439453125,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            139
+          ]
+        }
+      ],
+      "orig": "2) Dokumen  yang  dimaksud  pada  ayat  (1)  meliputi  Peraturan  Syarikah,  Peraturan  Mudir, Keputusan Mudir, dan Instruksi/Edaran Mudir.",
+      "text": "Dokumen  yang  dimaksud  pada  ayat  (1)  meliputi  Peraturan  Syarikah,  Peraturan  Mudir, Keputusan Mudir, dan Instruksi/Edaran Mudir.",
+      "enumerated": true,
+      "marker": "2)"
+    },
+    {
+      "self_ref": "#/texts/39",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 282.41,
+            "t": 608.3800439453125,
+            "r": 312.914,
+            "b": 597.3400439453126,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            7
+          ]
+        }
+      ],
+      "orig": "Pasal 4",
+      "text": "Pasal 4",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/40",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 72.024,
+            "t": 579.3400439453126,
+            "r": 383.242,
+            "b": 568.3000439453125,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            64
+          ]
+        }
+      ],
+      "orig": "Format penomoran baru dokumen Perusahaan adalah sebagai berikut:",
+      "text": "Format penomoran baru dokumen Perusahaan adalah sebagai berikut:"
+    },
+    {
+      "self_ref": "#/texts/41",
+      "parent": {
+        "$ref": "#/groups/6"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 90.024,
+            "t": 564.7900439453125,
+            "r": 193.214,
+            "b": 553.7500439453125,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            22
+          ]
+        }
+      ],
+      "orig": "1) Peraturan Syarikah:",
+      "text": "Peraturan Syarikah:",
+      "enumerated": true,
+      "marker": "1)"
+    },
+    {
+      "self_ref": "#/texts/42",
+      "parent": {
+        "$ref": "#/groups/6"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 126.02,
+            "t": 550.3900439453125,
+            "r": 273.668,
+            "b": 539.3500439453126,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            28
+          ]
+        }
+      ],
+      "orig": "o Format: [Nomor Urut_Tahun]",
+      "text": "o Format: [Nomor Urut_Tahun]",
+      "enumerated": false,
+      "marker": ""
+    },
+    {
+      "self_ref": "#/texts/43",
+      "parent": {
+        "$ref": "#/groups/6"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 126.02,
+            "t": 535.8700439453125,
+            "r": 252.422,
+            "b": 524.8300439453126,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            24
+          ]
+        }
+      ],
+      "orig": "o Contoh: 001 Tahun 2025",
+      "text": "o Contoh: 001 Tahun 2025",
+      "enumerated": false,
+      "marker": ""
+    },
+    {
+      "self_ref": "#/texts/44",
+      "parent": {
+        "$ref": "#/groups/6"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 90.024,
+            "t": 521.3500439453126,
+            "r": 180.84,
+            "b": 510.31004394531254,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            18
+          ]
+        }
+      ],
+      "orig": "2) Peraturan Mudir",
+      "text": "Peraturan Mudir",
+      "enumerated": true,
+      "marker": "2)"
+    },
+    {
+      "self_ref": "#/texts/45",
+      "parent": {
+        "$ref": "#/groups/6"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 126.02,
+            "t": 506.8300439453125,
+            "r": 277.028,
+            "b": 495.79004394531256,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            29
+          ]
+        }
+      ],
+      "orig": "o Format: [Nomor Urut]_Tahun]",
+      "text": "o Format: [Nomor Urut]_Tahun]",
+      "enumerated": false,
+      "marker": ""
+    },
+    {
+      "self_ref": "#/texts/46",
+      "parent": {
+        "$ref": "#/groups/6"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 126.02,
+            "t": 492.43004394531255,
+            "r": 249.958,
+            "b": 481.3900439453125,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            23
+          ]
+        }
+      ],
+      "orig": "o Contoh: 004 Tahun2025",
+      "text": "o Contoh: 004 Tahun2025",
+      "enumerated": false,
+      "marker": ""
+    },
+    {
+      "self_ref": "#/texts/47",
+      "parent": {
+        "$ref": "#/groups/6"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 90.024,
+            "t": 477.91004394531257,
+            "r": 187.077,
+            "b": 466.87004394531255,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            19
+          ]
+        }
+      ],
+      "orig": "3) Keputusan Mudir:",
+      "text": "Keputusan Mudir:",
+      "enumerated": true,
+      "marker": "3)"
+    },
+    {
+      "self_ref": "#/texts/48",
+      "parent": {
+        "$ref": "#/groups/6"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 126.02,
+            "t": 463.3900439453125,
+            "r": 441.692,
+            "b": 452.35004394531256,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            62
+          ]
+        }
+      ],
+      "orig": "o Format: [Nomor Urut]/KM/BPKHLtd/[Bulan dalam Romawi]/[Tahun]",
+      "text": "o Format: [Nomor Urut]/KM/BPKHLtd/[Bulan dalam Romawi]/[Tahun]",
+      "enumerated": false,
+      "marker": ""
+    },
+    {
+      "self_ref": "#/texts/49",
+      "parent": {
+        "$ref": "#/groups/6"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 126.02,
+            "t": 448.87004394531255,
+            "r": 294.197,
+            "b": 437.8300439453125,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            32
+          ]
+        }
+      ],
+      "orig": "o Contoh: 002/KM/BPKHLtd/II/2025",
+      "text": "o Contoh: 002/KM/BPKHLtd/II/2025",
+      "enumerated": false,
+      "marker": ""
+    },
+    {
+      "self_ref": "#/texts/50",
+      "parent": {
+        "$ref": "#/groups/6"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 90.024,
+            "t": 434.47004394531257,
+            "r": 212.039,
+            "b": 423.43004394531255,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            26
+          ]
+        }
+      ],
+      "orig": "4) Instruksi/Edaran Mudir:",
+      "text": "Instruksi/Edaran Mudir:",
+      "enumerated": true,
+      "marker": "4)"
+    },
+    {
+      "self_ref": "#/texts/51",
+      "parent": {
+        "$ref": "#/groups/6"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 126.02,
+            "t": 419.95004394531253,
+            "r": 452.05,
+            "b": 408.91004394531257,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            66
+          ]
+        }
+      ],
+      "orig": "o Format: [Nomor Urut]/EM/Kode Divisi/[Bulan dalam Romawi]/[Tahun]",
+      "text": "o Format: [Nomor Urut]/EM/Kode Divisi/[Bulan dalam Romawi]/[Tahun]",
+      "enumerated": false,
+      "marker": ""
+    },
+    {
+      "self_ref": "#/texts/52",
+      "parent": {
+        "$ref": "#/groups/6"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 126.02,
+            "t": 405.43004394531255,
+            "r": 271.432,
+            "b": 394.3900439453125,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            28
+          ]
+        }
+      ],
+      "orig": "o Contoh: 003/EM/FIN/II/2025",
+      "text": "o Contoh: 003/EM/FIN/II/2025",
+      "enumerated": false,
+      "marker": ""
+    },
+    {
+      "self_ref": "#/texts/53",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 244.25,
+            "t": 361.97004394531257,
+            "r": 351.172,
+            "b": 321.8900439453125,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            34
+          ]
+        }
+      ],
+      "orig": "BAB IV KETENTUAN PERALIHAN Pasal 5",
+      "text": "BAB IV KETENTUAN PERALIHAN Pasal 5",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/54",
+      "parent": {
+        "$ref": "#/groups/7"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 90.024,
+            "t": 289.97004394531257,
+            "r": 525.895,
+            "b": 232.61004394531255,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            345
+          ]
+        }
+      ],
+      "orig": "1) Dengan berlakunya Peraturan Syarikah ini, maka seluruh peraturan internal Perusahaan dalam bentuk  Pedoman,  Standar  Operasional  Prosedur  (SOP),  Keputusan  Mudir,  Instruksi/Edaran Mudir,  dan  bentuk  lainnya  yang  telah  ditetapkan  atau  bertanggal  sebelum  ditetapkannya Peraturan Syarikah ini, dicabut dan dinyatakan tidak berlaku;",
+      "text": "Dengan berlakunya Peraturan Syarikah ini, maka seluruh peraturan internal Perusahaan dalam bentuk  Pedoman,  Standar  Operasional  Prosedur  (SOP),  Keputusan  Mudir,  Instruksi/Edaran Mudir,  dan  bentuk  lainnya  yang  telah  ditetapkan  atau  bertanggal  sebelum  ditetapkannya Peraturan Syarikah ini, dicabut dan dinyatakan tidak berlaku;",
+      "enumerated": true,
+      "marker": "1)"
+    },
+    {
+      "self_ref": "#/texts/55",
+      "parent": {
+        "$ref": "#/groups/7"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 90.024,
+            "t": 228.1700439453125,
+            "r": 525.915,
+            "b": 186.2900439453125,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            212
+          ]
+        }
+      ],
+      "orig": "2) Dikecualikan  dari  ketentuan  sebagaimana  dimaksud  pada  ayat  (1),  dokumen-dokumen  di bawah  ini  dinyatakan  tetap  berlaku  dan  memiliki  kedudukan  hukum  yang  setara  dengan Peraturan Syarikah ini:",
+      "text": "Dikecualikan  dari  ketentuan  sebagaimana  dimaksud  pada  ayat  (1),  dokumen-dokumen  di bawah  ini  dinyatakan  tetap  berlaku  dan  memiliki  kedudukan  hukum  yang  setara  dengan Peraturan Syarikah ini:",
+      "enumerated": true,
+      "marker": "2)"
+    },
+    {
+      "self_ref": "#/texts/56",
+      "parent": {
+        "$ref": "#/groups/7"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 117.86,
+            "t": 181.8200439453126,
+            "r": 525.693,
+            "b": 139.94004394531248,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            179
+          ]
+        }
+      ],
+      "orig": "a. Keputusan Mudir Nomor 007/SK/DIR/2024 tentang Rencana Jangka Panjang Perusahaan (RPBP) Tahun 2024-2028 dan Rencana Bisnis Tahunan Perusahaan (RBTP) Tahun 2024 BPKH Limited; dan",
+      "text": "Keputusan Mudir Nomor 007/SK/DIR/2024 tentang Rencana Jangka Panjang Perusahaan (RPBP) Tahun 2024-2028 dan Rencana Bisnis Tahunan Perusahaan (RBTP) Tahun 2024 BPKH Limited; dan",
+      "enumerated": true,
+      "marker": "a."
+    },
+    {
+      "self_ref": "#/texts/57",
+      "parent": {
+        "$ref": "#/groups/7"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 117.86,
+            "t": 135.50004394531254,
+            "r": 525.671,
+            "b": 109.10004394531256,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            102
+          ]
+        }
+      ],
+      "orig": "b. Peraturan Mudir Nomor 008/PER/DIR/2024 tentang Rencana Bisnis Tahunan Perusahaan (RBTP) Tahun 2025.",
+      "text": "Peraturan Mudir Nomor 008/PER/DIR/2024 tentang Rencana Bisnis Tahunan Perusahaan (RBTP) Tahun 2025.",
+      "enumerated": true,
+      "marker": "b."
+    },
+    {
+      "self_ref": "#/texts/58",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "furniture",
+      "label": "page_footer",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 294.77,
+            "t": 55.151043945312495,
+            "r": 300.665,
+            "b": 41.67104394531259,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            1
+          ]
+        }
+      ],
+      "orig": "3",
+      "text": "3"
+    },
+    {
+      "self_ref": "#/texts/59",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 255.05,
+            "t": 562.5100439453125,
+            "r": 340.444,
+            "b": 536.9500439453126,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            28
+          ]
+        }
+      ],
+      "orig": "BPKH LIMITED BOARD OF MUDIRS",
+      "text": "BPKH LIMITED BOARD OF MUDIRS",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/60",
+      "parent": {
+        "$ref": "#/groups/8"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "caption",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 167.18,
+            "t": 511.0300439453125,
+            "r": 202.265,
+            "b": 499.99004394531255,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            7
+          ]
+        }
+      ],
+      "orig": "Mudir 1",
+      "text": "Mudir 1"
+    },
+    {
+      "self_ref": "#/texts/61",
+      "parent": {
+        "$ref": "#/groups/8"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "caption",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 392.59,
+            "t": 511.0300439453125,
+            "r": 427.675,
+            "b": 499.99004394531255,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            7
+          ]
+        }
+      ],
+      "orig": "Mudir 2",
+      "text": "Mudir 2"
+    },
+    {
+      "self_ref": "#/texts/62",
+      "parent": {
+        "$ref": "#/groups/8"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "caption",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 153.98,
+            "t": 434.5900439453125,
+            "r": 215.528,
+            "b": 423.55004394531255,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            13
+          ]
+        }
+      ],
+      "orig": "Sidiq Haryono",
+      "text": "Sidiq Haryono"
+    },
+    {
+      "self_ref": "#/texts/63",
+      "parent": {
+        "$ref": "#/groups/8"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "caption",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 372.31,
+            "t": 430.51004394531253,
+            "r": 447.967,
+            "b": 419.47004394531257,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            16
+          ]
+        }
+      ],
+      "orig": "Iman Ni'matullah",
+      "text": "Iman Ni'matullah"
+    },
+    {
+      "self_ref": "#/texts/64",
+      "parent": {
+        "$ref": "#/pictures/4"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "caption",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 392.59,
+            "t": 511.0300439453125,
+            "r": 427.675,
+            "b": 499.99004394531255,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            7
+          ]
+        }
+      ],
+      "orig": "Mudir 2",
+      "text": "Mudir 2"
+    },
+    {
+      "self_ref": "#/texts/65",
+      "parent": {
+        "$ref": "#/pictures/5"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 481.3333333333333,
+            "t": 784.9200439453125,
+            "r": 545.6666666666666,
+            "b": 777.9200439453125,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            7
+          ]
+        }
+      ],
+      "orig": "LIMITED",
+      "text": "LIMITED"
+    },
+    {
+      "self_ref": "#/texts/66",
+      "parent": {
+        "$ref": "#/groups/9"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 90.024,
+            "t": 767.7600439453125,
+            "r": 525.608,
+            "b": 725.8600439453126,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            190
+          ]
+        }
+      ],
+      "orig": "3) Penomoran dokumen Perusahaan yang diterbitkan setelah tanggal ditetapkannya Peraturan Syarikah ini wajib mengikuti format penomoran sebagaimana diatur dalam Pasal 4 Peraturan Syarikah ini",
+      "text": "Penomoran dokumen Perusahaan yang diterbitkan setelah tanggal ditetapkannya Peraturan Syarikah ini wajib mengikuti format penomoran sebagaimana diatur dalam Pasal 4 Peraturan Syarikah ini",
+      "enumerated": true,
+      "marker": "3)"
+    },
+    {
+      "self_ref": "#/texts/67",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 247.97,
+            "t": 692.9800439453126,
+            "r": 347.352,
+            "b": 652.9000439453125,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            31
+          ]
+        }
+      ],
+      "orig": "BAB V KETENTUAN PENUTUP Pasal 6",
+      "text": "BAB V KETENTUAN PENUTUP Pasal 6",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/68",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 72.024,
+            "t": 635.0200439453125,
+            "r": 341.124,
+            "b": 623.9800439453126,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            62
+          ]
+        }
+      ],
+      "orig": "Peraturan Syarikah ini mulai berlaku sejak tanggal ditetapkan.",
+      "text": "Peraturan Syarikah ini mulai berlaku sejak tanggal ditetapkan."
+    },
+    {
+      "self_ref": "#/texts/69",
+      "parent": {
+        "$ref": "#/groups/10"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 72.024,
+            "t": 605.9800439453126,
+            "r": 170.854,
+            "b": 594.9400439453126,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            21
+          ]
+        }
+      ],
+      "orig": "Ditetapkan di: Makkah",
+      "text": "Ditetapkan di: Makkah"
+    },
+    {
+      "self_ref": "#/texts/70",
+      "parent": {
+        "$ref": "#/groups/10"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 72.024,
+            "t": 591.4600439453126,
+            "r": 203.354,
+            "b": 580.4200439453125,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            29
+          ]
+        }
+      ],
+      "orig": "Pada tanggal: 2 Februari 2025",
+      "text": "Pada tanggal: 2 Februari 2025"
+    },
+    {
+      "self_ref": "#/texts/71",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "furniture",
+      "label": "page_footer",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 294.77,
+            "t": 55.151043945312495,
+            "r": 300.665,
+            "b": 41.67104394531259,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            1
+          ]
+        }
+      ],
+      "orig": "4",
+      "text": "4"
+    }
+  ],
+  "pictures": [
+    {
+      "self_ref": "#/pictures/0",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "picture",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 464.62457275390625,
+            "t": 820.7907543182373,
+            "r": 561.5393676757812,
+            "b": 778.3437385559082,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            0
+          ]
+        }
+      ],
+      "captions": [],
+      "references": [],
+      "footnotes": [],
+      "annotations": []
+    },
+    {
+      "self_ref": "#/pictures/1",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "picture",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 464.7164001464844,
+            "t": 820.9929466247559,
+            "r": 561.6693115234375,
+            "b": 777.5361633300781,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            0
+          ]
+        }
+      ],
+      "captions": [],
+      "references": [],
+      "footnotes": [],
+      "annotations": []
+    },
+    {
+      "self_ref": "#/pictures/2",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "picture",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 464.7624206542969,
+            "t": 820.7955455780029,
+            "r": 561.475341796875,
+            "b": 778.4156455993652,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            0
+          ]
+        }
+      ],
+      "captions": [],
+      "references": [],
+      "footnotes": [],
+      "annotations": []
+    },
+    {
+      "self_ref": "#/pictures/3",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "picture",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 110.06416320800781,
+            "t": 488.08441162109375,
+            "r": 256.81976318359375,
+            "b": 449.6178283691406,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            0
+          ]
+        }
+      ],
+      "captions": [],
+      "references": [],
+      "footnotes": [],
+      "annotations": []
+    },
+    {
+      "self_ref": "#/pictures/4",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [
+        {
+          "$ref": "#/texts/64"
+        }
+      ],
+      "content_layer": "body",
+      "label": "picture",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 377.8659973144531,
+            "t": 510.9580993652344,
+            "r": 439.7399597167969,
+            "b": 441.9666748046875,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            0
+          ]
+        }
+      ],
+      "captions": [],
+      "references": [],
+      "footnotes": [],
+      "annotations": []
+    },
+    {
+      "self_ref": "#/pictures/5",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [
+        {
+          "$ref": "#/texts/65"
+        }
+      ],
+      "content_layer": "body",
+      "label": "picture",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 464.594482421875,
+            "t": 820.9364929199219,
+            "r": 561.5975952148438,
+            "b": 778.046501159668,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            0
+          ]
+        }
+      ],
+      "captions": [],
+      "references": [],
+      "footnotes": [],
+      "annotations": []
+    }
+  ],
+  "tables": [],
+  "key_value_items": [],
+  "form_items": [],
+  "pages": {
+    "1": {
+      "size": {
+        "width": 595.3200073242188,
+        "height": 841.9200439453125
+      },
+      "page_no": 1
+    },
+    "2": {
+      "size": {
+        "width": 595.3200073242188,
+        "height": 841.9200439453125
+      },
+      "page_no": 2
+    },
+    "3": {
+      "size": {
+        "width": 595.3200073242188,
+        "height": 841.9200439453125
+      },
+      "page_no": 3
+    },
+    "4": {
+      "size": {
+        "width": 595.3200073242188,
+        "height": 841.9200439453125
+      },
+      "page_no": 4
+    }
+  }
+}

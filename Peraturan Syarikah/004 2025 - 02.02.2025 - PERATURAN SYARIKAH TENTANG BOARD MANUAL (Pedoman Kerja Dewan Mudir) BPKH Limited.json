@@ -1,0 +1,6032 @@
+{
+  "schema_name": "DoclingDocument",
+  "version": "1.7.0",
+  "name": "004 2025 - 02.02.2025 - PERATURAN SYARIKAH TENTANG BOARD MANUAL (Pedoman Kerja Dewan Mudir) BPKH Limited",
+  "origin": {
+    "mimetype": "application/pdf",
+    "binary_hash": 10794461897963580637,
+    "filename": "004 2025 - 02.02.2025 - PERATURAN SYARIKAH TENTANG BOARD MANUAL (Pedoman Kerja Dewan Mudir) BPKH Limited.pdf"
+  },
+  "furniture": {
+    "self_ref": "#/furniture",
+    "children": [],
+    "content_layer": "furniture",
+    "name": "_root_",
+    "label": "unspecified"
+  },
+  "body": {
+    "self_ref": "#/body",
+    "children": [
+      {
+        "$ref": "#/texts/0"
+      },
+      {
+        "$ref": "#/groups/0"
+      },
+      {
+        "$ref": "#/texts/5"
+      },
+      {
+        "$ref": "#/groups/1"
+      },
+      {
+        "$ref": "#/texts/10"
+      },
+      {
+        "$ref": "#/texts/11"
+      },
+      {
+        "$ref": "#/texts/12"
+      },
+      {
+        "$ref": "#/texts/13"
+      },
+      {
+        "$ref": "#/texts/14"
+      },
+      {
+        "$ref": "#/texts/15"
+      },
+      {
+        "$ref": "#/texts/16"
+      },
+      {
+        "$ref": "#/pictures/0"
+      },
+      {
+        "$ref": "#/texts/17"
+      },
+      {
+        "$ref": "#/texts/18"
+      },
+      {
+        "$ref": "#/groups/2"
+      },
+      {
+        "$ref": "#/texts/25"
+      },
+      {
+        "$ref": "#/texts/26"
+      },
+      {
+        "$ref": "#/texts/27"
+      },
+      {
+        "$ref": "#/texts/28"
+      },
+      {
+        "$ref": "#/groups/3"
+      },
+      {
+        "$ref": "#/texts/31"
+      },
+      {
+        "$ref": "#/groups/4"
+      },
+      {
+        "$ref": "#/texts/37"
+      },
+      {
+        "$ref": "#/groups/5"
+      },
+      {
+        "$ref": "#/pictures/1"
+      },
+      {
+        "$ref": "#/pictures/2"
+      },
+      {
+        "$ref": "#/texts/41"
+      },
+      {
+        "$ref": "#/texts/42"
+      },
+      {
+        "$ref": "#/texts/43"
+      },
+      {
+        "$ref": "#/groups/6"
+      },
+      {
+        "$ref": "#/texts/51"
+      },
+      {
+        "$ref": "#/texts/52"
+      },
+      {
+        "$ref": "#/groups/7"
+      },
+      {
+        "$ref": "#/texts/71"
+      },
+      {
+        "$ref": "#/groups/8"
+      },
+      {
+        "$ref": "#/texts/80"
+      },
+      {
+        "$ref": "#/texts/81"
+      },
+      {
+        "$ref": "#/groups/9"
+      },
+      {
+        "$ref": "#/texts/85"
+      },
+      {
+        "$ref": "#/groups/10"
+      },
+      {
+        "$ref": "#/tables/0"
+      },
+      {
+        "$ref": "#/pictures/3"
+      },
+      {
+        "$ref": "#/pictures/4"
+      },
+      {
+        "$ref": "#/tables/1"
+      },
+      {
+        "$ref": "#/texts/89"
+      },
+      {
+        "$ref": "#/groups/11"
+      },
+      {
+        "$ref": "#/texts/93"
+      },
+      {
+        "$ref": "#/texts/94"
+      },
+      {
+        "$ref": "#/groups/12"
+      },
+      {
+        "$ref": "#/texts/98"
+      },
+      {
+        "$ref": "#/groups/13"
+      },
+      {
+        "$ref": "#/texts/103"
+      },
+      {
+        "$ref": "#/groups/14"
+      },
+      {
+        "$ref": "#/texts/106"
+      },
+      {
+        "$ref": "#/texts/107"
+      },
+      {
+        "$ref": "#/groups/15"
+      },
+      {
+        "$ref": "#/texts/110"
+      },
+      {
+        "$ref": "#/texts/111"
+      },
+      {
+        "$ref": "#/texts/112"
+      },
+      {
+        "$ref": "#/texts/113"
+      },
+      {
+        "$ref": "#/groups/16"
+      },
+      {
+        "$ref": "#/texts/117"
+      },
+      {
+        "$ref": "#/groups/17"
+      },
+      {
+        "$ref": "#/texts/120"
+      },
+      {
+        "$ref": "#/groups/18"
+      },
+      {
+        "$ref": "#/pictures/5"
+      },
+      {
+        "$ref": "#/pictures/6"
+      },
+      {
+        "$ref": "#/pictures/7"
+      },
+      {
+        "$ref": "#/texts/126"
+      },
+      {
+        "$ref": "#/texts/127"
+      },
+      {
+        "$ref": "#/groups/19"
+      },
+      {
+        "$ref": "#/texts/130"
+      },
+      {
+        "$ref": "#/groups/20"
+      },
+      {
+        "$ref": "#/texts/133"
+      },
+      {
+        "$ref": "#/texts/134"
+      },
+      {
+        "$ref": "#/texts/135"
+      },
+      {
+        "$ref": "#/texts/136"
+      },
+      {
+        "$ref": "#/texts/137"
+      },
+      {
+        "$ref": "#/groups/21"
+      },
+      {
+        "$ref": "#/texts/142"
+      },
+      {
+        "$ref": "#/pictures/8"
+      },
+      {
+        "$ref": "#/texts/143"
+      }
+    ],
+    "content_layer": "body",
+    "name": "_root_",
+    "label": "unspecified"
+  },
+  "groups": [
+    {
+      "self_ref": "#/groups/0",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [
+        {
+          "$ref": "#/texts/1"
+        },
+        {
+          "$ref": "#/texts/2"
+        },
+        {
+          "$ref": "#/texts/3"
+        },
+        {
+          "$ref": "#/texts/4"
+        }
+      ],
+      "content_layer": "body",
+      "name": "list",
+      "label": "list"
+    },
+    {
+      "self_ref": "#/groups/1",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [
+        {
+          "$ref": "#/texts/6"
+        },
+        {
+          "$ref": "#/texts/7"
+        },
+        {
+          "$ref": "#/texts/8"
+        },
+        {
+          "$ref": "#/texts/9"
+        }
+      ],
+      "content_layer": "body",
+      "name": "list",
+      "label": "list"
+    },
+    {
+      "self_ref": "#/groups/2",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [
+        {
+          "$ref": "#/texts/19"
+        },
+        {
+          "$ref": "#/texts/20"
+        },
+        {
+          "$ref": "#/texts/21"
+        },
+        {
+          "$ref": "#/texts/22"
+        },
+        {
+          "$ref": "#/texts/23"
+        },
+        {
+          "$ref": "#/texts/24"
+        }
+      ],
+      "content_layer": "body",
+      "name": "list",
+      "label": "list"
+    },
+    {
+      "self_ref": "#/groups/3",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [
+        {
+          "$ref": "#/texts/29"
+        },
+        {
+          "$ref": "#/texts/30"
+        }
+      ],
+      "content_layer": "body",
+      "name": "list",
+      "label": "list"
+    },
+    {
+      "self_ref": "#/groups/4",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [
+        {
+          "$ref": "#/texts/32"
+        },
+        {
+          "$ref": "#/texts/33"
+        },
+        {
+          "$ref": "#/texts/34"
+        },
+        {
+          "$ref": "#/texts/35"
+        },
+        {
+          "$ref": "#/texts/36"
+        }
+      ],
+      "content_layer": "body",
+      "name": "list",
+      "label": "list"
+    },
+    {
+      "self_ref": "#/groups/5",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [
+        {
+          "$ref": "#/texts/38"
+        },
+        {
+          "$ref": "#/texts/39"
+        },
+        {
+          "$ref": "#/texts/40"
+        }
+      ],
+      "content_layer": "body",
+      "name": "list",
+      "label": "list"
+    },
+    {
+      "self_ref": "#/groups/6",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [
+        {
+          "$ref": "#/texts/44"
+        },
+        {
+          "$ref": "#/texts/45"
+        },
+        {
+          "$ref": "#/texts/46"
+        },
+        {
+          "$ref": "#/texts/47"
+        },
+        {
+          "$ref": "#/texts/48"
+        },
+        {
+          "$ref": "#/texts/49"
+        },
+        {
+          "$ref": "#/texts/50"
+        }
+      ],
+      "content_layer": "body",
+      "name": "list",
+      "label": "list"
+    },
+    {
+      "self_ref": "#/groups/7",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [
+        {
+          "$ref": "#/texts/53"
+        },
+        {
+          "$ref": "#/texts/54"
+        },
+        {
+          "$ref": "#/texts/55"
+        },
+        {
+          "$ref": "#/texts/56"
+        },
+        {
+          "$ref": "#/texts/57"
+        },
+        {
+          "$ref": "#/texts/58"
+        },
+        {
+          "$ref": "#/texts/59"
+        },
+        {
+          "$ref": "#/texts/60"
+        },
+        {
+          "$ref": "#/texts/61"
+        },
+        {
+          "$ref": "#/texts/62"
+        },
+        {
+          "$ref": "#/texts/63"
+        },
+        {
+          "$ref": "#/texts/64"
+        },
+        {
+          "$ref": "#/texts/65"
+        },
+        {
+          "$ref": "#/texts/66"
+        },
+        {
+          "$ref": "#/texts/67"
+        },
+        {
+          "$ref": "#/texts/68"
+        },
+        {
+          "$ref": "#/texts/69"
+        },
+        {
+          "$ref": "#/texts/70"
+        }
+      ],
+      "content_layer": "body",
+      "name": "list",
+      "label": "list"
+    },
+    {
+      "self_ref": "#/groups/8",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [
+        {
+          "$ref": "#/texts/72"
+        },
+        {
+          "$ref": "#/texts/73"
+        },
+        {
+          "$ref": "#/texts/74"
+        },
+        {
+          "$ref": "#/texts/75"
+        },
+        {
+          "$ref": "#/texts/76"
+        },
+        {
+          "$ref": "#/texts/77"
+        },
+        {
+          "$ref": "#/texts/78"
+        },
+        {
+          "$ref": "#/texts/79"
+        }
+      ],
+      "content_layer": "body",
+      "name": "list",
+      "label": "list"
+    },
+    {
+      "self_ref": "#/groups/9",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [
+        {
+          "$ref": "#/texts/82"
+        },
+        {
+          "$ref": "#/texts/83"
+        },
+        {
+          "$ref": "#/texts/84"
+        }
+      ],
+      "content_layer": "body",
+      "name": "list",
+      "label": "list"
+    },
+    {
+      "self_ref": "#/groups/10",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [
+        {
+          "$ref": "#/texts/86"
+        },
+        {
+          "$ref": "#/texts/87"
+        },
+        {
+          "$ref": "#/texts/88"
+        }
+      ],
+      "content_layer": "body",
+      "name": "list",
+      "label": "list"
+    },
+    {
+      "self_ref": "#/groups/11",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [
+        {
+          "$ref": "#/texts/90"
+        },
+        {
+          "$ref": "#/texts/91"
+        },
+        {
+          "$ref": "#/texts/92"
+        }
+      ],
+      "content_layer": "body",
+      "name": "list",
+      "label": "list"
+    },
+    {
+      "self_ref": "#/groups/12",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [
+        {
+          "$ref": "#/texts/95"
+        },
+        {
+          "$ref": "#/texts/96"
+        },
+        {
+          "$ref": "#/texts/97"
+        }
+      ],
+      "content_layer": "body",
+      "name": "list",
+      "label": "list"
+    },
+    {
+      "self_ref": "#/groups/13",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [
+        {
+          "$ref": "#/texts/99"
+        },
+        {
+          "$ref": "#/texts/100"
+        },
+        {
+          "$ref": "#/texts/101"
+        },
+        {
+          "$ref": "#/texts/102"
+        }
+      ],
+      "content_layer": "body",
+      "name": "list",
+      "label": "list"
+    },
+    {
+      "self_ref": "#/groups/14",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [
+        {
+          "$ref": "#/texts/104"
+        },
+        {
+          "$ref": "#/texts/105"
+        }
+      ],
+      "content_layer": "body",
+      "name": "list",
+      "label": "list"
+    },
+    {
+      "self_ref": "#/groups/15",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [
+        {
+          "$ref": "#/texts/108"
+        },
+        {
+          "$ref": "#/texts/109"
+        }
+      ],
+      "content_layer": "body",
+      "name": "list",
+      "label": "list"
+    },
+    {
+      "self_ref": "#/groups/16",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [
+        {
+          "$ref": "#/texts/114"
+        },
+        {
+          "$ref": "#/texts/115"
+        },
+        {
+          "$ref": "#/texts/116"
+        }
+      ],
+      "content_layer": "body",
+      "name": "list",
+      "label": "list"
+    },
+    {
+      "self_ref": "#/groups/17",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [
+        {
+          "$ref": "#/texts/118"
+        },
+        {
+          "$ref": "#/texts/119"
+        }
+      ],
+      "content_layer": "body",
+      "name": "list",
+      "label": "list"
+    },
+    {
+      "self_ref": "#/groups/18",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [
+        {
+          "$ref": "#/texts/121"
+        },
+        {
+          "$ref": "#/texts/125"
+        }
+      ],
+      "content_layer": "body",
+      "name": "list",
+      "label": "list"
+    },
+    {
+      "self_ref": "#/groups/19",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [
+        {
+          "$ref": "#/texts/128"
+        },
+        {
+          "$ref": "#/texts/129"
+        }
+      ],
+      "content_layer": "body",
+      "name": "list",
+      "label": "list"
+    },
+    {
+      "self_ref": "#/groups/20",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [
+        {
+          "$ref": "#/texts/131"
+        },
+        {
+          "$ref": "#/texts/132"
+        }
+      ],
+      "content_layer": "body",
+      "name": "list",
+      "label": "list"
+    },
+    {
+      "self_ref": "#/groups/21",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [
+        {
+          "$ref": "#/texts/138"
+        },
+        {
+          "$ref": "#/texts/139"
+        },
+        {
+          "$ref": "#/texts/140"
+        },
+        {
+          "$ref": "#/texts/141"
+        }
+      ],
+      "content_layer": "body",
+      "name": "group",
+      "label": "key_value_area"
+    }
+  ],
+  "texts": [
+    {
+      "self_ref": "#/texts/0",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 72.024,
+            "t": 594.7,
+            "r": 130.795,
+            "b": 583.66,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            10
+          ]
+        }
+      ],
+      "orig": "Menimbang:",
+      "text": "Menimbang:",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/1",
+      "parent": {
+        "$ref": "#/groups/0"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 90.024,
+            "t": 579.34,
+            "r": 542.449,
+            "b": 537.58,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            210
+          ]
+        }
+      ],
+      "orig": "a. Bahwa untuk mendukung dan mengimplementasikan prinsip-prinsip Tata Kelola Perusahaan yang Baik ( Good Corporate Governance ), diperlukan suatu pedoman yang jelas bagi Dewan Mudir dalam menjalankan fungsinya.",
+      "text": "Bahwa untuk mendukung dan mengimplementasikan prinsip-prinsip Tata Kelola Perusahaan yang Baik ( Good Corporate Governance ), diperlukan suatu pedoman yang jelas bagi Dewan Mudir dalam menjalankan fungsinya.",
+      "enumerated": true,
+      "marker": "a."
+    },
+    {
+      "self_ref": "#/texts/2",
+      "parent": {
+        "$ref": "#/groups/0"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 90.024,
+            "t": 533.11,
+            "r": 542.278,
+            "b": 491.35,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            211
+          ]
+        }
+      ],
+      "orig": "b. Bahwa  untuk  memastikan  Dewan  Mudir  dapat  menjalankan  tugas,  wewenang,  dan  tanggung jawabnya  secara  efektif,  efisien,  dan  akuntabel,  perlu  ditetapkan  suatu  kerangka  kerja  yang terstruktur.",
+      "text": "Bahwa  untuk  memastikan  Dewan  Mudir  dapat  menjalankan  tugas,  wewenang,  dan  tanggung jawabnya  secara  efektif,  efisien,  dan  akuntabel,  perlu  ditetapkan  suatu  kerangka  kerja  yang terstruktur.",
+      "enumerated": true,
+      "marker": "b."
+    },
+    {
+      "self_ref": "#/texts/3",
+      "parent": {
+        "$ref": "#/groups/0"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 90.024,
+            "t": 487.03,
+            "r": 542.256,
+            "b": 445.15,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            210
+          ]
+        }
+      ],
+      "orig": "c. Bahwa untuk memberikan kejelasan mengenai struktur, mekanisme pengambilan keputusan, dan hubungan kerja  Dewan Mudir  dengan  organ  perusahaan  lainnya,  diperlukan  sebuah  pedoman kerja yang komprehensif.",
+      "text": "Bahwa untuk memberikan kejelasan mengenai struktur, mekanisme pengambilan keputusan, dan hubungan kerja  Dewan Mudir  dengan  organ  perusahaan  lainnya,  diperlukan  sebuah  pedoman kerja yang komprehensif.",
+      "enumerated": true,
+      "marker": "c."
+    },
+    {
+      "self_ref": "#/texts/4",
+      "parent": {
+        "$ref": "#/groups/0"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 90.024,
+            "t": 440.83,
+            "r": 542.57,
+            "b": 399.07,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            201
+          ]
+        }
+      ],
+      "orig": "d. Bahwa  berdasarkan  pertimbangan  sebagaimana  dimaksud  dalam  huruf  a,  b,  dan  c,  perlu menetapkan  Peraturan  Syarikah  tentang  Pedoman  Kerja  Dewan  Mudir  ( Board  Manual )  BPKH Limited.",
+      "text": "Bahwa  berdasarkan  pertimbangan  sebagaimana  dimaksud  dalam  huruf  a,  b,  dan  c,  perlu menetapkan  Peraturan  Syarikah  tentang  Pedoman  Kerja  Dewan  Mudir  ( Board  Manual )  BPKH Limited.",
+      "enumerated": true,
+      "marker": "d."
+    },
+    {
+      "self_ref": "#/texts/5",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 72.024,
+            "t": 379.27,
+            "r": 125.155,
+            "b": 368.23,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            10
+          ]
+        }
+      ],
+      "orig": "Mengingat:",
+      "text": "Mengingat:",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/6",
+      "parent": {
+        "$ref": "#/groups/1"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 78.024,
+            "t": 357.89,
+            "r": 296.065,
+            "b": 346.85,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            47
+          ]
+        }
+      ],
+      "orig": "1. Article of Association tanggal 23/08/1444 H;",
+      "text": "Article of Association tanggal 23/08/1444 H;",
+      "enumerated": true,
+      "marker": "1."
+    },
+    {
+      "self_ref": "#/texts/7",
+      "parent": {
+        "$ref": "#/groups/1"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 78.024,
+            "t": 342.53,
+            "r": 394.005,
+            "b": 331.49,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            63
+          ]
+        }
+      ],
+      "orig": "2. Anggaran Dasar Perusahaan Nomor 487734 tanggal 12/05/1446 H;",
+      "text": "Anggaran Dasar Perusahaan Nomor 487734 tanggal 12/05/1446 H;",
+      "enumerated": true,
+      "marker": "2."
+    },
+    {
+      "self_ref": "#/texts/8",
+      "parent": {
+        "$ref": "#/groups/1"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 78.024,
+            "t": 327.17,
+            "r": 542.217,
+            "b": 301.61,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            157
+          ]
+        }
+      ],
+      "orig": "3. Keputusan Kepala Badan Pelaksana BPKH Nomor 163/BPKH.00/09/2024 tentang Piagam Hubungan Antara Badan Pengelola Keuangan Haji dengan Syarikah BPKH Limited.",
+      "text": "Keputusan Kepala Badan Pelaksana BPKH Nomor 163/BPKH.00/09/2024 tentang Piagam Hubungan Antara Badan Pengelola Keuangan Haji dengan Syarikah BPKH Limited.",
+      "enumerated": true,
+      "marker": "3."
+    },
+    {
+      "self_ref": "#/texts/9",
+      "parent": {
+        "$ref": "#/groups/1"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 78.024,
+            "t": 298.13,
+            "r": 542.172,
+            "b": 271.73,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            107
+          ]
+        }
+      ],
+      "orig": "4. Peraturan Syarikah BPKH Limited Nomor 001 Tahun 2025 tentang Hierarki Peraturan Perusahaan BPKH Limited.",
+      "text": "Peraturan Syarikah BPKH Limited Nomor 001 Tahun 2025 tentang Hierarki Peraturan Perusahaan BPKH Limited.",
+      "enumerated": true,
+      "marker": "4."
+    },
+    {
+      "self_ref": "#/texts/10",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 72.024,
+            "t": 255.40999999999997,
+            "r": 144.475,
+            "b": 244.37,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            11
+          ]
+        }
+      ],
+      "orig": "MEMUTUSKAN:",
+      "text": "MEMUTUSKAN:",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/11",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 72.024,
+            "t": 227.93000000000006,
+            "r": 133.555,
+            "b": 216.89,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            11
+          ]
+        }
+      ],
+      "orig": "Menetapkan:",
+      "text": "Menetapkan:",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/12",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 72.024,
+            "t": 212.56999999999994,
+            "r": 542.251,
+            "b": 186.14,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            94
+          ]
+        }
+      ],
+      "orig": "PERATURAN SYARIKAH BPKH LIMITED TENTANG PEDOMAN KERJA DEWAN MUDIR (BOARD MANUAL) BPKH LIMITED.",
+      "text": "PERATURAN SYARIKAH BPKH LIMITED TENTANG PEDOMAN KERJA DEWAN MUDIR (BOARD MANUAL) BPKH LIMITED."
+    },
+    {
+      "self_ref": "#/texts/13",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 223.01,
+            "t": 717.82,
+            "r": 391.485,
+            "b": 691.42,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            53
+          ]
+        }
+      ],
+      "orig": "PERATURAN SYARIKAH BPKH LIMITED NOMOR: 004 TAHUN 2025",
+      "text": "PERATURAN SYARIKAH BPKH LIMITED NOMOR: 004 TAHUN 2025",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/14",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 284.45,
+            "t": 687.1,
+            "r": 330.165,
+            "b": 676.06,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            7
+          ]
+        }
+      ],
+      "orig": "TENTANG",
+      "text": "TENTANG",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/15",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 190.22,
+            "t": 671.62,
+            "r": 424.365,
+            "b": 645.22,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            53
+          ]
+        }
+      ],
+      "orig": "PEDOMAN KERJA DEWAN MUDIR (BOARD MANUAL) BPKH LIMITED",
+      "text": "PEDOMAN KERJA DEWAN MUDIR (BOARD MANUAL) BPKH LIMITED",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/16",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 208.97,
+            "t": 640.9,
+            "r": 405.645,
+            "b": 614.5,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            53
+          ]
+        }
+      ],
+      "orig": "DENGAN RAHMAT TUHAN YANG MAHA ESA MUDIR BPKH LIMITED,",
+      "text": "DENGAN RAHMAT TUHAN YANG MAHA ESA MUDIR BPKH LIMITED,",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/17",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 247.13,
+            "t": 717.82,
+            "r": 367.485,
+            "b": 706.78,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            21
+          ]
+        }
+      ],
+      "orig": "BAB I: KETENTUAN UMUM",
+      "text": "BAB I: KETENTUAN UMUM",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/18",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 244.49,
+            "t": 690.94,
+            "r": 370.005,
+            "b": 679.9,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            26
+          ]
+        }
+      ],
+      "orig": "Pasal 1: Maksud dan Tujuan",
+      "text": "Pasal 1: Maksud dan Tujuan",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/19",
+      "parent": {
+        "$ref": "#/groups/2"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 78.024,
+            "t": 664.06,
+            "r": 542.571,
+            "b": 637.66,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            201
+          ]
+        }
+      ],
+      "orig": "1. Board  Manual ini  disusun  sebagai  pedoman  bagi  anggota  Dewan  Mudir  ( Board  of  Mudir )  dalam menjalankan tugas, wewenang, dan tanggung jawabnya secara profesional, efektif, dan transparan.",
+      "text": "Board  Manual ini  disusun  sebagai  pedoman  bagi  anggota  Dewan  Mudir  ( Board  of  Mudir )  dalam menjalankan tugas, wewenang, dan tanggung jawabnya secara profesional, efektif, dan transparan.",
+      "enumerated": true,
+      "marker": "1."
+    },
+    {
+      "self_ref": "#/texts/20",
+      "parent": {
+        "$ref": "#/groups/2"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 78.024,
+            "t": 633.34,
+            "r": 271.345,
+            "b": 622.3,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            40
+          ]
+        }
+      ],
+      "orig": "2. Tujuan dari pedoman ini adalah untuk:",
+      "text": "Tujuan dari pedoman ini adalah untuk:",
+      "enumerated": true,
+      "marker": "2."
+    },
+    {
+      "self_ref": "#/texts/21",
+      "parent": {
+        "$ref": "#/groups/2"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 114.02,
+            "t": 611.98,
+            "r": 514.995,
+            "b": 600.94,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            83
+          ]
+        }
+      ],
+      "orig": "a. Memberikan kejelasan mengenai struktur, fungsi, dan mekanisme kerja Dewan Mudir.",
+      "text": "Memberikan kejelasan mengenai struktur, fungsi, dan mekanisme kerja Dewan Mudir.",
+      "enumerated": true,
+      "marker": "a."
+    },
+    {
+      "self_ref": "#/texts/22",
+      "parent": {
+        "$ref": "#/groups/2"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 114.02,
+            "t": 596.62,
+            "r": 542.244,
+            "b": 570.1,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            151
+          ]
+        }
+      ],
+      "orig": "b. Memastikan  proses  pengambilan  keputusan  berjalan  sesuai  dengan  prinsip  Tata  Kelola Perusahaan yang Baik ( Good Corporate Governance - GCG).",
+      "text": "Memastikan  proses  pengambilan  keputusan  berjalan  sesuai  dengan  prinsip  Tata  Kelola Perusahaan yang Baik ( Good Corporate Governance - GCG).",
+      "enumerated": true,
+      "marker": "b."
+    },
+    {
+      "self_ref": "#/texts/23",
+      "parent": {
+        "$ref": "#/groups/2"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 114.02,
+            "t": 565.78,
+            "r": 542.432,
+            "b": 539.38,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            136
+          ]
+        }
+      ],
+      "orig": "c. Menjadi acuan dalam hubungan kerja antara Dewan Mudir dengan organ perusahaan lainnya, termasuk General Meeting dan Shahibul Syirkah.",
+      "text": "Menjadi acuan dalam hubungan kerja antara Dewan Mudir dengan organ perusahaan lainnya, termasuk General Meeting dan Shahibul Syirkah.",
+      "enumerated": true,
+      "marker": "c."
+    },
+    {
+      "self_ref": "#/texts/24",
+      "parent": {
+        "$ref": "#/groups/2"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 114.02,
+            "t": 535.03,
+            "r": 542.388,
+            "b": 508.51,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            158
+          ]
+        }
+      ],
+      "orig": "d. Mendukung pencapaian visi, misi, dan tujuan strategis Perusahaan sebagaimana diatur dalam Anggaran Dasar dan Rencana Pengembangan Bisnis Perusahaan (RPBP).",
+      "text": "Mendukung pencapaian visi, misi, dan tujuan strategis Perusahaan sebagaimana diatur dalam Anggaran Dasar dan Rencana Pengembangan Bisnis Perusahaan (RPBP).",
+      "enumerated": true,
+      "marker": "d."
+    },
+    {
+      "self_ref": "#/texts/25",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 255.77,
+            "t": 492.19,
+            "r": 358.725,
+            "b": 481.15,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            22
+          ]
+        }
+      ],
+      "orig": "Pasal 2: Ruang Lingkup",
+      "text": "Pasal 2: Ruang Lingkup",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/26",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 72.024,
+            "t": 464.83,
+            "r": 542.577,
+            "b": 423.07,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            255
+          ]
+        }
+      ],
+      "orig": "Pedoman ini berlaku bagi seluruh anggota Dewan Mudir BPKH Limited dalam menjalankan setiap aspek tugas  dan  fungsinya,  termasuk  dalam  interaksinya  dengan  organ  perusahaan  lain  dan  dalam  proses pengambilan keputusan strategis maupun operasional.",
+      "text": "Pedoman ini berlaku bagi seluruh anggota Dewan Mudir BPKH Limited dalam menjalankan setiap aspek tugas  dan  fungsinya,  termasuk  dalam  interaksinya  dengan  organ  perusahaan  lain  dan  dalam  proses pengambilan keputusan strategis maupun operasional."
+    },
+    {
+      "self_ref": "#/texts/27",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 194.3,
+            "t": 385.27,
+            "r": 420.285,
+            "b": 374.23,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            43
+          ]
+        }
+      ],
+      "orig": "BAB II: STATUS, KOMPOSISI, DAN PENGANGKATAN",
+      "text": "BAB II: STATUS, KOMPOSISI, DAN PENGANGKATAN",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/28",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 207.29,
+            "t": 357.89,
+            "r": 407.325,
+            "b": 346.85,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            41
+          ]
+        }
+      ],
+      "orig": "Pasal 3: Status dan Kedudukan Dewan Mudir",
+      "text": "Pasal 3: Status dan Kedudukan Dewan Mudir",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/29",
+      "parent": {
+        "$ref": "#/groups/3"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 78.024,
+            "t": 336.53,
+            "r": 542.294,
+            "b": 310.13,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            160
+          ]
+        }
+      ],
+      "orig": "1. Dewan Mudir adalah jajaran pengurus Perusahaan yang berwenang dan bertanggung jawab penuh atas pengurusan Perusahaan untuk kepentingan dan tujuan Perusahaan.",
+      "text": "Dewan Mudir adalah jajaran pengurus Perusahaan yang berwenang dan bertanggung jawab penuh atas pengurusan Perusahaan untuk kepentingan dan tujuan Perusahaan.",
+      "enumerated": true,
+      "marker": "1."
+    },
+    {
+      "self_ref": "#/texts/30",
+      "parent": {
+        "$ref": "#/groups/3"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 78.024,
+            "t": 305.69,
+            "r": 542.58,
+            "b": 279.28999999999996,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            155
+          ]
+        }
+      ],
+      "orig": "2. Setiap anggota Dewan Mudir memiliki kewenangan untuk mewakili Perusahaan baik di dalam maupun di luar pengadilan sesuai dengan ketentuan Anggaran Dasar.",
+      "text": "Setiap anggota Dewan Mudir memiliki kewenangan untuk mewakili Perusahaan baik di dalam maupun di luar pengadilan sesuai dengan ketentuan Anggaran Dasar.",
+      "enumerated": true,
+      "marker": "2."
+    },
+    {
+      "self_ref": "#/texts/31",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 234.17,
+            "t": 262.97,
+            "r": 380.325,
+            "b": 251.93000000000006,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            30
+          ]
+        }
+      ],
+      "orig": "Pasal 4: Komposisi Dewan Mudir",
+      "text": "Pasal 4: Komposisi Dewan Mudir",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/32",
+      "parent": {
+        "$ref": "#/groups/4"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 78.024,
+            "t": 241.61,
+            "r": 542.239,
+            "b": 215.09000000000003,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            109
+          ]
+        }
+      ],
+      "orig": "1. Dewan Mudir terdiri dari beberapa anggota Mudir yang menjalankan fungsi eksekutif tertinggi di Perusahaan.",
+      "text": "Dewan Mudir terdiri dari beberapa anggota Mudir yang menjalankan fungsi eksekutif tertinggi di Perusahaan.",
+      "enumerated": true,
+      "marker": "1."
+    },
+    {
+      "self_ref": "#/texts/33",
+      "parent": {
+        "$ref": "#/groups/4"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 78.024,
+            "t": 210.76999999999998,
+            "r": 251.905,
+            "b": 199.73000000000002,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            37
+          ]
+        }
+      ],
+      "orig": "2. Struktur Dewan Mudir terdiri dari:",
+      "text": "Struktur Dewan Mudir terdiri dari:",
+      "enumerated": true,
+      "marker": "2."
+    },
+    {
+      "self_ref": "#/texts/34",
+      "parent": {
+        "$ref": "#/groups/4"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 96.024,
+            "t": 195.38,
+            "r": 358.365,
+            "b": 184.34000000000003,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            59
+          ]
+        }
+      ],
+      "orig": "a. Mudir 1, berperan sebagai Chief Executive Officer (CEO).",
+      "text": "Mudir 1, berperan sebagai Chief Executive Officer (CEO).",
+      "enumerated": true,
+      "marker": "a."
+    },
+    {
+      "self_ref": "#/texts/35",
+      "parent": {
+        "$ref": "#/groups/4"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 96.024,
+            "t": 180.01999999999998,
+            "r": 362.925,
+            "b": 168.98000000000002,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            59
+          ]
+        }
+      ],
+      "orig": "b. Mudir 2, berperan sebagai Chief Operating Officer (COO).",
+      "text": "Mudir 2, berperan sebagai Chief Operating Officer (COO).",
+      "enumerated": true,
+      "marker": "b."
+    },
+    {
+      "self_ref": "#/texts/36",
+      "parent": {
+        "$ref": "#/groups/4"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 96.024,
+            "t": 164.65999999999997,
+            "r": 349.725,
+            "b": 153.62,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            57
+          ]
+        }
+      ],
+      "orig": "c. Mudir 3, berperan sebagai Chief Finance Officer (CFO).",
+      "text": "Mudir 3, berperan sebagai Chief Finance Officer (CFO).",
+      "enumerated": true,
+      "marker": "c."
+    },
+    {
+      "self_ref": "#/texts/37",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 215.69,
+            "t": 137.18000000000006,
+            "r": 398.925,
+            "b": 126.13999999999999,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            38
+          ]
+        }
+      ],
+      "orig": "Pasal 5: Pengangkatan dan Masa Jabatan",
+      "text": "Pasal 5: Pengangkatan dan Masa Jabatan",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/38",
+      "parent": {
+        "$ref": "#/groups/5"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 78.024,
+            "t": 115.81999999999994,
+            "r": 422.325,
+            "b": 104.77999999999997,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            72
+          ]
+        }
+      ],
+      "orig": "1. Anggota Dewan Mudir diangkat dan diberhentikan oleh General Meeting .",
+      "text": "Anggota Dewan Mudir diangkat dan diberhentikan oleh General Meeting .",
+      "enumerated": true,
+      "marker": "1."
+    },
+    {
+      "self_ref": "#/texts/39",
+      "parent": {
+        "$ref": "#/groups/5"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 78.024,
+            "t": 100.46399999999994,
+            "r": 542.261,
+            "b": 74.06399999999996,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            168
+          ]
+        }
+      ],
+      "orig": "2. Masa jabatan anggota Dewan Mudir adalah 5 (lima) tahun dan dapat diangkat kembali, dengan tidak mengurangi hak General Meeting untuk memberhentikannya sewaktu-waktu.",
+      "text": "Masa jabatan anggota Dewan Mudir adalah 5 (lima) tahun dan dapat diangkat kembali, dengan tidak mengurangi hak General Meeting untuk memberhentikannya sewaktu-waktu.",
+      "enumerated": true,
+      "marker": "2."
+    },
+    {
+      "self_ref": "#/texts/40",
+      "parent": {
+        "$ref": "#/groups/5"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 78.024,
+            "t": 717.82,
+            "r": 542.382,
+            "b": 691.42,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            132
+          ]
+        }
+      ],
+      "orig": "3. Proses seleksi dan pencalonan anggota Dewan Mudir dilakukan oleh BPKH selaku pemegang saham sesuai dengan peraturan yang berlaku.",
+      "text": "Proses seleksi dan pencalonan anggota Dewan Mudir dilakukan oleh BPKH selaku pemegang saham sesuai dengan peraturan yang berlaku.",
+      "enumerated": true,
+      "marker": "3."
+    },
+    {
+      "self_ref": "#/texts/41",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 185.18,
+            "t": 653.62,
+            "r": 429.405,
+            "b": 642.58,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            44
+          ]
+        }
+      ],
+      "orig": "BAB III: TUGAS, WEWENANG, DAN TANGGUNG JAWAB",
+      "text": "BAB III: TUGAS, WEWENANG, DAN TANGGUNG JAWAB",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/42",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 209.93,
+            "t": 626.26,
+            "r": 404.565,
+            "b": 615.22,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            42
+          ]
+        }
+      ],
+      "orig": "Pasal 6: Tugas dan Tanggung Jawab Kolektif",
+      "text": "Pasal 6: Tugas dan Tanggung Jawab Kolektif",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/43",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 72.024,
+            "t": 595.54,
+            "r": 422.445,
+            "b": 584.5,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            75
+          ]
+        }
+      ],
+      "orig": "Sebagai satu kesatuan, Dewan Mudir bertanggung jawab secara kolektif untuk:",
+      "text": "Sebagai satu kesatuan, Dewan Mudir bertanggung jawab secara kolektif untuk:"
+    },
+    {
+      "self_ref": "#/texts/44",
+      "parent": {
+        "$ref": "#/groups/6"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 78.024,
+            "t": 580.06,
+            "r": 542.564,
+            "b": 553.66,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            129
+          ]
+        }
+      ],
+      "orig": "1. Mengelola Perusahaan sesuai dengan Anggaran Dasar dan peraturan perundang-undangan untuk mencapai tujuan strategis Perusahaan.",
+      "text": "Mengelola Perusahaan sesuai dengan Anggaran Dasar dan peraturan perundang-undangan untuk mencapai tujuan strategis Perusahaan.",
+      "enumerated": true,
+      "marker": "1."
+    },
+    {
+      "self_ref": "#/texts/45",
+      "parent": {
+        "$ref": "#/groups/6"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 78.024,
+            "t": 549.34,
+            "r": 542.283,
+            "b": 522.91,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            170
+          ]
+        }
+      ],
+      "orig": "2. Menyusun  Rencana  Pengembangan  Bisnis  Perusahaan  (RPBP)  dan  Rencana  Bisnis  Tahunan Perusahaan (RBTP) untuk diajukan dan disahkan sesuai ketentuan yang berlaku.",
+      "text": "Menyusun  Rencana  Pengembangan  Bisnis  Perusahaan  (RPBP)  dan  Rencana  Bisnis  Tahunan Perusahaan (RBTP) untuk diajukan dan disahkan sesuai ketentuan yang berlaku.",
+      "enumerated": true,
+      "marker": "2."
+    },
+    {
+      "self_ref": "#/texts/46",
+      "parent": {
+        "$ref": "#/groups/6"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 78.024,
+            "t": 518.59,
+            "r": 542.458,
+            "b": 492.07,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            111
+          ]
+        }
+      ],
+      "orig": "3. Menetapkan  Peraturan  Syarikah  yang  mengatur  kebijakan-kebijakan  umum  dan  fundamental  di Perusahaan.",
+      "text": "Menetapkan  Peraturan  Syarikah  yang  mengatur  kebijakan-kebijakan  umum  dan  fundamental  di Perusahaan.",
+      "enumerated": true,
+      "marker": "3."
+    },
+    {
+      "self_ref": "#/texts/47",
+      "parent": {
+        "$ref": "#/groups/6"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 78.024,
+            "t": 487.75,
+            "r": 542.363,
+            "b": 461.35,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            156
+          ]
+        }
+      ],
+      "orig": "4. Memastikan  penerapan  prinsip-prinsip  GCG  (Transparansi,  Akuntabilitas,  Pertanggungjawaban, Independensi, dan Kewajaran) di seluruh lini organisasi.",
+      "text": "Memastikan  penerapan  prinsip-prinsip  GCG  (Transparansi,  Akuntabilitas,  Pertanggungjawaban, Independensi, dan Kewajaran) di seluruh lini organisasi.",
+      "enumerated": true,
+      "marker": "4."
+    },
+    {
+      "self_ref": "#/texts/48",
+      "parent": {
+        "$ref": "#/groups/6"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 78.024,
+            "t": 457.03,
+            "r": 542.371,
+            "b": 430.63,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            139
+          ]
+        }
+      ],
+      "orig": "5. Menyusun dan menyampaikan laporan manajemen (triwulanan dan tahunan) serta Laporan Tahunan kepada Shahibul Syirkah dan General Meeting .",
+      "text": "Menyusun dan menyampaikan laporan manajemen (triwulanan dan tahunan) serta Laporan Tahunan kepada Shahibul Syirkah dan General Meeting .",
+      "enumerated": true,
+      "marker": "5."
+    },
+    {
+      "self_ref": "#/texts/49",
+      "parent": {
+        "$ref": "#/groups/6"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 78.024,
+            "t": 426.19,
+            "r": 542.595,
+            "b": 415.15,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            98
+          ]
+        }
+      ],
+      "orig": "6. Mengambil keputusan investasi dan bisnis sesuai dengan ambang batas kewenangan yang ditetapkan.",
+      "text": "Mengambil keputusan investasi dan bisnis sesuai dengan ambang batas kewenangan yang ditetapkan.",
+      "enumerated": true,
+      "marker": "6."
+    },
+    {
+      "self_ref": "#/texts/50",
+      "parent": {
+        "$ref": "#/groups/6"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 78.024,
+            "t": 410.83,
+            "r": 465.915,
+            "b": 399.79,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            82
+          ]
+        }
+      ],
+      "orig": "7. Menjaga hubungan yang sinergis dan produktif dengan BPKH sebagai entitas induk.",
+      "text": "Menjaga hubungan yang sinergis dan produktif dengan BPKH sebagai entitas induk.",
+      "enumerated": true,
+      "marker": "7."
+    },
+    {
+      "self_ref": "#/texts/51",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 186.02,
+            "t": 362.09,
+            "r": 428.445,
+            "b": 351.05,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            51
+          ]
+        }
+      ],
+      "orig": "Pasal 7: Pembagian Kewenangan dan Fungsi Individual",
+      "text": "Pasal 7: Pembagian Kewenangan dan Fungsi Individual",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/52",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 72.024,
+            "t": 334.61,
+            "r": 542.493,
+            "b": 308.21,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            115
+          ]
+        }
+      ],
+      "orig": "Dalam rangka efektivitas dan koordinasi, kewenangan anggota Dewan Mudir dibagi  berdasarkan fungsi sebagai berikut:",
+      "text": "Dalam rangka efektivitas dan koordinasi, kewenangan anggota Dewan Mudir dibagi  berdasarkan fungsi sebagai berikut:"
+    },
+    {
+      "self_ref": "#/texts/53",
+      "parent": {
+        "$ref": "#/groups/7"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 75.384,
+            "t": 303.89,
+            "r": 269.545,
+            "b": 292.85,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            43
+          ]
+        }
+      ],
+      "orig": "1. Mudir 1 (Chief Executive Officer - CEO):",
+      "text": "Mudir 1 (Chief Executive Officer - CEO):",
+      "enumerated": true,
+      "marker": "1."
+    },
+    {
+      "self_ref": "#/texts/54",
+      "parent": {
+        "$ref": "#/groups/7"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 96.024,
+            "t": 288.53,
+            "r": 511.427,
+            "b": 262.13,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            115
+          ]
+        }
+      ],
+      "orig": "a. Memimpin keseluruhan organisasi dan memastikan semua fungsi berjalan selaras dengan tujuan strategis Perusahaan.",
+      "text": "Memimpin keseluruhan organisasi dan memastikan semua fungsi berjalan selaras dengan tujuan strategis Perusahaan.",
+      "enumerated": true,
+      "marker": "a."
+    },
+    {
+      "self_ref": "#/texts/55",
+      "parent": {
+        "$ref": "#/groups/7"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 96.024,
+            "t": 257.69000000000005,
+            "r": 271.585,
+            "b": 246.64999999999998,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            34
+          ]
+        }
+      ],
+      "orig": "b. Mengelola dan membawahi fungsi:",
+      "text": "Mengelola dan membawahi fungsi:",
+      "enumerated": true,
+      "marker": "b."
+    },
+    {
+      "self_ref": "#/texts/56",
+      "parent": {
+        "$ref": "#/groups/7"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 117.86,
+            "t": 242.33000000000004,
+            "r": 238.705,
+            "b": 231.28999999999996,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            22
+          ]
+        }
+      ],
+      "orig": "-Business & Investment",
+      "text": "-Business & Investment",
+      "enumerated": false,
+      "marker": ""
+    },
+    {
+      "self_ref": "#/texts/57",
+      "parent": {
+        "$ref": "#/groups/7"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 117.86,
+            "t": 226.97000000000003,
+            "r": 256.585,
+            "b": 215.93000000000006,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            24
+          ]
+        }
+      ],
+      "orig": "-Marketing Communication",
+      "text": "-Marketing Communication",
+      "enumerated": false,
+      "marker": ""
+    },
+    {
+      "self_ref": "#/texts/58",
+      "parent": {
+        "$ref": "#/groups/7"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 117.86,
+            "t": 211.61,
+            "r": 199.105,
+            "b": 200.56999999999994,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            15
+          ]
+        }
+      ],
+      "orig": "-Internal Audit",
+      "text": "-Internal Audit",
+      "enumerated": false,
+      "marker": ""
+    },
+    {
+      "self_ref": "#/texts/59",
+      "parent": {
+        "$ref": "#/groups/7"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 78.024,
+            "t": 196.22000000000003,
+            "r": 276.265,
+            "b": 185.18000000000006,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            43
+          ]
+        }
+      ],
+      "orig": "2. Mudir 2 (Chief Operating Officer - COO):",
+      "text": "Mudir 2 (Chief Operating Officer - COO):",
+      "enumerated": true,
+      "marker": "2."
+    },
+    {
+      "self_ref": "#/texts/60",
+      "parent": {
+        "$ref": "#/groups/7"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 96.024,
+            "t": 180.74,
+            "r": 302.425,
+            "b": 169.70000000000005,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            42
+          ]
+        }
+      ],
+      "orig": "a. Mengelola aspek operasional perusahaan.",
+      "text": "Mengelola aspek operasional perusahaan.",
+      "enumerated": true,
+      "marker": "a."
+    },
+    {
+      "self_ref": "#/texts/61",
+      "parent": {
+        "$ref": "#/groups/7"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 96.024,
+            "t": 165.38,
+            "r": 271.585,
+            "b": 154.34000000000003,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            34
+          ]
+        }
+      ],
+      "orig": "b. Mengelola dan membawahi fungsi:",
+      "text": "Mengelola dan membawahi fungsi:",
+      "enumerated": true,
+      "marker": "b."
+    },
+    {
+      "self_ref": "#/texts/62",
+      "parent": {
+        "$ref": "#/groups/7"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 117.86,
+            "t": 150.01999999999998,
+            "r": 281.545,
+            "b": 138.98000000000002,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            32
+          ]
+        }
+      ],
+      "orig": "-Human Capital & General Affairs",
+      "text": "-Human Capital & General Affairs",
+      "enumerated": false,
+      "marker": ""
+    },
+    {
+      "self_ref": "#/texts/63",
+      "parent": {
+        "$ref": "#/groups/7"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 117.86,
+            "t": 134.65999999999997,
+            "r": 225.385,
+            "b": 123.62,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            19
+          ]
+        }
+      ],
+      "orig": "-Legal & Compliance",
+      "text": "-Legal & Compliance",
+      "enumerated": false,
+      "marker": ""
+    },
+    {
+      "self_ref": "#/texts/64",
+      "parent": {
+        "$ref": "#/groups/7"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 117.86,
+            "t": 119.18000000000006,
+            "r": 261.265,
+            "b": 108.13999999999999,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            28
+          ]
+        }
+      ],
+      "orig": "-Information Technology (IT)",
+      "text": "-Information Technology (IT)",
+      "enumerated": false,
+      "marker": ""
+    },
+    {
+      "self_ref": "#/texts/65",
+      "parent": {
+        "$ref": "#/groups/7"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 78.024,
+            "t": 717.82,
+            "r": 264.025,
+            "b": 706.78,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            41
+          ]
+        }
+      ],
+      "orig": "3. Mudir 3 (Chief Finance Officer - CFO):",
+      "text": "Mudir 3 (Chief Finance Officer - CFO):",
+      "enumerated": true,
+      "marker": "3."
+    },
+    {
+      "self_ref": "#/texts/66",
+      "parent": {
+        "$ref": "#/groups/7"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 96.624,
+            "t": 696.46,
+            "r": 532.755,
+            "b": 685.42,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            91
+          ]
+        }
+      ],
+      "orig": "a. Bertanggung jawab atas pengelolaan keuangan, akuntansi, dan manajemen risiko Perusahaan.",
+      "text": "Bertanggung jawab atas pengelolaan keuangan, akuntansi, dan manajemen risiko Perusahaan.",
+      "enumerated": true,
+      "marker": "a."
+    },
+    {
+      "self_ref": "#/texts/67",
+      "parent": {
+        "$ref": "#/groups/7"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 96.624,
+            "t": 681.1,
+            "r": 272.185,
+            "b": 670.06,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            34
+          ]
+        }
+      ],
+      "orig": "b. Mengelola dan membawahi fungsi:",
+      "text": "Mengelola dan membawahi fungsi:",
+      "enumerated": true,
+      "marker": "b."
+    },
+    {
+      "self_ref": "#/texts/68",
+      "parent": {
+        "$ref": "#/groups/7"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 117.86,
+            "t": 665.62,
+            "r": 223.225,
+            "b": 654.58,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            19
+          ]
+        }
+      ],
+      "orig": "-Finance & Treasury",
+      "text": "-Finance & Treasury",
+      "enumerated": false,
+      "marker": ""
+    },
+    {
+      "self_ref": "#/texts/69",
+      "parent": {
+        "$ref": "#/groups/7"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 117.86,
+            "t": 650.26,
+            "r": 188.035,
+            "b": 639.22,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            11
+          ]
+        }
+      ],
+      "orig": "-Accounting",
+      "text": "-Accounting",
+      "enumerated": false,
+      "marker": ""
+    },
+    {
+      "self_ref": "#/texts/70",
+      "parent": {
+        "$ref": "#/groups/7"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 117.86,
+            "t": 634.9,
+            "r": 217.705,
+            "b": 623.86,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            16
+          ]
+        }
+      ],
+      "orig": "-Risk Management",
+      "text": "-Risk Management",
+      "enumerated": false,
+      "marker": ""
+    },
+    {
+      "self_ref": "#/texts/71",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 195.05,
+            "t": 598.06,
+            "r": 419.565,
+            "b": 587.02,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            46
+          ]
+        }
+      ],
+      "orig": "Pasal 8: Hak dan Kewajiban Anggota Dewan Mudir",
+      "text": "Pasal 8: Hak dan Kewajiban Anggota Dewan Mudir",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/72",
+      "parent": {
+        "$ref": "#/groups/8"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 90.024,
+            "t": 576.7,
+            "r": 246.025,
+            "b": 565.66,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            30
+          ]
+        }
+      ],
+      "orig": "1. Anggota Dewan Mudir berhak:",
+      "text": "Anggota Dewan Mudir berhak:",
+      "enumerated": true,
+      "marker": "1."
+    },
+    {
+      "self_ref": "#/texts/73",
+      "parent": {
+        "$ref": "#/groups/8"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 126.02,
+            "t": 555.34,
+            "r": 533.475,
+            "b": 544.3,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            82
+          ]
+        }
+      ],
+      "orig": "o Memperoleh informasi dan akses dokumen yang diperlukan untuk melaksanakan tugas.",
+      "text": "o Memperoleh informasi dan akses dokumen yang diperlukan untuk melaksanakan tugas.",
+      "enumerated": false,
+      "marker": ""
+    },
+    {
+      "self_ref": "#/texts/74",
+      "parent": {
+        "$ref": "#/groups/8"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 126.02,
+            "t": 533.95,
+            "r": 423.165,
+            "b": 522.91,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            58
+          ]
+        }
+      ],
+      "orig": "o Mengikuti program pelatihan dan pengembangan kompetensi.",
+      "text": "o Mengikuti program pelatihan dan pengembangan kompetensi.",
+      "enumerated": false,
+      "marker": ""
+    },
+    {
+      "self_ref": "#/texts/75",
+      "parent": {
+        "$ref": "#/groups/8"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 126.02,
+            "t": 512.59,
+            "r": 383.205,
+            "b": 501.55,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            50
+          ]
+        }
+      ],
+      "orig": "o Mengajukan pendapat dan rekomendasi dalam rapat.",
+      "text": "o Mengajukan pendapat dan rekomendasi dalam rapat.",
+      "enumerated": false,
+      "marker": ""
+    },
+    {
+      "self_ref": "#/texts/76",
+      "parent": {
+        "$ref": "#/groups/8"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 90.024,
+            "t": 491.11,
+            "r": 274.945,
+            "b": 480.07,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            36
+          ]
+        }
+      ],
+      "orig": "2. Anggota Dewan Mudir berkewajiban:",
+      "text": "Anggota Dewan Mudir berkewajiban:",
+      "enumerated": true,
+      "marker": "2."
+    },
+    {
+      "self_ref": "#/texts/77",
+      "parent": {
+        "$ref": "#/groups/8"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 126.02,
+            "t": 469.75,
+            "r": 388.485,
+            "b": 458.71,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            54
+          ]
+        }
+      ],
+      "orig": "o Menghadiri rapat Dewan Mudir kecuali ada alasan sah.",
+      "text": "o Menghadiri rapat Dewan Mudir kecuali ada alasan sah.",
+      "enumerated": false,
+      "marker": ""
+    },
+    {
+      "self_ref": "#/texts/78",
+      "parent": {
+        "$ref": "#/groups/8"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 126.02,
+            "t": 448.39,
+            "r": 341.565,
+            "b": 437.35,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            43
+          ]
+        }
+      ],
+      "orig": "o Menjaga kerahasiaan informasi perusahaan.",
+      "text": "o Menjaga kerahasiaan informasi perusahaan.",
+      "enumerated": false,
+      "marker": ""
+    },
+    {
+      "self_ref": "#/texts/79",
+      "parent": {
+        "$ref": "#/groups/8"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 126.02,
+            "t": 427.03,
+            "r": 538.413,
+            "b": 400.63,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            116
+          ]
+        }
+      ],
+      "orig": "o Melaksanakan keputusan Dewan secara kolektif walaupun memiliki perbedaan pendapat pada saat pengambilan keputusan.",
+      "text": "o Melaksanakan keputusan Dewan secara kolektif walaupun memiliki perbedaan pendapat pada saat pengambilan keputusan.",
+      "enumerated": false,
+      "marker": ""
+    },
+    {
+      "self_ref": "#/texts/80",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 172.1,
+            "t": 341.45,
+            "r": 442.365,
+            "b": 330.41,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            49
+          ]
+        }
+      ],
+      "orig": "BAB IV: MEKANISME KERJA DAN PENGAMBILAN KEPUTUSAN",
+      "text": "BAB IV: MEKANISME KERJA DAN PENGAMBILAN KEPUTUSAN",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/81",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 222.53,
+            "t": 314.09,
+            "r": 391.965,
+            "b": 303.05,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            35
+          ]
+        }
+      ],
+      "orig": "Pasal 9: Prosedur Rapat Dewan Mudir",
+      "text": "Pasal 9: Prosedur Rapat Dewan Mudir",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/82",
+      "parent": {
+        "$ref": "#/groups/9"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 78.024,
+            "t": 292.61,
+            "r": 542.467,
+            "b": 266.21000000000004,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            149
+          ]
+        }
+      ],
+      "orig": "1. Pengambilan keputusan Dewan Mudir dapat dilakukan dalam rapat Dewan Mudir yang diselenggarakan secara berkala atau sewaktu-waktu sesuai kebutuhan.",
+      "text": "Pengambilan keputusan Dewan Mudir dapat dilakukan dalam rapat Dewan Mudir yang diselenggarakan secara berkala atau sewaktu-waktu sesuai kebutuhan.",
+      "enumerated": true,
+      "marker": "1."
+    },
+    {
+      "self_ref": "#/texts/83",
+      "parent": {
+        "$ref": "#/groups/9"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 78.024,
+            "t": 261.89,
+            "r": 542.242,
+            "b": 235.49,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            180
+          ]
+        }
+      ],
+      "orig": "2. Setiap  rapat  harus  memiliki  agenda  yang  jelas,  didokumentasikan  dalam  risalah  rapat,  dan didistribusikan kepada seluruh anggota Dewan Mudir dan pihak terkait lainnya.",
+      "text": "Setiap  rapat  harus  memiliki  agenda  yang  jelas,  didokumentasikan  dalam  risalah  rapat,  dan didistribusikan kepada seluruh anggota Dewan Mudir dan pihak terkait lainnya.",
+      "enumerated": true,
+      "marker": "2."
+    },
+    {
+      "self_ref": "#/texts/84",
+      "parent": {
+        "$ref": "#/groups/9"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 78.024,
+            "t": 231.16999999999996,
+            "r": 542.239,
+            "b": 204.64999999999998,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            143
+          ]
+        }
+      ],
+      "orig": "3. Keputusan rapat diambil berdasarkan musyawarah untuk mufakat. Apabila mufakat tidak tercapai, keputusan diambil berdasarkan suara terbanyak.",
+      "text": "Keputusan rapat diambil berdasarkan musyawarah untuk mufakat. Apabila mufakat tidak tercapai, keputusan diambil berdasarkan suara terbanyak.",
+      "enumerated": true,
+      "marker": "3."
+    },
+    {
+      "self_ref": "#/texts/85",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 195.53,
+            "t": 188.29999999999995,
+            "r": 418.965,
+            "b": 177.26,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            48
+          ]
+        }
+      ],
+      "orig": "Pasal 10: Proses Pengambilan Keputusan Strategis",
+      "text": "Pasal 10: Proses Pengambilan Keputusan Strategis",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/86",
+      "parent": {
+        "$ref": "#/groups/10"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 78.024,
+            "t": 166.94000000000005,
+            "r": 542.308,
+            "b": 140.53999999999996,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            165
+          ]
+        }
+      ],
+      "orig": "1. Keputusan Investasi dan Bisnis: Pengambilan keputusan untuk investasi dan bisnis dilakukan secara berjenjang berdasarkan ambang batas nilai yang telah ditetapkan:",
+      "text": "Keputusan Investasi dan Bisnis: Pengambilan keputusan untuk investasi dan bisnis dilakukan secara berjenjang berdasarkan ambang batas nilai yang telah ditetapkan:",
+      "enumerated": true,
+      "marker": "1."
+    },
+    {
+      "self_ref": "#/texts/87",
+      "parent": {
+        "$ref": "#/groups/10"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 5,
+          "bbox": {
+            "l": 78.024,
+            "t": 595.9,
+            "r": 542.569,
+            "b": 554.14,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            256
+          ]
+        }
+      ],
+      "orig": "2. Keputusan Operasional: Keputusan terkait operasional, seperti persetujuan perjalanan dinas, diambil oleh anggota Dewan Mudir yang membawahi fungsi terkait. Perjalanan dinas yang melibatkan salah satu anggota Dewan Mudir harus disetujui oleh Dewan Mudir.",
+      "text": "Keputusan Operasional: Keputusan terkait operasional, seperti persetujuan perjalanan dinas, diambil oleh anggota Dewan Mudir yang membawahi fungsi terkait. Perjalanan dinas yang melibatkan salah satu anggota Dewan Mudir harus disetujui oleh Dewan Mudir.",
+      "enumerated": true,
+      "marker": "2."
+    },
+    {
+      "self_ref": "#/texts/88",
+      "parent": {
+        "$ref": "#/groups/10"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 5,
+          "bbox": {
+            "l": 78.024,
+            "t": 549.7,
+            "r": 542.31,
+            "b": 507.91,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            244
+          ]
+        }
+      ],
+      "orig": "3. Penerbitan  Peraturan:  Dewan  Mudir  secara  kolektif  berwenang  menetapkan  Peraturan  Syarikah. Keputusan Mudir yang bersifat penetapan dapat dibuat oleh Dewan Mudir secara kolektif atau oleh Mudir secara individual sesuai kewenangannya.",
+      "text": "Penerbitan  Peraturan:  Dewan  Mudir  secara  kolektif  berwenang  menetapkan  Peraturan  Syarikah. Keputusan Mudir yang bersifat penetapan dapat dibuat oleh Dewan Mudir secara kolektif atau oleh Mudir secara individual sesuai kewenangannya.",
+      "enumerated": true,
+      "marker": "3."
+    },
+    {
+      "self_ref": "#/texts/89",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 5,
+          "bbox": {
+            "l": 235.49,
+            "t": 497.59,
+            "r": 379.005,
+            "b": 486.55,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            30
+          ]
+        }
+      ],
+      "orig": "Pasal 11: Benturan Kepentingan",
+      "text": "Pasal 11: Benturan Kepentingan",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/90",
+      "parent": {
+        "$ref": "#/groups/11"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 5,
+          "bbox": {
+            "l": 76.584,
+            "t": 476.11,
+            "r": 542.278,
+            "b": 449.71,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            114
+          ]
+        }
+      ],
+      "orig": "1. Setiap anggota Dewan Mudir wajib mengungkapkan kepentingan pribadi yang dapat menimbulkan benturan kepentingan.",
+      "text": "Setiap anggota Dewan Mudir wajib mengungkapkan kepentingan pribadi yang dapat menimbulkan benturan kepentingan.",
+      "enumerated": true,
+      "marker": "1."
+    },
+    {
+      "self_ref": "#/texts/91",
+      "parent": {
+        "$ref": "#/groups/11"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 5,
+          "bbox": {
+            "l": 76.584,
+            "t": 439.39,
+            "r": 542.256,
+            "b": 412.99,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            132
+          ]
+        }
+      ],
+      "orig": "2. Dalam hal terjadi benturan kepentingan, anggota Dewan Mudir yang bersangkutan wajib tidak ikut serta dalam pengambilan keputusan.",
+      "text": "Dalam hal terjadi benturan kepentingan, anggota Dewan Mudir yang bersangkutan wajib tidak ikut serta dalam pengambilan keputusan.",
+      "enumerated": true,
+      "marker": "2."
+    },
+    {
+      "self_ref": "#/texts/92",
+      "parent": {
+        "$ref": "#/groups/11"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 5,
+          "bbox": {
+            "l": 76.584,
+            "t": 402.67,
+            "r": 445.605,
+            "b": 391.63,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            77
+          ]
+        }
+      ],
+      "orig": "3. Semua pengungkapan benturan kepentingan harus dicatat dalam risalah rapat.",
+      "text": "Semua pengungkapan benturan kepentingan harus dicatat dalam risalah rapat.",
+      "enumerated": true,
+      "marker": "3."
+    },
+    {
+      "self_ref": "#/texts/93",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 5,
+          "bbox": {
+            "l": 212.81,
+            "t": 332.45,
+            "r": 404.085,
+            "b": 321.41,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            33
+          ]
+        }
+      ],
+      "orig": "BAB V: HUBUNGAN DENGAN ORGAN LAIN",
+      "text": "BAB V: HUBUNGAN DENGAN ORGAN LAIN",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/94",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 5,
+          "bbox": {
+            "l": 206.09,
+            "t": 305.09,
+            "r": 408.525,
+            "b": 294.05,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            41
+          ]
+        }
+      ],
+      "orig": "Pasal 12: Hubungan dengan General Meeting",
+      "text": "Pasal 12: Hubungan dengan General Meeting",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/95",
+      "parent": {
+        "$ref": "#/groups/12"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 5,
+          "bbox": {
+            "l": 78.024,
+            "t": 283.73,
+            "r": 488.955,
+            "b": 272.69000000000005,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            86
+          ]
+        }
+      ],
+      "orig": "1. Dewan Mudir diangkat, diberhentikan, dan bertanggung jawab kepada General Meeting .",
+      "text": "Dewan Mudir diangkat, diberhentikan, dan bertanggung jawab kepada General Meeting .",
+      "enumerated": true,
+      "marker": "1."
+    },
+    {
+      "self_ref": "#/texts/96",
+      "parent": {
+        "$ref": "#/groups/12"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 5,
+          "bbox": {
+            "l": 78.024,
+            "t": 268.25,
+            "r": 537.315,
+            "b": 257.21000000000004,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            95
+          ]
+        }
+      ],
+      "orig": "2. Dewan Mudir wajib melaksanakan semua keputusan yang telah ditetapkan dalam General Meeting .",
+      "text": "Dewan Mudir wajib melaksanakan semua keputusan yang telah ditetapkan dalam General Meeting .",
+      "enumerated": true,
+      "marker": "2."
+    },
+    {
+      "self_ref": "#/texts/97",
+      "parent": {
+        "$ref": "#/groups/12"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 5,
+          "bbox": {
+            "l": 78.024,
+            "t": 252.89,
+            "r": 542.595,
+            "b": 226.49,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            178
+          ]
+        }
+      ],
+      "orig": "3. Dewan Mudir mengajukan usulan-usulan strategis yang memerlukan persetujuan General Meeting , seperti perubahan Anggaran Dasar, aksi korporasi besar, dan penggunaan laba bersih",
+      "text": "Dewan Mudir mengajukan usulan-usulan strategis yang memerlukan persetujuan General Meeting , seperti perubahan Anggaran Dasar, aksi korporasi besar, dan penggunaan laba bersih",
+      "enumerated": true,
+      "marker": "3."
+    },
+    {
+      "self_ref": "#/texts/98",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 5,
+          "bbox": {
+            "l": 207.29,
+            "t": 210.16999999999996,
+            "r": 407.325,
+            "b": 199.13,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            42
+          ]
+        }
+      ],
+      "orig": "Pasal 13: Hubungan dengan Shahibul Syirkah",
+      "text": "Pasal 13: Hubungan dengan Shahibul Syirkah",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/99",
+      "parent": {
+        "$ref": "#/groups/13"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 5,
+          "bbox": {
+            "l": 78.024,
+            "t": 188.65999999999997,
+            "r": 534.675,
+            "b": 177.62,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            94
+          ]
+        }
+      ],
+      "orig": "1. Shahibul Syirkah berfungsi melakukan pengawasan dan pembinaan terhadap kinerja Dewan Mudir.",
+      "text": "Shahibul Syirkah berfungsi melakukan pengawasan dan pembinaan terhadap kinerja Dewan Mudir.",
+      "enumerated": true,
+      "marker": "1."
+    },
+    {
+      "self_ref": "#/texts/100",
+      "parent": {
+        "$ref": "#/groups/13"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 5,
+          "bbox": {
+            "l": 78.024,
+            "t": 173.29999999999995,
+            "r": 542.582,
+            "b": 146.89999999999998,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            153
+          ]
+        }
+      ],
+      "orig": "2. Dewan  Mudir  wajib  menyampaikan  rancangan  RPBP  dan  RBTP  kepada Shahibul  Syirkah untuk mendapatkan penelaahan dan persetujuan sebelum disahkan.",
+      "text": "Dewan  Mudir  wajib  menyampaikan  rancangan  RPBP  dan  RBTP  kepada Shahibul  Syirkah untuk mendapatkan penelaahan dan persetujuan sebelum disahkan.",
+      "enumerated": true,
+      "marker": "2."
+    },
+    {
+      "self_ref": "#/texts/101",
+      "parent": {
+        "$ref": "#/groups/13"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 5,
+          "bbox": {
+            "l": 78.024,
+            "t": 142.58000000000004,
+            "r": 523.995,
+            "b": 131.53999999999996,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            92
+          ]
+        }
+      ],
+      "orig": "3. Dewan Mudir wajib menyampaikan laporan manajemen secara berkala kepada Shahibul Syirkah .",
+      "text": "Dewan Mudir wajib menyampaikan laporan manajemen secara berkala kepada Shahibul Syirkah .",
+      "enumerated": true,
+      "marker": "3."
+    },
+    {
+      "self_ref": "#/texts/102",
+      "parent": {
+        "$ref": "#/groups/13"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 5,
+          "bbox": {
+            "l": 78.024,
+            "t": 127.22000000000003,
+            "r": 542.508,
+            "b": 100.70000000000005,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            116
+          ]
+        }
+      ],
+      "orig": "4. Dewan Mudir menerima masukan dan saran dari Shahibul Syirkah dalam mengelola dan menjalankan strategi Perusahaan.",
+      "text": "Dewan Mudir menerima masukan dan saran dari Shahibul Syirkah dalam mengelola dan menjalankan strategi Perusahaan.",
+      "enumerated": true,
+      "marker": "4."
+    },
+    {
+      "self_ref": "#/texts/103",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 6,
+          "bbox": {
+            "l": 72.024,
+            "t": 717.82,
+            "r": 295.465,
+            "b": 706.78,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            45
+          ]
+        }
+      ],
+      "orig": "Pasal 14: Hubungan dengan Manajemen Eksekutif",
+      "text": "Pasal 14: Hubungan dengan Manajemen Eksekutif",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/104",
+      "parent": {
+        "$ref": "#/groups/14"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 6,
+          "bbox": {
+            "l": 78.024,
+            "t": 696.46,
+            "r": 542.272,
+            "b": 670.06,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            122
+          ]
+        }
+      ],
+      "orig": "1. Dewan Mudir melakukan pengawasan dan memberikan arahan kepada para pejabat satu level di bawahnya ( Head of Division ).",
+      "text": "Dewan Mudir melakukan pengawasan dan memberikan arahan kepada para pejabat satu level di bawahnya ( Head of Division ).",
+      "enumerated": true,
+      "marker": "1."
+    },
+    {
+      "self_ref": "#/texts/105",
+      "parent": {
+        "$ref": "#/groups/14"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 6,
+          "bbox": {
+            "l": 78.024,
+            "t": 665.62,
+            "r": 542.316,
+            "b": 639.22,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            164
+          ]
+        }
+      ],
+      "orig": "2. Manajemen eksekutif (Kepala Divisi) melaporkan pertanggungjawaban pekerjaannya secara langsung kepada anggota Dewan Mudir yang membawahi fungsinya masing-masing.",
+      "text": "Manajemen eksekutif (Kepala Divisi) melaporkan pertanggungjawaban pekerjaannya secara langsung kepada anggota Dewan Mudir yang membawahi fungsinya masing-masing.",
+      "enumerated": true,
+      "marker": "2."
+    },
+    {
+      "self_ref": "#/texts/106",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 6,
+          "bbox": {
+            "l": 72.024,
+            "t": 601.54,
+            "r": 265.345,
+            "b": 590.5,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            35
+          ]
+        }
+      ],
+      "orig": "BAB VI: KOMITE DI BAWAH DEWAN MUDIR",
+      "text": "BAB VI: KOMITE DI BAWAH DEWAN MUDIR",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/107",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 6,
+          "bbox": {
+            "l": 72.024,
+            "t": 574.06,
+            "r": 211.945,
+            "b": 563.02,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            28
+          ]
+        }
+      ],
+      "orig": "Pasal 15: Pembentukan Komite",
+      "text": "Pasal 15: Pembentukan Komite",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/108",
+      "parent": {
+        "$ref": "#/groups/15"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 6,
+          "bbox": {
+            "l": 78.024,
+            "t": 552.7,
+            "r": 542.576,
+            "b": 526.27,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            133
+          ]
+        }
+      ],
+      "orig": "1. Untuk mendukung efektivitas pelaksanaan tugasnya, Dewan Mudir dapat membentuk komite-komite yang bersifat permanen maupun ad-hoc .",
+      "text": "Untuk mendukung efektivitas pelaksanaan tugasnya, Dewan Mudir dapat membentuk komite-komite yang bersifat permanen maupun ad-hoc .",
+      "enumerated": true,
+      "marker": "1."
+    },
+    {
+      "self_ref": "#/texts/109",
+      "parent": {
+        "$ref": "#/groups/15"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 6,
+          "bbox": {
+            "l": 78.024,
+            "t": 521.95,
+            "r": 542.172,
+            "b": 495.55,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            101
+          ]
+        }
+      ],
+      "orig": "2. Pembentukan, keanggotaan, dan piagam kerja setiap komite ditetapkan melalui Keputusan Dewan Mudir.",
+      "text": "Pembentukan, keanggotaan, dan piagam kerja setiap komite ditetapkan melalui Keputusan Dewan Mudir.",
+      "enumerated": true,
+      "marker": "2."
+    },
+    {
+      "self_ref": "#/texts/110",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 6,
+          "bbox": {
+            "l": 170.78,
+            "t": 460.39,
+            "r": 443.805,
+            "b": 449.35,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            51
+          ]
+        }
+      ],
+      "orig": "BAB VII: PENGENDALIAN INTERNAL DAN MANAJEMEN RISIKO",
+      "text": "BAB VII: PENGENDALIAN INTERNAL DAN MANAJEMEN RISIKO",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/111",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 6,
+          "bbox": {
+            "l": 236.69,
+            "t": 434.95,
+            "r": 377.805,
+            "b": 423.91,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            31
+          ]
+        }
+      ],
+      "orig": "Pasal 16: Pengendalian Internal",
+      "text": "Pasal 16: Pengendalian Internal",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/112",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 6,
+          "bbox": {
+            "l": 72.024,
+            "t": 407.59,
+            "r": 542.24,
+            "b": 369.67,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            210
+          ]
+        }
+      ],
+      "orig": "Dewan Mudir bertanggung jawab memastikan tersedianya sistem pengendalian internal yang memadai untuk melindungi aset perusahaan, memastikan keandalan laporan keuangan, dan menjamin kepatuhan terhadap peraturan.",
+      "text": "Dewan Mudir bertanggung jawab memastikan tersedianya sistem pengendalian internal yang memadai untuk melindungi aset perusahaan, memastikan keandalan laporan keuangan, dan menjamin kepatuhan terhadap peraturan."
+    },
+    {
+      "self_ref": "#/texts/113",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 6,
+          "bbox": {
+            "l": 244.49,
+            "t": 353.21,
+            "r": 370.005,
+            "b": 342.17,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            26
+          ]
+        }
+      ],
+      "orig": "Pasal 17: Manajemen Risiko",
+      "text": "Pasal 17: Manajemen Risiko",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/114",
+      "parent": {
+        "$ref": "#/groups/16"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 6,
+          "bbox": {
+            "l": 90.024,
+            "t": 325.85,
+            "r": 542.312,
+            "b": 301.37,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            146
+          ]
+        }
+      ],
+      "orig": "1. Dewan Mudir bertanggung jawab untuk menetapkan dan mengawasi kerangka kerja manajemen risiko yang komprehensif di seluruh tingkatan organisasi.",
+      "text": "Dewan Mudir bertanggung jawab untuk menetapkan dan mengawasi kerangka kerja manajemen risiko yang komprehensif di seluruh tingkatan organisasi.",
+      "enumerated": true,
+      "marker": "1."
+    },
+    {
+      "self_ref": "#/texts/115",
+      "parent": {
+        "$ref": "#/groups/16"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 6,
+          "bbox": {
+            "l": 90.024,
+            "t": 298.97,
+            "r": 542.403,
+            "b": 261.04999999999995,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            253
+          ]
+        }
+      ],
+      "orig": "2. Sistem  manajemen  risiko  bertujuan  untuk  mengidentifikasi,  mengevaluasi,  mengelola,  dan memantau  seluruh  risiko potensial -baik risiko strategis, operasional,  keuangan,  maupun kepatuhan -yang dapat memengaruhi pencapaian tujuan Perusahaan.",
+      "text": "Sistem  manajemen  risiko  bertujuan  untuk  mengidentifikasi,  mengevaluasi,  mengelola,  dan memantau  seluruh  risiko potensial -baik risiko strategis, operasional,  keuangan,  maupun kepatuhan -yang dapat memengaruhi pencapaian tujuan Perusahaan.",
+      "enumerated": true,
+      "marker": "2."
+    },
+    {
+      "self_ref": "#/texts/116",
+      "parent": {
+        "$ref": "#/groups/16"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 6,
+          "bbox": {
+            "l": 90.024,
+            "t": 258.65,
+            "r": 542.278,
+            "b": 220.73000000000002,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            241
+          ]
+        }
+      ],
+      "orig": "3. Untuk  setiap  usulan  proyek  bisnis  baru,  Dewan  Mudir  wajib  menerima  dan  menelaah  laporan analisis yang mencakup aspek bisnis, legal, dan manajemen risiko sebagai dasar fundamental dalam pengambilan keputusan persetujuan proyek.",
+      "text": "Untuk  setiap  usulan  proyek  bisnis  baru,  Dewan  Mudir  wajib  menerima  dan  menelaah  laporan analisis yang mencakup aspek bisnis, legal, dan manajemen risiko sebagai dasar fundamental dalam pengambilan keputusan persetujuan proyek.",
+      "enumerated": true,
+      "marker": "3."
+    },
+    {
+      "self_ref": "#/texts/117",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 6,
+          "bbox": {
+            "l": 192.02,
+            "t": 189.01999999999998,
+            "r": 422.445,
+            "b": 162.5,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            77
+          ]
+        }
+      ],
+      "orig": "BAB VIII: KODE ETIK DAN KERAHASIAAN INFORMASI Pasal 18: Kode Etik Dewan Mudir",
+      "text": "BAB VIII: KODE ETIK DAN KERAHASIAAN INFORMASI Pasal 18: Kode Etik Dewan Mudir",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/118",
+      "parent": {
+        "$ref": "#/groups/17"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 6,
+          "bbox": {
+            "l": 90.024,
+            "t": 158.18000000000006,
+            "r": 542.595,
+            "b": 147.14,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            96
+          ]
+        }
+      ],
+      "orig": "1. Anggota Dewan Mudir wajib menjunjung tinggi integritas, profesionalisme, dan kepatuhan hukum.",
+      "text": "Anggota Dewan Mudir wajib menjunjung tinggi integritas, profesionalisme, dan kepatuhan hukum.",
+      "enumerated": true,
+      "marker": "1."
+    },
+    {
+      "self_ref": "#/texts/119",
+      "parent": {
+        "$ref": "#/groups/17"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 6,
+          "bbox": {
+            "l": 90.024,
+            "t": 142.81999999999994,
+            "r": 529.635,
+            "b": 131.77999999999997,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            92
+          ]
+        }
+      ],
+      "orig": "2. Dilarang menerima hadiah atau gratifikasi yang dapat mempengaruhi independensi keputusan.",
+      "text": "Dilarang menerima hadiah atau gratifikasi yang dapat mempengaruhi independensi keputusan.",
+      "enumerated": true,
+      "marker": "2."
+    },
+    {
+      "self_ref": "#/texts/120",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 6,
+          "bbox": {
+            "l": 236.21,
+            "t": 127.46000000000004,
+            "r": 378.405,
+            "b": 116.41999999999996,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            31
+          ]
+        }
+      ],
+      "orig": "Pasal 19: Kerahasiaan Informasi",
+      "text": "Pasal 19: Kerahasiaan Informasi",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/121",
+      "parent": {
+        "$ref": "#/groups/18"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 6,
+          "bbox": {
+            "l": 90.024,
+            "t": 111.98000000000002,
+            "r": 542.389,
+            "b": 85.58400000000006,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            103
+          ]
+        }
+      ],
+      "orig": "1. Semua anggota Dewan Mudir wajib menjaga kerahasiaan dokumen, data keuangan, dan informasi strategis.",
+      "text": "Semua anggota Dewan Mudir wajib menjaga kerahasiaan dokumen, data keuangan, dan informasi strategis.",
+      "enumerated": true,
+      "marker": "1."
+    },
+    {
+      "self_ref": "#/texts/122",
+      "parent": {
+        "$ref": "#/pictures/6"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "caption",
+      "prov": [
+        {
+          "page_no": 7,
+          "bbox": {
+            "l": 392.59,
+            "t": 318.29,
+            "r": 430.125,
+            "b": 307.25,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            7
+          ]
+        }
+      ],
+      "orig": "Mudir 2",
+      "text": "Mudir 2"
+    },
+    {
+      "self_ref": "#/texts/123",
+      "parent": {
+        "$ref": "#/pictures/6"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "caption",
+      "prov": [
+        {
+          "page_no": 7,
+          "bbox": {
+            "l": 372.07,
+            "t": 237.76999999999998,
+            "r": 447.981,
+            "b": 226.73000000000002,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            16
+          ]
+        }
+      ],
+      "orig": "Iman Ni'matullah",
+      "text": "Iman Ni'matullah"
+    },
+    {
+      "self_ref": "#/texts/124",
+      "parent": {
+        "$ref": "#/pictures/7"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 7,
+          "bbox": {
+            "l": 494.6666666666667,
+            "t": 725.6666666666666,
+            "r": 559.6666666666666,
+            "b": 718.6666666666666,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            7
+          ]
+        }
+      ],
+      "orig": "LIMITED",
+      "text": "LIMITED"
+    },
+    {
+      "self_ref": "#/texts/125",
+      "parent": {
+        "$ref": "#/groups/18"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 7,
+          "bbox": {
+            "l": 90.024,
+            "t": 717.82,
+            "r": 542.256,
+            "b": 691.42,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            133
+          ]
+        }
+      ],
+      "orig": "2. Larangan  membocorkan  informasi  kepada  pihak  eksternal  kecuali  dengan  persetujuan  Dewan Mudir atau sesuai ketentuan hukum.",
+      "text": "Larangan  membocorkan  informasi  kepada  pihak  eksternal  kecuali  dengan  persetujuan  Dewan Mudir atau sesuai ketentuan hukum.",
+      "enumerated": true,
+      "marker": "2."
+    },
+    {
+      "self_ref": "#/texts/126",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 7,
+          "bbox": {
+            "l": 213.53,
+            "t": 656.26,
+            "r": 400.965,
+            "b": 645.22,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            34
+          ]
+        }
+      ],
+      "orig": "BAB IX: EVALUASI DAN PENYEMPURNAAN",
+      "text": "BAB IX: EVALUASI DAN PENYEMPURNAAN",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/127",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 7,
+          "bbox": {
+            "l": 248.57,
+            "t": 640.9,
+            "r": 366.045,
+            "b": 629.86,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            27
+          ]
+        }
+      ],
+      "orig": "Pasal 20: Penilaian Kinerja",
+      "text": "Pasal 20: Penilaian Kinerja",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/128",
+      "parent": {
+        "$ref": "#/groups/19"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 7,
+          "bbox": {
+            "l": 90.024,
+            "t": 625.54,
+            "r": 504.675,
+            "b": 614.5,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            89
+          ]
+        }
+      ],
+      "orig": "1. Dewan Mudir melakukan evaluasi kinerja tahunan baik secara kolektif maupun individual.",
+      "text": "Dewan Mudir melakukan evaluasi kinerja tahunan baik secara kolektif maupun individual.",
+      "enumerated": true,
+      "marker": "1."
+    },
+    {
+      "self_ref": "#/texts/129",
+      "parent": {
+        "$ref": "#/groups/19"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 7,
+          "bbox": {
+            "l": 90.024,
+            "t": 610.06,
+            "r": 526.635,
+            "b": 599.02,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            93
+          ]
+        }
+      ],
+      "orig": "2. Hasil evaluasi disampaikan kepada General Meeting dan digunakan untuk peningkatan kinerja.",
+      "text": "Hasil evaluasi disampaikan kepada General Meeting dan digunakan untuk peningkatan kinerja.",
+      "enumerated": true,
+      "marker": "2."
+    },
+    {
+      "self_ref": "#/texts/130",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 7,
+          "bbox": {
+            "l": 240.17,
+            "t": 594.7,
+            "r": 374.445,
+            "b": 583.66,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            29
+          ]
+        }
+      ],
+      "orig": "Pasal 19: Revisi Board Manual",
+      "text": "Pasal 19: Revisi Board Manual",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/131",
+      "parent": {
+        "$ref": "#/groups/20"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 7,
+          "bbox": {
+            "l": 90.024,
+            "t": 579.34,
+            "r": 505.275,
+            "b": 568.3,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            86
+          ]
+        }
+      ],
+      "orig": "1. Usulan perubahan Board Manual dapat diajukan oleh Dewan Mudir atau Shahibul Syirkah",
+      "text": "Usulan perubahan Board Manual dapat diajukan oleh Dewan Mudir atau Shahibul Syirkah",
+      "enumerated": true,
+      "marker": "1."
+    },
+    {
+      "self_ref": "#/texts/132",
+      "parent": {
+        "$ref": "#/groups/20"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "list_item",
+      "prov": [
+        {
+          "page_no": 7,
+          "bbox": {
+            "l": 90.024,
+            "t": 563.98,
+            "r": 394.725,
+            "b": 552.94,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            61
+          ]
+        }
+      ],
+      "orig": "2. Perubahan berlaku setelah mendapat persetujuan Dewan Mudir",
+      "text": "Perubahan berlaku setelah mendapat persetujuan Dewan Mudir",
+      "enumerated": true,
+      "marker": "2."
+    },
+    {
+      "self_ref": "#/texts/133",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 7,
+          "bbox": {
+            "l": 233.21,
+            "t": 519.79,
+            "r": 366.765,
+            "b": 508.75,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            24
+          ]
+        }
+      ],
+      "orig": "BAB X: KETENTUAN PENUTUP",
+      "text": "BAB X: KETENTUAN PENUTUP",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/134",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 7,
+          "bbox": {
+            "l": 280.49,
+            "t": 492.91,
+            "r": 319.345,
+            "b": 481.87,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            8
+          ]
+        }
+      ],
+      "orig": "Pasal 21",
+      "text": "Pasal 21",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/135",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 7,
+          "bbox": {
+            "l": 77.424,
+            "t": 466.03,
+            "r": 522.162,
+            "b": 441.55,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            146
+          ]
+        }
+      ],
+      "orig": "Peraturan Syarikah ini akan dievaluasi secara reguler dalam jangka waktu 3 (tiga) tahun atau secara insidentil sesuai dengan kebutuhan Perusahaan.",
+      "text": "Peraturan Syarikah ini akan dievaluasi secara reguler dalam jangka waktu 3 (tiga) tahun atau secara insidentil sesuai dengan kebutuhan Perusahaan."
+    },
+    {
+      "self_ref": "#/texts/136",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "section_header",
+      "prov": [
+        {
+          "page_no": 7,
+          "bbox": {
+            "l": 280.49,
+            "t": 425.71,
+            "r": 319.345,
+            "b": 414.67,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            8
+          ]
+        }
+      ],
+      "orig": "Pasal 22",
+      "text": "Pasal 22",
+      "level": 1
+    },
+    {
+      "self_ref": "#/texts/137",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 7,
+          "bbox": {
+            "l": 77.424,
+            "t": 398.95,
+            "r": 353.805,
+            "b": 387.91,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            62
+          ]
+        }
+      ],
+      "orig": "Peraturan Syarikah ini mulai berlaku sejak tanggal ditetapkan.",
+      "text": "Peraturan Syarikah ini mulai berlaku sejak tanggal ditetapkan."
+    },
+    {
+      "self_ref": "#/texts/138",
+      "parent": {
+        "$ref": "#/groups/21"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 7,
+          "bbox": {
+            "l": 72.024,
+            "t": 358.61,
+            "r": 155.395,
+            "b": 347.57,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            15
+          ]
+        }
+      ],
+      "orig": "Ditetapkan di :",
+      "text": "Ditetapkan di :"
+    },
+    {
+      "self_ref": "#/texts/139",
+      "parent": {
+        "$ref": "#/groups/21"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 7,
+          "bbox": {
+            "l": 164.18,
+            "t": 358.61,
+            "r": 201.745,
+            "b": 347.57,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            6
+          ]
+        }
+      ],
+      "orig": "Makkah",
+      "text": "Makkah"
+    },
+    {
+      "self_ref": "#/texts/140",
+      "parent": {
+        "$ref": "#/groups/21"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 7,
+          "bbox": {
+            "l": 72.024,
+            "t": 345.17,
+            "r": 155.395,
+            "b": 334.13,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            14
+          ]
+        }
+      ],
+      "orig": "Pada tanggal :",
+      "text": "Pada tanggal :"
+    },
+    {
+      "self_ref": "#/texts/141",
+      "parent": {
+        "$ref": "#/groups/21"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 7,
+          "bbox": {
+            "l": 164.18,
+            "t": 345.17,
+            "r": 236.665,
+            "b": 334.13,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            15
+          ]
+        }
+      ],
+      "orig": "2 Februari 2025",
+      "text": "2 Februari 2025"
+    },
+    {
+      "self_ref": "#/texts/142",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 7,
+          "bbox": {
+            "l": 167.18,
+            "t": 318.29,
+            "r": 204.745,
+            "b": 307.25,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            7
+          ]
+        }
+      ],
+      "orig": "Mudir 1",
+      "text": "Mudir 1"
+    },
+    {
+      "self_ref": "#/texts/143",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "text",
+      "prov": [
+        {
+          "page_no": 7,
+          "bbox": {
+            "l": 153.86,
+            "t": 241.97000000000003,
+            "r": 218.065,
+            "b": 230.93000000000006,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            13
+          ]
+        }
+      ],
+      "orig": "Sidiq Haryono",
+      "text": "Sidiq Haryono"
+    }
+  ],
+  "pictures": [
+    {
+      "self_ref": "#/pictures/0",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "picture",
+      "prov": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 479.6436767578125,
+            "t": 761.2003917694092,
+            "r": 575.8546752929688,
+            "b": 719.0057525634766,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            0
+          ]
+        }
+      ],
+      "captions": [],
+      "references": [],
+      "footnotes": [],
+      "annotations": []
+    },
+    {
+      "self_ref": "#/pictures/1",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "picture",
+      "prov": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 479.6425476074219,
+            "t": 761.1487464904785,
+            "r": 575.8902587890625,
+            "b": 719.0898971557617,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            0
+          ]
+        }
+      ],
+      "captions": [],
+      "references": [],
+      "footnotes": [],
+      "annotations": []
+    },
+    {
+      "self_ref": "#/pictures/2",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "picture",
+      "prov": [
+        {
+          "page_no": 3,
+          "bbox": {
+            "l": 479.63226318359375,
+            "t": 761.2086296081543,
+            "r": 575.83837890625,
+            "b": 718.18408203125,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            0
+          ]
+        }
+      ],
+      "captions": [],
+      "references": [],
+      "footnotes": [],
+      "annotations": []
+    },
+    {
+      "self_ref": "#/pictures/3",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "picture",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 479.768798828125,
+            "t": 761.1689777374268,
+            "r": 575.85546875,
+            "b": 718.9430923461914,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            0
+          ]
+        }
+      ],
+      "captions": [],
+      "references": [],
+      "footnotes": [],
+      "annotations": []
+    },
+    {
+      "self_ref": "#/pictures/4",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "picture",
+      "prov": [
+        {
+          "page_no": 5,
+          "bbox": {
+            "l": 479.64898681640625,
+            "t": 761.1295509338379,
+            "r": 575.8902587890625,
+            "b": 718.9735946655273,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            0
+          ]
+        }
+      ],
+      "captions": [],
+      "references": [],
+      "footnotes": [],
+      "annotations": []
+    },
+    {
+      "self_ref": "#/pictures/5",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "picture",
+      "prov": [
+        {
+          "page_no": 6,
+          "bbox": {
+            "l": 479.7164001464844,
+            "t": 761.1747283935547,
+            "r": 575.89453125,
+            "b": 718.9754104614258,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            0
+          ]
+        }
+      ],
+      "captions": [],
+      "references": [],
+      "footnotes": [],
+      "annotations": []
+    },
+    {
+      "self_ref": "#/pictures/6",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [
+        {
+          "$ref": "#/texts/122"
+        },
+        {
+          "$ref": "#/texts/123"
+        }
+      ],
+      "content_layer": "body",
+      "label": "picture",
+      "prov": [
+        {
+          "page_no": 7,
+          "bbox": {
+            "l": 371.1043395996094,
+            "t": 318.61163330078125,
+            "r": 448.2138671875,
+            "b": 228.27044677734375,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            0
+          ]
+        }
+      ],
+      "captions": [],
+      "references": [],
+      "footnotes": [],
+      "annotations": []
+    },
+    {
+      "self_ref": "#/pictures/7",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [
+        {
+          "$ref": "#/texts/124"
+        }
+      ],
+      "content_layer": "body",
+      "label": "picture",
+      "prov": [
+        {
+          "page_no": 7,
+          "bbox": {
+            "l": 479.6219177246094,
+            "t": 761.2643928527832,
+            "r": 575.8267211914062,
+            "b": 717.951904296875,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            0
+          ]
+        }
+      ],
+      "captions": [],
+      "references": [],
+      "footnotes": [],
+      "annotations": []
+    },
+    {
+      "self_ref": "#/pictures/8",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "picture",
+      "prov": [
+        {
+          "page_no": 7,
+          "bbox": {
+            "l": 110.591796875,
+            "t": 295.1980285644531,
+            "r": 256.8055419921875,
+            "b": 256.60382080078125,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            0
+          ]
+        }
+      ],
+      "captions": [],
+      "references": [],
+      "footnotes": [],
+      "annotations": []
+    }
+  ],
+  "tables": [
+    {
+      "self_ref": "#/tables/0",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "table",
+      "prov": [
+        {
+          "page_no": 4,
+          "bbox": {
+            "l": 92.84639739990234,
+            "t": 133.12530517578125,
+            "r": 533.4545288085938,
+            "b": 76.83837890625,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            0
+          ]
+        }
+      ],
+      "captions": [],
+      "references": [],
+      "footnotes": [],
+      "data": {
+        "table_cells": [
+          {
+            "bbox": {
+              "l": 108.98,
+              "t": 669.1,
+              "r": 205.083,
+              "b": 680.14,
+              "coord_origin": "TOPLEFT"
+            },
+            "row_span": 1,
+            "col_span": 1,
+            "start_row_offset_idx": 0,
+            "end_row_offset_idx": 1,
+            "start_col_offset_idx": 0,
+            "end_col_offset_idx": 1,
+            "text": "Jenis Investasi / Bisnis",
+            "column_header": true,
+            "row_header": false,
+            "row_section": false,
+            "fillable": false
+          },
+          {
+            "bbox": {
+              "l": 226.85,
+              "t": 662.38,
+              "r": 370.58,
+              "b": 686.74,
+              "coord_origin": "TOPLEFT"
+            },
+            "row_span": 1,
+            "col_span": 1,
+            "start_row_offset_idx": 0,
+            "end_row_offset_idx": 1,
+            "start_col_offset_idx": 1,
+            "end_col_offset_idx": 2,
+            "text": "Nilai Investasi / Kebutuhan OPEX / CAPEX",
+            "column_header": true,
+            "row_header": false,
+            "row_section": false,
+            "fillable": false
+          },
+          {
+            "bbox": {
+              "l": 415.03,
+              "t": 669.1,
+              "r": 494.662,
+              "b": 680.14,
+              "coord_origin": "TOPLEFT"
+            },
+            "row_span": 1,
+            "col_span": 1,
+            "start_row_offset_idx": 0,
+            "end_row_offset_idx": 1,
+            "start_col_offset_idx": 2,
+            "end_col_offset_idx": 3,
+            "text": "Batas Persetujuan",
+            "column_header": true,
+            "row_header": false,
+            "row_section": false,
+            "fillable": false
+          },
+          {
+            "bbox": {
+              "l": 98.664,
+              "t": 689.736,
+              "r": 215.423,
+              "b": 714.096,
+              "coord_origin": "TOPLEFT"
+            },
+            "row_span": 1,
+            "col_span": 1,
+            "start_row_offset_idx": 1,
+            "end_row_offset_idx": 2,
+            "start_col_offset_idx": 0,
+            "end_col_offset_idx": 1,
+            "text": "Bisnis / Proyek Penugasan BPKH / Kerja Sama",
+            "column_header": false,
+            "row_header": false,
+            "row_section": false,
+            "fillable": false
+          },
+          {
+            "bbox": {
+              "l": 226.25,
+              "t": 689.736,
+              "r": 371.531,
+              "b": 700.776,
+              "coord_origin": "TOPLEFT"
+            },
+            "row_span": 1,
+            "col_span": 1,
+            "start_row_offset_idx": 1,
+            "end_row_offset_idx": 2,
+            "start_col_offset_idx": 1,
+            "end_col_offset_idx": 2,
+            "text": "Tanpa modal ( NoCapital needed )",
+            "column_header": false,
+            "row_header": false,
+            "row_section": false,
+            "fillable": false
+          },
+          {
+            "bbox": {
+              "l": 382.27,
+              "t": 689.736,
+              "r": 456.602,
+              "b": 700.776,
+              "coord_origin": "TOPLEFT"
+            },
+            "row_span": 1,
+            "col_span": 1,
+            "start_row_offset_idx": 1,
+            "end_row_offset_idx": 2,
+            "start_col_offset_idx": 2,
+            "end_col_offset_idx": 3,
+            "text": "2 Anggota Mudir",
+            "column_header": false,
+            "row_header": false,
+            "row_section": false,
+            "fillable": false
+          }
+        ],
+        "num_rows": 2,
+        "num_cols": 3,
+        "grid": [
+          [
+            {
+              "bbox": {
+                "l": 108.98,
+                "t": 669.1,
+                "r": 205.083,
+                "b": 680.14,
+                "coord_origin": "TOPLEFT"
+              },
+              "row_span": 1,
+              "col_span": 1,
+              "start_row_offset_idx": 0,
+              "end_row_offset_idx": 1,
+              "start_col_offset_idx": 0,
+              "end_col_offset_idx": 1,
+              "text": "Jenis Investasi / Bisnis",
+              "column_header": true,
+              "row_header": false,
+              "row_section": false,
+              "fillable": false
+            },
+            {
+              "bbox": {
+                "l": 226.85,
+                "t": 662.38,
+                "r": 370.58,
+                "b": 686.74,
+                "coord_origin": "TOPLEFT"
+              },
+              "row_span": 1,
+              "col_span": 1,
+              "start_row_offset_idx": 0,
+              "end_row_offset_idx": 1,
+              "start_col_offset_idx": 1,
+              "end_col_offset_idx": 2,
+              "text": "Nilai Investasi / Kebutuhan OPEX / CAPEX",
+              "column_header": true,
+              "row_header": false,
+              "row_section": false,
+              "fillable": false
+            },
+            {
+              "bbox": {
+                "l": 415.03,
+                "t": 669.1,
+                "r": 494.662,
+                "b": 680.14,
+                "coord_origin": "TOPLEFT"
+              },
+              "row_span": 1,
+              "col_span": 1,
+              "start_row_offset_idx": 0,
+              "end_row_offset_idx": 1,
+              "start_col_offset_idx": 2,
+              "end_col_offset_idx": 3,
+              "text": "Batas Persetujuan",
+              "column_header": true,
+              "row_header": false,
+              "row_section": false,
+              "fillable": false
+            }
+          ],
+          [
+            {
+              "bbox": {
+                "l": 98.664,
+                "t": 689.736,
+                "r": 215.423,
+                "b": 714.096,
+                "coord_origin": "TOPLEFT"
+              },
+              "row_span": 1,
+              "col_span": 1,
+              "start_row_offset_idx": 1,
+              "end_row_offset_idx": 2,
+              "start_col_offset_idx": 0,
+              "end_col_offset_idx": 1,
+              "text": "Bisnis / Proyek Penugasan BPKH / Kerja Sama",
+              "column_header": false,
+              "row_header": false,
+              "row_section": false,
+              "fillable": false
+            },
+            {
+              "bbox": {
+                "l": 226.25,
+                "t": 689.736,
+                "r": 371.531,
+                "b": 700.776,
+                "coord_origin": "TOPLEFT"
+              },
+              "row_span": 1,
+              "col_span": 1,
+              "start_row_offset_idx": 1,
+              "end_row_offset_idx": 2,
+              "start_col_offset_idx": 1,
+              "end_col_offset_idx": 2,
+              "text": "Tanpa modal ( NoCapital needed )",
+              "column_header": false,
+              "row_header": false,
+              "row_section": false,
+              "fillable": false
+            },
+            {
+              "bbox": {
+                "l": 382.27,
+                "t": 689.736,
+                "r": 456.602,
+                "b": 700.776,
+                "coord_origin": "TOPLEFT"
+              },
+              "row_span": 1,
+              "col_span": 1,
+              "start_row_offset_idx": 1,
+              "end_row_offset_idx": 2,
+              "start_col_offset_idx": 2,
+              "end_col_offset_idx": 3,
+              "text": "2 Anggota Mudir",
+              "column_header": false,
+              "row_header": false,
+              "row_section": false,
+              "fillable": false
+            }
+          ]
+        ]
+      },
+      "annotations": []
+    },
+    {
+      "self_ref": "#/tables/1",
+      "parent": {
+        "$ref": "#/body"
+      },
+      "children": [],
+      "content_layer": "body",
+      "label": "table",
+      "prov": [
+        {
+          "page_no": 5,
+          "bbox": {
+            "l": 92.48033905029297,
+            "t": 720.2602920532227,
+            "r": 533.5031127929688,
+            "b": 610.0118103027344,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            0
+          ]
+        }
+      ],
+      "captions": [],
+      "references": [],
+      "footnotes": [],
+      "data": {
+        "table_cells": [
+          {
+            "bbox": {
+              "l": 98.664,
+              "t": 74.65999999999997,
+              "r": 171.108,
+              "b": 85.70000000000005,
+              "coord_origin": "TOPLEFT"
+            },
+            "row_span": 1,
+            "col_span": 1,
+            "start_row_offset_idx": 0,
+            "end_row_offset_idx": 1,
+            "start_col_offset_idx": 0,
+            "end_col_offset_idx": 1,
+            "text": "Bisnis / Investasi",
+            "column_header": false,
+            "row_header": false,
+            "row_section": false,
+            "fillable": false
+          },
+          {
+            "bbox": {
+              "l": 226.25,
+              "t": 74.65999999999997,
+              "r": 284.508,
+              "b": 85.70000000000005,
+              "coord_origin": "TOPLEFT"
+            },
+            "row_span": 1,
+            "col_span": 1,
+            "start_row_offset_idx": 0,
+            "end_row_offset_idx": 1,
+            "start_col_offset_idx": 1,
+            "end_col_offset_idx": 2,
+            "text": "< 25 juta SAR",
+            "column_header": false,
+            "row_header": false,
+            "row_section": false,
+            "fillable": false
+          },
+          {
+            "bbox": {
+              "l": 382.27,
+              "t": 74.65999999999997,
+              "r": 456.602,
+              "b": 85.70000000000005,
+              "coord_origin": "TOPLEFT"
+            },
+            "row_span": 1,
+            "col_span": 1,
+            "start_row_offset_idx": 0,
+            "end_row_offset_idx": 1,
+            "start_col_offset_idx": 2,
+            "end_col_offset_idx": 3,
+            "text": "2 Anggota Mudir",
+            "column_header": false,
+            "row_header": false,
+            "row_section": false,
+            "fillable": false
+          },
+          {
+            "bbox": {
+              "l": 98.664,
+              "t": 88.58000000000004,
+              "r": 171.108,
+              "b": 99.62,
+              "coord_origin": "TOPLEFT"
+            },
+            "row_span": 1,
+            "col_span": 1,
+            "start_row_offset_idx": 1,
+            "end_row_offset_idx": 2,
+            "start_col_offset_idx": 0,
+            "end_col_offset_idx": 1,
+            "text": "Bisnis / Investasi",
+            "column_header": false,
+            "row_header": false,
+            "row_section": false,
+            "fillable": false
+          },
+          {
+            "bbox": {
+              "l": 226.25,
+              "t": 88.58000000000004,
+              "r": 358.653,
+              "b": 99.62,
+              "coord_origin": "TOPLEFT"
+            },
+            "row_span": 1,
+            "col_span": 1,
+            "start_row_offset_idx": 1,
+            "end_row_offset_idx": 2,
+            "start_col_offset_idx": 1,
+            "end_col_offset_idx": 2,
+            "text": "25 juta SAR < X < 100 juta SAR",
+            "column_header": false,
+            "row_header": false,
+            "row_section": false,
+            "fillable": false
+          },
+          {
+            "bbox": {
+              "l": 382.27,
+              "t": 88.58000000000004,
+              "r": 527.556,
+              "b": 113.05999999999995,
+              "coord_origin": "TOPLEFT"
+            },
+            "row_span": 1,
+            "col_span": 1,
+            "start_row_offset_idx": 1,
+            "end_row_offset_idx": 2,
+            "start_col_offset_idx": 2,
+            "end_col_offset_idx": 3,
+            "text": "2 Anggota Mudir & Shahibul Syirkah",
+            "column_header": false,
+            "row_header": false,
+            "row_section": false,
+            "fillable": false
+          },
+          {
+            "bbox": {
+              "l": 98.664,
+              "t": 115.94000000000005,
+              "r": 171.108,
+              "b": 126.98000000000002,
+              "coord_origin": "TOPLEFT"
+            },
+            "row_span": 1,
+            "col_span": 1,
+            "start_row_offset_idx": 2,
+            "end_row_offset_idx": 3,
+            "start_col_offset_idx": 0,
+            "end_col_offset_idx": 1,
+            "text": "Bisnis / Investasi",
+            "column_header": false,
+            "row_header": false,
+            "row_section": false,
+            "fillable": false
+          },
+          {
+            "bbox": {
+              "l": 226.25,
+              "t": 115.94000000000005,
+              "r": 290.039,
+              "b": 126.98000000000002,
+              "coord_origin": "TOPLEFT"
+            },
+            "row_span": 1,
+            "col_span": 1,
+            "start_row_offset_idx": 2,
+            "end_row_offset_idx": 3,
+            "start_col_offset_idx": 1,
+            "end_col_offset_idx": 2,
+            "text": "> 100 juta SAR",
+            "column_header": false,
+            "row_header": false,
+            "row_section": false,
+            "fillable": false
+          },
+          {
+            "bbox": {
+              "l": 382.27,
+              "t": 115.94000000000005,
+              "r": 527.523,
+              "b": 140.41999999999996,
+              "coord_origin": "TOPLEFT"
+            },
+            "row_span": 1,
+            "col_span": 1,
+            "start_row_offset_idx": 2,
+            "end_row_offset_idx": 3,
+            "start_col_offset_idx": 2,
+            "end_col_offset_idx": 3,
+            "text": "2 Anggota Mudir, Shahibul Syirkah &General Meeting",
+            "column_header": false,
+            "row_header": false,
+            "row_section": false,
+            "fillable": false
+          },
+          {
+            "bbox": {
+              "l": 98.664,
+              "t": 143.29999999999995,
+              "r": 215.489,
+              "b": 167.77999999999997,
+              "coord_origin": "TOPLEFT"
+            },
+            "row_span": 1,
+            "col_span": 1,
+            "start_row_offset_idx": 3,
+            "end_row_offset_idx": 4,
+            "start_col_offset_idx": 0,
+            "end_col_offset_idx": 1,
+            "text": "Pendanaan dari Pihak Eksternal",
+            "column_header": false,
+            "row_header": false,
+            "row_section": false,
+            "fillable": false
+          },
+          {
+            "bbox": {
+              "l": 226.25,
+              "t": 143.29999999999995,
+              "r": 278.193,
+              "b": 154.34000000000003,
+              "coord_origin": "TOPLEFT"
+            },
+            "row_span": 1,
+            "col_span": 1,
+            "start_row_offset_idx": 3,
+            "end_row_offset_idx": 4,
+            "start_col_offset_idx": 1,
+            "end_col_offset_idx": 2,
+            "text": "Semua Nilai",
+            "column_header": false,
+            "row_header": false,
+            "row_section": false,
+            "fillable": false
+          },
+          {
+            "bbox": {
+              "l": 382.27,
+              "t": 143.29999999999995,
+              "r": 527.577,
+              "b": 181.22000000000003,
+              "coord_origin": "TOPLEFT"
+            },
+            "row_span": 1,
+            "col_span": 1,
+            "start_row_offset_idx": 3,
+            "end_row_offset_idx": 4,
+            "start_col_offset_idx": 2,
+            "end_col_offset_idx": 3,
+            "text": "2 Anggota Mudir, Shahibul Syirkah, General Meeting & Dewan Pengawas",
+            "column_header": false,
+            "row_header": false,
+            "row_section": false,
+            "fillable": false
+          }
+        ],
+        "num_rows": 4,
+        "num_cols": 3,
+        "grid": [
+          [
+            {
+              "bbox": {
+                "l": 98.664,
+                "t": 74.65999999999997,
+                "r": 171.108,
+                "b": 85.70000000000005,
+                "coord_origin": "TOPLEFT"
+              },
+              "row_span": 1,
+              "col_span": 1,
+              "start_row_offset_idx": 0,
+              "end_row_offset_idx": 1,
+              "start_col_offset_idx": 0,
+              "end_col_offset_idx": 1,
+              "text": "Bisnis / Investasi",
+              "column_header": false,
+              "row_header": false,
+              "row_section": false,
+              "fillable": false
+            },
+            {
+              "bbox": {
+                "l": 226.25,
+                "t": 74.65999999999997,
+                "r": 284.508,
+                "b": 85.70000000000005,
+                "coord_origin": "TOPLEFT"
+              },
+              "row_span": 1,
+              "col_span": 1,
+              "start_row_offset_idx": 0,
+              "end_row_offset_idx": 1,
+              "start_col_offset_idx": 1,
+              "end_col_offset_idx": 2,
+              "text": "< 25 juta SAR",
+              "column_header": false,
+              "row_header": false,
+              "row_section": false,
+              "fillable": false
+            },
+            {
+              "bbox": {
+                "l": 382.27,
+                "t": 74.65999999999997,
+                "r": 456.602,
+                "b": 85.70000000000005,
+                "coord_origin": "TOPLEFT"
+              },
+              "row_span": 1,
+              "col_span": 1,
+              "start_row_offset_idx": 0,
+              "end_row_offset_idx": 1,
+              "start_col_offset_idx": 2,
+              "end_col_offset_idx": 3,
+              "text": "2 Anggota Mudir",
+              "column_header": false,
+              "row_header": false,
+              "row_section": false,
+              "fillable": false
+            }
+          ],
+          [
+            {
+              "bbox": {
+                "l": 98.664,
+                "t": 88.58000000000004,
+                "r": 171.108,
+                "b": 99.62,
+                "coord_origin": "TOPLEFT"
+              },
+              "row_span": 1,
+              "col_span": 1,
+              "start_row_offset_idx": 1,
+              "end_row_offset_idx": 2,
+              "start_col_offset_idx": 0,
+              "end_col_offset_idx": 1,
+              "text": "Bisnis / Investasi",
+              "column_header": false,
+              "row_header": false,
+              "row_section": false,
+              "fillable": false
+            },
+            {
+              "bbox": {
+                "l": 226.25,
+                "t": 88.58000000000004,
+                "r": 358.653,
+                "b": 99.62,
+                "coord_origin": "TOPLEFT"
+              },
+              "row_span": 1,
+              "col_span": 1,
+              "start_row_offset_idx": 1,
+              "end_row_offset_idx": 2,
+              "start_col_offset_idx": 1,
+              "end_col_offset_idx": 2,
+              "text": "25 juta SAR < X < 100 juta SAR",
+              "column_header": false,
+              "row_header": false,
+              "row_section": false,
+              "fillable": false
+            },
+            {
+              "bbox": {
+                "l": 382.27,
+                "t": 88.58000000000004,
+                "r": 527.556,
+                "b": 113.05999999999995,
+                "coord_origin": "TOPLEFT"
+              },
+              "row_span": 1,
+              "col_span": 1,
+              "start_row_offset_idx": 1,
+              "end_row_offset_idx": 2,
+              "start_col_offset_idx": 2,
+              "end_col_offset_idx": 3,
+              "text": "2 Anggota Mudir & Shahibul Syirkah",
+              "column_header": false,
+              "row_header": false,
+              "row_section": false,
+              "fillable": false
+            }
+          ],
+          [
+            {
+              "bbox": {
+                "l": 98.664,
+                "t": 115.94000000000005,
+                "r": 171.108,
+                "b": 126.98000000000002,
+                "coord_origin": "TOPLEFT"
+              },
+              "row_span": 1,
+              "col_span": 1,
+              "start_row_offset_idx": 2,
+              "end_row_offset_idx": 3,
+              "start_col_offset_idx": 0,
+              "end_col_offset_idx": 1,
+              "text": "Bisnis / Investasi",
+              "column_header": false,
+              "row_header": false,
+              "row_section": false,
+              "fillable": false
+            },
+            {
+              "bbox": {
+                "l": 226.25,
+                "t": 115.94000000000005,
+                "r": 290.039,
+                "b": 126.98000000000002,
+                "coord_origin": "TOPLEFT"
+              },
+              "row_span": 1,
+              "col_span": 1,
+              "start_row_offset_idx": 2,
+              "end_row_offset_idx": 3,
+              "start_col_offset_idx": 1,
+              "end_col_offset_idx": 2,
+              "text": "> 100 juta SAR",
+              "column_header": false,
+              "row_header": false,
+              "row_section": false,
+              "fillable": false
+            },
+            {
+              "bbox": {
+                "l": 382.27,
+                "t": 115.94000000000005,
+                "r": 527.523,
+                "b": 140.41999999999996,
+                "coord_origin": "TOPLEFT"
+              },
+              "row_span": 1,
+              "col_span": 1,
+              "start_row_offset_idx": 2,
+              "end_row_offset_idx": 3,
+              "start_col_offset_idx": 2,
+              "end_col_offset_idx": 3,
+              "text": "2 Anggota Mudir, Shahibul Syirkah &General Meeting",
+              "column_header": false,
+              "row_header": false,
+              "row_section": false,
+              "fillable": false
+            }
+          ],
+          [
+            {
+              "bbox": {
+                "l": 98.664,
+                "t": 143.29999999999995,
+                "r": 215.489,
+                "b": 167.77999999999997,
+                "coord_origin": "TOPLEFT"
+              },
+              "row_span": 1,
+              "col_span": 1,
+              "start_row_offset_idx": 3,
+              "end_row_offset_idx": 4,
+              "start_col_offset_idx": 0,
+              "end_col_offset_idx": 1,
+              "text": "Pendanaan dari Pihak Eksternal",
+              "column_header": false,
+              "row_header": false,
+              "row_section": false,
+              "fillable": false
+            },
+            {
+              "bbox": {
+                "l": 226.25,
+                "t": 143.29999999999995,
+                "r": 278.193,
+                "b": 154.34000000000003,
+                "coord_origin": "TOPLEFT"
+              },
+              "row_span": 1,
+              "col_span": 1,
+              "start_row_offset_idx": 3,
+              "end_row_offset_idx": 4,
+              "start_col_offset_idx": 1,
+              "end_col_offset_idx": 2,
+              "text": "Semua Nilai",
+              "column_header": false,
+              "row_header": false,
+              "row_section": false,
+              "fillable": false
+            },
+            {
+              "bbox": {
+                "l": 382.27,
+                "t": 143.29999999999995,
+                "r": 527.577,
+                "b": 181.22000000000003,
+                "coord_origin": "TOPLEFT"
+              },
+              "row_span": 1,
+              "col_span": 1,
+              "start_row_offset_idx": 3,
+              "end_row_offset_idx": 4,
+              "start_col_offset_idx": 2,
+              "end_col_offset_idx": 3,
+              "text": "2 Anggota Mudir, Shahibul Syirkah, General Meeting & Dewan Pengawas",
+              "column_header": false,
+              "row_header": false,
+              "row_section": false,
+              "fillable": false
+            }
+          ]
+        ]
+      },
+      "annotations": []
+    }
+  ],
+  "key_value_items": [],
+  "form_items": [],
+  "pages": {
+    "1": {
+      "size": {
+        "width": 612.0,
+        "height": 792.0
+      },
+      "page_no": 1
+    },
+    "2": {
+      "size": {
+        "width": 612.0,
+        "height": 792.0
+      },
+      "page_no": 2
+    },
+    "3": {
+      "size": {
+        "width": 612.0,
+        "height": 792.0
+      },
+      "page_no": 3
+    },
+    "4": {
+      "size": {
+        "width": 612.0,
+        "height": 792.0
+      },
+      "page_no": 4
+    },
+    "5": {
+      "size": {
+        "width": 612.0,
+        "height": 792.0
+      },
+      "page_no": 5
+    },
+    "6": {
+      "size": {
+        "width": 612.0,
+        "height": 792.0
+      },
+      "page_no": 6
+    },
+    "7": {
+      "size": {
+        "width": 612.0,
+        "height": 792.0
+      },
+      "page_no": 7
+    }
+  }
+}
