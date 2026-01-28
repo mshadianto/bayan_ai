@@ -1,5 +1,5 @@
 import { ReactNode, useEffect, useCallback, useRef, useState } from 'react';
-import { X, GripHorizontal } from 'lucide-react';
+import { X, GripHorizontal, Maximize2, Minimize2 } from 'lucide-react';
 
 interface ModalProps {
   isOpen: boolean;
@@ -27,6 +27,7 @@ export function Modal({
   footer,
 }: ModalProps) {
   const [position, setPosition] = useState<{ x: number; y: number } | null>(null);
+  const [isMaximized, setIsMaximized] = useState(false);
   const isDragging = useRef(false);
   const dragStart = useRef({ x: 0, y: 0 });
   const positionRef = useRef({ x: 0, y: 0 });
@@ -40,10 +41,11 @@ export function Modal({
     [onClose]
   );
 
-  // Reset position when modal opens
+  // Reset position and maximize state when modal opens
   useEffect(() => {
     if (isOpen) {
       setPosition(null);
+      setIsMaximized(false);
       positionRef.current = { x: 0, y: 0 };
       document.addEventListener('keydown', handleEscape);
       document.body.style.overflow = 'hidden';
@@ -152,30 +154,42 @@ export function Modal({
         {/* Modal content */}
         <div
           ref={modalRef}
-          style={transformStyle}
-          className={`pointer-events-auto relative bg-input rounded-2xl border border-border w-full ${SIZE_CLASSES[size]} max-h-[96vh] flex flex-col shadow-2xl animate-modal-slide-up`}
+          style={isMaximized ? {} : transformStyle}
+          className={`pointer-events-auto relative bg-input rounded-2xl border border-border w-full ${isMaximized ? 'max-w-[98vw] max-h-[98vh]' : `${SIZE_CLASSES[size]} max-h-[96vh]`} flex flex-col shadow-2xl animate-modal-slide-up transition-all duration-200`}
         >
           {/* Header - draggable */}
           <div
             className="flex-shrink-0 flex items-center justify-between p-4 border-b border-border bg-input rounded-t-2xl cursor-grab active:cursor-grabbing select-none touch-none"
             onMouseDown={handleMouseDown}
             onTouchStart={handleTouchStart}
+            onDoubleClick={() => setIsMaximized(prev => !prev)}
           >
             <div className="flex items-center gap-2">
               <GripHorizontal size={16} className="text-content-muted" />
-              <h2 id="modal-title" className="text-lg font-semibold text-content pr-8 truncate">
+              <h2 id="modal-title" className="text-lg font-semibold text-content pr-16 truncate">
                 {title}
               </h2>
             </div>
-            <button
-              onClick={(e) => { e.stopPropagation(); onClose(); }}
-              onMouseDown={(e) => e.stopPropagation()}
-              onTouchStart={(e) => e.stopPropagation()}
-              className="absolute right-4 top-4 p-1.5 rounded-lg text-content-secondary hover:text-content hover:bg-hover transition-colors"
-              aria-label="Close modal"
-            >
-              <X size={20} />
-            </button>
+            <div className="absolute right-4 top-4 flex items-center gap-1">
+              <button
+                onClick={(e) => { e.stopPropagation(); setIsMaximized(prev => !prev); }}
+                onMouseDown={(e) => e.stopPropagation()}
+                onTouchStart={(e) => e.stopPropagation()}
+                className="p-1.5 rounded-lg text-content-secondary hover:text-content hover:bg-hover transition-colors"
+                aria-label={isMaximized ? 'Restore modal' : 'Maximize modal'}
+              >
+                {isMaximized ? <Minimize2 size={16} /> : <Maximize2 size={16} />}
+              </button>
+              <button
+                onClick={(e) => { e.stopPropagation(); onClose(); }}
+                onMouseDown={(e) => e.stopPropagation()}
+                onTouchStart={(e) => e.stopPropagation()}
+                className="p-1.5 rounded-lg text-content-secondary hover:text-content hover:bg-hover transition-colors"
+                aria-label="Close modal"
+              >
+                <X size={20} />
+              </button>
+            </div>
           </div>
 
           {/* Body - scrollable */}
