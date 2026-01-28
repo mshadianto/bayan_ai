@@ -16,6 +16,7 @@ import type {
   LCRMSDashboardData,
   LCRMSAlert,
 } from '../../types';
+import { searchKnowledge } from './knowledgeSearch';
 
 // ==================== CONTRACTS ====================
 export const mockContracts: Contract[] = [
@@ -852,66 +853,7 @@ export const lcrmsApi = {
     },
     askQuestion: async (question: string): Promise<{ answer: string; sources: string[] }> => {
       await delay(800);
-      const lowerQ = question.toLowerCase();
-
-      if (lowerQ.includes('hierarki') || lowerQ.includes('penomoran') || lowerQ.includes('jenis peraturan')) {
-        return {
-          answer: 'Berdasarkan PS-001/2025, hierarki peraturan perusahaan BPKH Limited terdiri dari: (1) Peraturan Syarikah - peraturan tertinggi yang ditetapkan oleh Mudir, (2) Peraturan Mudir - peraturan pelaksanaan yang ditetapkan oleh Mudir, (3) Surat Keputusan (SK) Mudir, (4) Surat Edaran, dan (5) Nota Dinas. Setiap dokumen memiliki sistem penomoran baku sesuai ketentuan BAB III peraturan ini.',
-          sources: ['PS-001/2025 - Hierarki Peraturan Perusahaan'],
-        };
-      }
-      if (lowerQ.includes('sdm') || lowerQ.includes('karyawan') || lowerQ.includes('kepegawaian') || lowerQ.includes('rekrutmen') || lowerQ.includes('pegawai')) {
-        return {
-          answer: 'Berdasarkan PS-006/2025 (menggantikan PS-002/2025), tata kelola SDM BPKH Limited mencakup: perencanaan tenaga kerja, akuisisi talenta (rekrutmen), pengembangan karir dan kompetensi, penilaian kinerja, sistem remunerasi dan tunjangan, hubungan industrial, serta mekanisme pemberhentian pegawai. Rekrutmen dilakukan berdasarkan prinsip transparansi, akuntabilitas, dan merit system.',
-          sources: ['PS-006/2025 - Tata Kelola Sumber Daya Manusia', 'PS-002/2025 - Tata Kelola SDM (Versi Awal)'],
-        };
-      }
-      if (lowerQ.includes('cuti') || lowerQ.includes('leave')) {
-        return {
-          answer: 'Sesuai PS-006/2025 tentang Tata Kelola SDM, ketentuan cuti pegawai BPKH Limited diatur dalam bab mengenai hubungan industrial dan kesejahteraan pegawai. Pengajuan cuti mengikuti prosedur yang ditetapkan dengan persetujuan atasan langsung.',
-          sources: ['PS-006/2025 - Tata Kelola Sumber Daya Manusia'],
-        };
-      }
-      if (lowerQ.includes('induk usaha') || lowerQ.includes('bpkh') || lowerQ.includes('tata kelola perusahaan') || lowerQ.includes('gcg') || lowerQ.includes('governance')) {
-        return {
-          answer: 'Berdasarkan PS-003/2025, hubungan tata kelola antara BPKH Limited dan induk usaha BPKH diatur berdasarkan prinsip Good Corporate Governance. Perusahaan tunduk kepada norma hukum yang berlaku di Kerajaan Arab Saudi serta peraturan internal BPKH. Pedoman ini mencakup mekanisme pelaporan, pengawasan, dan koordinasi antara anak perusahaan dengan induk usaha.',
-          sources: ['PS-003/2025 - Tata Kelola BPKH Limited dengan Induk Usaha'],
-        };
-      }
-      if (lowerQ.includes('board') || lowerQ.includes('mudir') || lowerQ.includes('direksi') || lowerQ.includes('dewan')) {
-        return {
-          answer: 'Berdasarkan PS-004/2025 (Board Manual), Dewan Mudir BPKH Limited memiliki tugas dan wewenang menjalankan pengelolaan perusahaan sesuai prinsip GCG. Pedoman ini mengatur fungsi, tanggung jawab, mekanisme pengambilan keputusan, rapat Dewan Mudir, serta hubungan kerja dengan organ perusahaan lainnya.',
-          sources: ['PS-004/2025 - Board Manual (Pedoman Kerja Dewan Mudir)'],
-        };
-      }
-      if (lowerQ.includes('compliance') || lowerQ.includes('kepatuhan')) {
-        return {
-          answer: 'Berdasarkan PS-005/2025, kerangka kerja kepatuhan (compliance) BPKH Limited bertujuan memastikan seluruh aktivitas bisnis berjalan sesuai peraturan perundang-undangan, kebijakan internal, dan standar etika. Tata kelola compliance mencakup identifikasi risiko kepatuhan, monitoring, pelaporan pelanggaran, dan mekanisme whistleblowing.',
-          sources: ['PS-005/2025 - Tata Kelola Kepatuhan (Compliance)'],
-        };
-      }
-      if (lowerQ.includes('investasi') || lowerQ.includes('investment') || lowerQ.includes('bisnis') || lowerQ.includes('portofolio')) {
-        return {
-          answer: 'Berdasarkan PS-007/2025, pedoman investasi dan bisnis BPKH Limited mengatur kebijakan investasi, manajemen portofolio, proses due diligence, pengelolaan risiko investasi, serta kepatuhan syariah. Seluruh kegiatan investasi wajib memenuhi prinsip kehati-hatian dan screening syariah untuk memastikan kehalalan instrumen investasi.',
-          sources: ['PS-007/2025 - Pedoman Investasi dan Bisnis', 'PM-007/2024 - RPBP 2024-2028'],
-        };
-      }
-      if (lowerQ.includes('rpbp') || lowerQ.includes('rbtp') || lowerQ.includes('rencana bisnis') || lowerQ.includes('business plan') || lowerQ.includes('anggaran')) {
-        return {
-          answer: 'RPBP 2024-2028 (PM-007/2024) menetapkan arah pengembangan bisnis jangka menengah BPKH Limited, sedangkan RBTP 2025 (PM-008/2024) merinci target bisnis tahunan mencakup anggaran operasional, rencana investasi, pengembangan SDM, dan KPI perusahaan untuk tahun buku 2025.',
-          sources: ['PM-007/2024 - RPBP 2024-2028 dan RBTP 2024', 'PM-008/2024 - RBTP 2025'],
-        };
-      }
-      if (lowerQ.includes('perjalanan dinas') || lowerQ.includes('travel') || lowerQ.includes('uang harian') || lowerQ.includes('transportasi') || lowerQ.includes('akomodasi')) {
-        return {
-          answer: 'Berdasarkan PS-008/2025, perjalanan dinas BPKH Limited diatur dengan ketentuan: jenis perjalanan dinas (dalam/luar kota/luar negeri), prosedur pengajuan dan persetujuan, komponen biaya (uang harian, transportasi, akomodasi), serta mekanisme pertanggungjawaban. Perjalanan dinas luar negeri memiliki ketentuan khusus terkait passport, visa, dan uang representasi.',
-          sources: ['PS-008/2025 - Tata Cara Perjalanan Dinas'],
-        };
-      }
-      return {
-        answer: 'Maaf, saya tidak menemukan informasi spesifik terkait pertanyaan Anda dalam database Peraturan Syarikah BPKH Limited. Silakan coba kata kunci lain seperti: hierarki peraturan, SDM/kepegawaian, tata kelola, compliance, investasi, perjalanan dinas, atau rencana bisnis.',
-        sources: [],
-      };
+      return searchKnowledge(question);
     },
   },
 

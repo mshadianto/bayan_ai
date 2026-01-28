@@ -113,9 +113,11 @@ export default function KnowledgeBase() {
   };
 
   const suggestedQuestions = [
-    'Bagaimana hierarki peraturan perusahaan?',
-    'Apa ketentuan perjalanan dinas?',
-    'Bagaimana pedoman investasi dan bisnis?',
+    'Apa hierarki peraturan perusahaan BPKH Limited?',
+    'Bagaimana ketentuan perjalanan dinas luar negeri?',
+    'Apa tugas dan wewenang Dewan Mudir?',
+    'Bagaimana proses rekrutmen karyawan?',
+    'Apa pedoman investasi dan screening syariah?',
   ];
 
   const getDocTypeColor = (type: string) => {
