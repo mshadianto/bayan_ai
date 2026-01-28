@@ -120,13 +120,13 @@ export default function KnowledgeBase() {
 
   const getDocTypeColor = (type: string) => {
     const colors: Record<string, string> = {
-      peraturan_syarikah: 'bg-amber-100 text-amber-700',
-      peraturan_mudir: 'bg-orange-100 text-orange-700',
-      sk_direksi: 'bg-purple-100 text-purple-700',
-      surat_edaran: 'bg-blue-100 text-blue-700',
-      peraturan_perusahaan: 'bg-green-100 text-green-700',
-      uu: 'bg-red-100 text-red-700',
-      other: 'bg-gray-100 text-gray-700',
+      peraturan_syarikah: 'bg-amber-100 text-amber-700 dark:bg-amber-900/50 dark:text-amber-300',
+      peraturan_mudir: 'bg-orange-100 text-orange-700 dark:bg-orange-900/50 dark:text-orange-300',
+      sk_direksi: 'bg-purple-100 text-purple-700 dark:bg-purple-900/50 dark:text-purple-300',
+      surat_edaran: 'bg-blue-100 text-blue-700 dark:bg-blue-900/50 dark:text-blue-300',
+      peraturan_perusahaan: 'bg-green-100 text-green-700 dark:bg-emerald-900/50 dark:text-emerald-300',
+      uu: 'bg-red-100 text-red-700 dark:bg-red-900/50 dark:text-red-300',
+      other: 'bg-hover text-content-tertiary',
     };
     return colors[type] || colors.other;
   };
@@ -158,8 +158,8 @@ export default function KnowledgeBase() {
     <div className="p-6">
       {/* Header */}
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-gray-900">Legal Knowledge Base</h1>
-        <p className="text-gray-600">Kamus Syarikah - AI-Assisted Legal Information System</p>
+        <h1 className="text-2xl font-bold text-content">Legal Knowledge Base</h1>
+        <p className="text-content-secondary">Kamus Syarikah - AI-Assisted Legal Information System</p>
       </div>
 
       {/* Tabs */}
@@ -169,7 +169,7 @@ export default function KnowledgeBase() {
           className={`px-4 py-2 rounded-lg font-medium transition-colors ${
             activeTab === 'chatbot'
               ? 'bg-amber-600 text-white'
-              : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              : 'bg-hover text-content-tertiary hover:bg-hover'
           }`}
         >
           Kamus Syarikah (AI Chat)
@@ -179,7 +179,7 @@ export default function KnowledgeBase() {
           className={`px-4 py-2 rounded-lg font-medium transition-colors ${
             activeTab === 'documents'
               ? 'bg-amber-600 text-white'
-              : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              : 'bg-hover text-content-tertiary hover:bg-hover'
           }`}
         >
           Document Library ({documents.length})
@@ -190,7 +190,7 @@ export default function KnowledgeBase() {
       {activeTab === 'chatbot' && (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Chat Area */}
-          <div className="lg:col-span-2 bg-white rounded-lg shadow-sm border border-gray-200 flex flex-col h-[600px]">
+          <div className="lg:col-span-2 bg-card rounded-lg shadow-sm border border-border flex flex-col h-[600px]">
             {/* Chat Messages */}
             <div className="flex-1 overflow-y-auto p-4 space-y-4">
               {messages.map((msg) => (
@@ -202,30 +202,30 @@ export default function KnowledgeBase() {
                     className={`max-w-[80%] rounded-lg p-4 ${
                       msg.type === 'user'
                         ? 'bg-amber-600 text-white'
-                        : 'bg-gray-100 text-gray-800'
+                        : 'bg-hover text-content-tertiary'
                     }`}
                   >
                     {msg.type === 'assistant' && (
                       <div className="flex items-center gap-2 mb-2">
                         <span className="text-lg">🤖</span>
-                        <span className="font-medium text-amber-700">Kamus Syarikah</span>
+                        <span className="font-medium text-amber-700 dark:text-amber-400">Kamus Syarikah</span>
                       </div>
                     )}
                     <p className="whitespace-pre-wrap">{msg.content}</p>
                     {msg.sources && msg.sources.length > 0 && (
-                      <div className="mt-3 pt-3 border-t border-gray-200">
-                        <p className="text-xs text-gray-500 mb-1">Sumber:</p>
+                      <div className="mt-3 pt-3 border-t border-border">
+                        <p className="text-xs text-content-muted mb-1">Sumber:</p>
                         <ul className="text-xs space-y-1">
                           {msg.sources.map((source, idx) => (
                             <li key={idx} className="flex items-center gap-1">
                               <span>📄</span>
-                              <span className="text-amber-700">{source}</span>
+                              <span className="text-amber-700 dark:text-amber-400">{source}</span>
                             </li>
                           ))}
                         </ul>
                       </div>
                     )}
-                    <p className={`text-xs mt-2 ${msg.type === 'user' ? 'text-amber-200' : 'text-gray-400'}`}>
+                    <p className={`text-xs mt-2 ${msg.type === 'user' ? 'text-amber-200' : 'text-content-muted'}`}>
                       {msg.timestamp.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' })}
                     </p>
                   </div>
@@ -233,7 +233,7 @@ export default function KnowledgeBase() {
               ))}
               {isTyping && (
                 <div className="flex justify-start">
-                  <div className="bg-gray-100 rounded-lg p-4">
+                  <div className="bg-hover rounded-lg p-4">
                     <div className="flex items-center gap-2">
                       <span className="text-lg">🤖</span>
                       <div className="flex gap-1">
@@ -249,7 +249,7 @@ export default function KnowledgeBase() {
             </div>
 
             {/* Input Area */}
-            <div className="p-4 border-t border-gray-200">
+            <div className="p-4 border-t border-border">
               <div className="flex gap-2">
                 <input
                   type="text"
@@ -257,13 +257,13 @@ export default function KnowledgeBase() {
                   onChange={(e) => setInputValue(e.target.value)}
                   onKeyPress={handleKeyPress}
                   placeholder="Tanyakan tentang peraturan atau kebijakan..."
-                  className="flex-1 rounded-lg border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+                  className="flex-1 rounded-lg border border-border-subtle px-4 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent"
                   disabled={isTyping}
                 />
                 <button
                   onClick={handleAskQuestion}
                   disabled={isTyping || !inputValue.trim()}
-                  className="px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
+                  className="px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 disabled:bg-hover disabled:cursor-not-allowed transition-colors"
                 >
                   Kirim
                 </button>
@@ -274,14 +274,14 @@ export default function KnowledgeBase() {
           {/* Sidebar */}
           <div className="space-y-4">
             {/* Suggested Questions */}
-            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
-              <h3 className="font-semibold text-gray-900 mb-3">Pertanyaan Populer</h3>
+            <div className="bg-card rounded-lg shadow-sm border border-border p-4">
+              <h3 className="font-semibold text-content mb-3">Pertanyaan Populer</h3>
               <div className="space-y-2">
                 {suggestedQuestions.map((q, idx) => (
                   <button
                     key={idx}
                     onClick={() => setInputValue(q)}
-                    className="w-full text-left px-3 py-2 text-sm bg-amber-50 hover:bg-amber-100 rounded-lg text-amber-800 transition-colors"
+                    className="w-full text-left px-3 py-2 text-sm bg-amber-50 hover:bg-amber-100 dark:bg-amber-900/30 dark:hover:bg-amber-900/50 rounded-lg text-amber-800 dark:text-amber-300 transition-colors"
                   >
                     {q}
                   </button>
@@ -299,23 +299,23 @@ export default function KnowledgeBase() {
             </div>
 
             {/* Quick Stats */}
-            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
-              <h3 className="font-semibold text-gray-900 mb-3">Database Dokumen</h3>
+            <div className="bg-card rounded-lg shadow-sm border border-border p-4">
+              <h3 className="font-semibold text-content mb-3">Database Dokumen</h3>
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between">
-                  <span className="text-gray-600">Total Dokumen</span>
+                  <span className="text-content-secondary">Total Dokumen</span>
                   <span className="font-medium">{documents.length}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-600">Peraturan Syarikah</span>
+                  <span className="text-content-secondary">Peraturan Syarikah</span>
                   <span className="font-medium">{documents.filter(d => d.document_type === 'peraturan_syarikah').length}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-600">Peraturan Mudir</span>
+                  <span className="text-content-secondary">Peraturan Mudir</span>
                   <span className="font-medium">{documents.filter(d => d.document_type === 'peraturan_mudir').length}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-600">Berlaku (Active)</span>
+                  <span className="text-content-secondary">Berlaku (Active)</span>
                   <span className="font-medium">{documents.filter(d => d.status === 'active').length}</span>
                 </div>
               </div>
@@ -328,7 +328,7 @@ export default function KnowledgeBase() {
       {activeTab === 'documents' && (
         <div className="space-y-4">
           {/* Search */}
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+          <div className="bg-card rounded-lg shadow-sm border border-border p-4">
             <div className="flex gap-2">
               <input
                 type="text"
@@ -336,26 +336,26 @@ export default function KnowledgeBase() {
                 onChange={(e) => setSearchQuery(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
                 placeholder="Cari dokumen berdasarkan judul, ringkasan, atau kata kunci..."
-                className="flex-1 rounded-lg border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500"
+                className="flex-1 rounded-lg border border-border-subtle px-4 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500"
               />
               <button
                 onClick={handleSearch}
                 disabled={searching}
-                className="px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 disabled:bg-gray-300 transition-colors"
+                className="px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 disabled:bg-hover transition-colors"
               >
                 {searching ? 'Mencari...' : 'Cari'}
               </button>
               {searchResults !== null && (
                 <button
                   onClick={() => { setSearchResults(null); setSearchQuery(''); }}
-                  className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors"
+                  className="px-4 py-2 bg-hover text-content-tertiary rounded-lg hover:bg-hover transition-colors"
                 >
                   Reset
                 </button>
               )}
             </div>
             {searchResults !== null && (
-              <p className="text-sm text-gray-600 mt-2">
+              <p className="text-sm text-content-secondary mt-2">
                 Ditemukan {searchResults.length} dokumen untuk "{searchQuery}"
               </p>
             )}
@@ -367,7 +367,7 @@ export default function KnowledgeBase() {
               <div
                 key={doc.id}
                 onClick={() => setSelectedDocument(doc)}
-                className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow cursor-pointer"
+                className="bg-card rounded-lg shadow-sm border border-border p-4 hover:shadow-md transition-shadow cursor-pointer"
               >
                 <div className="flex items-start gap-3">
                   <div className="text-3xl">📄</div>
@@ -375,19 +375,19 @@ export default function KnowledgeBase() {
                     <span className={`inline-block px-2 py-0.5 rounded text-xs font-medium mb-2 ${getDocTypeColor(doc.document_type)}`}>
                       {getDocTypeLabel(doc.document_type)}
                     </span>
-                    <h3 className="font-medium text-gray-900 truncate">{doc.title}</h3>
-                    <p className="text-sm text-gray-500">{doc.document_number}</p>
+                    <h3 className="font-medium text-content truncate">{doc.title}</h3>
+                    <p className="text-sm text-content-muted">{doc.document_number}</p>
                     {doc.summary && (
-                      <p className="text-sm text-gray-600 mt-2 line-clamp-2">{doc.summary}</p>
+                      <p className="text-sm text-content-secondary mt-2 line-clamp-2">{doc.summary}</p>
                     )}
                     <div className="flex flex-wrap gap-1 mt-2">
                       {doc.keywords.slice(0, 3).map((kw, idx) => (
-                        <span key={idx} className="px-2 py-0.5 bg-gray-100 text-gray-600 rounded text-xs">
+                        <span key={idx} className="px-2 py-0.5 bg-hover text-content-secondary rounded text-xs">
                           {kw}
                         </span>
                       ))}
                     </div>
-                    <p className="text-xs text-gray-400 mt-2">
+                    <p className="text-xs text-content-muted mt-2">
                       Berlaku: {new Date(doc.effective_date || doc.issue_date).toLocaleDateString('id-ID')}
                     </p>
                   </div>
@@ -397,7 +397,7 @@ export default function KnowledgeBase() {
           </div>
 
           {displayedDocuments.length === 0 && (
-            <div className="text-center py-12 text-gray-500">
+            <div className="text-center py-12 text-content-muted">
               <span className="text-4xl mb-4 block">📭</span>
               <p>Tidak ada dokumen ditemukan</p>
             </div>
