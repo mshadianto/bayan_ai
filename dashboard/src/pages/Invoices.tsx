@@ -387,35 +387,37 @@ function ApprovalActions({ invoice, onApprove, onReject, isProcessing }: {
       </div>
 
       {/* Reject Modal */}
-      {showRejectModal && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-input rounded-xl p-6 max-w-md w-full mx-4">
-            <h3 className="text-lg font-semibold text-content mb-4">Reject Invoice</h3>
-            <textarea
-              value={rejectReason}
-              onChange={(e) => setRejectReason(e.target.value)}
-              className="w-full bg-input border border-border-subtle rounded-lg px-4 py-2 text-content focus:outline-none focus:border-red-500 min-h-[80px] mb-4"
-              placeholder="Reason for rejection..."
-              required
-            />
-            <div className="flex gap-3">
-              <button
-                onClick={() => setShowRejectModal(false)}
-                className="flex-1 px-4 py-2 bg-hover text-content rounded-lg hover:bg-hover"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={handleReject}
-                disabled={!rejectReason}
-                className="flex-1 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-500 disabled:opacity-50"
-              >
-                Reject
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      <Modal
+        isOpen={showRejectModal}
+        onClose={() => setShowRejectModal(false)}
+        title="Reject Invoice"
+        size="sm"
+        footer={
+          <>
+            <button
+              onClick={() => setShowRejectModal(false)}
+              className="flex-1 px-4 py-2 bg-hover text-content rounded-lg hover:bg-hover"
+            >
+              Cancel
+            </button>
+            <button
+              onClick={handleReject}
+              disabled={!rejectReason}
+              className="flex-1 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-500 disabled:opacity-50"
+            >
+              Reject
+            </button>
+          </>
+        }
+      >
+        <textarea
+          value={rejectReason}
+          onChange={(e) => setRejectReason(e.target.value)}
+          className="w-full bg-input border border-border-subtle rounded-lg px-4 py-2 text-content focus:outline-none focus:border-red-500 min-h-[80px]"
+          placeholder="Reason for rejection..."
+          required
+        />
+      </Modal>
     </div>
   );
 }

@@ -27,15 +27,15 @@ export function Modal({
   footer,
 }: ModalProps) {
   const [position, setPosition] = useState<{ x: number; y: number } | null>(null);
-  const dragRef = useRef<{ startX: number; startY: number; initialX: number; initialY: number } | null>(null);
+  const isDragging = useRef(false);
+  const dragStart = useRef({ x: 0, y: 0 });
+  const positionRef = useRef({ x: 0, y: 0 });
   const modalRef = useRef<HTMLDivElement>(null);
 
   // Handle escape key
   const handleEscape = useCallback(
     (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        onClose();
-      }
+      if (e.key === 'Escape') onClose();
     },
     [onClose]
   );
@@ -44,49 +44,88 @@ export function Modal({
   useEffect(() => {
     if (isOpen) {
       setPosition(null);
+      positionRef.current = { x: 0, y: 0 };
       document.addEventListener('keydown', handleEscape);
       document.body.style.overflow = 'hidden';
     }
-
     return () => {
       document.removeEventListener('keydown', handleEscape);
       document.body.style.overflow = 'unset';
     };
   }, [isOpen, handleEscape]);
 
-  // Drag handlers
+  // Unified move handler (mouse + touch)
+  const handleMove = useCallback((clientX: number, clientY: number) => {
+    if (!isDragging.current) return;
+    const dx = clientX - dragStart.current.x;
+    const dy = clientY - dragStart.current.y;
+    const newX = positionRef.current.x + dx;
+    const newY = positionRef.current.y + dy;
+    setPosition({ x: newX, y: newY });
+  }, []);
+
+  // Unified end handler
+  const handleEnd = useCallback(() => {
+    if (!isDragging.current) return;
+    isDragging.current = false;
+    // Save final position for next drag
+    setPosition(prev => {
+      if (prev) positionRef.current = prev;
+      return prev;
+    });
+    document.removeEventListener('mousemove', onMouseMove);
+    document.removeEventListener('mouseup', onMouseUp);
+    document.removeEventListener('touchmove', onTouchMove);
+    document.removeEventListener('touchend', onTouchEnd);
+  }, []);
+
+  // Mouse event wrappers
+  const onMouseMove = useCallback((e: MouseEvent) => {
+    e.preventDefault();
+    handleMove(e.clientX, e.clientY);
+  }, [handleMove]);
+
+  const onMouseUp = useCallback(() => {
+    handleEnd();
+  }, [handleEnd]);
+
+  // Touch event wrappers
+  const onTouchMove = useCallback((e: TouchEvent) => {
+    e.preventDefault();
+    const touch = e.touches[0];
+    handleMove(touch.clientX, touch.clientY);
+  }, [handleMove]);
+
+  const onTouchEnd = useCallback(() => {
+    handleEnd();
+  }, [handleEnd]);
+
+  // Start drag (mouse)
   const handleMouseDown = useCallback((e: React.MouseEvent) => {
     e.preventDefault();
-    const modal = modalRef.current;
-    if (!modal) return;
+    isDragging.current = true;
+    dragStart.current = { x: e.clientX, y: e.clientY };
+    // Save current position as starting point
+    setPosition(prev => {
+      positionRef.current = prev || { x: 0, y: 0 };
+      return prev;
+    });
+    document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mouseup', onMouseUp);
+  }, [onMouseMove, onMouseUp]);
 
-    const rect = modal.getBoundingClientRect();
-    dragRef.current = {
-      startX: e.clientX,
-      startY: e.clientY,
-      initialX: rect.left + rect.width / 2 - window.innerWidth / 2,
-      initialY: rect.top + rect.height / 2 - window.innerHeight / 2,
-    };
-
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!dragRef.current) return;
-      const dx = e.clientX - dragRef.current.startX;
-      const dy = e.clientY - dragRef.current.startY;
-      setPosition({
-        x: dragRef.current.initialX + dx,
-        y: dragRef.current.initialY + dy,
-      });
-    };
-
-    const handleMouseUp = () => {
-      dragRef.current = null;
-      document.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mouseup', handleMouseUp);
-    };
-
-    document.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('mouseup', handleMouseUp);
-  }, []);
+  // Start drag (touch)
+  const handleTouchStart = useCallback((e: React.TouchEvent) => {
+    const touch = e.touches[0];
+    isDragging.current = true;
+    dragStart.current = { x: touch.clientX, y: touch.clientY };
+    setPosition(prev => {
+      positionRef.current = prev || { x: 0, y: 0 };
+      return prev;
+    });
+    document.addEventListener('touchmove', onTouchMove, { passive: false });
+    document.addEventListener('touchend', onTouchEnd);
+  }, [onTouchMove, onTouchEnd]);
 
   if (!isOpen) return null;
 
@@ -96,7 +135,7 @@ export function Modal({
 
   return (
     <div
-      className="fixed inset-0 z-50 overflow-y-auto"
+      className="fixed inset-0 z-50 overflow-hidden"
       role="dialog"
       aria-modal="true"
       aria-labelledby="modal-title"
@@ -109,17 +148,18 @@ export function Modal({
       />
 
       {/* Modal wrapper - centers content */}
-      <div className="min-h-full flex items-center justify-center p-4">
+      <div className="h-full flex items-center justify-center p-4 pointer-events-none">
         {/* Modal content */}
         <div
           ref={modalRef}
           style={transformStyle}
-          className={`relative bg-input rounded-2xl border border-border w-full ${SIZE_CLASSES[size]} max-h-[85vh] flex flex-col shadow-2xl animate-modal-slide-up`}
+          className={`pointer-events-auto relative bg-input rounded-2xl border border-border w-full ${SIZE_CLASSES[size]} max-h-[85vh] flex flex-col shadow-2xl animate-modal-slide-up`}
         >
           {/* Header - draggable */}
           <div
-            className="flex-shrink-0 flex items-center justify-between p-4 border-b border-border bg-input rounded-t-2xl cursor-grab active:cursor-grabbing select-none"
+            className="flex-shrink-0 flex items-center justify-between p-4 border-b border-border bg-input rounded-t-2xl cursor-grab active:cursor-grabbing select-none touch-none"
             onMouseDown={handleMouseDown}
+            onTouchStart={handleTouchStart}
           >
             <div className="flex items-center gap-2">
               <GripHorizontal size={16} className="text-content-muted" />
@@ -130,6 +170,7 @@ export function Modal({
             <button
               onClick={(e) => { e.stopPropagation(); onClose(); }}
               onMouseDown={(e) => e.stopPropagation()}
+              onTouchStart={(e) => e.stopPropagation()}
               className="absolute right-4 top-4 p-1.5 rounded-lg text-content-secondary hover:text-content hover:bg-hover transition-colors"
               aria-label="Close modal"
             >

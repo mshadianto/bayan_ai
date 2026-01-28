@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { lcrmsApi } from '../../services/supabaseLcrms';
+import { Modal } from '../../components/common';
 import type { LegalDocument } from '../../types';
 
 interface ChatMessage {
@@ -401,88 +402,78 @@ export default function KnowledgeBase() {
       )}
 
       {/* Document Detail Modal */}
-      {selectedDocument && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-            <div className="p-6 border-b border-gray-200 flex justify-between items-start">
-              <div>
-                <span className={`inline-block px-2 py-0.5 rounded text-xs font-medium mb-2 ${getDocTypeColor(selectedDocument.document_type)}`}>
-                  {getDocTypeLabel(selectedDocument.document_type)}
-                </span>
-                <h2 className="text-xl font-bold text-gray-900">{selectedDocument.title}</h2>
-                <p className="text-gray-500">{selectedDocument.document_number}</p>
-              </div>
-              <button
-                onClick={() => setSelectedDocument(null)}
-                className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
-              >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
+      <Modal
+        isOpen={!!selectedDocument}
+        onClose={() => setSelectedDocument(null)}
+        title={selectedDocument?.title || ''}
+        size="xl"
+        footer={selectedDocument?.document_url ? (
+          <button className="w-full px-4 py-3 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors flex items-center justify-center gap-2">
+            <span>📥</span>
+            <span>Download Dokumen</span>
+          </button>
+        ) : undefined}
+      >
+        {selectedDocument && (
+          <div className="space-y-4">
+            <div className="flex items-center gap-2 mb-2">
+              <span className={`inline-block px-2 py-0.5 rounded text-xs font-medium ${getDocTypeColor(selectedDocument.document_type)}`}>
+                {getDocTypeLabel(selectedDocument.document_type)}
+              </span>
+              <span className="text-content-secondary text-sm">{selectedDocument.document_number}</span>
             </div>
-            <div className="p-6 space-y-4">
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <p className="text-sm text-gray-500">Penerbit</p>
-                  <p className="font-medium">{selectedDocument.issuer}</p>
-                </div>
-                <div>
-                  <p className="text-sm text-gray-500">Kategori</p>
-                  <p className="font-medium">{selectedDocument.category}</p>
-                </div>
-                <div>
-                  <p className="text-sm text-gray-500">Tanggal Terbit</p>
-                  <p className="font-medium">{new Date(selectedDocument.issue_date).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
-                </div>
-                <div>
-                  <p className="text-sm text-gray-500">Tanggal Berlaku</p>
-                  <p className="font-medium">{new Date(selectedDocument.effective_date || selectedDocument.issue_date).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
-                </div>
-              </div>
 
-              {selectedDocument.summary && (
-                <div>
-                  <p className="text-sm text-gray-500 mb-1">Ringkasan</p>
-                  <p className="text-gray-800 bg-gray-50 rounded-lg p-3">{selectedDocument.summary}</p>
-                </div>
-              )}
-
+            <div className="grid grid-cols-2 gap-4">
               <div>
-                <p className="text-sm text-gray-500 mb-2">Kata Kunci</p>
-                <div className="flex flex-wrap gap-2">
-                  {(selectedDocument.keywords ?? []).map((kw, idx) => (
-                    <span key={idx} className="px-3 py-1 bg-amber-100 text-amber-700 rounded-full text-sm">
-                      {kw}
-                    </span>
-                  ))}
-                </div>
+                <p className="text-sm text-content-secondary">Penerbit</p>
+                <p className="font-medium text-content">{selectedDocument.issuer}</p>
               </div>
-
               <div>
-                <p className="text-sm text-gray-500 mb-2">Status</p>
-                <span className={`px-3 py-1 rounded-full text-sm font-medium ${
-                  selectedDocument.status === 'active' ? 'bg-green-100 text-green-700' :
-                  selectedDocument.status === 'amended' ? 'bg-yellow-100 text-yellow-700' :
-                  'bg-gray-100 text-gray-700'
-                }`}>
-                  {selectedDocument.status === 'active' ? 'Berlaku' :
-                   selectedDocument.status === 'amended' ? 'Diamendemen' : 'Dicabut'}
-                </span>
+                <p className="text-sm text-content-secondary">Kategori</p>
+                <p className="font-medium text-content">{selectedDocument.category}</p>
               </div>
+              <div>
+                <p className="text-sm text-content-secondary">Tanggal Terbit</p>
+                <p className="font-medium text-content">{new Date(selectedDocument.issue_date).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
+              </div>
+              <div>
+                <p className="text-sm text-content-secondary">Tanggal Berlaku</p>
+                <p className="font-medium text-content">{new Date(selectedDocument.effective_date || selectedDocument.issue_date).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
+              </div>
+            </div>
 
-              {selectedDocument.document_url && (
-                <div className="pt-4 border-t border-gray-200">
-                  <button className="w-full px-4 py-3 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors flex items-center justify-center gap-2">
-                    <span>📥</span>
-                    <span>Download Dokumen</span>
-                  </button>
-                </div>
-              )}
+            {selectedDocument.summary && (
+              <div>
+                <p className="text-sm text-content-secondary mb-1">Ringkasan</p>
+                <p className="text-content-tertiary bg-card rounded-lg p-3">{selectedDocument.summary}</p>
+              </div>
+            )}
+
+            <div>
+              <p className="text-sm text-content-secondary mb-2">Kata Kunci</p>
+              <div className="flex flex-wrap gap-2">
+                {(selectedDocument.keywords ?? []).map((kw, idx) => (
+                  <span key={idx} className="px-3 py-1 bg-amber-100 text-amber-700 dark:bg-amber-900/50 dark:text-amber-300 rounded-full text-sm">
+                    {kw}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <p className="text-sm text-content-secondary mb-2">Status</p>
+              <span className={`px-3 py-1 rounded-full text-sm font-medium ${
+                selectedDocument.status === 'active' ? 'bg-green-100 text-green-700 dark:bg-emerald-900/50 dark:text-emerald-300' :
+                selectedDocument.status === 'amended' ? 'bg-yellow-100 text-yellow-700 dark:bg-amber-900/50 dark:text-amber-300' :
+                'bg-hover text-content-tertiary'
+              }`}>
+                {selectedDocument.status === 'active' ? 'Berlaku' :
+                 selectedDocument.status === 'amended' ? 'Diamendemen' : 'Dicabut'}
+              </span>
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </Modal>
     </div>
   );
 }

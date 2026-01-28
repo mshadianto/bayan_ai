@@ -504,44 +504,44 @@ function ApprovalActions({ request, onAction, isProcessing }: {
       </div>
 
       {/* Reject/Return Confirmation Modal */}
-      {showRejectModal && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-input rounded-xl p-6 max-w-md w-full mx-4">
-            <h3 className="text-lg font-semibold text-content mb-4">
-              {rejectAction === 'reject' ? 'Reject Request' : 'Return to Requester'}
-            </h3>
-            <p className="text-content-secondary mb-4">
-              {rejectAction === 'reject'
-                ? 'This will permanently reject the request.'
-                : 'This will return the request to the requester for revision.'}
-            </p>
-            <textarea
-              value={comments}
-              onChange={(e) => setComments(e.target.value)}
-              className="w-full bg-input border border-border-subtle rounded-lg px-4 py-2 text-content focus:outline-none focus:border-red-500 min-h-[80px] mb-4"
-              placeholder="Reason for rejection/return..."
-              required
-            />
-            <div className="flex gap-3">
-              <button
-                onClick={() => setShowRejectModal(false)}
-                className="flex-1 px-4 py-2 bg-hover text-content rounded-lg hover:bg-hover"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={handleReject}
-                disabled={!comments}
-                className={`flex-1 px-4 py-2 text-white rounded-lg disabled:opacity-50 ${
-                  rejectAction === 'reject' ? 'bg-red-600 hover:bg-red-500' : 'bg-amber-600 hover:bg-amber-500'
-                }`}
-              >
-                Confirm
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      <Modal
+        isOpen={showRejectModal}
+        onClose={() => setShowRejectModal(false)}
+        title={rejectAction === 'reject' ? 'Reject Request' : 'Return to Requester'}
+        size="sm"
+        footer={
+          <>
+            <button
+              onClick={() => setShowRejectModal(false)}
+              className="flex-1 px-4 py-2 bg-hover text-content rounded-lg hover:bg-hover"
+            >
+              Cancel
+            </button>
+            <button
+              onClick={handleReject}
+              disabled={!comments}
+              className={`flex-1 px-4 py-2 text-white rounded-lg disabled:opacity-50 ${
+                rejectAction === 'reject' ? 'bg-red-600 hover:bg-red-500' : 'bg-amber-600 hover:bg-amber-500'
+              }`}
+            >
+              Confirm
+            </button>
+          </>
+        }
+      >
+        <p className="text-content-secondary mb-4">
+          {rejectAction === 'reject'
+            ? 'This will permanently reject the request.'
+            : 'This will return the request to the requester for revision.'}
+        </p>
+        <textarea
+          value={comments}
+          onChange={(e) => setComments(e.target.value)}
+          className="w-full bg-input border border-border-subtle rounded-lg px-4 py-2 text-content focus:outline-none focus:border-red-500 min-h-[80px]"
+          placeholder="Reason for rejection/return..."
+          required
+        />
+      </Modal>
     </div>
   );
 }
