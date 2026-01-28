@@ -25,7 +25,7 @@ bayan_ai/
 │   │   ├── components/     # Reusable UI components
 │   │   │   ├── Layout/     # Header, Sidebar, Layout
 │   │   │   └── common/     # StatusBadge, StatCard, Modal, etc.
-│   │   ├── contexts/       # React Context (UserContext - RBAC)
+│   │   ├── contexts/       # React Context (UserContext - RBAC, ThemeContext - Dark/Light)
 │   │   ├── pages/          # Route pages
 │   │   │   ├── hcms/       # Human Capital Management (9 modules)
 │   │   │   ├── lcrms/      # Legal, Compliance & Risk Mgmt (7 modules)
@@ -166,6 +166,14 @@ wrangler deploy
 ---
 
 ## UI Theme
+
+### Dark / Light Mode
+
+The dashboard supports dark and light mode with a toggle button (sun/moon icon) in the header. Theme preference is persisted in `localStorage` and respects the system `prefers-color-scheme` on first visit. Defaults to dark mode.
+
+Theming is implemented via CSS custom properties defined in `index.css` (`:root` for light, `.dark` for dark) and Tailwind's `darkMode: 'class'` strategy. Semantic color tokens (`bg-card`, `text-content`, `border-border`, etc.) are used across all components and pages.
+
+### Module Color Scheme
 
 | Module | Color Scheme | Gradient |
 |--------|-------------|----------|
