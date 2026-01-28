@@ -148,12 +148,12 @@ export function Modal({
       />
 
       {/* Modal wrapper - centers content */}
-      <div className="h-full flex items-center justify-center p-4 pointer-events-none">
+      <div className="h-full flex items-center justify-center p-2 pointer-events-none">
         {/* Modal content */}
         <div
           ref={modalRef}
           style={transformStyle}
-          className={`pointer-events-auto relative bg-input rounded-2xl border border-border w-full ${SIZE_CLASSES[size]} max-h-[85vh] flex flex-col shadow-2xl animate-modal-slide-up`}
+          className={`pointer-events-auto relative bg-input rounded-2xl border border-border w-full ${SIZE_CLASSES[size]} max-h-[96vh] flex flex-col shadow-2xl animate-modal-slide-up`}
         >
           {/* Header - draggable */}
           <div
