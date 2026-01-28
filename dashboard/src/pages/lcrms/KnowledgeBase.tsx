@@ -202,7 +202,7 @@ export default function KnowledgeBase() {
                     className={`max-w-[80%] rounded-lg p-4 ${
                       msg.type === 'user'
                         ? 'bg-amber-600 text-white'
-                        : 'bg-hover text-content-tertiary'
+                        : 'bg-hover text-content'
                     }`}
                   >
                     {msg.type === 'assistant' && (
@@ -237,9 +237,9 @@ export default function KnowledgeBase() {
                     <div className="flex items-center gap-2">
                       <span className="text-lg">🤖</span>
                       <div className="flex gap-1">
-                        <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></span>
-                        <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></span>
-                        <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></span>
+                        <span className="w-2 h-2 bg-content-muted rounded-full animate-bounce"></span>
+                        <span className="w-2 h-2 bg-content-muted rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></span>
+                        <span className="w-2 h-2 bg-content-muted rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></span>
                       </div>
                     </div>
                   </div>
@@ -257,13 +257,13 @@ export default function KnowledgeBase() {
                   onChange={(e) => setInputValue(e.target.value)}
                   onKeyPress={handleKeyPress}
                   placeholder="Tanyakan tentang peraturan atau kebijakan..."
-                  className="flex-1 rounded-lg border border-border-subtle px-4 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+                  className="flex-1 rounded-lg border border-border-subtle bg-input text-content px-4 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent"
                   disabled={isTyping}
                 />
                 <button
                   onClick={handleAskQuestion}
                   disabled={isTyping || !inputValue.trim()}
-                  className="px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 disabled:bg-hover disabled:cursor-not-allowed transition-colors"
+                  className="px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 disabled:bg-hover disabled:text-content-muted disabled:cursor-not-allowed transition-colors"
                 >
                   Kirim
                 </button>
@@ -336,7 +336,7 @@ export default function KnowledgeBase() {
                 onChange={(e) => setSearchQuery(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
                 placeholder="Cari dokumen berdasarkan judul, ringkasan, atau kata kunci..."
-                className="flex-1 rounded-lg border border-border-subtle px-4 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500"
+                className="flex-1 rounded-lg border border-border-subtle bg-input text-content px-4 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500"
               />
               <button
                 onClick={handleSearch}
